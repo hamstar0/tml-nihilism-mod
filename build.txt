@@ -4,4 +4,4 @@ displayName = Nihilism
 modReferences = HamstarHelpers
 buildIgnore = *.csproj, *.user, obj\*, bin\*, .vs\*
 includePDB = true
-homepage = https://forums.terraria.org/index.php?threads/better-buffs.59710/
+homepage = https://forums.terraria.org/index.php?threads/nihilism-empties-the-game.60333/
