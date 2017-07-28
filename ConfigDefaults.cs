@@ -4,13 +4,23 @@ using System.Collections.Generic;
 
 namespace Nihilism {
 	public class ConfigurationData {
-		public readonly static Version CurrentVersion = new Version( 1, 0, 0 );
+		public readonly static Version CurrentVersion = new Version( 1, 2, 0 );
 
 
 		public string VersionSinceUpdate = "";
 
 		public bool Enabled = true;
-		
+
+		public bool RecipesBlacklistChecksFirst = false;
+		public bool ItemsBlacklistChecksFirst = false;
+		public bool NpcsBlacklistChecksFirst = false;
+		public bool NpcItemDropsBlacklistChecksFirst = false;
+
+		public string RecipesBlacklistPattern = "(.*?)";
+		public string ItemsBlacklistPattern = "(.*?)";
+		public string NpcsBlacklistPattern = "(.*?)";
+		public string NpcItemDropsBlacklistPattern = "(.*?)";
+
 		public IDictionary<string, bool> RecipeWhitelist = new Dictionary<string, bool> {
 			{ "Copper Pickaxe", true }
 		};
