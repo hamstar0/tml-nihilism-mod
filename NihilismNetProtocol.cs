@@ -7,11 +7,13 @@ using Terraria.ModLoader;
 namespace Nihilism {
 	public enum NihilismProtocolTypes : byte {
 		RequestModSettings,
-		ModSettings
+		ModSettings,
+		InitFromClient,
+		InitFromServer
 	}
 
 
-	public static class NihilismNetProtocol {
+	static class NihilismNetProtocol {
 		public static void RouteReceivedPackets( NihilismMod mymod, BinaryReader reader ) {
 			NihilismProtocolTypes protocol = (NihilismProtocolTypes)reader.ReadByte();
 
@@ -21,6 +23,12 @@ namespace Nihilism {
 				break;
 			case NihilismProtocolTypes.ModSettings:
 				NihilismNetProtocol.ReceiveModSettingsOnClient( mymod, reader );
+				break;
+			case NihilismProtocolTypes.InitFromClient:
+				NihilismNetProtocol.ReceiveInitAndModSettingsOnServer( mymod, reader );
+				break;
+			case NihilismProtocolTypes.InitFromServer:
+				NihilismNetProtocol.ReceiveInitAndModSettingsOnClient( mymod, reader );
 				break;
 			default:
 				DebugHelpers.Log( "Invalid packet protocol: " + protocol );
@@ -34,14 +42,28 @@ namespace Nihilism {
 		// Client Senders
 		////////////////
 		
-		public static void SendModSettingsRequestFromClient( Mod mod ) {
+		public static void SendModSettingsRequestFromClient( NihilismMod mymod ) {
 			// Clients only
 			if( Main.netMode != 1 ) { return; }
 
-			ModPacket packet = mod.GetPacket();
+			ModPacket packet = mymod.GetPacket();
 
 			packet.Write( (byte)NihilismProtocolTypes.RequestModSettings );
 			packet.Write( (int)Main.myPlayer );
+
+			packet.Send();
+		}
+
+		public static void SendInitAndModSettingsFromClient( NihilismMod mymod ) {
+			// Clients only
+			if( Main.netMode != 1 ) { return; }
+
+			var modworld = mymod.GetModWorld<NihilismWorld>();
+			ModPacket packet = mymod.GetPacket();
+
+			packet.Write( (byte)NihilismProtocolTypes.InitFromClient );
+			packet.Write( (bool)modworld.Logic.IsNihilistic );
+			packet.Write( (string)mymod.Config.SerializeMe() );
 
 			packet.Send();
 		}
@@ -63,6 +85,20 @@ namespace Nihilism {
 			packet.Send( (int)player.whoAmI );
 		}
 
+		public static void SendInitAndModSettingsFromServer( NihilismMod mymod, Player player ) {
+			// Server only
+			if( Main.netMode != 2 ) { return; }
+
+			var modworld = mymod.GetModWorld<NihilismWorld>();
+			ModPacket packet = mymod.GetPacket();
+
+			packet.Write( (byte)NihilismProtocolTypes.InitFromServer );
+			packet.Write( (bool)modworld.Logic.IsNihilistic );
+			packet.Write( (string)mymod.Config.SerializeMe() );
+
+			packet.Send( (int)player.whoAmI );
+		}
+
 
 
 		////////////////
@@ -75,7 +111,17 @@ namespace Nihilism {
 			
 			mymod.Config.DeserializeMe( reader.ReadString() );
 		}
-		
+
+		private static void ReceiveInitAndModSettingsOnClient( NihilismMod mymod, BinaryReader reader ) {
+			// Clients only
+			if( Main.netMode != 1 ) { return; }
+
+			var modworld = mymod.GetModWorld<NihilismWorld>();
+
+			modworld.Logic.NihiliateCurrentWorld( mymod, reader.ReadBoolean() );
+			mymod.Config.DeserializeMe( reader.ReadString() );
+		}
+
 
 
 		////////////////
@@ -94,6 +140,23 @@ namespace Nihilism {
 			}
 
 			NihilismNetProtocol.SendModSettingsFromServer( mymod, Main.player[player_who] );
+		}
+
+		private static void ReceiveInitAndModSettingsOnServer( NihilismMod mymod, BinaryReader reader ) {
+			// Server only
+			if( Main.netMode != 2 ) { return; }
+			var modworld = mymod.GetModWorld<NihilismWorld>();
+
+			modworld.Logic.NihiliateCurrentWorld( mymod, reader.ReadBoolean() );
+			mymod.Config.DeserializeMe( reader.ReadString() );
+
+			// Rebroadcast settings
+			for( int i=0; i<Main.player.Length; i++ ) {
+				Player player = Main.player[i];
+				if( player == null || !player.active ) { continue; }
+
+				NihilismNetProtocol.SendInitAndModSettingsFromServer( mymod, player );
+			}
 		}
 	}
 }

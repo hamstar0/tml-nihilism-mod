@@ -33,11 +33,7 @@ namespace Nihilism {
 				}
 
 				if( Main.netMode == 1 ) {   // Client
-					NihilismNetProtocol.SendModSettingsRequestFromClient( this.mod );
-				}
-
-				if( mymod.Config.Data.Enabled ) {
-					this.BlockRecipesIfNotWhitelisted();
+					NihilismNetProtocol.SendModSettingsRequestFromClient( mymod );
 				}
 			}
 
@@ -46,7 +42,8 @@ namespace Nihilism {
 
 		public override void PreUpdate() {
 			var mymod = (NihilismMod)this.mod;
-			if( !mymod.Config.Data.Enabled ) { return; }
+			var modworld = mymod.GetModWorld<NihilismWorld>();
+			if( !modworld.Logic.IsCurrentWorldNihilated( mymod ) ) { return; }
 			if( !this.HasEnteredWorld ) { return; }
 
 			if( this.player.whoAmI == Main.myPlayer ) {
@@ -57,7 +54,8 @@ namespace Nihilism {
 
 		public override bool PreItemCheck() {
 			var mymod = (NihilismMod)this.mod;
-			if( !mymod.Config.Data.Enabled ) { return base.PreItemCheck(); }
+			var modworld = mymod.GetModWorld<NihilismWorld>();
+			if( !modworld.Logic.IsCurrentWorldNihilated( mymod ) ) { return base.PreItemCheck(); }
 
 			return !this.BlockHeldItemIfNotWhitelisted();
 		}
@@ -66,6 +64,7 @@ namespace Nihilism {
 
 		private bool BlockHeldItemIfNotWhitelisted() {
 			var mymod = (NihilismMod)this.mod;
+			var modworld = mymod.GetModWorld<NihilismWorld>();
 			var held_item = this.player.HeldItem;
 			bool has_mouse_item = this.player.whoAmI == Main.myPlayer && Main.mouseItem != null && !Main.mouseItem.IsAir;
 			bool is_using_blocked = false;
@@ -73,7 +72,7 @@ namespace Nihilism {
 			if( held_item != null && !held_item.IsAir ) {
 				var whitelist = mymod.Config.Data.ItemWhitelist;
 
-				is_using_blocked = !whitelist.ContainsKey( held_item.Name ) || !whitelist[held_item.Name];
+				is_using_blocked = !modworld.Logic.IsItemEnabled( mymod, held_item );
 				if( is_using_blocked ) {
 					this.player.noItems = true;
 					
@@ -83,19 +82,19 @@ namespace Nihilism {
 				}
 			}
 			
-//HamstarHelpers.MiscHelpers.DebugHelpers.Display["can use item"] = held_item.Name+" "+ is_using_blocked;
 			return is_using_blocked;
 		}
 
 
 		private void BlockEquipsIfNotWhitelisted() {
 			var mymod = (NihilismMod)this.mod;
+			var modworld = mymod.GetModWorld<NihilismWorld>();
 			var whitelist = mymod.Config.Data.ItemWhitelist;
 
 			for( int i=0; i<this.player.armor.Length; i++ ) {
 				Item item = this.player.armor[i];
 				if( item == null || item.IsAir ) { continue; }
-				if( whitelist.ContainsKey(item.Name) && whitelist[item.Name] ) { continue; }
+				if( modworld.Logic.IsItemEnabled( mymod, item ) ) { continue; }
 				 
 				PlayerItemHelpers.DropEquippedItem( player, i );
 			}
@@ -104,13 +103,14 @@ namespace Nihilism {
 
 		private void BlockRecipesIfNotWhitelisted() {
 			var mymod = (NihilismMod)this.mod;
+			var modworld = mymod.GetModWorld<NihilismWorld>();
 
 			for( int i=0; i<Main.recipe.Length; i++ ) {
 				Recipe old = Main.recipe[i];
 				Item item = old.createItem;
 
 				if( item == null || item.IsAir ) { continue; }
-				if( mymod.Config.Data.RecipeWhitelist.ContainsKey(item.Name) ) { continue; }
+				if( modworld.Logic.IsRecipeOfItemEnabled( mymod, item ) ) { continue; }
 
 				Main.recipe[i] = new Recipe();
 			}

@@ -54,11 +54,14 @@
   <ItemGroup>
     <Compile Include="ConfigDefaults.cs" />
     <Compile Include="NihilismItem.cs" />
+    <Compile Include="NihilismLogic.cs" />
     <Compile Include="NihilismMod.cs" />
     <Compile Include="NihilismNetProtocol.cs" />
     <Compile Include="NihilismNpc.cs" />
     <Compile Include="NihilismPlayer.cs" />
     <Compile Include="NihilismProjectile.cs" />
+    <Compile Include="NihilismUI.cs" />
+    <Compile Include="NihilismWorld.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -6,13 +6,13 @@ namespace Nihilism {
 	class NihilismProjectile : GlobalProjectile {
 		public override bool? CanUseGrapple( int item_type, Player player ) {
 			var mymod = (NihilismMod)this.mod;
-			if( !mymod.Config.Data.Enabled ) { return base.CanUseGrapple( item_type, player ); }
-			var whitelist = mymod.Config.Data.ItemWhitelist;
+			var modworld = mymod.GetModWorld<NihilismWorld>();
+			if( !modworld.Logic.IsCurrentWorldNihilated( mymod ) ) { return base.CanUseGrapple( item_type, player ); }
 
 			Item grapple_item = new Item();
 			grapple_item.SetDefaults( item_type );
-
-			return whitelist.ContainsKey( grapple_item.Name ) && whitelist[ grapple_item.Name ];
+			
+			return modworld.Logic.IsItemEnabled( mymod, grapple_item );
 		}
 	}
 }

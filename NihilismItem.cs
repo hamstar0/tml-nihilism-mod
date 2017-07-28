@@ -8,11 +8,11 @@ namespace Nihilism {
 	class NihilismItem : GlobalItem {
 		public override void PostDrawInInventory( Item item, SpriteBatch sb, Vector2 position, Rectangle frame, Color draw_color, Color item_color, Vector2 origin, float scale ) {
 			var mymod = (NihilismMod)this.mod;
-			if( !mymod.Config.Data.Enabled ) { return; }
+			var modworld = mymod.GetModWorld<NihilismWorld>();
+			if( !modworld.Logic.IsCurrentWorldNihilated( mymod ) ) { return; }
 			if( item == null || item.IsAir ) { return; }
-			var whitelist = mymod.Config.Data.ItemWhitelist;
 
-			if( !whitelist.ContainsKey( item.Name ) || !whitelist[item.Name] ) {
+			if( !modworld.Logic.IsItemEnabled( mymod, item ) ) {
 				float pos_x = position.X + (((float)frame.Width / 2f) * scale) - (((float)mymod.DisabledItem.Width / 2f) * scale);
 				float pos_y = position.Y + (((float)frame.Height / 2f) * scale) - (((float)mymod.DisabledItem.Height / 2f) * scale);
 				var pos = new Vector2( pos_x, pos_y );
@@ -24,11 +24,10 @@ namespace Nihilism {
 
 		public override bool CanUseItem( Item item, Player player ) {
 			var mymod = (NihilismMod)this.mod;
-			if( !mymod.Config.Data.Enabled ) { return base.CanUseItem(item, player); }
-			var whitelist = mymod.Config.Data.ItemWhitelist;
-
-			bool can_use = whitelist.ContainsKey( item.Name ) && whitelist[item.Name];
-			return can_use;
+			var modworld = mymod.GetModWorld<NihilismWorld>();
+			if( !modworld.Logic.IsCurrentWorldNihilated( mymod ) ) { return base.CanUseItem(item, player); }
+			
+			return modworld.Logic.IsItemEnabled( mymod, item );
 		}
 	}
 }
