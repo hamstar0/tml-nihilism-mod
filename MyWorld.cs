@@ -3,7 +3,7 @@ using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 
 namespace Nihilism {
-	class NihilismWorld : ModWorld {
+	class MyWorld : ModWorld {
 		public NihilismLogic Logic;
 
 

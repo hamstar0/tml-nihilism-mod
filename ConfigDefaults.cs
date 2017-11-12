@@ -3,9 +3,12 @@ using System.Collections.Generic;
 
 
 namespace Nihilism {
-	public class ConfigurationData {
+	public class NihilismConfigData {
 		public readonly static Version CurrentVersion = new Version( 1, 2, 0 );
+		public readonly static string ConfigFileName = "Nihilism Config.json";
 
+
+		////////////////
 
 		public string VersionSinceUpdate = "";
 
@@ -39,16 +42,16 @@ namespace Nihilism {
 		////////////////
 
 		public bool UpdateToLatestVersion() {
-			var new_config = new ConfigurationData();
+			var new_config = new NihilismConfigData();
 			var vers_since = this.VersionSinceUpdate != "" ?
 				new Version( this.VersionSinceUpdate ) :
 				new Version();
 
-			if( vers_since >= ConfigurationData.CurrentVersion ) {
+			if( vers_since >= NihilismConfigData.CurrentVersion ) {
 				return false;
 			}
 			
-			this.VersionSinceUpdate = ConfigurationData.CurrentVersion.ToString();
+			this.VersionSinceUpdate = NihilismConfigData.CurrentVersion.ToString();
 
 			return true;
 		}

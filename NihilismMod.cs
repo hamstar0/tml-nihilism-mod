@@ -1,6 +1,7 @@
-﻿using HamstarHelpers.MiscHelpers;
+﻿using HamstarHelpers.DebugHelpers;
 using HamstarHelpers.Utilities.Config;
 using Microsoft.Xna.Framework.Graphics;
+using Nihilism.NetProtocol;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -10,8 +11,28 @@ using Terraria.UI;
 
 
 namespace Nihilism {
-    public class NihilismMod : Mod {
-		public JsonConfig<ConfigurationData> Config { get; private set; }
+    class NihilismMod : Mod {
+		public static string GithubUserName { get { return "hamstar0"; } }
+		public static string GithubProjectName { get { return "tml-nihilism-mod"; } }
+
+		public static string ConfigRelativeFilePath {
+			get { return ConfigurationDataBase.RelativePath + Path.DirectorySeparatorChar + NihilismConfigData.ConfigFileName; }
+		}
+		public static void ReloadConfigFromFile() {
+			if( Main.netMode != 0 ) {
+				throw new Exception( "Cannot reload configs outside of single player." );
+			}
+			if( NihilismMod.Instance != null ) {
+				NihilismMod.Instance.Config.LoadFile();
+			}
+		}
+
+		public static NihilismMod Instance { get; private set; }
+
+
+		////////////////
+
+		public JsonConfig<NihilismConfigData> Config { get; private set; }
 		public Texture2D DisabledItem = null;
 
 		public NihilismUI UI = null;
@@ -25,12 +46,14 @@ namespace Nihilism {
 				AutoloadGores = true,
 				AutoloadSounds = true
 			};
-
-			string filename = "Nihilism Config.json";
-			this.Config = new JsonConfig<ConfigurationData>( filename, "Mod Configs", new ConfigurationData() );
+			
+			this.Config = new JsonConfig<NihilismConfigData>( NihilismConfigData.ConfigFileName,
+				ConfigurationDataBase.RelativePath, new NihilismConfigData() );
 		}
 
 		public override void Load() {
+			NihilismMod.Instance = this;
+
 			if( Main.netMode != 2 ) {   // Not server
 				this.DisabledItem = ModLoader.GetTexture( "Terraria/MapDeath" );
 			}
@@ -53,10 +76,16 @@ namespace Nihilism {
 			}
 
 			if( this.Config.Data.UpdateToLatestVersion() ) {
-				ErrorLogger.Log( "Nihilism updated to " + ConfigurationData.CurrentVersion.ToString() );
+				ErrorLogger.Log( "Nihilism updated to " + NihilismConfigData.CurrentVersion.ToString() );
 				this.Config.SaveFile();
 			}
 		}
+
+		public override void Unload() {
+			NihilismMod.Instance = null;
+		}
+
+		////////////////
 
 		public override void PostSetupContent() {
 			if( !Main.dedServ ) {
@@ -67,14 +96,18 @@ namespace Nihilism {
 
 		////////////////
 
-		public override void HandlePacket( BinaryReader reader, int whoAmI ) {
-			NihilismNetProtocol.RouteReceivedPackets( this, reader );
+		public override void HandlePacket( BinaryReader reader, int player_who ) {
+			if( Main.netMode == 1 ) {   // Client
+				ClientPacketHandlers.HandlePacket( this, reader );
+			} else if( Main.netMode == 2 ) {    // Server
+				ServerPacketHandlers.HandlePacket( this, reader, player_who );
+			}
 		}
 
 		////////////////
 
 		public override void ModifyInterfaceLayers( List<GameInterfaceLayer> layers ) {
-			var modworld = this.GetModWorld<NihilismWorld>();
+			var modworld = this.GetModWorld<MyWorld>();
 			if( !this.Config.Data.Enabled ) { return; }
 
 			if( !modworld.Logic.IsInitialized ) {

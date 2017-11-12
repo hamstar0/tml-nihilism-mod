@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using Nihilism.NetProtocol;
+using System.IO;
 using System.Text.RegularExpressions;
 using Terraria;
 using Terraria.ModLoader.IO;
@@ -173,7 +174,7 @@ namespace Nihilism {
 			this.IsInitialized = true;
 
 			if( Main.netMode == 1 ) {   // Client
-				NihilismNetProtocol.SendInitAndModSettingsFromClient( mymod );
+				ClientPacketHandlers.SendInitAndModSettingsFromClient( mymod );
 			}
 		}
 

@@ -1,4 +1,4 @@
-﻿using HamstarHelpers.UIHelpers;
+﻿using HamstarHelpers.HudHelpers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
@@ -147,7 +147,7 @@ namespace Nihilism {
 			if( this.IsTogglerLit ) { body_color = NihilismUI.ButtonBodyLitColor; }
 			this.GetTogglerDimensions( out pos, out size );
 			
-			UIHelpers.DrawBorderedRect( sb, body_color, edge_color, pos, size, 2 );
+			HudHelpers.DrawBorderedRect( sb, body_color, edge_color, pos, size, 2 );
 		}
 		
 		public void CheckTogglerMouseInteraction() {
@@ -176,13 +176,13 @@ namespace Nihilism {
 
 		private void ActivateNihilism() {
 			var mymod = (NihilismMod)ModLoader.GetMod( "Nihilism" );
-			var modworld = mymod.GetModWorld<NihilismWorld>();
+			var modworld = mymod.GetModWorld<MyWorld>();
 			modworld.Logic.NihiliateCurrentWorld( mymod, true );
 		}
 
 		private void DeactivateNihilism() {
 			var mymod = (NihilismMod)ModLoader.GetMod( "Nihilism" );
-			var modworld = mymod.GetModWorld<NihilismWorld>();
+			var modworld = mymod.GetModWorld<MyWorld>();
 			modworld.Logic.NihiliateCurrentWorld( mymod, false );
 		}
 	}

@@ -5,10 +5,10 @@ using Terraria.ModLoader;
 
 
 namespace Nihilism {
-	class NihilismItem : GlobalItem {
+	class MyItem : GlobalItem {
 		public override void PostDrawInInventory( Item item, SpriteBatch sb, Vector2 position, Rectangle frame, Color draw_color, Color item_color, Vector2 origin, float scale ) {
 			var mymod = (NihilismMod)this.mod;
-			var modworld = mymod.GetModWorld<NihilismWorld>();
+			var modworld = mymod.GetModWorld<MyWorld>();
 			if( !modworld.Logic.IsCurrentWorldNihilated( mymod ) ) { return; }
 			if( item == null || item.IsAir ) { return; }
 
@@ -24,7 +24,7 @@ namespace Nihilism {
 
 		public override bool CanUseItem( Item item, Player player ) {
 			var mymod = (NihilismMod)this.mod;
-			var modworld = mymod.GetModWorld<NihilismWorld>();
+			var modworld = mymod.GetModWorld<MyWorld>();
 			if( !modworld.Logic.IsCurrentWorldNihilated( mymod ) ) { return base.CanUseItem(item, player); }
 			
 			return modworld.Logic.IsItemEnabled( mymod, item );

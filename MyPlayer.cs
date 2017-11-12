@@ -1,10 +1,11 @@
 ﻿using HamstarHelpers.PlayerHelpers;
+using Nihilism.NetProtocol;
 using Terraria;
 using Terraria.ModLoader;
 
 
 namespace Nihilism {
-	class NihilismPlayer : ModPlayer {
+	class MyPlayer : ModPlayer {
 		public bool HasEnteredWorld { get; private set; }
 
 
@@ -15,7 +16,7 @@ namespace Nihilism {
 		}
 
 		public override void clientClone( ModPlayer client_clone ) {
-			var clone = (NihilismPlayer)client_clone;
+			var clone = (MyPlayer)client_clone;
 			clone.HasEnteredWorld = this.HasEnteredWorld;
 		}
 
@@ -33,7 +34,7 @@ namespace Nihilism {
 				}
 
 				if( Main.netMode == 1 ) {   // Client
-					NihilismNetProtocol.SendModSettingsRequestFromClient( mymod );
+					ClientPacketHandlers.SendModSettingsRequestFromClient( mymod );
 				}
 			}
 
@@ -42,7 +43,7 @@ namespace Nihilism {
 
 		public override void PreUpdate() {
 			var mymod = (NihilismMod)this.mod;
-			var modworld = mymod.GetModWorld<NihilismWorld>();
+			var modworld = mymod.GetModWorld<MyWorld>();
 			if( !modworld.Logic.IsCurrentWorldNihilated( mymod ) ) { return; }
 			if( !this.HasEnteredWorld ) { return; }
 
@@ -54,7 +55,7 @@ namespace Nihilism {
 
 		public override bool PreItemCheck() {
 			var mymod = (NihilismMod)this.mod;
-			var modworld = mymod.GetModWorld<NihilismWorld>();
+			var modworld = mymod.GetModWorld<MyWorld>();
 			if( !modworld.Logic.IsCurrentWorldNihilated( mymod ) ) { return base.PreItemCheck(); }
 
 			return !this.BlockHeldItemIfNotWhitelisted();
@@ -64,7 +65,7 @@ namespace Nihilism {
 
 		private bool BlockHeldItemIfNotWhitelisted() {
 			var mymod = (NihilismMod)this.mod;
-			var modworld = mymod.GetModWorld<NihilismWorld>();
+			var modworld = mymod.GetModWorld<MyWorld>();
 			var held_item = this.player.HeldItem;
 			bool has_mouse_item = this.player.whoAmI == Main.myPlayer && Main.mouseItem != null && !Main.mouseItem.IsAir;
 			bool is_using_blocked = false;
@@ -88,7 +89,7 @@ namespace Nihilism {
 
 		private void BlockEquipsIfNotWhitelisted() {
 			var mymod = (NihilismMod)this.mod;
-			var modworld = mymod.GetModWorld<NihilismWorld>();
+			var modworld = mymod.GetModWorld<MyWorld>();
 			var whitelist = mymod.Config.Data.ItemWhitelist;
 
 			for( int i=0; i<this.player.armor.Length; i++ ) {
@@ -103,7 +104,7 @@ namespace Nihilism {
 
 		private void BlockRecipesIfNotWhitelisted() {
 			var mymod = (NihilismMod)this.mod;
-			var modworld = mymod.GetModWorld<NihilismWorld>();
+			var modworld = mymod.GetModWorld<MyWorld>();
 
 			for( int i=0; i<Main.recipe.Length; i++ ) {
 				Recipe old = Main.recipe[i];

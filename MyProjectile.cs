@@ -3,10 +3,10 @@ using Terraria.ModLoader;
 
 
 namespace Nihilism {
-	class NihilismProjectile : GlobalProjectile {
+	class MyProjectile : GlobalProjectile {
 		public override bool? CanUseGrapple( int item_type, Player player ) {
 			var mymod = (NihilismMod)this.mod;
-			var modworld = mymod.GetModWorld<NihilismWorld>();
+			var modworld = mymod.GetModWorld<MyWorld>();
 			if( !modworld.Logic.IsCurrentWorldNihilated( mymod ) ) { return base.CanUseGrapple( item_type, player ); }
 
 			Item grapple_item = new Item();
