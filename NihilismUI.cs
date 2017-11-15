@@ -3,12 +3,11 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.GameContent.UI.Elements;
-using Terraria.ModLoader;
 using Terraria.UI;
 
 
 namespace Nihilism {
-	public class NihilismUI : UIState {
+	class NihilismUI : UIState {
 		public static float PanelWidth = 288f;
 		public static float PanelHeight = 84f;
 		public static Color ButtonEdgeColor = new Color( 128, 128, 128 );
@@ -59,8 +58,6 @@ namespace Nihilism {
 		////////////////
 
 		public override void OnInitialize() {
-			var mymod = (NihilismMod)ModLoader.GetMod( "Nihilism" );
-
 			float top = 0;
 			
 			this.MainPanel = new UIPanel();
@@ -175,13 +172,13 @@ namespace Nihilism {
 		////////////////
 
 		private void ActivateNihilism() {
-			var mymod = (NihilismMod)ModLoader.GetMod( "Nihilism" );
+			var mymod = NihilismMod.Instance;
 			var modworld = mymod.GetModWorld<MyWorld>();
 			modworld.Logic.NihiliateCurrentWorld( mymod, true );
 		}
 
 		private void DeactivateNihilism() {
-			var mymod = (NihilismMod)ModLoader.GetMod( "Nihilism" );
+			var mymod = NihilismMod.Instance;
 			var modworld = mymod.GetModWorld<MyWorld>();
 			modworld.Logic.NihiliateCurrentWorld( mymod, false );
 		}

@@ -12,6 +12,8 @@ using Terraria.UI;
 
 namespace Nihilism {
     class NihilismMod : Mod {
+		public static NihilismMod Instance { get; private set; }
+
 		public static string GithubUserName { get { return "hamstar0"; } }
 		public static string GithubProjectName { get { return "tml-nihilism-mod"; } }
 
@@ -22,12 +24,8 @@ namespace Nihilism {
 			if( Main.netMode != 0 ) {
 				throw new Exception( "Cannot reload configs outside of single player." );
 			}
-			if( NihilismMod.Instance != null ) {
-				NihilismMod.Instance.Config.LoadFile();
-			}
+			NihilismMod.Instance.Config.LoadFile();
 		}
-
-		public static NihilismMod Instance { get; private set; }
 
 
 		////////////////
@@ -40,6 +38,8 @@ namespace Nihilism {
 		private int LastSeenScreenHeight = -1;
 
 
+		////////////////
+
 		public NihilismMod() {
 			this.Properties = new ModProperties() {
 				Autoload = true,
@@ -51,8 +51,16 @@ namespace Nihilism {
 				ConfigurationDataBase.RelativePath, new NihilismConfigData() );
 		}
 
+		////////////////
+
 		public override void Load() {
 			NihilismMod.Instance = this;
+
+			var hamhelpmod = ModLoader.GetMod( "HamstarHelpers" );
+			var min_ver = new Version( 1, 2, 0 );
+			if( hamhelpmod.Version < min_ver ) {
+				throw new Exception( "Hamstar Helpers must be version " + min_ver.ToString() + " or greater." );
+			}
 
 			if( Main.netMode != 2 ) {   // Not server
 				this.DisabledItem = ModLoader.GetTexture( "Terraria/MapDeath" );
