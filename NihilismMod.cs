@@ -17,7 +17,7 @@ namespace Nihilism {
 		public static string GithubUserName { get { return "hamstar0"; } }
 		public static string GithubProjectName { get { return "tml-nihilism-mod"; } }
 
-		public static string ConfigRelativeFilePath {
+		public static string ConfigFileRelativePath {
 			get { return ConfigurationDataBase.RelativePath + Path.DirectorySeparatorChar + NihilismConfigData.ConfigFileName; }
 		}
 		public static void ReloadConfigFromFile() {
