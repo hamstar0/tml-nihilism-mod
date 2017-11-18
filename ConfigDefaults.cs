@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Nihilism {
 	public class NihilismConfigData {
-		public readonly static Version CurrentVersion = new Version( 1, 2, 0 );
+		public readonly static Version ConfigVersion = new Version( 1, 2, 0 );
 		public readonly static string ConfigFileName = "Nihilism Config.json";
 
 
@@ -47,11 +47,11 @@ namespace Nihilism {
 				new Version( this.VersionSinceUpdate ) :
 				new Version();
 
-			if( vers_since >= NihilismConfigData.CurrentVersion ) {
+			if( vers_since >= NihilismConfigData.ConfigVersion ) {
 				return false;
 			}
 			
-			this.VersionSinceUpdate = NihilismConfigData.CurrentVersion.ToString();
+			this.VersionSinceUpdate = NihilismConfigData.ConfigVersion.ToString();
 
 			return true;
 		}

@@ -84,7 +84,7 @@ namespace Nihilism {
 			}
 
 			if( this.Config.Data.UpdateToLatestVersion() ) {
-				ErrorLogger.Log( "Nihilism updated to " + NihilismConfigData.CurrentVersion.ToString() );
+				ErrorLogger.Log( "Nihilism updated to " + NihilismConfigData.ConfigVersion.ToString() );
 				this.Config.SaveFile();
 			}
 		}
