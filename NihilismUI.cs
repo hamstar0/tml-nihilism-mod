@@ -24,6 +24,8 @@ namespace Nihilism {
 
 
 
+		////////////////
+
 		public NihilismUI() {
 			this.Backend = new UserInterface();
 			this.IsOpen = false;
@@ -34,24 +36,6 @@ namespace Nihilism {
 			this.Activate();
 			this.Backend.SetState( this );
 			this.HasBeenSetup = true;
-		}
-
-		////////////////
-
-		public void RecalculateBackend() {
-			if( !this.HasBeenSetup ) { return; }
-			this.Backend.Recalculate();
-		}
-
-		public void UpdateBackend( GameTime game_time ) {
-			if( !this.HasBeenSetup ) { return; }
-			this.Backend.Update( game_time );
-		}
-
-		protected override void DrawSelf( SpriteBatch sb ) {
-			if( this.MainPanel.ContainsPoint( Main.MouseScreen ) ) {
-				Main.LocalPlayer.mouseInterface = true;
-			}
 		}
 
 
@@ -112,16 +96,35 @@ namespace Nihilism {
 
 		////////////////
 
+		public void UpdateBackend( GameTime game_time ) {
+			if( !this.HasBeenSetup ) { return; }
+			this.Backend.Update( game_time );
+		}
+
+		public override void Update( GameTime game_time ) {
+			base.Update( game_time );
+
+			if( this.MainPanel.ContainsPoint( Main.MouseScreen ) ) {
+				Main.LocalPlayer.mouseInterface = true;
+			}
+		}
+
+		////////////////
+
+		public void RecalculateBackend() {
+			if( !this.HasBeenSetup ) { return; }
+			this.Backend.Recalculate();
+		}
+
+
+		////////////////
+
 		public void Open() {
 			this.IsOpen = true;
-			this.MainPanel.Top.Set( -(NihilismUI.PanelHeight / 2f), 0.5f );
-			this.Recalculate();
 		}
 
 		public void Close() {
 			this.IsOpen = false;
-			this.MainPanel.Top.Set( 8f - NihilismUI.PanelHeight, 0f );
-			this.Recalculate();
 		}
 
 
@@ -168,18 +171,25 @@ namespace Nihilism {
 			this.IsTogglerLit = lit;
 		}
 
+		////////////////
+
+		public override void Draw( SpriteBatch spriteBatch ) {
+			if( !this.IsOpen ) { return; }
+			base.Draw( spriteBatch );
+		}
+
 
 		////////////////
 
 		private void ActivateNihilism() {
 			var mymod = NihilismMod.Instance;
-			var modworld = mymod.GetModWorld<MyWorld>();
+			var modworld = mymod.GetModWorld<NihilismWorld>();
 			modworld.Logic.NihiliateCurrentWorld( mymod, true );
 		}
 
 		private void DeactivateNihilism() {
 			var mymod = NihilismMod.Instance;
-			var modworld = mymod.GetModWorld<MyWorld>();
+			var modworld = mymod.GetModWorld<NihilismWorld>();
 			modworld.Logic.NihiliateCurrentWorld( mymod, false );
 		}
 	}

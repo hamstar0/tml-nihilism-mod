@@ -1,9 +1,11 @@
-﻿using System;
+﻿using HamstarHelpers.Utilities.Config;
+using System;
 using System.Collections.Generic;
+using Terraria;
 
 
 namespace Nihilism {
-	public class NihilismConfigData {
+	public class NihilismConfigData : ConfigurationDataBase {
 		public readonly static Version ConfigVersion = new Version( 1, 2, 0 );
 		public readonly static string ConfigFileName = "Nihilism Config.json";
 
@@ -24,18 +26,10 @@ namespace Nihilism {
 		public string NpcsBlacklistPattern = "(.*?)";
 		public string NpcItemDropsBlacklistPattern = "(.*?)";
 
-		public IDictionary<string, bool> RecipeWhitelist = new Dictionary<string, bool> {
-			{ "Copper Pickaxe", true }
-		};
-		public IDictionary<string, bool> ItemWhitelist = new Dictionary<string, bool> {
-			{ "Copper Pickaxe", true }
-		};
-		public IDictionary<string, bool> NpcWhitelist = new Dictionary<string, bool> {
-			{ "Green Slime", true }
-		};
-		public IDictionary<string, bool> NpcItemDropWhitelist = new Dictionary<string, bool> {
-			{ "Green Slime", true }
-		};
+		public IDictionary<string, bool> RecipeWhitelist = new Dictionary<string, bool> { };
+		public IDictionary<string, bool> ItemWhitelist = new Dictionary<string, bool> { };
+		public IDictionary<string, bool> NpcWhitelist = new Dictionary<string, bool> { };
+		public IDictionary<string, bool> NpcItemDropWhitelist = new Dictionary<string, bool> { };
 
 
 
@@ -54,6 +48,21 @@ namespace Nihilism {
 			this.VersionSinceUpdate = NihilismConfigData.ConfigVersion.ToString();
 
 			return true;
+		}
+
+
+		////////////////
+
+		public void SetDefaults() {
+			this.RecipeWhitelist["Copper Pickaxe"] = true;
+			this.ItemWhitelist["Copper Pickaxe"] = true;
+			this.NpcWhitelist["Green Slime"] = true;
+			this.NpcItemDropWhitelist["Green Slime"] = true;
+		}
+
+
+		public override void OnLoad( bool success ) {
+			NihilismLogic.ResetCachedPatterns();
 		}
 	}
 }

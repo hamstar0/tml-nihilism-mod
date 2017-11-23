@@ -1,8 +1,15 @@
+v1.2
+-	Add occluding colored mist clouds
+-	Add Avoid Blocks (invisible; kills all)
+-	Add Void Blocks (invisible)
 v1.1
--	Remove events
+-	Whitelist/blacklist buildable blocks
+-	Whitelist/blacklist breakable objects
+-	Add option to remove events
+-	Implement per-world configs (replaces general config)
+
 v1
 -	Release
-
 -	Remove mob spawns
 	-	Disable all mob spawns not on whitelist
 	-	Implement config whitelist

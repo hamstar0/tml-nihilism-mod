@@ -1,5 +1,4 @@
-﻿using HamstarHelpers.DebugHelpers;
-using HamstarHelpers.Utilities.Config;
+﻿using HamstarHelpers.Utilities.Config;
 using Microsoft.Xna.Framework.Graphics;
 using Nihilism.NetProtocol;
 using System;
@@ -24,7 +23,9 @@ namespace Nihilism {
 			if( Main.netMode != 0 ) {
 				throw new Exception( "Cannot reload configs outside of single player." );
 			}
-			NihilismMod.Instance.Config.LoadFile();
+			if( !NihilismMod.Instance.Config.LoadFile() ) {
+				ErrorLogger.Log("Could not load config file.");
+			}
 		}
 
 
@@ -57,7 +58,7 @@ namespace Nihilism {
 			NihilismMod.Instance = this;
 
 			var hamhelpmod = ModLoader.GetMod( "HamstarHelpers" );
-			var min_ver = new Version( 1, 2, 0 );
+			var min_ver = new Version( 1, 2, 1 );
 			if( hamhelpmod.Version < min_ver ) {
 				throw new Exception( "Hamstar Helpers must be version " + min_ver.ToString() + " or greater." );
 			}
@@ -74,13 +75,10 @@ namespace Nihilism {
 		}
 
 		private void LoadConfig() {
-			try {
-				if( !this.Config.LoadFile() ) {
-					this.Config.SaveFile();
-				}
-			} catch( Exception e ) {
-				DebugHelpers.Log( e.Message );
+			if( !this.Config.LoadFile() ) {
+				this.Config.Data.SetDefaults();
 				this.Config.SaveFile();
+				ErrorLogger.Log( "Nihilism config " + NihilismConfigData.ConfigVersion.ToString() + " created (Mod.Load())." );
 			}
 
 			if( this.Config.Data.UpdateToLatestVersion() ) {
@@ -115,7 +113,7 @@ namespace Nihilism {
 		////////////////
 
 		public override void ModifyInterfaceLayers( List<GameInterfaceLayer> layers ) {
-			var modworld = this.GetModWorld<MyWorld>();
+			var modworld = this.GetModWorld<NihilismWorld>();
 			if( !this.Config.Data.Enabled ) { return; }
 
 			if( !modworld.Logic.IsInitialized ) {

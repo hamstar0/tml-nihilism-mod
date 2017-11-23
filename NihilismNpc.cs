@@ -3,10 +3,10 @@ using Terraria.ModLoader;
 
 
 namespace Nihilism {
-	class MyNpc : GlobalNPC {
+	class NihilismNpc : GlobalNPC {
 		public override bool PreNPCLoot( NPC npc ) {
 			var mymod = (NihilismMod)this.mod;
-			var modworld = mymod.GetModWorld<MyWorld>();
+			var modworld = mymod.GetModWorld<NihilismWorld>();
 			if( !modworld.Logic.IsCurrentWorldNihilated( mymod ) ) { return base.PreNPCLoot(npc); }
 			
 			return modworld.Logic.IsNpcItemDropEnabled( mymod, npc );
@@ -15,10 +15,13 @@ namespace Nihilism {
 
 		public override bool PreAI( NPC npc ) {
 			var mymod = (NihilismMod)this.mod;
-			var modworld = mymod.GetModWorld<MyWorld>();
+			var modworld = mymod.GetModWorld<NihilismWorld>();
 			if( !modworld.Logic.IsCurrentWorldNihilated( mymod ) ) { return base.PreAI(npc); }
 			
 			npc.active = modworld.Logic.IsNpcEnabled( mymod, npc );
+			if( !npc.active ) {
+				Main.npc[npc.whoAmI] = new NPC();
+			}
 			
 			return npc.active;
 		}

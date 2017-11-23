@@ -1,11 +1,13 @@
-﻿using HamstarHelpers.PlayerHelpers;
+﻿using HamstarHelpers.DotNetHelpers;
+using HamstarHelpers.PlayerHelpers;
 using Nihilism.NetProtocol;
+using System.Linq;
 using Terraria;
 using Terraria.ModLoader;
 
 
 namespace Nihilism {
-	class MyPlayer : ModPlayer {
+	class NihilismPlayer : ModPlayer {
 		public bool HasEnteredWorld { get; private set; }
 
 
@@ -16,7 +18,7 @@ namespace Nihilism {
 		}
 
 		public override void clientClone( ModPlayer client_clone ) {
-			var clone = (MyPlayer)client_clone;
+			var clone = (NihilismPlayer)client_clone;
 			clone.HasEnteredWorld = this.HasEnteredWorld;
 		}
 
@@ -29,7 +31,9 @@ namespace Nihilism {
 			if( player.whoAmI == this.player.whoAmI ) {
 				if( Main.netMode != 2 ) {   // Not server
 					if( !mymod.Config.LoadFile() ) {
+						mymod.Config.Data.SetDefaults();
 						mymod.Config.SaveFile();
+						ErrorLogger.Log( "Nihilism config " + NihilismConfigData.ConfigVersion.ToString() + " created (ModPlayer.OnEnterWorld())." );
 					}
 				}
 
@@ -38,12 +42,13 @@ namespace Nihilism {
 				}
 			}
 
+//Main.NewText("whitelist "+string.Join(", ", mymod.Config.Data.ItemWhitelist.Select(kv => kv.Key+":"+kv.Value).ToArray()) );
 			this.HasEnteredWorld = true;
 		}
 
 		public override void PreUpdate() {
 			var mymod = (NihilismMod)this.mod;
-			var modworld = mymod.GetModWorld<MyWorld>();
+			var modworld = mymod.GetModWorld<NihilismWorld>();
 			if( !modworld.Logic.IsCurrentWorldNihilated( mymod ) ) { return; }
 			if( !this.HasEnteredWorld ) { return; }
 
@@ -55,7 +60,7 @@ namespace Nihilism {
 
 		public override bool PreItemCheck() {
 			var mymod = (NihilismMod)this.mod;
-			var modworld = mymod.GetModWorld<MyWorld>();
+			var modworld = mymod.GetModWorld<NihilismWorld>();
 			if( !modworld.Logic.IsCurrentWorldNihilated( mymod ) ) { return base.PreItemCheck(); }
 
 			return !this.BlockHeldItemIfNotWhitelisted();
@@ -65,7 +70,7 @@ namespace Nihilism {
 
 		private bool BlockHeldItemIfNotWhitelisted() {
 			var mymod = (NihilismMod)this.mod;
-			var modworld = mymod.GetModWorld<MyWorld>();
+			var modworld = mymod.GetModWorld<NihilismWorld>();
 			var held_item = this.player.HeldItem;
 			bool has_mouse_item = this.player.whoAmI == Main.myPlayer && Main.mouseItem != null && !Main.mouseItem.IsAir;
 			bool is_using_blocked = false;
@@ -89,7 +94,7 @@ namespace Nihilism {
 
 		private void BlockEquipsIfNotWhitelisted() {
 			var mymod = (NihilismMod)this.mod;
-			var modworld = mymod.GetModWorld<MyWorld>();
+			var modworld = mymod.GetModWorld<NihilismWorld>();
 			var whitelist = mymod.Config.Data.ItemWhitelist;
 
 			for( int i=0; i<this.player.armor.Length; i++ ) {
@@ -104,7 +109,7 @@ namespace Nihilism {
 
 		private void BlockRecipesIfNotWhitelisted() {
 			var mymod = (NihilismMod)this.mod;
-			var modworld = mymod.GetModWorld<MyWorld>();
+			var modworld = mymod.GetModWorld<NihilismWorld>();
 
 			for( int i=0; i<Main.recipe.Length; i++ ) {
 				Recipe old = Main.recipe[i];

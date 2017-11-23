@@ -44,7 +44,7 @@ namespace Nihilism.NetProtocol {
 			// Clients only
 			if( Main.netMode != 1 ) { return; }
 
-			var modworld = mymod.GetModWorld<MyWorld>();
+			var modworld = mymod.GetModWorld<NihilismWorld>();
 			ModPacket packet = mymod.GetPacket();
 
 			packet.Write( (byte)NihilismProtocolTypes.InitFromClient );
@@ -71,7 +71,7 @@ namespace Nihilism.NetProtocol {
 			// Clients only
 			if( Main.netMode != 1 ) { return; }
 
-			var modworld = mymod.GetModWorld<MyWorld>();
+			var modworld = mymod.GetModWorld<NihilismWorld>();
 
 			modworld.Logic.NihiliateCurrentWorld( mymod, reader.ReadBoolean() );
 			mymod.Config.DeserializeMe( reader.ReadString() );
