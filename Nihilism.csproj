@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="API.cs" />
     <Compile Include="ConfigDefaults.cs" />
+    <Compile Include="ControlPanel\ControlPanelTheme.cs" />
     <Compile Include="NihilismItem.cs" />
     <Compile Include="NetProtocol\ServerPacketHandlers.cs" />
     <Compile Include="NetProtocol\ClientPacketHandlers.cs" />
@@ -63,9 +64,11 @@
     <Compile Include="NihilismNpc.cs" />
     <Compile Include="NihilismPlayer.cs" />
     <Compile Include="NihilismProjectile.cs" />
-    <Compile Include="NihilismUI.cs" />
+    <Compile Include="ControlPanel\ControlPanelUI.cs" />
     <Compile Include="NihilismWorld.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ControlPanel\ControlPanelUI_Init.cs" />
+    <Compile Include="ControlPanel\ControlPanelUI_Toggler.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="build.txt" />

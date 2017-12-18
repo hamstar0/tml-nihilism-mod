@@ -1,12 +1,11 @@
 ﻿using HamstarHelpers.Utilities.Config;
 using System;
 using System.Collections.Generic;
-using Terraria;
 
 
 namespace Nihilism {
 	public class NihilismConfigData : ConfigurationDataBase {
-		public readonly static Version ConfigVersion = new Version( 1, 2, 0 );
+		public readonly static Version ConfigVersion = new Version( 1, 3, 2 );
 		public readonly static string ConfigFileName = "Nihilism Config.json";
 
 
@@ -44,7 +43,22 @@ namespace Nihilism {
 			if( vers_since >= NihilismConfigData.ConfigVersion ) {
 				return false;
 			}
-			
+
+			if( vers_since < new Version(1, 3, 2) ) {
+				if( this.RecipeWhitelist.Count == 1 && this.RecipeWhitelist.ContainsKey("Copper Pickaxe") ) {
+					this.RecipeWhitelist = new_config.RecipeWhitelist;
+				}
+				if( this.ItemWhitelist.Count == 1 && this.ItemWhitelist.ContainsKey( "Copper Pickaxe" ) ) {
+					this.ItemWhitelist = new_config.ItemWhitelist;
+				}
+				if( this.NpcWhitelist.Count == 1 && this.NpcWhitelist.ContainsKey( "Green Slime" ) ) {
+					this.NpcWhitelist = new_config.NpcWhitelist;
+				}
+				if( this.NpcItemDropWhitelist.Count == 1 && this.NpcItemDropWhitelist.ContainsKey( "Green Slime" ) ) {
+					this.NpcItemDropWhitelist = new_config.NpcItemDropWhitelist;
+				}
+			}
+
 			this.VersionSinceUpdate = NihilismConfigData.ConfigVersion.ToString();
 
 			return true;

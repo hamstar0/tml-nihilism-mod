@@ -1,6 +1,7 @@
 ﻿using HamstarHelpers.Utilities.Config;
 using Microsoft.Xna.Framework.Graphics;
 using Nihilism.NetProtocol;
+using Nihilism.UI;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -24,7 +25,7 @@ namespace Nihilism {
 				throw new Exception( "Cannot reload configs outside of single player." );
 			}
 			if( !NihilismMod.Instance.Config.LoadFile() ) {
-				ErrorLogger.Log("Could not load config file.");
+				NihilismMod.Instance.Config.SaveFile();
 			}
 		}
 
@@ -34,7 +35,7 @@ namespace Nihilism {
 		public JsonConfig<NihilismConfigData> Config { get; private set; }
 		public Texture2D DisabledItem = null;
 
-		public NihilismUI UI = null;
+		public ControlPanelUI ControlPanel = null;
 		private int LastSeenScreenWidth = -1;
 		private int LastSeenScreenHeight = -1;
 
@@ -58,7 +59,7 @@ namespace Nihilism {
 			NihilismMod.Instance = this;
 
 			var hamhelpmod = ModLoader.GetMod( "HamstarHelpers" );
-			var min_ver = new Version( 1, 2, 1 );
+			var min_ver = new Version( 1, 2, 3, 1 );
 			if( hamhelpmod.Version < min_ver ) {
 				throw new Exception( "Hamstar Helpers must be version " + min_ver.ToString() + " or greater." );
 			}
@@ -68,10 +69,8 @@ namespace Nihilism {
 			}
 
 			this.LoadConfig();
-
-			if( !Main.dedServ ) {
-				this.UI = new NihilismUI();
-			}
+			
+			this.ControlPanel = new ControlPanelUI();
 		}
 
 		private void LoadConfig() {
@@ -93,14 +92,6 @@ namespace Nihilism {
 
 		////////////////
 
-		public override void PostSetupContent() {
-			if( !Main.dedServ ) {
-				this.UI.PostSetupContent();
-			}
-		}
-
-
-		////////////////
 
 		public override void HandlePacket( BinaryReader reader, int player_who ) {
 			if( Main.netMode == 1 ) {   // Client
@@ -119,22 +110,26 @@ namespace Nihilism {
 			if( !modworld.Logic.IsInitialized ) {
 				int idx = layers.FindIndex( layer => layer.Name.Equals( "Vanilla: Mouse Text" ) );
 				if( idx != -1 ) {
-					var interface_layer = new LegacyGameInterfaceLayer( "Nihilism: Activator",
-						delegate {
-							if( this.LastSeenScreenWidth != Main.screenWidth || this.LastSeenScreenHeight != Main.screenHeight ) {
-								this.LastSeenScreenWidth = Main.screenWidth;
-								this.LastSeenScreenHeight = Main.screenHeight;
-								this.UI.RecalculateBackend();
-							}
+					GameInterfaceDrawMethod draw_method = delegate {
+						if( this.LastSeenScreenWidth != Main.screenWidth || this.LastSeenScreenHeight != Main.screenHeight ) {
+							this.LastSeenScreenWidth = Main.screenWidth;
+							this.LastSeenScreenHeight = Main.screenHeight;
+							this.ControlPanel.RecalculateBackend();
+						}
 
-							this.UI.CheckTogglerMouseInteraction();
-							this.UI.UpdateBackend( Main._drawInterfaceGameTime );
+						this.ControlPanel.UpdateInteractivity( Main._drawInterfaceGameTime );
+						this.ControlPanel.UpdateDialog();
+						this.ControlPanel.UpdateToggler();
 
-							this.UI.Draw( Main.spriteBatch );
-							this.UI.DrawToggler( Main.spriteBatch );
+						this.ControlPanel.Draw( Main.spriteBatch );
+						this.ControlPanel.DrawToggler( Main.spriteBatch );
 
-							return true;
-						}, InterfaceScaleType.None );
+						return true;
+					};
+
+					var interface_layer = new LegacyGameInterfaceLayer( "Nihilism: Activator", draw_method,
+						InterfaceScaleType.UI );
+
 					layers.Insert( idx, interface_layer );
 				}
 			}
