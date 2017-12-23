@@ -53,8 +53,8 @@ namespace Nihilism {
 			if( !this.HasEnteredWorld ) { return; }
 
 			if( this.player.whoAmI == Main.myPlayer ) {
-				this.BlockRecipesIfNotWhitelisted();
-				this.BlockEquipsIfNotWhitelisted();
+				this.BlockRecipesIfDisabled();
+				this.BlockEquipsIfDisabled();
 			}
 		}
 
@@ -63,12 +63,12 @@ namespace Nihilism {
 			var modworld = mymod.GetModWorld<NihilismWorld>();
 			if( !modworld.Logic.IsCurrentWorldNihilated( mymod ) ) { return base.PreItemCheck(); }
 
-			return !this.BlockHeldItemIfNotWhitelisted();
+			return !this.BlockHeldItemIfDisabled();
 		}
 
 		////////////////
 
-		private bool BlockHeldItemIfNotWhitelisted() {
+		private bool BlockHeldItemIfDisabled() {
 			var mymod = (NihilismMod)this.mod;
 			var modworld = mymod.GetModWorld<NihilismWorld>();
 			var held_item = this.player.HeldItem;
@@ -76,8 +76,6 @@ namespace Nihilism {
 			bool is_using_blocked = false;
 
 			if( held_item != null && !held_item.IsAir ) {
-				var whitelist = mymod.Config.Data.ItemWhitelist;
-
 				is_using_blocked = !modworld.Logic.IsItemEnabled( mymod, held_item );
 				if( is_using_blocked ) {
 					this.player.noItems = true;
@@ -92,7 +90,7 @@ namespace Nihilism {
 		}
 
 
-		private void BlockEquipsIfNotWhitelisted() {
+		private void BlockEquipsIfDisabled() {
 			var mymod = (NihilismMod)this.mod;
 			var modworld = mymod.GetModWorld<NihilismWorld>();
 			var whitelist = mymod.Config.Data.ItemWhitelist;
@@ -107,7 +105,7 @@ namespace Nihilism {
 		}
 
 
-		private void BlockRecipesIfNotWhitelisted() {
+		private void BlockRecipesIfDisabled() {
 			var mymod = (NihilismMod)this.mod;
 			var modworld = mymod.GetModWorld<NihilismWorld>();
 

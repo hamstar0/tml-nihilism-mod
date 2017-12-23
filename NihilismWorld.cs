@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 
@@ -22,11 +23,19 @@ namespace Nihilism {
 		}
 
 		public override void NetReceive( BinaryReader reader ) {
-			this.Logic.NetReceiveWorldData( reader );
+			try {
+				this.Logic.NetReceiveWorldData( reader );
+			} catch( Exception e ) {
+				ErrorLogger.Log( e.ToString() );
+			}
 		}
 
 		public override void NetSend( BinaryWriter writer ) {
-			this.Logic.NetSendWorldData( writer );
+			try {
+				this.Logic.NetSendWorldData( writer );
+			} catch(Exception e ) {
+				ErrorLogger.Log(e.ToString() );
+			}
 		}
 	}
 }
