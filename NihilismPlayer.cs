@@ -58,17 +58,18 @@ namespace Nihilism {
 			}
 		}
 
-		public override bool PreItemCheck() {
+
+		/*public override bool PreItemCheck() {	Redundant?!
 			var mymod = (NihilismMod)this.mod;
 			var modworld = mymod.GetModWorld<NihilismWorld>();
 			if( !modworld.Logic.IsCurrentWorldNihilated( mymod ) ) { return base.PreItemCheck(); }
-
+			
 			return !this.BlockHeldItemIfDisabled();
-		}
+		}*/
 
 		////////////////
 
-		private bool BlockHeldItemIfDisabled() {
+		/*private bool BlockHeldItemIfDisabled() {
 			var mymod = (NihilismMod)this.mod;
 			var modworld = mymod.GetModWorld<NihilismWorld>();
 			var held_item = this.player.HeldItem;
@@ -87,7 +88,7 @@ namespace Nihilism {
 			}
 			
 			return is_using_blocked;
-		}
+		}*/
 
 
 		private void BlockEquipsIfDisabled() {
