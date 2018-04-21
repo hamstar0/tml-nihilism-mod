@@ -1,4 +1,5 @@
 ﻿using HamstarHelpers.Utilities.Config;
+using Nihilism.Logic;
 using System;
 using System.Collections.Generic;
 

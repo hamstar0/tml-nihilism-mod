@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Nihilism.Logic;
+using System;
 using System.IO;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
+
 
 namespace Nihilism {
 	class NihilismWorld : ModWorld {

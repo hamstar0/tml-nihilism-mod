@@ -1,4 +1,6 @@
-﻿using HamstarHelpers.Utilities.Config;
+﻿using HamstarHelpers.TmlHelpers;
+using HamstarHelpers.Utilities.Config;
+using HamstarHelpers.Utilities.Messages;
 using Microsoft.Xna.Framework.Graphics;
 using Nihilism.NetProtocol;
 using Nihilism.UI;
@@ -24,20 +26,17 @@ namespace Nihilism {
 			if( Main.netMode != 0 ) {
 				throw new Exception( "Cannot reload configs outside of single player." );
 			}
-			if( !NihilismMod.Instance.Config.LoadFile() ) {
-				NihilismMod.Instance.Config.SaveFile();
+			if( !NihilismMod.Instance.JsonConfig.LoadFile() ) {
+				NihilismMod.Instance.JsonConfig.SaveFile();
 			}
 		}
 
 
 		////////////////
 
-		public JsonConfig<NihilismConfigData> Config { get; private set; }
+		public JsonConfig<NihilismConfigData> JsonConfig { get; private set; }
+		public NihilismConfigData Config { get; internal set; }
 		public Texture2D DisabledItem = null;
-
-		public ControlPanelUI ControlPanel = null;
-		private int LastSeenScreenWidth = -1;
-		private int LastSeenScreenHeight = -1;
 
 
 		////////////////
@@ -49,40 +48,41 @@ namespace Nihilism {
 				AutoloadSounds = true
 			};
 			
-			this.Config = new JsonConfig<NihilismConfigData>( NihilismConfigData.ConfigFileName,
-				ConfigurationDataBase.RelativePath, new NihilismConfigData() );
+			this.JsonConfig = new JsonConfig<NihilismConfigData>( NihilismConfigData.ConfigFileName,
+					ConfigurationDataBase.RelativePath, new NihilismConfigData() );
+			this.Config = this.JsonConfig.Data;
 		}
 
 		////////////////
 
 		public override void Load() {
 			NihilismMod.Instance = this;
-
-			var hamhelpmod = ModLoader.GetMod( "HamstarHelpers" );
-			var min_ver = new Version( 1, 2, 3, 1 );
-			if( hamhelpmod.Version < min_ver ) {
-				throw new Exception( "Hamstar Helpers must be version " + min_ver.ToString() + " or greater." );
-			}
-
+			
 			if( Main.netMode != 2 ) {   // Not server
 				this.DisabledItem = ModLoader.GetTexture( "Terraria/MapDeath" );
 			}
 
 			this.LoadConfig();
-			
-			this.ControlPanel = new ControlPanelUI();
+
+			TmlLoadHelpers.AddWorldLoadPromise( () => {
+				var myworld = this.GetModWorld<NihilismWorld>();
+				
+				if( !myworld.Logic.IsCurrentWorldNihilated( this ) ) {
+					InboxMessages.SetMessage( "nihilism_init", "Enter the /nihilate command to begin Nihilism.", true );
+				}
+			} );
 		}
 
 		private void LoadConfig() {
-			if( !this.Config.LoadFile() ) {
-				this.Config.Data.SetDefaults();
-				this.Config.SaveFile();
+			if( !this.JsonConfig.LoadFile() ) {
+				this.Config.SetDefaults();
+				this.JsonConfig.SaveFile();
 				ErrorLogger.Log( "Nihilism config " + NihilismConfigData.ConfigVersion.ToString() + " created (Mod.Load())." );
 			}
 
-			if( this.Config.Data.UpdateToLatestVersion() ) {
+			if( this.Config.UpdateToLatestVersion() ) {
 				ErrorLogger.Log( "Nihilism updated to " + NihilismConfigData.ConfigVersion.ToString() );
-				this.Config.SaveFile();
+				this.JsonConfig.SaveFile();
 			}
 		}
 
@@ -98,40 +98,6 @@ namespace Nihilism {
 				ClientPacketHandlers.HandlePacket( this, reader );
 			} else if( Main.netMode == 2 ) {    // Server
 				ServerPacketHandlers.HandlePacket( this, reader, player_who );
-			}
-		}
-
-		////////////////
-
-		public override void ModifyInterfaceLayers( List<GameInterfaceLayer> layers ) {
-			var modworld = this.GetModWorld<NihilismWorld>();
-			if( !this.Config.Data.Enabled ) { return; }
-
-			if( !modworld.Logic.IsInitialized ) {
-				int idx = layers.FindIndex( layer => layer.Name.Equals( "Vanilla: Mouse Text" ) );
-				if( idx != -1 ) {
-					GameInterfaceDrawMethod draw_method = delegate {
-						if( this.LastSeenScreenWidth != Main.screenWidth || this.LastSeenScreenHeight != Main.screenHeight ) {
-							this.LastSeenScreenWidth = Main.screenWidth;
-							this.LastSeenScreenHeight = Main.screenHeight;
-							this.ControlPanel.RecalculateBackend();
-						}
-
-						this.ControlPanel.UpdateInteractivity( Main._drawInterfaceGameTime );
-						this.ControlPanel.UpdateDialog();
-						this.ControlPanel.UpdateToggler();
-
-						this.ControlPanel.Draw( Main.spriteBatch );
-						this.ControlPanel.DrawToggler( Main.spriteBatch );
-
-						return true;
-					};
-
-					var interface_layer = new LegacyGameInterfaceLayer( "Nihilism: Activator", draw_method,
-						InterfaceScaleType.UI );
-
-					layers.Insert( idx, interface_layer );
-				}
 			}
 		}
 	}

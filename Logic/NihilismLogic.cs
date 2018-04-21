@@ -1,13 +1,12 @@
 ﻿using HamstarHelpers.DebugHelpers;
 using Nihilism.NetProtocol;
 using System.IO;
-using System.Linq;
 using System.Text.RegularExpressions;
 using Terraria;
 using Terraria.ModLoader.IO;
 
 
-namespace Nihilism {
+namespace Nihilism.Logic {
 	class NihilismLogic {
 		private static Regex _RecipesBlacklistPattern = null;
 		private static Regex _ItemsBlacklistPattern = null;
@@ -16,25 +15,25 @@ namespace Nihilism {
 
 		public static Regex GetRecipesBlacklistPattern( NihilismMod mymod ) {
 			if( NihilismLogic._RecipesBlacklistPattern == null ) {
-				NihilismLogic._RecipesBlacklistPattern = new Regex( mymod.Config.Data.RecipesBlacklistPattern, RegexOptions.IgnoreCase );
+				NihilismLogic._RecipesBlacklistPattern = new Regex( mymod.Config.RecipesBlacklistPattern, RegexOptions.IgnoreCase );
 			}
 			return NihilismLogic._RecipesBlacklistPattern;
 		}
 		public static Regex GetItemsBlacklistPattern( NihilismMod mymod ) {
 			if( NihilismLogic._ItemsBlacklistPattern == null ) {
-				NihilismLogic._ItemsBlacklistPattern = new Regex( mymod.Config.Data.ItemsBlacklistPattern, RegexOptions.IgnoreCase );
+				NihilismLogic._ItemsBlacklistPattern = new Regex( mymod.Config.ItemsBlacklistPattern, RegexOptions.IgnoreCase );
 			}
 			return NihilismLogic._ItemsBlacklistPattern;
 		}
 		public static Regex GetNpcsBlacklistPattern( NihilismMod mymod ) {
 			if( NihilismLogic._NpcsBlacklistPattern == null ) {
-				NihilismLogic._NpcsBlacklistPattern = new Regex( mymod.Config.Data.NpcsBlacklistPattern, RegexOptions.IgnoreCase );
+				NihilismLogic._NpcsBlacklistPattern = new Regex( mymod.Config.NpcsBlacklistPattern, RegexOptions.IgnoreCase );
 			}
 			return NihilismLogic._NpcsBlacklistPattern;
 		}
 		public static Regex GetNpcItemDropsBlacklistPattern( NihilismMod mymod ) {
 			if( NihilismLogic._NpcItemDropsBlacklistPattern == null ) {
-				NihilismLogic._NpcItemDropsBlacklistPattern = new Regex( mymod.Config.Data.NpcItemDropsBlacklistPattern, RegexOptions.IgnoreCase );
+				NihilismLogic._NpcItemDropsBlacklistPattern = new Regex( mymod.Config.NpcItemDropsBlacklistPattern, RegexOptions.IgnoreCase );
 			}
 			return NihilismLogic._NpcItemDropsBlacklistPattern;
 		}
@@ -55,7 +54,7 @@ namespace Nihilism {
 
 
 		public bool IsCurrentWorldNihilated( NihilismMod mymod ) {
-			if( !mymod.Config.Data.Enabled ) { return false; }
+			if( !mymod.Config.Enabled ) { return false; }
 			if( !this.IsInitialized ) { return false; }
 
 			return this.IsNihilistic;
@@ -64,10 +63,10 @@ namespace Nihilism {
 		////
 
 		public bool IsItemWhitelisted( NihilismMod mymod, Item item ) {
-			if( !mymod.Config.Data.ItemWhitelist.ContainsKey( item.Name ) ) {
+			if( !mymod.Config.ItemWhitelist.ContainsKey( item.Name ) ) {
 				return false;
 			}
-			return mymod.Config.Data.ItemWhitelist[item.Name];
+			return mymod.Config.ItemWhitelist[item.Name];
 		}
 
 		public bool IsItemBlacklisted( NihilismMod mymod, Item item ) {
@@ -75,7 +74,7 @@ namespace Nihilism {
 		}
 
 		public bool IsItemEnabled( NihilismMod mymod, Item item ) {
-			if( mymod.Config.Data.ItemsBlacklistChecksFirst ) {
+			if( mymod.Config.ItemsBlacklistChecksFirst ) {
 				if( this.IsItemBlacklisted( mymod, item ) ) {
 					return false;
 				}
@@ -91,10 +90,10 @@ namespace Nihilism {
 		////
 
 		public bool IsRecipeWhitelisted( NihilismMod mymod, Item item ) {
-			if( !mymod.Config.Data.RecipeWhitelist.ContainsKey( item.Name ) ) {
+			if( !mymod.Config.RecipeWhitelist.ContainsKey( item.Name ) ) {
 				return false;
 			}
-			return mymod.Config.Data.RecipeWhitelist[ item.Name ];
+			return mymod.Config.RecipeWhitelist[ item.Name ];
 		}
 
 		public bool IsRecipeBlacklisted( NihilismMod mymod, Item item ) {
@@ -102,7 +101,7 @@ namespace Nihilism {
 		}
 
 		public bool IsRecipeOfItemEnabled( NihilismMod mymod, Item item ) {
-			if( mymod.Config.Data.RecipesBlacklistChecksFirst ) {
+			if( mymod.Config.RecipesBlacklistChecksFirst ) {
 				if( this.IsRecipeBlacklisted( mymod, item ) ) {
 					return false;
 				}
@@ -118,10 +117,10 @@ namespace Nihilism {
 		////
 
 		public bool IsNpcWhitelisted( NihilismMod mymod, NPC npc ) {
-			if( !mymod.Config.Data.NpcWhitelist.ContainsKey( npc.TypeName ) ) {
+			if( !mymod.Config.NpcWhitelist.ContainsKey( npc.TypeName ) ) {
 				return false;
 			}
-			return mymod.Config.Data.NpcWhitelist[npc.TypeName];
+			return mymod.Config.NpcWhitelist[npc.TypeName];
 		}
 
 		public bool IsNpcBlacklisted( NihilismMod mymod, NPC npc ) {
@@ -129,7 +128,7 @@ namespace Nihilism {
 		}
 
 		public bool IsNpcEnabled( NihilismMod mymod, NPC npc ) {
-			if( mymod.Config.Data.NpcsBlacklistChecksFirst ) {
+			if( mymod.Config.NpcsBlacklistChecksFirst ) {
 				if( this.IsNpcBlacklisted( mymod, npc ) ) {
 					return false;
 				}
@@ -145,10 +144,10 @@ namespace Nihilism {
 		////
 
 		public bool IsNpcItemDropWhitelisted( NihilismMod mymod, NPC npc ) {
-			if( !mymod.Config.Data.NpcItemDropWhitelist.ContainsKey( npc.TypeName ) ) {
+			if( !mymod.Config.NpcItemDropWhitelist.ContainsKey( npc.TypeName ) ) {
 				return false;
 			}
-			return mymod.Config.Data.NpcItemDropWhitelist[npc.TypeName];
+			return mymod.Config.NpcItemDropWhitelist[npc.TypeName];
 		}
 
 		public bool IsNpcItemDropBlacklisted( NihilismMod mymod, NPC npc ) {
@@ -156,7 +155,7 @@ namespace Nihilism {
 		}
 
 		public bool IsNpcItemDropEnabled( NihilismMod mymod, NPC npc ) {
-			if( mymod.Config.Data.NpcItemDropsBlacklistChecksFirst ) {
+			if( mymod.Config.NpcItemDropsBlacklistChecksFirst ) {
 				if( this.IsNpcItemDropBlacklisted(mymod, npc) ) {
 					return false;
 				}

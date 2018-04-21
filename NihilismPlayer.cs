@@ -30,9 +30,9 @@ namespace Nihilism {
 
 			if( player.whoAmI == this.player.whoAmI ) {
 				if( Main.netMode != 2 ) {   // Not server
-					if( !mymod.Config.LoadFile() ) {
-						mymod.Config.Data.SetDefaults();
-						mymod.Config.SaveFile();
+					if( !mymod.JsonConfig.LoadFile() ) {
+						mymod.Config.SetDefaults();
+						mymod.JsonConfig.SaveFile();
 						ErrorLogger.Log( "Nihilism config " + NihilismConfigData.ConfigVersion.ToString() + " created (ModPlayer.OnEnterWorld())." );
 					}
 				}
@@ -94,7 +94,7 @@ namespace Nihilism {
 		private void BlockEquipsIfDisabled() {
 			var mymod = (NihilismMod)this.mod;
 			var modworld = mymod.GetModWorld<NihilismWorld>();
-			var whitelist = mymod.Config.Data.ItemWhitelist;
+			var whitelist = mymod.Config.ItemWhitelist;
 
 			for( int i=0; i<this.player.armor.Length; i++ ) {
 				Item item = this.player.armor[i];

@@ -1,13 +1,27 @@
 v2.0
+-	Whitelist/blacklist block breaking
 -	Add occluding colored mist cloud objects
 -	Add Avoid Blocks (invisible, invincible, non-solid, kills all)
--	Add Void Blocks (invisible, invincible, non-solid)
--	Implement API
+-	Add Ward Blocks (invisible, invincible, non-solid)
 -	Add Block Blocks (invisible, invincible, solid)
--	Whitelist/blacklist block breaking
--	Add option to blacklist invasions events
--	Implement per-world configs (replaces general config)
+v1.5
+-	Whitelist/blacklist buffs
+-	Add option to lock weather
+-	Add option to stop weather
+-	Add option to stop music
+-	Add option to stop time
+-	Add option to stop invasions
+v1.4
+-	Implement API (alter lists, enabled/disable for current world, etc.)
+-	Implement commands
+	-	Add whitelisted item, recipe, item drop, npc
+	-	Add mode start/end
+-	Implement per-world black/white lists
+-	Revise net protocols
 
+-	Remove control panel + add inbox message
+-	@Helpers
+	-	Add message queue
 v1
 -	Release
 -	Remove mob spawns

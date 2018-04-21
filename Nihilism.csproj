@@ -31,7 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="HamstarHelpers">
-      <HintPath>..\HamstarHelpers\bin\Release\HamstarHelpers.dll</HintPath>
+      <HintPath>..\..\Helpers\HamstarHelpers\bin\Release\HamstarHelpers.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -41,26 +41,35 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="Terraria">
-      <HintPath>..\..\..\..\Program Files\Steam\steamapps\common\Terraria\Terraria.exe</HintPath>
-    </Reference>
-    <Reference Include="Terraria.Libraries.ReLogic.ReLogic">
-      <HintPath>..\..\Reference\Terraria.Libraries.ReLogic.ReLogic.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Xna.Framework" />
     <Reference Include="Microsoft.Xna.Framework.Game" />
     <Reference Include="Microsoft.Xna.Framework.Graphics" />
+    <Reference Include="Terraria">
+      <HintPath>..\..\..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Terraria\Terraria.exe</HintPath>
+    </Reference>
+    <Reference Include="Terraria.Libraries.ReLogic.ReLogic">
+      <HintPath>..\..\..\Reference\Terraria.Libraries.ReLogic.ReLogic.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="API.cs" />
-    <Compile Include="ConfigDefaults.cs" />
+    <Compile Include="Commands\NpcBlacklistSetCommand.cs" />
+    <Compile Include="Commands\LootBlacklistSetCommand.cs" />
+    <Compile Include="Commands\ItemBlacklistSetCommand.cs" />
+    <Compile Include="Commands\LootWhitelistAddCommand.cs" />
+    <Compile Include="Commands\NpcWhitelistAddCommand.cs" />
+    <Compile Include="Commands\RecipeBlacklistSetCommand.cs" />
+    <Compile Include="Commands\RecipeWhitelistAddCommand.cs" />
+    <Compile Include="Commands\ItemWhitelistAddCommand.cs" />
+    <Compile Include="Commands\NihilismOffCommand.cs" />
+    <Compile Include="Commands\NihilismOnCommand.cs" />
+    <Compile Include="Config.cs" />
     <Compile Include="ControlPanel\ControlPanelTheme.cs" />
+    <Compile Include="NetProtocol\InitAndModSettingsProtocol.cs" />
+    <Compile Include="NetProtocol\ModSettingsProtocol.cs" />
     <Compile Include="NihilismItem.cs" />
-    <Compile Include="NetProtocol\ServerPacketHandlers.cs" />
-    <Compile Include="NetProtocol\ClientPacketHandlers.cs" />
-    <Compile Include="NihilismLogic.cs" />
+    <Compile Include="Logic\NihilismLogic.cs" />
     <Compile Include="NihilismMod.cs" />
-    <Compile Include="NetProtocol\NetProtocolTypes.cs" />
     <Compile Include="NihilismNpc.cs" />
     <Compile Include="NihilismPlayer.cs" />
     <Compile Include="NihilismProjectile.cs" />
