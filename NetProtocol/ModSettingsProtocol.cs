@@ -1,5 +1,6 @@
 ﻿using HamstarHelpers.Utilities.Network;
-using Terraria;
+using Nihilism.Data;
+
 
 namespace Nihilism.NetProtocol {
 	class NihilismModSettingsProtocol : PacketProtocol {
@@ -10,7 +11,7 @@ namespace Nihilism.NetProtocol {
 			this.Settings = NihilismMod.Instance.Config;
 		}
 		
-		public override void ReceiveOnClient() {
+		protected override void ReceiveWithClient() {
 			NihilismMod.Instance.Config = this.Settings;
 		}
 	}

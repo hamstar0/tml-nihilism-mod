@@ -33,6 +33,9 @@
     <Reference Include="HamstarHelpers">
       <HintPath>..\..\Helpers\HamstarHelpers\bin\Release\HamstarHelpers.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\..\Reference\tModLoader Patcher\references\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -63,9 +66,10 @@
     <Compile Include="Commands\ItemWhitelistAddCommand.cs" />
     <Compile Include="Commands\NihilismOffCommand.cs" />
     <Compile Include="Commands\NihilismOnCommand.cs" />
-    <Compile Include="Config.cs" />
-    <Compile Include="ControlPanel\ControlPanelTheme.cs" />
-    <Compile Include="NetProtocol\InitAndModSettingsProtocol.cs" />
+    <Compile Include="Data\Config.cs" />
+    <Compile Include="Data\Filters.cs" />
+    <Compile Include="Logic\NihilismLogic_Lists.cs" />
+    <Compile Include="NetProtocol\WorldFiltersProtocol.cs" />
     <Compile Include="NetProtocol\ModSettingsProtocol.cs" />
     <Compile Include="NihilismItem.cs" />
     <Compile Include="Logic\NihilismLogic.cs" />
@@ -73,11 +77,8 @@
     <Compile Include="NihilismNpc.cs" />
     <Compile Include="NihilismPlayer.cs" />
     <Compile Include="NihilismProjectile.cs" />
-    <Compile Include="ControlPanel\ControlPanelUI.cs" />
     <Compile Include="NihilismWorld.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ControlPanel\ControlPanelUI_Init.cs" />
-    <Compile Include="ControlPanel\ControlPanelUI_Toggler.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="build.txt" />

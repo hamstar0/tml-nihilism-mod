@@ -1,6 +1,5 @@
-﻿using Nihilism.Logic;
-using System;
-using System.IO;
+﻿using HamstarHelpers.DebugHelpers;
+using Nihilism.Logic;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 
@@ -17,27 +16,12 @@ namespace Nihilism {
 		}
 
 		public override void Load( TagCompound tag ) {
-			this.Logic.LoadWorldData( tag );
+			this.Logic.LoadWorldData( (NihilismMod)this.mod );
 		}
 
 		public override TagCompound Save() {
-			return this.Logic.SaveWorldData();
-		}
-
-		public override void NetReceive( BinaryReader reader ) {
-			try {
-				this.Logic.NetReceiveWorldData( reader );
-			} catch( Exception e ) {
-				ErrorLogger.Log( e.ToString() );
-			}
-		}
-
-		public override void NetSend( BinaryWriter writer ) {
-			try {
-				this.Logic.NetSendWorldData( writer );
-			} catch(Exception e ) {
-				ErrorLogger.Log(e.ToString() );
-			}
+			this.Logic.SaveWorldData( (NihilismMod)this.mod );
+			return new TagCompound();
 		}
 	}
 }

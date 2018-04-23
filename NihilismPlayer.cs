@@ -1,7 +1,6 @@
 ﻿using HamstarHelpers.DotNetHelpers;
 using HamstarHelpers.PlayerHelpers;
-using Nihilism.NetProtocol;
-using System.Linq;
+using Nihilism.Data;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -25,20 +24,33 @@ namespace Nihilism {
 
 		////////////////
 
-		public override void OnEnterWorld( Player player ) {
-			var mymod = (NihilismMod)this.mod;
+		public override void SyncPlayer( int to_who, int from_who, bool new_player ) {
+			if( Main.netMode == 2 ) {
+				if( to_who == -1 && from_who == this.player.whoAmI ) {
+					var mymod = (NihilismMod)this.mod;
+					var myworld = mymod.GetModWorld<NihilismWorld>();
 
+					myworld.Logic.OnEnterWorldForServer( mymod, this.player );
+				}
+			}
+		}
+		
+		public override void OnEnterWorld( Player player ) {
 			if( player.whoAmI == this.player.whoAmI ) {
+				var mymod = (NihilismMod)this.mod;
+				var myworld = this.mod.GetModWorld<NihilismWorld>();
+
 				if( Main.netMode != 2 ) {   // Not server
 					if( !mymod.JsonConfig.LoadFile() ) {
-						mymod.Config.SetDefaults();
 						mymod.JsonConfig.SaveFile();
 						ErrorLogger.Log( "Nihilism config " + NihilismConfigData.ConfigVersion.ToString() + " created (ModPlayer.OnEnterWorld())." );
 					}
 				}
 
-				if( Main.netMode == 1 ) {   // Client
-					ClientPacketHandlers.SendModSettingsRequestFromClient( mymod );
+				if( Main.netMode == 0 ) {
+					myworld.Logic.OnEnterWorldForSingle( mymod, player );
+				} else if( Main.netMode == 1 ) {
+					myworld.Logic.OnEnterWorldForClient( mymod, player );
 				}
 			}
 
@@ -49,7 +61,7 @@ namespace Nihilism {
 		public override void PreUpdate() {
 			var mymod = (NihilismMod)this.mod;
 			var modworld = mymod.GetModWorld<NihilismWorld>();
-			if( !modworld.Logic.IsCurrentWorldNihilated( mymod ) ) { return; }
+			if( !modworld.Logic.IsCurrentWorldNihilated() ) { return; }
 			if( !this.HasEnteredWorld ) { return; }
 
 			if( this.player.whoAmI == Main.myPlayer ) {
@@ -90,16 +102,15 @@ namespace Nihilism {
 			return is_using_blocked;
 		}*/
 
-
+		
 		private void BlockEquipsIfDisabled() {
 			var mymod = (NihilismMod)this.mod;
-			var modworld = mymod.GetModWorld<NihilismWorld>();
-			var whitelist = mymod.Config.ItemWhitelist;
+			var myworld = mymod.GetModWorld<NihilismWorld>();
 
 			for( int i=0; i<this.player.armor.Length; i++ ) {
 				Item item = this.player.armor[i];
 				if( item == null || item.IsAir ) { continue; }
-				if( modworld.Logic.IsItemEnabled( mymod, item ) ) { continue; }
+				if( myworld.Logic.IsItemEnabled( item ) ) { continue; }
 				 
 				PlayerItemHelpers.DropEquippedItem( player, i );
 			}
@@ -115,7 +126,7 @@ namespace Nihilism {
 				Item item = old.createItem;
 
 				if( item == null || item.IsAir ) { continue; }
-				if( modworld.Logic.IsRecipeOfItemEnabled( mymod, item ) ) { continue; }
+				if( modworld.Logic.IsRecipeOfItemEnabled( item ) ) { continue; }
 
 				Main.recipe[i] = new Recipe();
 			}

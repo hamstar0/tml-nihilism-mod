@@ -12,13 +12,15 @@ v1.5
 -	Add option to stop time
 -	Add option to stop invasions
 v1.4
+-	Add 'Item License' to allow a player to add an item to their personal whitelist
+	-	Implement per-player whitelists (per world)
 -	Implement API (alter lists, enabled/disable for current world, etc.)
 -	Implement commands
 	-	Add whitelisted item, recipe, item drop, npc
 	-	Add mode start/end
+
 -	Implement per-world black/white lists
 -	Revise net protocols
-
 -	Remove control panel + add inbox message
 -	@Helpers
 	-	Add message queue

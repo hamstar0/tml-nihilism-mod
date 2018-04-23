@@ -2,14 +2,11 @@
 using HamstarHelpers.Utilities.Config;
 using HamstarHelpers.Utilities.Messages;
 using Microsoft.Xna.Framework.Graphics;
-using Nihilism.NetProtocol;
-using Nihilism.UI;
+using Nihilism.Data;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using Terraria;
 using Terraria.ModLoader;
-using Terraria.UI;
 
 
 namespace Nihilism {
@@ -36,7 +33,8 @@ namespace Nihilism {
 
 		public JsonConfig<NihilismConfigData> JsonConfig { get; private set; }
 		public NihilismConfigData Config { get; internal set; }
-		public Texture2D DisabledItem = null;
+
+		public Texture2D DisabledItem { get; private set; }
 
 
 		////////////////
@@ -65,9 +63,10 @@ namespace Nihilism {
 			this.LoadConfig();
 
 			TmlLoadHelpers.AddWorldLoadPromise( () => {
+				if( Main.netMode != 1 ) { return; }
+
 				var myworld = this.GetModWorld<NihilismWorld>();
-				
-				if( !myworld.Logic.IsCurrentWorldNihilated( this ) ) {
+				if( !myworld.Logic.IsCurrentWorldNihilated() ) {
 					InboxMessages.SetMessage( "nihilism_init", "Enter the /nihilate command to begin Nihilism.", true );
 				}
 			} );
@@ -75,9 +74,8 @@ namespace Nihilism {
 
 		private void LoadConfig() {
 			if( !this.JsonConfig.LoadFile() ) {
-				this.Config.SetDefaults();
 				this.JsonConfig.SaveFile();
-				ErrorLogger.Log( "Nihilism config " + NihilismConfigData.ConfigVersion.ToString() + " created (Mod.Load())." );
+				ErrorLogger.Log( "Nihilism config " + NihilismConfigData.ConfigVersion.ToString() + " created." );
 			}
 
 			if( this.Config.UpdateToLatestVersion() ) {
@@ -88,17 +86,6 @@ namespace Nihilism {
 
 		public override void Unload() {
 			NihilismMod.Instance = null;
-		}
-
-		////////////////
-
-
-		public override void HandlePacket( BinaryReader reader, int player_who ) {
-			if( Main.netMode == 1 ) {   // Client
-				ClientPacketHandlers.HandlePacket( this, reader );
-			} else if( Main.netMode == 2 ) {    // Server
-				ServerPacketHandlers.HandlePacket( this, reader, player_who );
-			}
 		}
 	}
 }
