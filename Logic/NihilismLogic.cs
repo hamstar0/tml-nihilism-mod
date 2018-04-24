@@ -9,19 +9,28 @@ using Terraria;
 
 namespace Nihilism.Logic {
 	partial class NihilismLogic {
-		public NihilismFilterData Filters { get; private set; }
+		public NihilismFilterData Data { get; private set; }
 
 
 		////////////////
 
 		public NihilismLogic() {
-			this.Filters = null;
+			this.Data = null;
 		}
 
 		////////////////
 
 		public bool IsCurrentWorldNihilated() {
-			return this.Filters != null && this.Filters.IsActive;
+			return this.Data != null && this.Data.IsActive;
+		}
+
+
+		public void NihilateCurrentWorld() {
+			this.Data.IsActive = true;
+		}
+
+		public void UnnihilateCurrentWorld() {
+			this.Data.IsActive = false;
 		}
 
 
@@ -36,16 +45,16 @@ namespace Nihilism.Logic {
 			var filters = DataFileHelpers.LoadJson<NihilismFilterData>( mymod, this.GetDataFileName(), out success );
 
 			if( success ) {
-				this.Filters = filters;
+				this.Data = filters;
 			}
 		}
 
 		public void SaveWorldData( NihilismMod mymod ) {
-			if( this.Filters == null ) {
+			if( this.Data == null ) {
 				return;
 			}
 
-			DataFileHelpers.SaveAsJson<NihilismFilterData>( mymod, this.GetDataFileName(), this.Filters );
+			DataFileHelpers.SaveAsJson<NihilismFilterData>( mymod, this.GetDataFileName(), this.Data );
 		}
 
 
@@ -66,7 +75,7 @@ namespace Nihilism.Logic {
 		////////////////
 
 		internal void UpdateFilters( NihilismFilterData filters ) {
-			this.Filters = filters;
+			this.Data = filters;
 		}
 	}
 }

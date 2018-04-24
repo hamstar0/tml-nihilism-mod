@@ -8,17 +8,17 @@ namespace Nihilism.Data {
 		public bool RecipesBlacklistChecksFirst = false;
 		public bool ItemsBlacklistChecksFirst = false;
 		public bool NpcsBlacklistChecksFirst = false;
-		public bool NpcItemDropsBlacklistChecksFirst = false;
+		public bool NpcLootBlacklistChecksFirst = false;
 
 		public string RecipesBlacklistPattern = "(.*?)";
 		public string ItemsBlacklistPattern = "(.*?)";
-		public string NpcsBlacklistPattern = "(.*?)";
-		public string NpcItemDropsBlacklistPattern = "(.*?)";
+		public string NpcBlacklistPattern = "(.*?)";
+		public string NpcLootBlacklistPattern = "(.*?)";
 
 		public IDictionary<string, bool> RecipeWhitelist = new Dictionary<string, bool> { };
 		public IDictionary<string, bool> ItemWhitelist = new Dictionary<string, bool> { };
 		public IDictionary<string, bool> NpcWhitelist = new Dictionary<string, bool> { };
-		public IDictionary<string, bool> NpcItemDropWhitelist = new Dictionary<string, bool> { };
+		public IDictionary<string, bool> NpcLootWhitelist = new Dictionary<string, bool> { };
 
 
 
@@ -28,7 +28,7 @@ namespace Nihilism.Data {
 			this.RecipeWhitelist["Copper Pickaxe"] = true;
 			this.ItemWhitelist["Copper Pickaxe"] = true;
 			this.NpcWhitelist["Green Slime"] = true;
-			this.NpcItemDropWhitelist["Green Slime"] = true;
+			this.NpcLootWhitelist["Green Slime"] = true;
 		}
 	}
 }

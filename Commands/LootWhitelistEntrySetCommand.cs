@@ -4,10 +4,10 @@ using Terraria.ModLoader;
 
 
 namespace Nihilism.Commands {
-	class NihilismOnCommand : ModCommand {
+	class LootWhitelistEntrySetCommand : ModCommand {
 		public override string Command {
 			get {
-				return "nih_on";
+				return "nih_loot_whitelist_add";
 			}
 		}
 		public override CommandType Type {
@@ -21,12 +21,12 @@ namespace Nihilism.Commands {
 		}
 		public override string Usage {
 			get {
-				return "/" + this.Command;
+				return "/" + this.Command + " Zombie";
 			}
 		}
 		public override string Description {
 			get {
-				return "Activates Nihilism mod for the current world. Use /help to see a list of commands to adjust available items, npcs, loot, and recipes.";
+				return "Adds a lootable npc to the whitelist as an exception to the blacklist.";
 			}
 		}
 
@@ -34,15 +34,15 @@ namespace Nihilism.Commands {
 		////////////////
 
 		public override void Action( CommandCaller caller, string input, string[] args ) {
-			var myworld = this.mod.GetModWorld<NihilismWorld>();
-
-			if( myworld.Logic.Data.IsActive ) {
-				caller.Reply( "Current world is already nihilated.", Color.Yellow );
+			if( args.Length == 0 ) {
+				caller.Reply( "No npc name specified.", Color.Yellow );
 				return;
 			}
 
-			myworld.Logic.NihilateCurrentWorld();
-			caller.Reply( "Current world nihilation: On", Color.YellowGreen );
+			string ent_name = args[0];
+
+			NihilismAPI.NpcLootWhitelistEntrySet( ent_name );
+			caller.Reply( "Lootable npc " + ent_name + " added to whitelist.", Color.YellowGreen );
 		}
 	}
 }

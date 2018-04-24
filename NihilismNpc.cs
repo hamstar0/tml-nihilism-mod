@@ -9,7 +9,7 @@ namespace Nihilism {
 			var modworld = mymod.GetModWorld<NihilismWorld>();
 			if( !modworld.Logic.IsCurrentWorldNihilated() ) { return base.PreNPCLoot(npc); }
 			
-			return modworld.Logic.IsNpcItemDropEnabled( npc );
+			return modworld.Logic.IsNpcLootEnabled( npc );
 		}
 
 

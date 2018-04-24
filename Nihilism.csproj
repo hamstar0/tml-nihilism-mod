@@ -55,15 +55,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="API_Call.cs" />
     <Compile Include="API.cs" />
     <Compile Include="Commands\NpcBlacklistSetCommand.cs" />
     <Compile Include="Commands\LootBlacklistSetCommand.cs" />
     <Compile Include="Commands\ItemBlacklistSetCommand.cs" />
-    <Compile Include="Commands\LootWhitelistAddCommand.cs" />
-    <Compile Include="Commands\NpcWhitelistAddCommand.cs" />
+    <Compile Include="Commands\LootWhitelistEntrySetCommand.cs" />
+    <Compile Include="Commands\NpcWhitelistEntrySetCommand.cs" />
     <Compile Include="Commands\RecipeBlacklistSetCommand.cs" />
     <Compile Include="Commands\RecipeWhitelistAddCommand.cs" />
-    <Compile Include="Commands\ItemWhitelistAddCommand.cs" />
+    <Compile Include="Commands\ItemWhitelistEntrySetCommand.cs" />
     <Compile Include="Commands\NihilismOffCommand.cs" />
     <Compile Include="Commands\NihilismOnCommand.cs" />
     <Compile Include="Data\Config.cs" />

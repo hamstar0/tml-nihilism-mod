@@ -8,48 +8,48 @@ namespace Nihilism.Logic {
 		private static Regex _RecipesBlacklistPattern = null;
 		private static Regex _ItemsBlacklistPattern = null;
 		private static Regex _NpcsBlacklistPattern = null;
-		private static Regex _NpcItemDropsBlacklistPattern = null;
+		private static Regex _NpcLootBlacklistPattern = null;
 
 		public static Regex GetRecipesBlacklistPattern( NihilismLogic logic ) {
 			if( NihilismLogic._RecipesBlacklistPattern == null ) {
-				NihilismLogic._RecipesBlacklistPattern = new Regex( logic.Filters.RecipesBlacklistPattern, RegexOptions.IgnoreCase );
+				NihilismLogic._RecipesBlacklistPattern = new Regex( logic.Data.RecipesBlacklistPattern, RegexOptions.IgnoreCase );
 			}
 			return NihilismLogic._RecipesBlacklistPattern;
 		}
 		public static Regex GetItemsBlacklistPattern( NihilismLogic logic ) {
 			if( NihilismLogic._ItemsBlacklistPattern == null ) {
-				NihilismLogic._ItemsBlacklistPattern = new Regex( logic.Filters.ItemsBlacklistPattern, RegexOptions.IgnoreCase );
+				NihilismLogic._ItemsBlacklistPattern = new Regex( logic.Data.ItemsBlacklistPattern, RegexOptions.IgnoreCase );
 			}
 			return NihilismLogic._ItemsBlacklistPattern;
 		}
 		public static Regex GetNpcsBlacklistPattern( NihilismLogic logic ) {
 			if( NihilismLogic._NpcsBlacklistPattern == null ) {
-				NihilismLogic._NpcsBlacklistPattern = new Regex( logic.Filters.NpcsBlacklistPattern, RegexOptions.IgnoreCase );
+				NihilismLogic._NpcsBlacklistPattern = new Regex( logic.Data.NpcBlacklistPattern, RegexOptions.IgnoreCase );
 			}
 			return NihilismLogic._NpcsBlacklistPattern;
 		}
-		public static Regex GetNpcItemDropsBlacklistPattern( NihilismLogic logic ) {
-			if( NihilismLogic._NpcItemDropsBlacklistPattern == null ) {
-				NihilismLogic._NpcItemDropsBlacklistPattern = new Regex( logic.Filters.NpcItemDropsBlacklistPattern, RegexOptions.IgnoreCase );
+		public static Regex GetNpcLootBlacklistPattern( NihilismLogic logic ) {
+			if( NihilismLogic._NpcLootBlacklistPattern == null ) {
+				NihilismLogic._NpcLootBlacklistPattern = new Regex( logic.Data.NpcLootBlacklistPattern, RegexOptions.IgnoreCase );
 			}
-			return NihilismLogic._NpcItemDropsBlacklistPattern;
+			return NihilismLogic._NpcLootBlacklistPattern;
 		}
 
 		public static void ResetCachedPatterns() {
 			NihilismLogic._RecipesBlacklistPattern = null;
 			NihilismLogic._ItemsBlacklistPattern = null;
 			NihilismLogic._NpcsBlacklistPattern = null;
-			NihilismLogic._NpcItemDropsBlacklistPattern = null;
+			NihilismLogic._NpcLootBlacklistPattern = null;
 		}
 
 
 		////////////////
 		
 		public bool IsItemWhitelisted( Item item ) {
-			if( !this.Filters.ItemWhitelist.ContainsKey( item.Name ) ) {
+			if( !this.Data.ItemWhitelist.ContainsKey( item.Name ) ) {
 				return false;
 			}
-			return this.Filters.ItemWhitelist[item.Name];
+			return this.Data.ItemWhitelist[item.Name];
 		}
 
 		public bool IsItemBlacklisted( Item item ) {
@@ -57,7 +57,7 @@ namespace Nihilism.Logic {
 		}
 
 		public bool IsItemEnabled( Item item ) {
-			if( this.Filters.ItemsBlacklistChecksFirst ) {
+			if( this.Data.ItemsBlacklistChecksFirst ) {
 				if( this.IsItemBlacklisted( item ) ) {
 					return false;
 				}
@@ -73,10 +73,10 @@ namespace Nihilism.Logic {
 		////
 
 		public bool IsRecipeWhitelisted( Item item ) {
-			if( !this.Filters.RecipeWhitelist.ContainsKey( item.Name ) ) {
+			if( !this.Data.RecipeWhitelist.ContainsKey( item.Name ) ) {
 				return false;
 			}
-			return this.Filters.RecipeWhitelist[ item.Name ];
+			return this.Data.RecipeWhitelist[ item.Name ];
 		}
 
 		public bool IsRecipeBlacklisted( Item item ) {
@@ -84,26 +84,26 @@ namespace Nihilism.Logic {
 		}
 
 		public bool IsRecipeOfItemEnabled( Item item ) {
-			if( this.Filters.RecipesBlacklistChecksFirst ) {
-				if( this.IsRecipeBlacklisted( this, item ) ) {
+			if( this.Data.RecipesBlacklistChecksFirst ) {
+				if( this.IsRecipeBlacklisted( item ) ) {
 					return false;
 				}
-				return this.IsRecipeWhitelisted( this, item );
+				return this.IsRecipeWhitelisted( item );
 			} else {
-				if( this.IsRecipeWhitelisted( this, item ) ) {
+				if( this.IsRecipeWhitelisted( item ) ) {
 					return true;
 				}
-				return !this.IsRecipeBlacklisted( this, item );
+				return !this.IsRecipeBlacklisted( item );
 			}
 		}
 
 		////
 
 		public bool IsNpcWhitelisted( NPC npc ) {
-			if( !this.Filters.NpcWhitelist.ContainsKey( npc.TypeName ) ) {
+			if( !this.Data.NpcWhitelist.ContainsKey( npc.TypeName ) ) {
 				return false;
 			}
-			return this.Filters.NpcWhitelist[npc.TypeName];
+			return this.Data.NpcWhitelist[npc.TypeName];
 		}
 
 		public bool IsNpcBlacklisted( NPC npc ) {
@@ -111,7 +111,7 @@ namespace Nihilism.Logic {
 		}
 
 		public bool IsNpcEnabled( NPC npc ) {
-			if( this.Filters.NpcsBlacklistChecksFirst ) {
+			if( this.Data.NpcsBlacklistChecksFirst ) {
 				if( this.IsNpcBlacklisted( npc ) ) {
 					return false;
 				}
@@ -126,28 +126,28 @@ namespace Nihilism.Logic {
 
 		////
 
-		public bool IsNpcItemDropWhitelisted( NPC npc ) {
-			if( !this.Filters.NpcItemDropWhitelist.ContainsKey( npc.TypeName ) ) {
+		public bool IsNpcLootWhitelisted( NPC npc ) {
+			if( !this.Data.NpcLootWhitelist.ContainsKey( npc.TypeName ) ) {
 				return false;
 			}
-			return this.Filters.NpcItemDropWhitelist[ npc.TypeName ];
+			return this.Data.NpcLootWhitelist[ npc.TypeName ];
 		}
 
-		public bool IsNpcItemDropBlacklisted( NPC npc ) {
-			return NihilismLogic.GetNpcItemDropsBlacklistPattern( this ).IsMatch( npc.TypeName );
+		public bool IsNpcLootBlacklisted( NPC npc ) {
+			return NihilismLogic.GetNpcLootBlacklistPattern( this ).IsMatch( npc.TypeName );
 		}
 
-		public bool IsNpcItemDropEnabled( NPC npc ) {
-			if( this.Filters.NpcItemDropsBlacklistChecksFirst ) {
-				if( this.IsNpcItemDropBlacklisted( npc) ) {
+		public bool IsNpcLootEnabled( NPC npc ) {
+			if( this.Data.NpcLootBlacklistChecksFirst ) {
+				if( this.IsNpcLootBlacklisted( npc) ) {
 					return false;
 				}
-				return this.IsNpcItemDropWhitelisted( npc );
+				return this.IsNpcLootWhitelisted( npc );
 			} else {
-				if( this.IsNpcItemDropWhitelisted( npc ) ) {
+				if( this.IsNpcLootWhitelisted( npc ) ) {
 					return true;
 				}
-				return !this.IsNpcItemDropBlacklisted( npc );
+				return !this.IsNpcLootBlacklisted( npc );
 			}
 		}
 	}

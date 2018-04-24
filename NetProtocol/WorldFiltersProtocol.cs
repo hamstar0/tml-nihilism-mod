@@ -12,7 +12,7 @@ namespace Nihilism.NetProtocol {
 		public override void SetServerDefaults() {
 			var myworld = NihilismMod.Instance.GetModWorld<NihilismWorld>();
 			
-			this.Filters = myworld.Logic.Filters;
+			this.Filters = myworld.Logic.Data;
 		}
 
 		////////////////
