@@ -22,12 +22,13 @@ namespace Nihilism {
 				NihilismAPI.SetItemsBlacklistPattern( pattern );
 				return null;
 			case "SetItemWhitelistEntry":
+			case "SetItemsWhitelistEntry":  // Oops (v1.4.0.1)
 				if( args.Length < 1 ) { throw new Exception( "Insufficient parameters for API call " + call_type ); }
 
 				ent_name = args[0] as string;
 				if( ent_name == null ) { throw new Exception( "Invalid parameter player for API call " + call_type ); }
 
-				NihilismAPI.SetItemWhitelistEntry( ent_name );
+				NihilismAPI.SetItemsWhitelistEntry( ent_name );
 				return null;
 			case "SetRecipesBlacklistPattern":
 				if( args.Length < 1 ) { throw new Exception( "Insufficient parameters for API call " + call_type ); }

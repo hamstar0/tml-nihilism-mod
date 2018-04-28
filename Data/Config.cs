@@ -5,13 +5,15 @@ using System.Collections.Generic;
 
 namespace Nihilism.Data {
 	public class NihilismConfigData : ConfigurationDataBase {
-		public readonly static Version ConfigVersion = new Version( 1, 4, 0 );
+		public readonly static Version ConfigVersion = new Version( 1, 4, 0, 2 );
 		public readonly static string ConfigFileName = "Nihilism Config.json";
 
 
 		////////////////
 
 		public string VersionSinceUpdate = NihilismConfigData.ConfigVersion.ToString();
+
+		public bool DebugModeInfo = false;
 
 
 		////////

@@ -23,7 +23,7 @@ namespace Nihilism {
 			myworld.Logic.SetItemsBlacklistPattern( pattern );
 		}
 
-		public static void SetItemWhitelistEntry( string item_name ) {
+		public static void SetItemsWhitelistEntry( string item_name ) {
 			if( !TmlLoadHelpers.IsWorldLoaded() ) { throw new Exception( "World not loaded" ); }
 
 			var myworld = NihilismMod.Instance.GetModWorld<NihilismWorld>();

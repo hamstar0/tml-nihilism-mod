@@ -12,7 +12,13 @@ namespace Nihilism {
 		////////////////
 
 		public override void Initialize() {
+			var mymod = (NihilismMod)this.mod;
+
 			this.Logic = new NihilismLogic();
+
+			if( mymod.Config.DebugModeInfo ) {
+				LogHelpers.Log( "World initialized." );
+			}
 		}
 
 		public override void Load( TagCompound tag ) {
