@@ -41,7 +41,7 @@ namespace Nihilism.Commands {
 
 			string ent_name = args[0];
 
-			NihilismAPI.ItemWhitelistEntrySet( ent_name );
+			NihilismAPI.SetItemWhitelistEntry( ent_name );
 			caller.Reply( "Item " + ent_name + " added to whitelist.", Color.YellowGreen );
 		}
 	}

@@ -69,7 +69,8 @@
     <Compile Include="Commands\NihilismOnCommand.cs" />
     <Compile Include="Data\Config.cs" />
     <Compile Include="Data\Filters.cs" />
-    <Compile Include="Logic\NihilismLogic_Lists.cs" />
+    <Compile Include="Logic\NihilismLogic_ListGetters.cs" />
+    <Compile Include="Logic\NihilismLogic_ListSetters.cs" />
     <Compile Include="NetProtocol\WorldFiltersProtocol.cs" />
     <Compile Include="NetProtocol\ModSettingsProtocol.cs" />
     <Compile Include="NihilismItem.cs" />

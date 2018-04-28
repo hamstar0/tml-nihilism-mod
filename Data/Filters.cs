@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using HamstarHelpers.Utilities.Config;
+using Nihilism.Logic;
+using System.Collections.Generic;
 
 
 namespace Nihilism.Data {
-	public class NihilismFilterData {
+	public class NihilismFilterData : ConfigurationDataBase {
 		public bool IsActive = false;
 
 		public bool RecipesBlacklistChecksFirst = false;
@@ -29,6 +31,13 @@ namespace Nihilism.Data {
 			this.ItemWhitelist["Copper Pickaxe"] = true;
 			this.NpcWhitelist["Green Slime"] = true;
 			this.NpcLootWhitelist["Green Slime"] = true;
+		}
+
+
+		////////////////
+
+		public override void OnLoad( bool success ) {
+			NihilismLogic.ResetCachedPatterns();
 		}
 	}
 }

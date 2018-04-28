@@ -41,7 +41,7 @@ namespace Nihilism.Commands {
 
 			string ent_name = args[0];
 
-			NihilismAPI.RecipeWhitelistEntrySet( ent_name );
+			NihilismAPI.SetRecipeWhitelistEntry( ent_name );
 			caller.Reply( "Recipe for item " + ent_name + " added to whitelist.", Color.YellowGreen );
 		}
 	}

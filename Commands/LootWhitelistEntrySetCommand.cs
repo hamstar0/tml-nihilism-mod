@@ -41,7 +41,7 @@ namespace Nihilism.Commands {
 
 			string ent_name = args[0];
 
-			NihilismAPI.NpcLootWhitelistEntrySet( ent_name );
+			NihilismAPI.SetNpcLootWhitelistEntry( ent_name );
 			caller.Reply( "Lootable npc " + ent_name + " added to whitelist.", Color.YellowGreen );
 		}
 	}

@@ -7,7 +7,7 @@ namespace Nihilism.Commands {
 	class NihilismOffCommand : ModCommand {
 		public override string Command {
 			get {
-				return "nih_on";
+				return "unnihilate";
 			}
 		}
 		public override CommandType Type {
@@ -26,7 +26,7 @@ namespace Nihilism.Commands {
 		}
 		public override string Description {
 			get {
-				return "Activates Nihilism mod for the current world. Use /help to see a list of commands to adjust available items, npcs, loot, and recipes.";
+				return "Deactivates Nihilism mod for the current world.";
 			}
 		}
 
@@ -36,13 +36,13 @@ namespace Nihilism.Commands {
 		public override void Action( CommandCaller caller, string input, string[] args ) {
 			var myworld = this.mod.GetModWorld<NihilismWorld>();
 
-			if( myworld.Logic.Data.IsActive ) {
-				caller.Reply( "Current world is already nihilated.", Color.Yellow );
+			if( !myworld.Logic.Data.IsActive ) {
+				caller.Reply( "Current world is already unnihilated.", Color.Yellow );
 				return;
 			}
 
 			myworld.Logic.UnnihilateCurrentWorld();
-			caller.Reply( "Current world nihilation: On", Color.YellowGreen );
+			caller.Reply( "Current world is no longer nihilated.", Color.YellowGreen );
 		}
 	}
 }

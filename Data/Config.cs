@@ -1,5 +1,4 @@
 ﻿using HamstarHelpers.Utilities.Config;
-using Nihilism.Logic;
 using System;
 using System.Collections.Generic;
 
@@ -13,6 +12,9 @@ namespace Nihilism.Data {
 		////////////////
 
 		public string VersionSinceUpdate = NihilismConfigData.ConfigVersion.ToString();
+
+
+		////////
 
 		public string _OLD_SETTINGS_BELOW_ = "";
 
@@ -47,13 +49,6 @@ namespace Nihilism.Data {
 			this.VersionSinceUpdate = NihilismConfigData.ConfigVersion.ToString();
 
 			return true;
-		}
-
-
-		////////////////
-		
-		public override void OnLoad( bool success ) {
-			NihilismLogic.ResetCachedPatterns();
 		}
 	}
 }

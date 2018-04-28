@@ -3,7 +3,7 @@ using Nihilism.Data;
 
 
 namespace Nihilism.NetProtocol {
-	class NihilismModSettingsProtocol : PacketProtocol {
+	class ModSettingsProtocol : PacketProtocol {
 		public NihilismConfigData Settings;
 
 		

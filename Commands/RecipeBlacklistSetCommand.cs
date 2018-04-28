@@ -41,7 +41,7 @@ namespace Nihilism.Commands {
 
 			string pattern = args[0];
 
-			NihilismAPI.RecipeBlacklistSet( pattern );
+			NihilismAPI.SetRecipesBlacklistPattern( pattern );
 			caller.Reply( "Recipe pattern " + pattern + " set as blacklist.", Color.YellowGreen );
 		}
 	}

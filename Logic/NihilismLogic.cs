@@ -1,5 +1,7 @@
 ﻿using HamstarHelpers.DebugHelpers;
 using HamstarHelpers.MiscHelpers;
+using HamstarHelpers.TmlHelpers;
+using HamstarHelpers.Utilities.Messages;
 using HamstarHelpers.Utilities.Network;
 using HamstarHelpers.WorldHelpers;
 using Nihilism.Data;
@@ -9,7 +11,7 @@ using Terraria;
 
 namespace Nihilism.Logic {
 	partial class NihilismLogic {
-		public NihilismFilterData Data { get; private set; }
+		internal NihilismFilterData Data;
 
 
 		////////////////
@@ -27,10 +29,12 @@ namespace Nihilism.Logic {
 
 		public void NihilateCurrentWorld() {
 			this.Data.IsActive = true;
+			this.SyncData();
 		}
 
 		public void UnnihilateCurrentWorld() {
 			this.Data.IsActive = false;
+			this.SyncData();
 		}
 
 
@@ -46,6 +50,8 @@ namespace Nihilism.Logic {
 
 			if( success ) {
 				this.Data = filters;
+			} else {
+				this.Data = new NihilismFilterData();
 			}
 		}
 
@@ -60,22 +66,37 @@ namespace Nihilism.Logic {
 
 		////////////////
 
-		public void OnEnterWorldForSingle( NihilismMod mod, Player player ) { }
-
-
-		public void OnEnterWorldForClient( NihilismMod mod, Player player ) {
-			PacketProtocol.QuickRequestFromServer<NihilismModSettingsProtocol>();
-			PacketProtocol.QuickRequestFromServer<NihilismWorldFiltersProtocol>();
+		internal void OnEnterWorldForSingle( NihilismMod mymod, Player player ) {
+			this.OnPostFiltersSyncToMe( mymod );
 		}
 
 
-		public void OnEnterWorldForServer( NihilismMod mod, Player player ) { }
+		internal void OnEnterWorldForClient( NihilismMod mymod, Player player ) {
+			PacketProtocol.QuickRequestFromServer<ModSettingsProtocol>();
+			PacketProtocol.QuickRequestFromServer<WorldFiltersProtocol>();
+		}
 
 
-		////////////////
+		internal void OnEnterWorldForServer( NihilismMod mymod, Player player ) { }
 
-		internal void UpdateFilters( NihilismFilterData filters ) {
-			this.Data = filters;
+
+		internal void OnPostFiltersSyncToMe( NihilismMod mymod ) {
+			TmlLoadHelpers.AddWorldLoadPromise( () => {
+				if( Main.netMode == 2 ) { return; }
+
+				var myworld = mymod.GetModWorld<NihilismWorld>();
+
+				if( !myworld.Logic.IsCurrentWorldNihilated() ) {
+					string msg;
+					if( Main.netMode == 0 ) {
+						msg = "Enter the /nihilate command to active Nihilism restrictions for the current world. Enter /help for a list of other commands.";
+					} else {
+						msg = "Enter nihilate in the server's command console to activate Nihilism restrictions for the current world. Enter help for a list of other commands.";
+					}
+
+					InboxMessages.SetMessage( "nihilism_init", msg, false );
+				}
+			} );
 		}
 	}
 }

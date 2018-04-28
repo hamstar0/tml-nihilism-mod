@@ -1,6 +1,5 @@
-﻿using HamstarHelpers.TmlHelpers;
+﻿using HamstarHelpers.DebugHelpers;
 using HamstarHelpers.Utilities.Config;
-using HamstarHelpers.Utilities.Messages;
 using Microsoft.Xna.Framework.Graphics;
 using Nihilism.Data;
 using System;
@@ -61,15 +60,6 @@ namespace Nihilism {
 			}
 
 			this.LoadConfig();
-
-			TmlLoadHelpers.AddWorldLoadPromise( () => {
-				if( Main.netMode != 1 ) { return; }
-
-				var myworld = this.GetModWorld<NihilismWorld>();
-				if( !myworld.Logic.IsCurrentWorldNihilated() ) {
-					InboxMessages.SetMessage( "nihilism_init", "Enter the /nihilate command to begin Nihilism.", true );
-				}
-			} );
 		}
 
 		private void LoadConfig() {

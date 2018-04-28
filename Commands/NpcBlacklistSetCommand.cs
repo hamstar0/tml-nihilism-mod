@@ -41,7 +41,7 @@ namespace Nihilism.Commands {
 
 			string pattern = args[0];
 
-			NihilismAPI.NpcBlacklistSet( pattern );
+			NihilismAPI.SetNpcBlacklistPattern( pattern );
 			caller.Reply( "Npc pattern "+ pattern + " set as blacklist.", Color.YellowGreen );
 		}
 	}

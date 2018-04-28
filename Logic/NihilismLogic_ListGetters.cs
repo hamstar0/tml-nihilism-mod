@@ -5,8 +5,8 @@ using Terraria;
 
 namespace Nihilism.Logic {
 	partial class NihilismLogic {
-		private static Regex _RecipesBlacklistPattern = null;
 		private static Regex _ItemsBlacklistPattern = null;
+		private static Regex _RecipesBlacklistPattern = null;
 		private static Regex _NpcsBlacklistPattern = null;
 		private static Regex _NpcLootBlacklistPattern = null;
 
