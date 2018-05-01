@@ -1,6 +1,7 @@
 ﻿using HamstarHelpers.Utilities.Network;
 using Nihilism.Data;
 using Nihilism.NetProtocol;
+using System.Linq;
 using Terraria;
 
 
@@ -80,6 +81,39 @@ namespace Nihilism.Logic {
 			this.Data.NpcWhitelist[npc_name] = true;
 
 			this.SyncData();
+		}
+
+
+		////////////////
+
+		public void SetCurrentFiltersAsDefaults() {
+			var mymod = NihilismMod.Instance;
+			var world_data = this.Data;
+
+			mymod.Config.DefaultItemsBlacklistPattern = world_data.ItemsBlacklistPattern;
+			mymod.Config.DefaultRecipesBlacklistPattern = world_data.RecipesBlacklistPattern;
+			mymod.Config.DefaultNpcLootBlacklistPattern = world_data.NpcLootBlacklistPattern;
+			mymod.Config.DefaultNpcBlacklistPattern = world_data.NpcBlacklistPattern;
+
+			mymod.Config.DefaultRecipeWhitelist = world_data.RecipeWhitelist.ToDictionary( entry => entry.Key, entry => entry.Value );
+			mymod.Config.DefaultItemWhitelist = world_data.ItemWhitelist.ToDictionary( entry => entry.Key, entry => entry.Value );
+			mymod.Config.DefaultNpcWhitelist = world_data.NpcWhitelist.ToDictionary( entry => entry.Key, entry => entry.Value );
+			mymod.Config.DefaultNpcLootWhitelist = world_data.NpcLootWhitelist.ToDictionary( entry => entry.Key, entry => entry.Value );
+		}
+
+		public void ResetFiltersFromDefaults() {
+			var mymod = NihilismMod.Instance;
+			var world_data = this.Data;
+
+			world_data.ItemsBlacklistPattern = mymod.Config.DefaultItemsBlacklistPattern;
+			world_data.RecipesBlacklistPattern = mymod.Config.DefaultRecipesBlacklistPattern;
+			world_data.NpcLootBlacklistPattern = mymod.Config.DefaultNpcLootBlacklistPattern;
+			world_data.NpcBlacklistPattern = mymod.Config.DefaultNpcBlacklistPattern;
+
+			world_data.RecipeWhitelist = mymod.Config.DefaultRecipeWhitelist.ToDictionary( entry => entry.Key, entry => entry.Value );
+			world_data.ItemWhitelist = mymod.Config.DefaultItemWhitelist.ToDictionary( entry => entry.Key, entry => entry.Value );
+			world_data.NpcWhitelist = mymod.Config.DefaultNpcWhitelist.ToDictionary( entry => entry.Key, entry => entry.Value );
+			world_data.NpcLootWhitelist = mymod.Config.DefaultNpcLootWhitelist.ToDictionary( entry => entry.Key, entry => entry.Value );
 		}
 	}
 }

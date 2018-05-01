@@ -1,6 +1,7 @@
 ﻿using HamstarHelpers.TmlHelpers;
 using Nihilism.Data;
 using System;
+using System.Linq;
 
 
 namespace Nihilism {
@@ -73,6 +74,26 @@ namespace Nihilism {
 
 			var myworld = NihilismMod.Instance.GetModWorld<NihilismWorld>();
 			myworld.Logic.SetNpcWhitelistEntry( npc_name );
+		}
+
+		////////////////
+
+		public static void SetCurrentFiltersAsDefaults() {
+			if( !TmlLoadHelpers.IsWorldLoaded() ) { throw new Exception( "World not loaded" ); }
+
+			var mymod = NihilismMod.Instance;
+			var myworld = mymod.GetModWorld<NihilismWorld>();
+
+			myworld.Logic.SetCurrentFiltersAsDefaults();
+		}
+
+		public static void ResetFiltersFromDefaults() {
+			if( !TmlLoadHelpers.IsWorldLoaded() ) { throw new Exception( "World not loaded" ); }
+
+			var mymod = NihilismMod.Instance;
+			var myworld = mymod.GetModWorld<NihilismWorld>();
+
+			myworld.Logic.ResetFiltersFromDefaults();
 		}
 	}
 }

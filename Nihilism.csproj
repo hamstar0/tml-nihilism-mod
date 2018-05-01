@@ -67,6 +67,8 @@
     <Compile Include="Commands\ItemWhitelistEntrySetCommand.cs" />
     <Compile Include="Commands\NihilismOffCommand.cs" />
     <Compile Include="Commands\NihilismOnCommand.cs" />
+    <Compile Include="Commands\ResetFiltersFromDefaultsCommand.cs" />
+    <Compile Include="Commands\SetFiltersAsDefaultsCommand.cs" />
     <Compile Include="Data\Config.cs" />
     <Compile Include="Data\Filters.cs" />
     <Compile Include="Logic\NihilismLogic_ListGetters.cs" />

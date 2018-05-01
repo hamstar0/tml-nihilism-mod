@@ -78,6 +78,12 @@ namespace Nihilism {
 
 				NihilismAPI.SetNpcWhitelistEntry( ent_name );
 				return null;
+			case "SetCurrentFiltersAsDefaults":
+				NihilismAPI.SetCurrentFiltersAsDefaults();
+				return null;
+			case "ResetFiltersFromDefaults":
+				NihilismAPI.ResetFiltersFromDefaults();
+				return null;
 			}
 
 			throw new Exception( "No such api call " + call_type );

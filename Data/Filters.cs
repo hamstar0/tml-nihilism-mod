@@ -1,6 +1,7 @@
 ﻿using HamstarHelpers.Utilities.Config;
 using Nihilism.Logic;
 using System.Collections.Generic;
+using System.Linq;
 
 
 namespace Nihilism.Data {
@@ -12,10 +13,10 @@ namespace Nihilism.Data {
 		public bool NpcsBlacklistChecksFirst = false;
 		public bool NpcLootBlacklistChecksFirst = false;
 
-		public string RecipesBlacklistPattern = "(.*?)";
-		public string ItemsBlacklistPattern = "(.*?)";
-		public string NpcBlacklistPattern = "(.*?)";
-		public string NpcLootBlacklistPattern = "(.*?)";
+		public string RecipesBlacklistPattern;
+		public string ItemsBlacklistPattern;
+		public string NpcBlacklistPattern;
+		public string NpcLootBlacklistPattern;
 
 		public IDictionary<string, bool> RecipeWhitelist = new Dictionary<string, bool> { };
 		public IDictionary<string, bool> ItemWhitelist = new Dictionary<string, bool> { };
@@ -26,11 +27,18 @@ namespace Nihilism.Data {
 
 		////////////////
 
-		public void SetDefaults() {
-			this.RecipeWhitelist["Copper Pickaxe"] = true;
-			this.ItemWhitelist["Copper Pickaxe"] = true;
-			this.NpcWhitelist["Green Slime"] = true;
-			this.NpcLootWhitelist["Green Slime"] = true;
+		public NihilismFilterData() {
+			var mymod = NihilismMod.Instance;
+
+			this.RecipesBlacklistPattern = mymod.Config.DefaultRecipesBlacklistPattern;
+			this.ItemsBlacklistPattern = mymod.Config.DefaultItemsBlacklistPattern;
+			this.NpcBlacklistPattern = mymod.Config.DefaultNpcBlacklistPattern;
+			this.NpcLootBlacklistPattern = mymod.Config.DefaultNpcLootBlacklistPattern;
+
+			this.RecipeWhitelist = mymod.Config.DefaultRecipeWhitelist.ToDictionary( entry => entry.Key, entry => entry.Value );
+			this.ItemWhitelist = mymod.Config.DefaultItemWhitelist.ToDictionary( entry => entry.Key, entry => entry.Value );
+			this.NpcWhitelist = mymod.Config.DefaultNpcWhitelist.ToDictionary( entry => entry.Key, entry => entry.Value );
+			this.NpcLootWhitelist = mymod.Config.DefaultNpcLootWhitelist.ToDictionary( entry => entry.Key, entry => entry.Value );
 		}
 
 
