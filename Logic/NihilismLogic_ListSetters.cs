@@ -86,34 +86,30 @@ namespace Nihilism.Logic {
 
 		////////////////
 
-		public void SetCurrentFiltersAsDefaults() {
-			var mymod = NihilismMod.Instance;
-			var world_data = this.Data;
+		public void SetCurrentFiltersAsDefaults( NihilismMod mymod ) {
+			mymod.Config.DefaultItemsBlacklistPattern = this.Data.ItemsBlacklistPattern;
+			mymod.Config.DefaultRecipesBlacklistPattern = this.Data.RecipesBlacklistPattern;
+			mymod.Config.DefaultNpcLootBlacklistPattern = this.Data.NpcLootBlacklistPattern;
+			mymod.Config.DefaultNpcBlacklistPattern = this.Data.NpcBlacklistPattern;
 
-			mymod.Config.DefaultItemsBlacklistPattern = world_data.ItemsBlacklistPattern;
-			mymod.Config.DefaultRecipesBlacklistPattern = world_data.RecipesBlacklistPattern;
-			mymod.Config.DefaultNpcLootBlacklistPattern = world_data.NpcLootBlacklistPattern;
-			mymod.Config.DefaultNpcBlacklistPattern = world_data.NpcBlacklistPattern;
+			mymod.Config.DefaultRecipeWhitelist = this.Data.RecipeWhitelist.ToDictionary( entry => entry.Key, entry => entry.Value );
+			mymod.Config.DefaultItemWhitelist = this.Data.ItemWhitelist.ToDictionary( entry => entry.Key, entry => entry.Value );
+			mymod.Config.DefaultNpcWhitelist = this.Data.NpcWhitelist.ToDictionary( entry => entry.Key, entry => entry.Value );
+			mymod.Config.DefaultNpcLootWhitelist = this.Data.NpcLootWhitelist.ToDictionary( entry => entry.Key, entry => entry.Value );
 
-			mymod.Config.DefaultRecipeWhitelist = world_data.RecipeWhitelist.ToDictionary( entry => entry.Key, entry => entry.Value );
-			mymod.Config.DefaultItemWhitelist = world_data.ItemWhitelist.ToDictionary( entry => entry.Key, entry => entry.Value );
-			mymod.Config.DefaultNpcWhitelist = world_data.NpcWhitelist.ToDictionary( entry => entry.Key, entry => entry.Value );
-			mymod.Config.DefaultNpcLootWhitelist = world_data.NpcLootWhitelist.ToDictionary( entry => entry.Key, entry => entry.Value );
+			this.SaveWorldData( mymod );
 		}
 
-		public void ResetFiltersFromDefaults() {
-			var mymod = NihilismMod.Instance;
-			var world_data = this.Data;
+		public void ResetFiltersFromDefaults( NihilismMod mymod ) {
+			this.Data.ItemsBlacklistPattern = mymod.Config.DefaultItemsBlacklistPattern;
+			this.Data.RecipesBlacklistPattern = mymod.Config.DefaultRecipesBlacklistPattern;
+			this.Data.NpcLootBlacklistPattern = mymod.Config.DefaultNpcLootBlacklistPattern;
+			this.Data.NpcBlacklistPattern = mymod.Config.DefaultNpcBlacklistPattern;
 
-			world_data.ItemsBlacklistPattern = mymod.Config.DefaultItemsBlacklistPattern;
-			world_data.RecipesBlacklistPattern = mymod.Config.DefaultRecipesBlacklistPattern;
-			world_data.NpcLootBlacklistPattern = mymod.Config.DefaultNpcLootBlacklistPattern;
-			world_data.NpcBlacklistPattern = mymod.Config.DefaultNpcBlacklistPattern;
-
-			world_data.RecipeWhitelist = mymod.Config.DefaultRecipeWhitelist.ToDictionary( entry => entry.Key, entry => entry.Value );
-			world_data.ItemWhitelist = mymod.Config.DefaultItemWhitelist.ToDictionary( entry => entry.Key, entry => entry.Value );
-			world_data.NpcWhitelist = mymod.Config.DefaultNpcWhitelist.ToDictionary( entry => entry.Key, entry => entry.Value );
-			world_data.NpcLootWhitelist = mymod.Config.DefaultNpcLootWhitelist.ToDictionary( entry => entry.Key, entry => entry.Value );
+			this.Data.RecipeWhitelist = mymod.Config.DefaultRecipeWhitelist.ToDictionary( entry => entry.Key, entry => entry.Value );
+			this.Data.ItemWhitelist = mymod.Config.DefaultItemWhitelist.ToDictionary( entry => entry.Key, entry => entry.Value );
+			this.Data.NpcWhitelist = mymod.Config.DefaultNpcWhitelist.ToDictionary( entry => entry.Key, entry => entry.Value );
+			this.Data.NpcLootWhitelist = mymod.Config.DefaultNpcLootWhitelist.ToDictionary( entry => entry.Key, entry => entry.Value );
 		}
 	}
 }

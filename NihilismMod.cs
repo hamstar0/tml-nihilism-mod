@@ -31,7 +31,7 @@ namespace Nihilism {
 		////////////////
 
 		public JsonConfig<NihilismConfigData> JsonConfig { get; private set; }
-		public NihilismConfigData Config { get; internal set; }
+		public NihilismConfigData Config { get { return this.JsonConfig.Data; } }
 
 		public Texture2D DisabledItem { get; private set; }
 
@@ -47,7 +47,6 @@ namespace Nihilism {
 			
 			this.JsonConfig = new JsonConfig<NihilismConfigData>( NihilismConfigData.ConfigFileName,
 					ConfigurationDataBase.RelativePath, new NihilismConfigData() );
-			this.Config = this.JsonConfig.Data;
 		}
 
 		////////////////

@@ -11,30 +11,19 @@ using Terraria;
 
 namespace Nihilism.Logic {
 	partial class NihilismLogic {
-		internal NihilismFilterData Data;
+		internal NihilismFilterData Data = null;
 
 
 		////////////////
 
 		public NihilismLogic() {
-			this.Data = null;
+			this.Data = new NihilismFilterData();
 		}
 
 		////////////////
 
 		public bool IsCurrentWorldNihilated() {
-			return this.Data != null && this.Data.IsActive;
-		}
-
-
-		public void NihilateCurrentWorld() {
-			this.Data.IsActive = true;
-			this.SyncData();
-		}
-
-		public void UnnihilateCurrentWorld() {
-			this.Data.IsActive = false;
-			this.SyncData();
+			return this.Data.IsActive;
 		}
 
 
@@ -50,16 +39,10 @@ namespace Nihilism.Logic {
 
 			if( success ) {
 				this.Data = filters;
-			} else {
-				this.Data = new NihilismFilterData();
 			}
 		}
 
 		public void SaveWorldData( NihilismMod mymod ) {
-			if( this.Data == null ) {
-				return;
-			}
-
 			DataFileHelpers.SaveAsJson<NihilismFilterData>( mymod, this.GetDataFileName(), this.Data );
 		}
 
@@ -70,15 +53,14 @@ namespace Nihilism.Logic {
 			this.OnPostFiltersSyncToMe( mymod );
 		}
 
-
 		internal void OnEnterWorldForClient( NihilismMod mymod, Player player ) {
 			PacketProtocol.QuickRequestFromServer<ModSettingsProtocol>();
 			PacketProtocol.QuickRequestFromServer<WorldFiltersProtocol>();
 		}
 
-
 		internal void OnEnterWorldForServer( NihilismMod mymod, Player player ) { }
 
+		////////////////
 
 		internal void OnPostFiltersSyncToMe( NihilismMod mymod ) {
 			TmlLoadHelpers.AddWorldLoadPromise( () => {
@@ -97,6 +79,19 @@ namespace Nihilism.Logic {
 					InboxMessages.SetMessage( "nihilism_init", msg, false );
 				}
 			} );
+		}
+
+
+		////////////////
+
+		public void NihilateCurrentWorld() {
+			this.Data.IsActive = true;
+			this.SyncData();
+		}
+
+		public void UnnihilateCurrentWorld() {
+			this.Data.IsActive = false;
+			this.SyncData();
 		}
 	}
 }

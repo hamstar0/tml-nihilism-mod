@@ -36,13 +36,11 @@ namespace Nihilism.Commands {
 		public override void Action( CommandCaller caller, string input, string[] args ) {
 			var myworld = this.mod.GetModWorld<NihilismWorld>();
 
-			if( myworld.Logic.Data.IsActive ) {
+			if( NihilismAPI.NihilateCurrentWorld() ) {
+				caller.Reply( "Current world is nihilated. Type /unnihilate to revert.", Color.YellowGreen );
+			}  else {
 				caller.Reply( "Current world is already nihilated.", Color.Yellow );
-				return;
 			}
-			
-			myworld.Logic.NihilateCurrentWorld();
-			caller.Reply( "Current world is nihilated. Type /unnihilate to revert.", Color.YellowGreen );
 		}
 	}
 }

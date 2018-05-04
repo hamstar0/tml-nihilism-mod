@@ -12,7 +12,7 @@ namespace Nihilism.NetProtocol {
 		}
 		
 		protected override void ReceiveWithClient() {
-			NihilismMod.Instance.Config = this.Settings;
+			NihilismMod.Instance.JsonConfig.SetData( this.Settings );
 		}
 	}
 }

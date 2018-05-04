@@ -13,6 +13,11 @@ namespace Nihilism {
 				NihilismAPI.SaveModSettingsChanges();
 				return null;
 
+			case "NihilateCurrentWorld":
+				return NihilismAPI.NihilateCurrentWorld();
+			case "UnnihilateCurrentWorld":
+				return NihilismAPI.UnnihilateCurrentWorld();
+
 			case "SetItemsBlacklistPattern":
 				if( args.Length < 1 ) { throw new Exception( "Insufficient parameters for API call " + call_type ); }
 

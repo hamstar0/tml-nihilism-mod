@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 
 namespace Nihilism.Commands {
-	class ResetFiltersFromDefaultsCommand : ModCommand {
+	class DefaultFiltersResetCommand : ModCommand {
 		public override string Command {
 			get {
 				return "nih_defaults_reset";

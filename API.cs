@@ -16,7 +16,30 @@ namespace Nihilism {
 
 
 		////////////////
-		
+
+		public static bool NihilateCurrentWorld() {
+			var myworld = NihilismMod.Instance.GetModWorld<NihilismWorld>();
+			if( myworld.Logic.Data.IsActive ) {
+				return false;
+			}
+
+			myworld.Logic.NihilateCurrentWorld();
+			return true;
+		}
+
+		public static bool UnnihilateCurrentWorld() {
+			var myworld = NihilismMod.Instance.GetModWorld<NihilismWorld>();
+			if( !myworld.Logic.Data.IsActive ) {
+				return false;
+			}
+
+			myworld.Logic.UnnihilateCurrentWorld();
+			return true;
+		}
+
+
+		////////////////
+
 		public static void SetItemsBlacklistPattern( string pattern ) {
 			if( !TmlLoadHelpers.IsWorldLoaded() ) { throw new Exception("World not loaded"); }
 
@@ -84,7 +107,7 @@ namespace Nihilism {
 			var mymod = NihilismMod.Instance;
 			var myworld = mymod.GetModWorld<NihilismWorld>();
 
-			myworld.Logic.SetCurrentFiltersAsDefaults();
+			myworld.Logic.SetCurrentFiltersAsDefaults( mymod );
 		}
 
 		public static void ResetFiltersFromDefaults() {
@@ -93,7 +116,7 @@ namespace Nihilism {
 			var mymod = NihilismMod.Instance;
 			var myworld = mymod.GetModWorld<NihilismWorld>();
 
-			myworld.Logic.ResetFiltersFromDefaults();
+			myworld.Logic.ResetFiltersFromDefaults( mymod );
 		}
 	}
 }
