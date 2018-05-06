@@ -1,5 +1,5 @@
 author = hamstar
-version = 1.5.1
+version = 1.5.2
 displayName = Nihilism
 modReferences = HamstarHelpers@1.4.6.1
 buildIgnore = *.csproj, *.user, obj\*, bin\*, .vs\*

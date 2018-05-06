@@ -6,15 +6,19 @@ namespace Nihilism {
 	class NihilismNpc : GlobalNPC {
 		public override bool PreNPCLoot( NPC npc ) {
 			var mymod = (NihilismMod)this.mod;
-			var modworld = mymod.GetModWorld<NihilismWorld>();
-			if( !modworld.Logic.IsCurrentWorldNihilated() ) { return base.PreNPCLoot(npc); }
+			if( !mymod.Config.EnableNpcLootFilters ) { return base.PreNPCLoot( npc ); }
+
+			var myworld = mymod.GetModWorld<NihilismWorld>();
+			if( !myworld.Logic.IsCurrentWorldNihilated() ) { return base.PreNPCLoot(npc); }
 			
-			return modworld.Logic.IsNpcLootEnabled( npc );
+			return myworld.Logic.IsNpcLootEnabled( npc );
 		}
 
 
 		public override bool PreAI( NPC npc ) {
 			var mymod = (NihilismMod)this.mod;
+			if( !mymod.Config.EnableNpcFilters ) { return base.PreAI( npc ); }
+
 			var myworld = mymod.GetModWorld<NihilismWorld>();
 			if( !myworld.Logic.IsCurrentWorldNihilated() ) { return base.PreAI(npc); }
 			

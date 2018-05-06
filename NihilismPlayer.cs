@@ -105,6 +105,8 @@ namespace Nihilism {
 		
 		private void BlockEquipsIfDisabled() {
 			var mymod = (NihilismMod)this.mod;
+			if( !mymod.Config.EnableItemFilters ) { return; }
+
 			var myworld = mymod.GetModWorld<NihilismWorld>();
 
 			for( int i=0; i<this.player.armor.Length; i++ ) {
@@ -119,6 +121,8 @@ namespace Nihilism {
 
 		private void BlockRecipesIfDisabled() {
 			var mymod = (NihilismMod)this.mod;
+			if( !mymod.Config.EnableRecipeFilters ) { return; }
+
 			var modworld = mymod.GetModWorld<NihilismWorld>();
 
 			for( int i=0; i<Main.recipe.Length; i++ ) {

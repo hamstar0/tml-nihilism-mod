@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Nihilism.Data {
 	public class NihilismConfigData : ConfigurationDataBase {
-		public readonly static Version ConfigVersion = new Version( 1, 5, 0 );
+		public readonly static Version ConfigVersion = new Version( 1, 5, 2 );
 		public readonly static string ConfigFileName = "Nihilism Config.json";
 
 
@@ -24,6 +24,11 @@ namespace Nihilism.Data {
 		public IDictionary<string, bool> DefaultItemWhitelist = new Dictionary<string, bool> { };
 		public IDictionary<string, bool> DefaultNpcWhitelist = new Dictionary<string, bool> { };
 		public IDictionary<string, bool> DefaultNpcLootWhitelist = new Dictionary<string, bool> { };
+
+		public bool EnableItemFilters = true;
+		public bool EnableRecipeFilters = true;
+		public bool EnableNpcFilters = true;
+		public bool EnableNpcLootFilters = true;
 
 
 		////////
