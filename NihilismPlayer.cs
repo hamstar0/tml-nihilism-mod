@@ -1,5 +1,4 @@
-﻿using HamstarHelpers.DotNetHelpers;
-using HamstarHelpers.PlayerHelpers;
+﻿using HamstarHelpers.PlayerHelpers;
 using Nihilism.Data;
 using Terraria;
 using Terraria.ModLoader;
@@ -53,8 +52,7 @@ namespace Nihilism {
 					myworld.Logic.OnEnterWorldForClient( mymod, player );
 				}
 			}
-
-//Main.NewText("whitelist "+string.Join(", ", mymod.Config.Data.ItemWhitelist.Select(kv => kv.Key+":"+kv.Value).ToArray()) );
+			
 			this.HasEnteredWorld = true;
 		}
 
@@ -65,42 +63,9 @@ namespace Nihilism {
 			if( !this.HasEnteredWorld ) { return; }
 
 			if( this.player.whoAmI == Main.myPlayer ) {
-				this.BlockRecipesIfDisabled();
 				this.BlockEquipsIfDisabled();
 			}
 		}
-
-
-		/*public override bool PreItemCheck() {	Redundant?!
-			var mymod = (NihilismMod)this.mod;
-			var modworld = mymod.GetModWorld<NihilismWorld>();
-			if( !modworld.Logic.IsCurrentWorldNihilated( mymod ) ) { return base.PreItemCheck(); }
-			
-			return !this.BlockHeldItemIfDisabled();
-		}*/
-
-		////////////////
-
-		/*private bool BlockHeldItemIfDisabled() {
-			var mymod = (NihilismMod)this.mod;
-			var modworld = mymod.GetModWorld<NihilismWorld>();
-			var held_item = this.player.HeldItem;
-			bool has_mouse_item = this.player.whoAmI == Main.myPlayer && Main.mouseItem != null && !Main.mouseItem.IsAir;
-			bool is_using_blocked = false;
-
-			if( held_item != null && !held_item.IsAir ) {
-				is_using_blocked = !modworld.Logic.IsItemEnabled( mymod, held_item );
-				if( is_using_blocked ) {
-					this.player.noItems = true;
-					
-					if( !has_mouse_item || (this.player.controlLeft || this.player.controlRight) ) {
-						PlayerItemHelpers.UnhandItem( player );
-					}
-				}
-			}
-			
-			return is_using_blocked;
-		}*/
 
 		
 		private void BlockEquipsIfDisabled() {
@@ -115,24 +80,6 @@ namespace Nihilism {
 				if( myworld.Logic.IsItemEnabled( item ) ) { continue; }
 				 
 				PlayerItemHelpers.DropEquippedItem( player, i );
-			}
-		}
-
-
-		private void BlockRecipesIfDisabled() {
-			var mymod = (NihilismMod)this.mod;
-			if( !mymod.Config.EnableRecipeFilters ) { return; }
-
-			var modworld = mymod.GetModWorld<NihilismWorld>();
-
-			for( int i=0; i<Main.recipe.Length; i++ ) {
-				Recipe old = Main.recipe[i];
-				Item item = old.createItem;
-
-				if( item == null || item.IsAir ) { continue; }
-				if( modworld.Logic.IsRecipeOfItemEnabled( item ) ) { continue; }
-
-				Main.recipe[i] = new Recipe();
 			}
 		}
 	}

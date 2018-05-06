@@ -81,6 +81,7 @@
     <Compile Include="NihilismNpc.cs" />
     <Compile Include="NihilismPlayer.cs" />
     <Compile Include="NihilismProjectile.cs" />
+    <Compile Include="NihilismRecipe.cs" />
     <Compile Include="NihilismWorld.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
