@@ -26,6 +26,7 @@ namespace Nihilism.Data {
 		public IDictionary<string, bool> DefaultNpcLootWhitelist = new Dictionary<string, bool> { };
 
 		public bool EnableItemFilters = true;
+		public bool EnableItemEquipsFilters = true;
 		public bool EnableRecipeFilters = true;
 		public bool EnableNpcFilters = true;
 		public bool EnableNpcLootFilters = true;

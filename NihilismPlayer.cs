@@ -105,7 +105,7 @@ namespace Nihilism {
 		
 		private void BlockEquipsIfDisabled() {
 			var mymod = (NihilismMod)this.mod;
-			if( !mymod.Config.EnableItemFilters ) { return; }
+			if( !mymod.Config.EnableItemEquipsFilters ) { return; }
 
 			var myworld = mymod.GetModWorld<NihilismWorld>();
 
