@@ -54,8 +54,8 @@ namespace Nihilism.Logic {
 		}
 
 		internal void OnEnterWorldForClient( NihilismMod mymod, Player player ) {
-			PacketProtocol.QuickRequestFromServer<ModSettingsProtocol>();
-			PacketProtocol.QuickRequestFromServer<WorldFiltersProtocol>();
+			PacketProtocol.QuickRequestToServer<ModSettingsProtocol>();
+			PacketProtocol.QuickRequestToServer<WorldFiltersProtocol>();
 		}
 
 		internal void OnEnterWorldForServer( NihilismMod mymod, Player player ) { }

@@ -22,11 +22,15 @@ namespace Nihilism {
 		}
 
 		public override void Load( TagCompound tag ) {
-			this.Logic.LoadWorldData( (NihilismMod)this.mod );
+			var mymod = (NihilismMod)this.mod;
+			this.Logic.LoadWorldData( mymod );
 		}
 
 		public override TagCompound Save() {
-			this.Logic.SaveWorldData( (NihilismMod)this.mod );
+			var mymod = (NihilismMod)this.mod;
+			if( !mymod.SuppressAutoSaving ) {
+				this.Logic.SaveWorldData( mymod );
+			}
 			return new TagCompound();
 		}
 	}

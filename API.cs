@@ -1,7 +1,6 @@
 ﻿using HamstarHelpers.TmlHelpers;
 using Nihilism.Data;
 using System;
-using System.Linq;
 
 
 namespace Nihilism {
@@ -35,6 +34,16 @@ namespace Nihilism {
 
 			myworld.Logic.UnnihilateCurrentWorld();
 			return true;
+		}
+
+		////////////////
+
+		public static void SuppressAutoSavingOn() {
+			NihilismMod.Instance.SuppressAutoSaving = true;
+		}
+		
+		public static void SuppressAutoSavingOff() {
+			NihilismMod.Instance.SuppressAutoSaving = false;
 		}
 
 

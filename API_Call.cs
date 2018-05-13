@@ -18,6 +18,13 @@ namespace Nihilism {
 			case "UnnihilateCurrentWorld":
 				return NihilismAPI.UnnihilateCurrentWorld();
 
+			case "SuppressAutoSavingOn":
+				NihilismAPI.SuppressAutoSavingOn();
+				return null;
+			case "SuppressAutoSavingOff":
+				NihilismAPI.SuppressAutoSavingOff();
+				return null;
+
 			case "SetItemsBlacklistPattern":
 				if( args.Length < 1 ) { throw new Exception( "Insufficient parameters for API call " + call_type ); }
 

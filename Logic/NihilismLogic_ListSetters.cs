@@ -8,10 +8,14 @@ using Terraria;
 namespace Nihilism.Logic {
 	partial class NihilismLogic {
 		private void SyncData() {
+			var mymod = NihilismMod.Instance;
+
 			if( Main.netMode == 1 ) {
 				PacketProtocol.QuickSyncToServerAndClients<WorldFiltersProtocol>();
 			} else if( Main.netMode == 2 ) {
-				this.SaveWorldData( NihilismMod.Instance );
+				if( !mymod.SuppressAutoSaving ) {
+					this.SaveWorldData( NihilismMod.Instance );
+				}
 				PacketProtocol.QuickSendToClient<WorldFiltersProtocol>( -1, -1 );
 			}
 		}

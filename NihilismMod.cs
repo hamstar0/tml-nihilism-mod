@@ -22,6 +22,10 @@ namespace Nihilism {
 			if( Main.netMode != 0 ) {
 				throw new Exception( "Cannot reload configs outside of single player." );
 			}
+			if( NihilismMod.Instance.SuppressAutoSaving ) {
+				Main.NewText( "Nihilism config settings auto saving suppressed." );
+				return;
+			}
 			if( !NihilismMod.Instance.JsonConfig.LoadFile() ) {
 				NihilismMod.Instance.JsonConfig.SaveFile();
 			}
@@ -34,6 +38,8 @@ namespace Nihilism {
 		public NihilismConfigData Config { get { return this.JsonConfig.Data; } }
 
 		public Texture2D DisabledItem { get; private set; }
+
+		public bool SuppressAutoSaving { get; internal set; }
 
 
 		////////////////
