@@ -39,9 +39,13 @@ namespace Nihilism.Commands {
 				return;
 			}
 
+			var mymod = NihilismMod.Instance;
+			var myworld = mymod.GetModWorld<NihilismWorld>();
 			string pattern = args[0];
 
-			NihilismAPI.SetRecipesBlacklistPattern( pattern );
+			myworld.Logic.SetRecipesBlacklistPattern( pattern );
+			myworld.Logic.SyncData();
+
 			caller.Reply( "Recipe pattern " + pattern + " set as blacklist.", Color.YellowGreen );
 		}
 	}

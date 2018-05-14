@@ -57,6 +57,7 @@
   <ItemGroup>
     <Compile Include="API_Call.cs" />
     <Compile Include="API.cs" />
+    <Compile Include="Commands\ShowFiltersCommand.cs" />
     <Compile Include="Commands\NpcBlacklistSetCommand.cs" />
     <Compile Include="Commands\LootBlacklistSetCommand.cs" />
     <Compile Include="Commands\ItemBlacklistSetCommand.cs" />

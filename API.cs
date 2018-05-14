@@ -1,4 +1,5 @@
-﻿using HamstarHelpers.TmlHelpers;
+﻿using HamstarHelpers.DebugHelpers;
+using HamstarHelpers.TmlHelpers;
 using Nihilism.Data;
 using System;
 
@@ -23,6 +24,7 @@ namespace Nihilism {
 			}
 
 			myworld.Logic.NihilateCurrentWorld();
+
 			return true;
 		}
 
@@ -33,6 +35,7 @@ namespace Nihilism {
 			}
 
 			myworld.Logic.UnnihilateCurrentWorld();
+
 			return true;
 		}
 
@@ -49,63 +52,79 @@ namespace Nihilism {
 
 		////////////////
 
-		public static void SetItemsBlacklistPattern( string pattern ) {
+		public static void SetItemsBlacklistPattern( string pattern, bool local_only ) {
 			if( !TmlLoadHelpers.IsWorldLoaded() ) { throw new Exception("World not loaded"); }
-
+			
 			var myworld = NihilismMod.Instance.GetModWorld<NihilismWorld>();
 			myworld.Logic.SetItemsBlacklistPattern( pattern );
+
+			if( local_only ) { myworld.Logic.SyncData(); }
 		}
 
-		public static void SetItemsWhitelistEntry( string item_name ) {
+		public static void SetItemsWhitelistEntry( string item_name, bool local_only ) {
 			if( !TmlLoadHelpers.IsWorldLoaded() ) { throw new Exception( "World not loaded" ); }
-
+			
 			var myworld = NihilismMod.Instance.GetModWorld<NihilismWorld>();
 			myworld.Logic.SetItemWhitelistEntry( item_name );
+
+			if( local_only ) { myworld.Logic.SyncData(); }
 		}
 
 
-		public static void SetRecipesBlacklistPattern( string pattern ) {
+		public static void SetRecipesBlacklistPattern( string pattern, bool local_only ) {
 			if( !TmlLoadHelpers.IsWorldLoaded() ) { throw new Exception( "World not loaded" ); }
 
 			var myworld = NihilismMod.Instance.GetModWorld<NihilismWorld>();
 			myworld.Logic.SetRecipesBlacklistPattern( pattern );
+
+			if( local_only ) { myworld.Logic.SyncData(); }
 		}
 
-		public static void SetRecipeWhitelistEntry( string item_name ) {
+		public static void SetRecipeWhitelistEntry( string item_name, bool local_only ) {
 			if( !TmlLoadHelpers.IsWorldLoaded() ) { throw new Exception( "World not loaded" ); }
 
 			var myworld = NihilismMod.Instance.GetModWorld<NihilismWorld>();
 			myworld.Logic.SetRecipeWhitelistEntry( item_name );
+
+			if( local_only ) { myworld.Logic.SyncData(); }
 		}
 
 
-		public static void SetNpcLootBlacklistPattern( string pattern ) {
+		public static void SetNpcLootBlacklistPattern( string pattern, bool local_only ) {
 			if( !TmlLoadHelpers.IsWorldLoaded() ) { throw new Exception( "World not loaded" ); }
 
 			var myworld = NihilismMod.Instance.GetModWorld<NihilismWorld>();
 			myworld.Logic.SetNpcLootBlacklistPattern( pattern );
+
+			if( local_only ) { myworld.Logic.SyncData(); }
 		}
 
-		public static void SetNpcLootWhitelistEntry( string npc_name ) {
+		public static void SetNpcLootWhitelistEntry( string npc_name, bool local_only ) {
 			if( !TmlLoadHelpers.IsWorldLoaded() ) { throw new Exception( "World not loaded" ); }
 
 			var myworld = NihilismMod.Instance.GetModWorld<NihilismWorld>();
 			myworld.Logic.SetNpcLootWhitelistEntry( npc_name );
+
+			if( local_only ) { myworld.Logic.SyncData(); }
 		}
 
 
-		public static void SetNpcBlacklistPattern( string pattern ) {
+		public static void SetNpcBlacklistPattern( string pattern, bool local_only ) {
 			if( !TmlLoadHelpers.IsWorldLoaded() ) { throw new Exception( "World not loaded" ); }
 
 			var myworld = NihilismMod.Instance.GetModWorld<NihilismWorld>();
 			myworld.Logic.SetNpcBlacklistPattern( pattern );
+
+			if( local_only ) { myworld.Logic.SyncData(); }
 		}
 
-		public static void SetNpcWhitelistEntry( string npc_name ) {
+		public static void SetNpcWhitelistEntry( string npc_name, bool local_only ) {
 			if( !TmlLoadHelpers.IsWorldLoaded() ) { throw new Exception( "World not loaded" ); }
 
 			var myworld = NihilismMod.Instance.GetModWorld<NihilismWorld>();
 			myworld.Logic.SetNpcWhitelistEntry( npc_name );
+
+			if( local_only ) { myworld.Logic.SyncData(); }
 		}
 
 		////////////////

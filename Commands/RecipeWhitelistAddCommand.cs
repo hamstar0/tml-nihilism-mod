@@ -39,9 +39,13 @@ namespace Nihilism.Commands {
 				return;
 			}
 
+			var mymod = NihilismMod.Instance;
+			var myworld = mymod.GetModWorld<NihilismWorld>();
 			string ent_name = args[0];
 
-			NihilismAPI.SetRecipeWhitelistEntry( ent_name );
+			myworld.Logic.SetRecipeWhitelistEntry( ent_name );
+			myworld.Logic.SyncData();
+
 			caller.Reply( "Recipe for item " + ent_name + " added to whitelist.", Color.YellowGreen );
 		}
 	}

@@ -25,6 +25,7 @@ namespace Nihilism {
 			npc.active = myworld.Logic.IsNpcEnabled( npc );
 			if( !npc.active ) {
 				Main.npc[npc.whoAmI] = new NPC();
+				Main.npc[npc.whoAmI].active = false;
 			}
 			
 			return npc.active;
