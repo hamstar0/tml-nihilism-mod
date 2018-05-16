@@ -58,7 +58,7 @@ namespace Nihilism {
 			var myworld = NihilismMod.Instance.GetModWorld<NihilismWorld>();
 			myworld.Logic.SetItemsBlacklistPattern( pattern );
 
-			if( local_only ) { myworld.Logic.SyncData(); }
+			if( !local_only ) { myworld.Logic.SyncData(); }
 		}
 
 		public static void SetItemsWhitelistEntry( string item_name, bool local_only ) {
@@ -67,7 +67,7 @@ namespace Nihilism {
 			var myworld = NihilismMod.Instance.GetModWorld<NihilismWorld>();
 			myworld.Logic.SetItemWhitelistEntry( item_name );
 
-			if( local_only ) { myworld.Logic.SyncData(); }
+			if( !local_only ) { myworld.Logic.SyncData(); }
 		}
 
 
@@ -77,7 +77,7 @@ namespace Nihilism {
 			var myworld = NihilismMod.Instance.GetModWorld<NihilismWorld>();
 			myworld.Logic.SetRecipesBlacklistPattern( pattern );
 
-			if( local_only ) { myworld.Logic.SyncData(); }
+			if( !local_only ) { myworld.Logic.SyncData(); }
 		}
 
 		public static void SetRecipeWhitelistEntry( string item_name, bool local_only ) {
@@ -86,7 +86,7 @@ namespace Nihilism {
 			var myworld = NihilismMod.Instance.GetModWorld<NihilismWorld>();
 			myworld.Logic.SetRecipeWhitelistEntry( item_name );
 
-			if( local_only ) { myworld.Logic.SyncData(); }
+			if( !local_only ) { myworld.Logic.SyncData(); }
 		}
 
 
@@ -96,7 +96,7 @@ namespace Nihilism {
 			var myworld = NihilismMod.Instance.GetModWorld<NihilismWorld>();
 			myworld.Logic.SetNpcLootBlacklistPattern( pattern );
 
-			if( local_only ) { myworld.Logic.SyncData(); }
+			if( !local_only ) { myworld.Logic.SyncData(); }
 		}
 
 		public static void SetNpcLootWhitelistEntry( string npc_name, bool local_only ) {
@@ -105,7 +105,7 @@ namespace Nihilism {
 			var myworld = NihilismMod.Instance.GetModWorld<NihilismWorld>();
 			myworld.Logic.SetNpcLootWhitelistEntry( npc_name );
 
-			if( local_only ) { myworld.Logic.SyncData(); }
+			if( !local_only ) { myworld.Logic.SyncData(); }
 		}
 
 
@@ -115,7 +115,7 @@ namespace Nihilism {
 			var myworld = NihilismMod.Instance.GetModWorld<NihilismWorld>();
 			myworld.Logic.SetNpcBlacklistPattern( pattern );
 
-			if( local_only ) { myworld.Logic.SyncData(); }
+			if( !local_only ) { myworld.Logic.SyncData(); }
 		}
 
 		public static void SetNpcWhitelistEntry( string npc_name, bool local_only ) {
@@ -124,7 +124,7 @@ namespace Nihilism {
 			var myworld = NihilismMod.Instance.GetModWorld<NihilismWorld>();
 			myworld.Logic.SetNpcWhitelistEntry( npc_name );
 
-			if( local_only ) { myworld.Logic.SyncData(); }
+			if( !local_only ) { myworld.Logic.SyncData(); }
 		}
 
 		////////////////
