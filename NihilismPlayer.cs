@@ -45,8 +45,8 @@ namespace Nihilism {
 				if( !mymod.SuppressAutoSaving ) {
 					if( !mymod.JsonConfig.LoadFile() ) {
 						mymod.JsonConfig.SaveFile();
+						LogHelpers.Log( "Nihilism config " + NihilismConfigData.ConfigVersion.ToString() + " created (ModPlayer.OnEnterWorld())." );
 					}
-					LogHelpers.Log( "Nihilism config " + NihilismConfigData.ConfigVersion.ToString() + " created (ModPlayer.OnEnterWorld())." );
 				}
 			}
 

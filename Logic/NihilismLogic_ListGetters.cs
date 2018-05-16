@@ -5,6 +5,18 @@ using Terraria;
 
 namespace Nihilism.Logic {
 	partial class NihilismLogic {
+		public static string GetItemName( Item item ) {
+			return Lang.GetItemNameValue( item.type );  //item.Name;
+		}
+
+		public static string GetNpcName( NPC npc ) {
+			return npc.TypeName;
+		}
+
+
+
+		////////////////
+
 		private static Regex _ItemsBlacklistPattern = null;
 		private static Regex _RecipesBlacklistPattern = null;
 		private static Regex _NpcsBlacklistPattern = null;
@@ -44,16 +56,20 @@ namespace Nihilism.Logic {
 
 
 		////////////////
-		
+
 		public bool IsItemWhitelisted( Item item ) {
-			if( !this.Data.ItemWhitelist.ContainsKey( item.Name ) ) {
+			string name = NihilismLogic.GetItemName( item );
+
+			if( !this.Data.ItemWhitelist.ContainsKey( name ) ) {
 				return false;
 			}
-			return this.Data.ItemWhitelist[item.Name];
+			return this.Data.ItemWhitelist[name];
 		}
 
 		public bool IsItemBlacklisted( Item item ) {
-			return NihilismLogic.GetItemsBlacklistPattern( this ).IsMatch( item.Name );
+			string name = NihilismLogic.GetItemName( item );
+
+			return NihilismLogic.GetItemsBlacklistPattern( this ).IsMatch( name );
 		}
 
 		public bool IsItemEnabled( Item item ) {
@@ -73,14 +89,18 @@ namespace Nihilism.Logic {
 		////
 
 		public bool IsRecipeWhitelisted( Item item ) {
-			if( !this.Data.RecipeWhitelist.ContainsKey( item.Name ) ) {
+			string name = NihilismLogic.GetItemName( item );
+
+			if( !this.Data.RecipeWhitelist.ContainsKey( name ) ) {
 				return false;
 			}
-			return this.Data.RecipeWhitelist[ item.Name ];
+			return this.Data.RecipeWhitelist[name];
 		}
 
 		public bool IsRecipeBlacklisted( Item item ) {
-			return NihilismLogic.GetRecipesBlacklistPattern( this ).IsMatch( item.Name );
+			string name = NihilismLogic.GetItemName( item );
+
+			return NihilismLogic.GetRecipesBlacklistPattern( this ).IsMatch( name );
 		}
 
 		public bool IsRecipeOfItemEnabled( Item item ) {
@@ -100,14 +120,18 @@ namespace Nihilism.Logic {
 		////
 
 		public bool IsNpcWhitelisted( NPC npc ) {
-			if( !this.Data.NpcWhitelist.ContainsKey( npc.TypeName ) ) {
+			string name = NihilismLogic.GetNpcName( npc );
+
+			if( !this.Data.NpcWhitelist.ContainsKey( name ) ) {
 				return false;
 			}
-			return this.Data.NpcWhitelist[npc.TypeName];
+			return this.Data.NpcWhitelist[name];
 		}
 
 		public bool IsNpcBlacklisted( NPC npc ) {
-			return NihilismLogic.GetNpcsBlacklistPattern( this ).IsMatch( npc.TypeName );
+			string name = NihilismLogic.GetNpcName( npc );
+
+			return NihilismLogic.GetNpcsBlacklistPattern( this ).IsMatch( name );
 		}
 
 		public bool IsNpcEnabled( NPC npc ) {
@@ -127,14 +151,18 @@ namespace Nihilism.Logic {
 		////
 
 		public bool IsNpcLootWhitelisted( NPC npc ) {
-			if( !this.Data.NpcLootWhitelist.ContainsKey( npc.TypeName ) ) {
+			string name = NihilismLogic.GetNpcName( npc );
+
+			if( !this.Data.NpcLootWhitelist.ContainsKey( name ) ) {
 				return false;
 			}
-			return this.Data.NpcLootWhitelist[ npc.TypeName ];
+			return this.Data.NpcLootWhitelist[ name ];
 		}
 
 		public bool IsNpcLootBlacklisted( NPC npc ) {
-			return NihilismLogic.GetNpcLootBlacklistPattern( this ).IsMatch( npc.TypeName );
+			string name = NihilismLogic.GetNpcName( npc );
+
+			return NihilismLogic.GetNpcLootBlacklistPattern( this ).IsMatch( name );
 		}
 
 		public bool IsNpcLootEnabled( NPC npc ) {
