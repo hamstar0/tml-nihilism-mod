@@ -43,7 +43,7 @@ namespace Nihilism.Commands {
 			var myworld = mymod.GetModWorld<NihilismWorld>();
 			string ent_name = args[0];
 
-			myworld.Logic.SetNpcLootWhitelistEntry( ent_name );
+			myworld.Logic.Data.SetNpcLootWhitelistEntry( ent_name );
 			myworld.Logic.SyncData();
 
 			caller.Reply( "Lootable npc " + ent_name + " added to whitelist.", Color.YellowGreen );

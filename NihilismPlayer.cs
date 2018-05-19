@@ -61,8 +61,9 @@ namespace Nihilism {
 
 		public override void PreUpdate() {
 			var mymod = (NihilismMod)this.mod;
-			var modworld = mymod.GetModWorld<NihilismWorld>();
-			if( !modworld.Logic.IsCurrentWorldNihilated() ) { return; }
+			var myworld = mymod.GetModWorld<NihilismWorld>();
+
+			if( !myworld.Logic.Data.IsActive() ) { return; }
 			if( !this.HasEnteredWorld ) { return; }
 
 			if( this.player.whoAmI == Main.myPlayer ) {
@@ -73,9 +74,10 @@ namespace Nihilism {
 		
 		private void BlockEquipsIfDisabled() {
 			var mymod = (NihilismMod)this.mod;
-			if( !mymod.Config.EnableItemEquipsFilters ) { return; }
+			if( !mymod.Config.EnableItemEquipsFilters ) { return; }///////////////////////////////
 
 			var myworld = mymod.GetModWorld<NihilismWorld>();
+			if( !myworld.Logic.Data.IsActive() ) { return; }
 
 			for( int i=0; i<this.player.armor.Length; i++ ) {
 				Item item = this.player.armor[i];

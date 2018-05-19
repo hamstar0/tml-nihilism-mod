@@ -3,7 +3,6 @@ using HamstarHelpers.MiscHelpers;
 using HamstarHelpers.TmlHelpers;
 using HamstarHelpers.Utilities.Messages;
 using HamstarHelpers.Utilities.Network;
-using HamstarHelpers.WorldHelpers;
 using Nihilism.Data;
 using Nihilism.NetProtocol;
 using Terraria;
@@ -18,12 +17,6 @@ namespace Nihilism.Logic {
 
 		public NihilismLogic() {
 			this.Data = new NihilismFilterAccess( new NihilismFilterData() );
-		}
-
-		////////////////
-
-		public bool IsCurrentWorldNihilated() {
-			return this.Data.IsActive();
 		}
 
 
@@ -59,7 +52,7 @@ namespace Nihilism.Logic {
 
 				var myworld = mymod.GetModWorld<NihilismWorld>();
 
-				if( !myworld.Logic.IsCurrentWorldNihilated() ) {
+				if( !myworld.Logic.Data.IsActive() ) {
 					string msg;
 					if( Main.netMode == 0 ) {
 						msg = "Enter the /nihilate command to active Nihilism restrictions for the current world. Enter /help for a list of other commands.";
@@ -90,15 +83,25 @@ namespace Nihilism.Logic {
 
 
 		////////////////
-
-		public void NihilateCurrentWorld() {
-			this.Data.IsActive = true;
-			this.SyncData();
+		
+		public bool AreItemsFiltered( NihilismMod mymod ) {
+			return this.Data.IsActive() && mymod.Config.EnableItemFilters;
 		}
 
-		public void UnnihilateCurrentWorld() {
-			this.Data.IsActive = false;
-			this.SyncData();
+		public bool AreItemEquipsFiltered( NihilismMod mymod ) {
+			return this.Data.IsActive() && mymod.Config.EnableItemEquipsFilters;
+		}
+
+		public bool AreRecipesFiltered( NihilismMod mymod ) {
+			return this.Data.IsActive() && mymod.Config.EnableRecipeFilters;
+		}
+
+		public bool AreNpcsFiltered( NihilismMod mymod ) {
+			return this.Data.IsActive() && mymod.Config.EnableNpcFilters;
+		}
+
+		public bool AreNpcLootsFiltered( NihilismMod mymod ) {
+			return this.Data.IsActive() && mymod.Config.EnableNpcLootFilters;
 		}
 	}
 }

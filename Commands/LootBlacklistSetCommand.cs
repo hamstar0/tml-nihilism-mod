@@ -43,7 +43,7 @@ namespace Nihilism.Commands {
 			var myworld = mymod.GetModWorld<NihilismWorld>();
 			string pattern = args[0];
 
-			myworld.Logic.SetNpcLootBlacklistPattern( pattern );
+			myworld.Logic.Data.SetNpcLootBlacklistPattern( pattern );
 			myworld.Logic.SyncData();
 
 			caller.Reply( "Npc loot pattern " + pattern + " set as blacklist.", Color.YellowGreen );
