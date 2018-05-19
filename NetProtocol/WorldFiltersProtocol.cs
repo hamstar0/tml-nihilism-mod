@@ -43,7 +43,7 @@ namespace Nihilism.NetProtocol {
 			var mymod = NihilismMod.Instance;
 			var myworld = mymod.GetModWorld<NihilismWorld>();
 			
-			myworld.Logic.SetFiltersNoSync( this.Filters );
+			myworld.Logic.SetData( this.Filters );
 		}
 	}
 }

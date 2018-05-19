@@ -16,6 +16,9 @@ v2.0
 
 
 
+v1.6
+-	Apply item filters to ammo
+
 v1.4
 -	Implement API (alter lists, enabled/disable for current world, etc.)
 -	Implement commands

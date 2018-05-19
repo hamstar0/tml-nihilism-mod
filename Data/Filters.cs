@@ -1,11 +1,10 @@
 ﻿using HamstarHelpers.Utilities.Config;
-using Nihilism.Logic;
 using System.Collections.Generic;
 using System.Linq;
 
 
 namespace Nihilism.Data {
-	public class NihilismFilterData : ConfigurationDataBase {
+	class NihilismFilterData : ConfigurationDataBase {
 		public bool IsActive = false;
 
 		public bool RecipesBlacklistChecksFirst = false;
@@ -45,7 +44,7 @@ namespace Nihilism.Data {
 		////////////////
 
 		public override void OnLoad( bool success ) {
-			NihilismLogic.ResetCachedPatterns();
+			this.ResetCachedPatterns();
 		}
 	}
 }

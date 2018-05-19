@@ -11,39 +11,30 @@ using Terraria;
 
 namespace Nihilism.Logic {
 	partial class NihilismLogic {
-		internal NihilismFilterData Data = null;
+		public NihilismFilterAccess Data { get; private set; }
 
 
 		////////////////
 
 		public NihilismLogic() {
-			this.Data = new NihilismFilterData();
+			this.Data = new NihilismFilterAccess( new NihilismFilterData() );
 		}
 
 		////////////////
 
 		public bool IsCurrentWorldNihilated() {
-			return this.Data.IsActive;
+			return this.Data.IsActive();
 		}
 
 
 		////////////////
-
-		private string GetDataFileName() {
-			return WorldHelpers.GetUniqueId( true ) + " Filters";
-		}
-
+		
 		public void LoadWorldData( NihilismMod mymod ) {
-			bool success;
-			var filters = DataFileHelpers.LoadJson<NihilismFilterData>( mymod, this.GetDataFileName(), out success );
-
-			if( success ) {
-				this.Data = filters;
-			}
+			this.Data.Load( mymod );
 		}
 
 		public void SaveWorldData( NihilismMod mymod ) {
-			DataFileHelpers.SaveAsJson<NihilismFilterData>( mymod, this.GetDataFileName(), this.Data );
+			this.Data.Save( mymod );
 		}
 
 
@@ -79,6 +70,22 @@ namespace Nihilism.Logic {
 					InboxMessages.SetMessage( "nihilism_init", msg, false );
 				}
 			} );
+		}
+
+
+		////////////////
+
+		public void SyncData() {
+			var mymod = NihilismMod.Instance;
+
+			if( Main.netMode == 1 ) {
+				PacketProtocol.QuickSyncToServerAndClients<WorldFiltersProtocol>();
+			} else if( Main.netMode == 2 ) {
+				if( !mymod.SuppressAutoSaving ) {
+					this.SaveWorldData( NihilismMod.Instance );
+				}
+				PacketProtocol.QuickSendToClient<WorldFiltersProtocol>( -1, -1 );
+			}
 		}
 
 

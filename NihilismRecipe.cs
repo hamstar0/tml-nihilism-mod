@@ -13,7 +13,7 @@ namespace Nihilism {
 
 			if( item == null || item.IsAir ) { return base.RecipeAvailable( recipe ); }
 
-			return myworld.Logic.IsRecipeOfItemEnabled( item );
+			return myworld.Logic.Data.IsRecipeOfItemEnabled( item );
 		}
 	}
 }
