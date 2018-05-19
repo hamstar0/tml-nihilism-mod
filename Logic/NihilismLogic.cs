@@ -1,5 +1,4 @@
 ﻿using HamstarHelpers.DebugHelpers;
-using HamstarHelpers.MiscHelpers;
 using HamstarHelpers.TmlHelpers;
 using HamstarHelpers.Utilities.Messages;
 using HamstarHelpers.Utilities.Network;
