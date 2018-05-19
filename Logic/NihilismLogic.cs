@@ -46,7 +46,7 @@ namespace Nihilism.Logic {
 		////////////////
 
 		internal void OnPostFiltersSyncToMe( NihilismMod mymod ) {
-			TmlLoadHelpers.AddWorldLoadPromise( () => {
+			TmlLoadHelpers.AddWorldLoadOncePromise( () => {
 				if( Main.netMode == 2 ) { return; }
 
 				var myworld = mymod.GetModWorld<NihilismWorld>();
