@@ -41,7 +41,7 @@ namespace Nihilism.Commands {
 
 			var mymod = NihilismMod.Instance;
 			var myworld = mymod.GetModWorld<NihilismWorld>();
-			string ent_name = args[0];
+			string ent_name = string.Join(" ", args);
 
 			myworld.Logic.Data.SetItemWhitelistEntry( ent_name );
 			myworld.Logic.SyncData();

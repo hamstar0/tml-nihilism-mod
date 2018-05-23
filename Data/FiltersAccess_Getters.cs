@@ -29,7 +29,7 @@ namespace Nihilism.Data {
 		private bool IsItemBlacklisted( Item item ) {
 			string name = NihilismFilterAccess.GetItemName( item );
 			Regex regex = this.GetRegex( this.Data.ItemsBlacklistPattern );
-
+			
 			return regex.IsMatch( name );
 		}
 
