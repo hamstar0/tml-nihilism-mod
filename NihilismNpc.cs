@@ -24,13 +24,16 @@ namespace Nihilism {
 				return base.PreAI(npc);
 			}
 			
-			npc.active = myworld.Logic.Data.IsNpcEnabled( npc );
-			if( !npc.active ) {
-				Main.npc[npc.whoAmI] = new NPC();
-				Main.npc[npc.whoAmI].active = false;
+			bool is_enabled = myworld.Logic.Data.IsNpcEnabled( npc );
+
+			if( !is_enabled ) {
+				npc.active = false;
+				Main.npc[npc.whoAmI] = new NPC {
+					active = false
+				};
 			}
-			
-			return npc.active;
+
+			return base.PreAI( npc );
 		}
 	}
 }
