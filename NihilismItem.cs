@@ -21,7 +21,7 @@ namespace Nihilism {
 				float pos_y = position.Y + (((float)frame.Height / 2f) * scale) - (((float)mymod.DisabledItem.Height / 2f) * scale);
 				var pos = new Vector2( pos_x, pos_y );
 				var rect = new Rectangle( 0, 0, mymod.DisabledItem.Width, mymod.DisabledItem.Height );
-				var color = new Color( 192, 192, 192, 192 );
+				var color = Color.White * 0.625f;
 
 				sb.Draw( mymod.DisabledItem, pos, rect, color, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f );
 			}

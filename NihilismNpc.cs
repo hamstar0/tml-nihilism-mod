@@ -8,7 +8,7 @@ namespace Nihilism {
 			var mymod = (NihilismMod)this.mod;
 			var myworld = mymod.GetModWorld<NihilismWorld>();
 
-			if( !myworld.Logic.AreNpcLootsFiltered( mymod ) ) {
+			if( myworld.Logic == null || !myworld.Logic.AreNpcLootsFiltered( mymod ) ) {
 				return base.PreNPCLoot(npc);
 			}
 			
@@ -20,7 +20,7 @@ namespace Nihilism {
 			var mymod = (NihilismMod)this.mod;
 			var myworld = mymod.GetModWorld<NihilismWorld>();
 
-			if( !myworld.Logic.AreNpcsFiltered( mymod ) ) {
+			if( myworld.Logic == null || !myworld.Logic.AreNpcsFiltered( mymod ) ) {
 				return base.PreAI(npc);
 			}
 			
