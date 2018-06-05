@@ -35,7 +35,21 @@ namespace Nihilism {
 				return base.CanUseItem( item, player );
 			}
 			
-			return myworld.Logic.Data.IsItemEnabled( item );
+			if( !myworld.Logic.Data.IsItemEnabled( item ) ) {
+				return false;
+			} else if( item.useAmmo == 0 ) {
+				return true;
+			}
+
+			for( int i=0; i<player.inventory.Length; i++ ) {
+				Item ammo_item = player.inventory[i];
+				if( ammo_item == null || ammo_item.IsAir ) { continue; }
+				
+				if( ammo_item.ammo == item.useAmmo ) {
+					return myworld.Logic.Data.IsItemEnabled( ammo_item );
+				}
+			}
+			return false;
 		}
 	}
 }

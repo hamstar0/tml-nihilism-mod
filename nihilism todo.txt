@@ -4,6 +4,9 @@ v3.0
 -	Add Avoid Blocks (invisible, invincible, non-solid, kills all)
 -	Add Ward Blocks (invisible, invincible, non-solid)
 -	Add Block Blocks (invisible, invincible, solid)
+
+
+
 v2.0
 -	Whitelist/blacklist buffs
 -	Add option to lock weather
@@ -11,14 +14,9 @@ v2.0
 -	Add option to stop music
 -	Add option to stop time
 -	Add option to stop invasions
--	Add 'Item License' to allow a player to add an item to their personal whitelist
-	-	Implement per-player whitelists (per world)
 
-
-
-v1.6
--	Apply item filters to ammo
-
+v1.5.6
+-	Set ammo types to block weapons if not unlocked
 v1.4
 -	Implement API (alter lists, enabled/disable for current world, etc.)
 -	Implement commands
