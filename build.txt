@@ -1,7 +1,7 @@
 author = hamstar
-version = 1.5.6.2
+version = 1.5.6.3
 displayName = Nihilism
-modReferences = HamstarHelpers@1.4.12
+modReferences = HamstarHelpers@1.4.17
 buildIgnore = *.csproj, *.user, obj\*, bin\*, .vs\*
 includePDB = true
 homepage = https://forums.terraria.org/index.php?threads/nihilism-empties-the-game.60333/

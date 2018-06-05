@@ -33,7 +33,7 @@ namespace Nihilism.Logic {
 		////////////////
 
 		internal void OnEnterWorldForSingle( NihilismMod mymod, Player player ) {
-			this.OnPostFiltersSyncToMe( mymod );
+			this.OnFiltersLoad( mymod );
 		}
 
 		internal void OnEnterWorldForClient( NihilismMod mymod, Player player ) {
@@ -45,7 +45,7 @@ namespace Nihilism.Logic {
 
 		////////////////
 
-		internal void OnPostFiltersSyncToMe( NihilismMod mymod ) {
+		internal void OnFiltersLoad( NihilismMod mymod ) {
 			TmlLoadHelpers.AddWorldLoadOncePromise( () => {
 				if( Main.netMode == 2 ) { return; }
 
@@ -61,6 +61,11 @@ namespace Nihilism.Logic {
 
 					InboxMessages.SetMessage( "nihilism_init", msg, false );
 				}
+
+				TmlLoadHelpers.TriggerCustomPromise( "NihilismOnEnterWorld" );
+				TmlLoadHelpers.AddWorldUnloadOncePromise( () => {
+					TmlLoadHelpers.ClearCustomPromise( "NihilismOnEnterWorld" );
+				} );
 			} );
 		}
 

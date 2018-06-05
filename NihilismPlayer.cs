@@ -61,6 +61,7 @@ namespace Nihilism {
 			this.HasEnteredWorld = true;
 		}
 
+
 		public override void PreUpdate() {
 			var mymod = (NihilismMod)this.mod;
 			var myworld = mymod.GetModWorld<NihilismWorld>();

@@ -31,7 +31,7 @@ namespace Nihilism.NetProtocol {
 
 			var mymod = NihilismMod.Instance;
 			var myworld = mymod.GetModWorld<NihilismWorld>();
-			myworld.Logic.OnPostFiltersSyncToMe( mymod );
+			myworld.Logic.OnFiltersLoad( mymod );
 		}
 		protected override void ReceiveWithServer( int from_who ) {
 			this.ReceiveOnAny();

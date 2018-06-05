@@ -33,7 +33,7 @@ namespace Nihilism.Data {
 			this.ItemsBlacklistPattern = mymod.Config.DefaultItemsBlacklistPattern;
 			this.NpcBlacklistPattern = mymod.Config.DefaultNpcBlacklistPattern;
 			this.NpcLootBlacklistPattern = mymod.Config.DefaultNpcLootBlacklistPattern;
-
+			
 			this.RecipeWhitelist = mymod.Config.DefaultRecipeWhitelist.ToDictionary( entry => entry.Key, entry => entry.Value );
 			this.ItemWhitelist = mymod.Config.DefaultItemWhitelist.ToDictionary( entry => entry.Key, entry => entry.Value );
 			this.NpcWhitelist = mymod.Config.DefaultNpcWhitelist.ToDictionary( entry => entry.Key, entry => entry.Value );
@@ -48,7 +48,7 @@ namespace Nihilism.Data {
 			mymod.Config.DefaultRecipesBlacklistPattern = this.RecipesBlacklistPattern;
 			mymod.Config.DefaultNpcLootBlacklistPattern = this.NpcLootBlacklistPattern;
 			mymod.Config.DefaultNpcBlacklistPattern = this.NpcBlacklistPattern;
-
+			
 			mymod.Config.DefaultRecipeWhitelist = this.RecipeWhitelist.ToDictionary( entry => entry.Key, entry => entry.Value );
 			mymod.Config.DefaultItemWhitelist = this.ItemWhitelist.ToDictionary( entry => entry.Key, entry => entry.Value );
 			mymod.Config.DefaultNpcWhitelist = this.NpcWhitelist.ToDictionary( entry => entry.Key, entry => entry.Value );
@@ -64,7 +64,7 @@ namespace Nihilism.Data {
 			this.RecipesBlacklistPattern = mymod.Config.DefaultRecipesBlacklistPattern;
 			this.NpcLootBlacklistPattern = mymod.Config.DefaultNpcLootBlacklistPattern;
 			this.NpcBlacklistPattern = mymod.Config.DefaultNpcBlacklistPattern;
-
+			
 			this.RecipeWhitelist = mymod.Config.DefaultRecipeWhitelist.ToDictionary( entry => entry.Key, entry => entry.Value );
 			this.ItemWhitelist = mymod.Config.DefaultItemWhitelist.ToDictionary( entry => entry.Key, entry => entry.Value );
 			this.NpcWhitelist = mymod.Config.DefaultNpcWhitelist.ToDictionary( entry => entry.Key, entry => entry.Value );
