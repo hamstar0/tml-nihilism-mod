@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using HamstarHelpers.PlayerHelpers;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.ModLoader;
@@ -41,7 +42,17 @@ namespace Nihilism {
 				return true;
 			}
 
-			for( int i=0; i<player.inventory.Length; i++ ) {
+			/*Item ammo_item = PlayerItemHelpers.GetCurrenAmmo( player, item );
+			if( ammo_item != null ) {
+				return myworld.Logic.Data.IsItemEnabled( ammo_item );
+			}*/
+
+			bool first = true;
+
+			for( int i=54; i<player.inventory.Length; i++ ) {
+				if( i == 58 ) { i = 0; }
+				else if( !first && i == 54 ) { break; }
+
 				Item ammo_item = player.inventory[i];
 				if( ammo_item == null || ammo_item.IsAir ) { continue; }
 				
@@ -49,6 +60,7 @@ namespace Nihilism {
 					return myworld.Logic.Data.IsItemEnabled( ammo_item );
 				}
 			}
+
 			return false;
 		}
 	}
