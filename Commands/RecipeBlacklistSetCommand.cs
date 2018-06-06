@@ -7,7 +7,7 @@ namespace Nihilism.Commands {
 	class RecipeBlacklistSetCommand : ModCommand {
 		public override string Command {
 			get {
-				return "nih_recipe_blacklist_set";
+				return "nihrecipeblacklistset";
 			}
 		}
 		public override CommandType Type {
@@ -26,7 +26,7 @@ namespace Nihilism.Commands {
 		}
 		public override string Description {
 			get {
-				return "Sets the recipe blacklist matching pattern. For help with using regexp, visit: https://regexr.com/";
+				return "Sets the recipe blacklist matching pattern. For regex help, visit: https://regexr.com/";
 			}
 		}
 

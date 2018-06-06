@@ -3,6 +3,7 @@ using HamstarHelpers.MiscHelpers;
 using HamstarHelpers.WorldHelpers;
 using Terraria;
 
+
 namespace Nihilism.Data {
 	partial class NihilismFilterAccess {
 		private NihilismFilterData Data;
@@ -16,7 +17,7 @@ namespace Nihilism.Data {
 		////////////////
 
 		private string GetDataFileName() {
-			return WorldHelpers.GetUniqueId( true ) + " Filters";
+			return WorldHelpers.GetUniqueIdWithSeed() + " Filters";
 		}
 
 		public void Load( NihilismMod mymod ) {

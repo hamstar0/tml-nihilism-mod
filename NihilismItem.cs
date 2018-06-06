@@ -42,23 +42,9 @@ namespace Nihilism {
 				return true;
 			}
 
-			/*Item ammo_item = PlayerItemHelpers.GetCurrenAmmo( player, item );
+			Item ammo_item = PlayerItemFinderHelpers.GetCurrentAmmo( player, item );
 			if( ammo_item != null ) {
 				return myworld.Logic.Data.IsItemEnabled( ammo_item );
-			}*/
-
-			bool first = true;
-
-			for( int i=54; i<player.inventory.Length; i++ ) {
-				if( i == 58 ) { i = 0; }
-				else if( !first && i == 54 ) { break; }
-
-				Item ammo_item = player.inventory[i];
-				if( ammo_item == null || ammo_item.IsAir ) { continue; }
-				
-				if( ammo_item.ammo == item.useAmmo ) {
-					return myworld.Logic.Data.IsItemEnabled( ammo_item );
-				}
 			}
 
 			return false;

@@ -7,12 +7,12 @@ using Terraria.ModLoader;
 
 namespace Nihilism {
 	class NihilismPlayer : ModPlayer {
-		public override bool CloneNewInstances { get { return false; } }
-
 		public bool HasEnteredWorld { get; private set; }
 
 
 		////////////////
+
+		public override bool CloneNewInstances { get { return false; } }
 
 		public override void Initialize() {
 			this.HasEnteredWorld = false;

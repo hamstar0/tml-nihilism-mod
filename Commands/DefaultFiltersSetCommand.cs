@@ -7,7 +7,7 @@ namespace Nihilism.Commands {
 	class DefaultFiltersSetCommand : ModCommand {
 		public override string Command {
 			get {
-				return "nih_defaults_set";
+				return "nihdefaultsset";
 			}
 		}
 		public override CommandType Type {
@@ -26,7 +26,7 @@ namespace Nihilism.Commands {
 		}
 		public override string Description {
 			get {
-				return "Copies the current set of blacklists and whitelists to be the defaults that new worlds will generate with.";
+				return "Set current white and blacklists as defaults for each new world.";
 			}
 		}
 

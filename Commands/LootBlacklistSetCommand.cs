@@ -7,7 +7,7 @@ namespace Nihilism.Commands {
 	class LootBlacklistSetCommand : ModCommand {
 		public override string Command {
 			get {
-				return "nih_loot_blacklist_set";
+				return "nihlootblacklistset";
 			}
 		}
 		public override CommandType Type {
@@ -26,7 +26,7 @@ namespace Nihilism.Commands {
 		}
 		public override string Description {
 			get {
-				return "Sets the loot dropping npc blacklist matching pattern. For help with using regexp, visit: https://regexr.com/";
+				return "Sets the loot dropping npc blacklist matching pattern. For regex help, visit: https://regexr.com/";
 			}
 		}
 

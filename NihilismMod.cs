@@ -1,5 +1,6 @@
 ﻿using HamstarHelpers.DebugHelpers;
 using HamstarHelpers.Utilities.Config;
+using HamstarHelpers.Utilities.Messages;
 using Microsoft.Xna.Framework.Graphics;
 using Nihilism.Data;
 using System;
@@ -41,6 +42,8 @@ namespace Nihilism {
 
 		public bool SuppressAutoSaving { get; internal set; }
 
+		private bool HasUpdated = false;
+
 
 		////////////////
 
@@ -73,7 +76,9 @@ namespace Nihilism {
 				ErrorLogger.Log( "Nihilism config " + NihilismConfigData.ConfigVersion.ToString() + " created." );
 			}
 
-			if( this.Config.UpdateToLatestVersion() ) {
+			this.HasUpdated = this.Config.UpdateToLatestVersion();
+
+			if( this.HasUpdated ) {
 				ErrorLogger.Log( "Nihilism updated to " + NihilismConfigData.ConfigVersion.ToString() );
 				this.JsonConfig.SaveFile();
 			}
@@ -81,6 +86,13 @@ namespace Nihilism {
 
 		public override void Unload() {
 			NihilismMod.Instance = null;
+		}
+
+
+		public override void PostAddRecipes() {
+			if( this.HasUpdated && this.Version == new Version(1, 5, 9) ) {
+				InboxMessages.SetMessage( "nihilism_update", "A version update has put your world data into a new file. You may need to manually copy this (see Documents/My Games/Terraria/ModLoader/Mod Specific Data/Nihilism).", true );
+			}
 		}
 
 

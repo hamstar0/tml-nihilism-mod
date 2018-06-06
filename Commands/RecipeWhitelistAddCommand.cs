@@ -7,7 +7,7 @@ namespace Nihilism.Commands {
 	class RecipeWhitelistAddCommand : ModCommand {
 		public override string Command {
 			get {
-				return "nih_recipe_whitelist_add";
+				return "nihrecipewhitelistadd";
 			}
 		}
 		public override CommandType Type {
