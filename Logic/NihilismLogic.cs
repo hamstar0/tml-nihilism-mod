@@ -54,9 +54,9 @@ namespace Nihilism.Logic {
 				if( !myworld.Logic.Data.IsActive() ) {
 					string msg;
 					if( Main.netMode == 0 ) {
-						msg = "Enter the /nihilate command to active Nihilism restrictions for the current world. Enter /help for a list of other commands.";
+						msg = "Enter the /nihon command to active Nihilism restrictions for the current world. Enter /help for a list of other commands.";
 					} else {
-						msg = "Enter nihilate in the server's command console to activate Nihilism restrictions for the current world. Enter help for a list of other commands.";
+						msg = "Enter nihon in the server's command console to activate Nihilism restrictions for the current world. Enter help for a list of other commands.";
 					}
 
 					InboxMessages.SetMessage( "nihilism_init", msg, false );
