@@ -58,12 +58,12 @@
     <Compile Include="API_Call.cs" />
     <Compile Include="API.cs" />
     <Compile Include="Commands\ShowFiltersCommand.cs" />
-    <Compile Include="Commands\NpcBlacklistSetCommand.cs" />
-    <Compile Include="Commands\LootBlacklistSetCommand.cs" />
-    <Compile Include="Commands\ItemBlacklistSetCommand.cs" />
+    <Compile Include="Commands\NpcFilterSetCommand.cs" />
+    <Compile Include="Commands\LootFilterSetCommand.cs" />
+    <Compile Include="Commands\ItemFilterSetCommand.cs" />
     <Compile Include="Commands\LootWhitelistEntrySetCommand.cs" />
     <Compile Include="Commands\NpcWhitelistEntrySetCommand.cs" />
-    <Compile Include="Commands\RecipeBlacklistSetCommand.cs" />
+    <Compile Include="Commands\RecipeFilterSetCommand.cs" />
     <Compile Include="Commands\RecipeWhitelistAddCommand.cs" />
     <Compile Include="Commands\ItemWhitelistEntrySetCommand.cs" />
     <Compile Include="Commands\NihilismOffCommand.cs" />
@@ -75,9 +75,8 @@
     <Compile Include="Data\FiltersAccess_Setters.cs" />
     <Compile Include="Data\FiltersAccess_Getters.cs" />
     <Compile Include="Data\Filters.cs" />
-    <Compile Include="Data\FiltersAccess_Regex.cs" />
-    <Compile Include="NetProtocol\WorldFiltersProtocol.cs" />
     <Compile Include="NetProtocol\ModSettingsProtocol.cs" />
+    <Compile Include="NetProtocol\WorldFiltersProtocol.cs" />
     <Compile Include="NihilismItem.cs" />
     <Compile Include="Logic\NihilismLogic.cs" />
     <Compile Include="NihilismMod.cs" />

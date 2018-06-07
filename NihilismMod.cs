@@ -10,7 +10,7 @@ using Terraria.ModLoader;
 
 
 namespace Nihilism {
-    class NihilismMod : Mod {
+	class NihilismMod : Mod {
 		public static NihilismMod Instance { get; private set; }
 
 		public static string GithubUserName { get { return "hamstar0"; } }
@@ -27,16 +27,16 @@ namespace Nihilism {
 				Main.NewText( "Nihilism config settings auto saving suppressed." );
 				return;
 			}
-			if( !NihilismMod.Instance.JsonConfig.LoadFile() ) {
-				NihilismMod.Instance.JsonConfig.SaveFile();
+			if( !NihilismMod.Instance.ConfigJson.LoadFile() ) {
+				NihilismMod.Instance.ConfigJson.SaveFile();
 			}
 		}
 
 
 		////////////////
 
-		public JsonConfig<NihilismConfigData> JsonConfig { get; private set; }
-		public NihilismConfigData Config { get { return this.JsonConfig.Data; } }
+		public JsonConfig<NihilismConfigData> ConfigJson { get; private set; }
+		public NihilismConfigData Config { get { return this.ConfigJson.Data; } }
 
 		public Texture2D DisabledItem { get; private set; }
 
@@ -53,8 +53,8 @@ namespace Nihilism {
 				AutoloadGores = true,
 				AutoloadSounds = true
 			};
-			
-			this.JsonConfig = new JsonConfig<NihilismConfigData>( NihilismConfigData.ConfigFileName,
+
+			this.ConfigJson = new JsonConfig<NihilismConfigData>( NihilismConfigData.ConfigFileName,
 					ConfigurationDataBase.RelativePath, new NihilismConfigData() );
 		}
 
@@ -62,7 +62,7 @@ namespace Nihilism {
 
 		public override void Load() {
 			NihilismMod.Instance = this;
-			
+
 			if( Main.netMode != 2 ) {   // Not server
 				this.DisabledItem = ModLoader.GetTexture( "Terraria/MapDeath" );
 			}
@@ -71,8 +71,8 @@ namespace Nihilism {
 		}
 
 		private void LoadConfig() {
-			if( !this.JsonConfig.LoadFile() ) {
-				this.JsonConfig.SaveFile();
+			if( !this.ConfigJson.LoadFile() ) {
+				this.ConfigJson.SaveFile();
 				ErrorLogger.Log( "Nihilism config " + NihilismConfigData.ConfigVersion.ToString() + " created." );
 			}
 
@@ -80,7 +80,7 @@ namespace Nihilism {
 
 			if( this.HasUpdated ) {
 				ErrorLogger.Log( "Nihilism updated to " + NihilismConfigData.ConfigVersion.ToString() );
-				this.JsonConfig.SaveFile();
+				this.ConfigJson.SaveFile();
 			}
 		}
 
@@ -90,7 +90,7 @@ namespace Nihilism {
 
 
 		public override void PostAddRecipes() {
-			if( this.HasUpdated && this.Version == new Version(1, 5, 9) ) {
+			if( this.HasUpdated && this.Version == new Version( 1, 5, 9 ) ) {
 				InboxMessages.SetMessage( "nihilism_update", "A version update has put your world data into a new file. You may need to manually copy this (see Documents/My Games/Terraria/ModLoader/Mod Specific Data/Nihilism).", true );
 			}
 		}

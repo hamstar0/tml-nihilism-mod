@@ -4,10 +4,10 @@ using Terraria.ModLoader;
 
 
 namespace Nihilism.Commands {
-	class ItemBlacklistSetCommand : ModCommand {
+	class RecipeFilterSetCommand : ModCommand {
 		public override string Command {
 			get {
-				return "nihitem_blacklistset";
+				return "nihrecipefilter";
 			}
 		}
 		public override CommandType Type {
@@ -21,12 +21,12 @@ namespace Nihilism.Commands {
 		}
 		public override string Usage {
 			get {
-				return "/" + this.Command + " ^(Wood)$|^(Excalibur)$";
+				return "/" + this.Command + " <true/false>";
 			}
 		}
 		public override string Description {
 			get {
-				return "Sets the item blacklist matching pattern. For regex help, visit: https://regexr.com/";
+				return "Sets recipes to be filtered or not.";
 			}
 		}
 
@@ -35,18 +35,20 @@ namespace Nihilism.Commands {
 
 		public override void Action( CommandCaller caller, string input, string[] args ) {
 			if( args.Length == 0 ) {
-				caller.Reply( "No item regex pattern specified.", Color.Yellow );
+				caller.Reply( "Missing parameter.", Color.Yellow );
 				return;
 			}
 
+			bool on;
+			if( !bool.TryParse( args[0], out on ) ) { caller.Reply( "Invalid parameter." ); }
+
 			var mymod = NihilismMod.Instance;
 			var myworld = mymod.GetModWorld<NihilismWorld>();
-			string pattern = args[0];
 
-			myworld.Logic.Data.SetItemsBlacklistPattern( pattern );
+			myworld.Logic.Data.SetRecipeFilter( on );
 			myworld.Logic.SyncData();
 
-			caller.Reply( "Item pattern " + pattern + " set as blacklist.", Color.YellowGreen );
+			caller.Reply( "Recipe filter " + on + ".", Color.LimeGreen );
 		}
 	}
 }

@@ -4,7 +4,8 @@
 namespace Nihilism {
 	public static partial class NihilismAPI {
 		internal static object Call( string call_type, params object[] args ) {
-			string pattern, ent_name;
+			bool on;
+			string ent_name;
 			bool local_only;
 			
 			switch( call_type ) {
@@ -26,16 +27,16 @@ namespace Nihilism {
 				NihilismAPI.SuppressAutoSavingOff();
 				return null;
 
-			case "SetItemsBlacklistPattern":
+			case "SetItemFilter":
 				if( args.Length < 2 ) { throw new Exception( "Insufficient parameters for API call " + call_type ); }
 
-				pattern = args[0] as string;
-				if( pattern == null ) { throw new Exception( "Invalid parameter player for API call " + call_type ); }
+				if( !( args[0] is bool ) ) { throw new Exception( "Invalid parameter player for API call " + call_type ); }
+				on = (bool)args[0];
 
 				if( !(args[1] is bool) ) { throw new Exception( "Invalid parameter local_only for API call " + call_type ); }
 				local_only = (bool)args[1];
 
-				NihilismAPI.SetItemsBlacklistPattern( pattern, local_only );
+				NihilismAPI.SetItemFilter( on, local_only );
 				return null;
 			case "SetItemWhitelistEntry":
 			case "SetItemsWhitelistEntry":  // Oops (v1.4.0.1)
@@ -49,16 +50,16 @@ namespace Nihilism {
 
 				NihilismAPI.SetItemsWhitelistEntry( ent_name, local_only );
 				return null;
-			case "SetRecipesBlacklistPattern":
+			case "SetRecipesFilter":
 				if( args.Length < 2 ) { throw new Exception( "Insufficient parameters for API call " + call_type ); }
 
-				pattern = args[0] as string;
-				if( pattern == null ) { throw new Exception( "Invalid parameter player for API call " + call_type ); }
+				if( !( args[0] is bool ) ) { throw new Exception( "Invalid parameter player for API call " + call_type ); }
+				on = (bool)args[0];
 
 				if( !( args[1] is bool ) ) { throw new Exception( "Invalid parameter local_only for API call " + call_type ); }
 				local_only = (bool)args[1];
 
-				NihilismAPI.SetRecipesBlacklistPattern( pattern, local_only );
+				NihilismAPI.SetRecipesFilter( on, local_only );
 				return null;
 			case "SetRecipeWhitelistEntry":
 				if( args.Length < 2 ) { throw new Exception( "Insufficient parameters for API call " + call_type ); }
@@ -71,16 +72,16 @@ namespace Nihilism {
 
 				NihilismAPI.SetRecipeWhitelistEntry( ent_name, local_only );
 				return null;
-			case "SetNpcLootBlacklistPattern":
+			case "SetNpcLootFilter":
 				if( args.Length < 2 ) { throw new Exception( "Insufficient parameters for API call " + call_type ); }
 
-				pattern = args[0] as string;
-				if( pattern == null ) { throw new Exception( "Invalid parameter player for API call " + call_type ); }
+				if( !(args[0] is bool) ) { throw new Exception( "Invalid parameter player for API call " + call_type ); }
+				on = (bool)args[0];
 
 				if( !( args[1] is bool ) ) { throw new Exception( "Invalid parameter local_only for API call " + call_type ); }
 				local_only = (bool)args[1];
 
-				NihilismAPI.SetNpcLootBlacklistPattern( pattern, local_only );
+				NihilismAPI.SetNpcLootFilter( on, local_only );
 				return null;
 			case "SetNpcLootWhitelistEntry":
 				if( args.Length < 2 ) { throw new Exception( "Insufficient parameters for API call " + call_type ); }
@@ -93,16 +94,16 @@ namespace Nihilism {
 
 				NihilismAPI.SetNpcLootWhitelistEntry( ent_name, local_only );
 				return null;
-			case "SetNpcBlacklistPattern":
+			case "SetNpcFilter":
 				if( args.Length < 2 ) { throw new Exception( "Insufficient parameters for API call " + call_type ); }
 
-				pattern = args[0] as string;
-				if( pattern == null ) { throw new Exception( "Invalid parameter player for API call " + call_type ); }
+				if( !( args[0] is bool ) ) { throw new Exception( "Invalid parameter player for API call " + call_type ); }
+				on = (bool)args[0];
 
 				if( !( args[1] is bool ) ) { throw new Exception( "Invalid parameter local_only for API call " + call_type ); }
 				local_only = (bool)args[1];
 
-				NihilismAPI.SetNpcBlacklistPattern( pattern, local_only );
+				NihilismAPI.SetNpcFilter( on, local_only );
 				return null;
 			case "SetNpcWhitelistEntry":
 				if( args.Length < 2 ) { throw new Exception( "Insufficient parameters for API call " + call_type ); }
@@ -115,6 +116,7 @@ namespace Nihilism {
 
 				NihilismAPI.SetNpcWhitelistEntry( ent_name, local_only );
 				return null;
+
 			case "SetCurrentFiltersAsDefaults":
 				NihilismAPI.SetCurrentFiltersAsDefaults();
 				return null;

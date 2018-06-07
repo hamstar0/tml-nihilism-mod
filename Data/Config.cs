@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Nihilism.Data {
 	public class NihilismConfigData : ConfigurationDataBase {
-		public readonly static Version ConfigVersion = new Version( 1, 5, 9 );
+		public readonly static Version ConfigVersion = new Version( 2, 0, 0 );
 		public readonly static string ConfigFileName = "Nihilism Config.json";
 
 
@@ -14,11 +14,11 @@ namespace Nihilism.Data {
 		public string VersionSinceUpdate = NihilismConfigData.ConfigVersion.ToString();
 
 		public bool DebugModeInfo = false;
-		
-		public string DefaultRecipesBlacklistPattern = "(.*?)";
-		public string DefaultItemsBlacklistPattern = "(.*?)";
-		public string DefaultNpcBlacklistPattern = "(.*?)";
-		public string DefaultNpcLootBlacklistPattern = "(.*?)";
+
+		public bool DefaultRecipesBlacklisted = true;
+		public bool DefaultItemsBlacklisted = true;
+		public bool DefaultNpcBlacklisted = true;
+		public bool DefaultNpcLootBlacklisted = true;
 
 		public IDictionary<string, bool> DefaultRecipeWhitelist = new Dictionary<string, bool> { };
 		public IDictionary<string, bool> DefaultItemWhitelist = new Dictionary<string, bool> { };
@@ -36,6 +36,15 @@ namespace Nihilism.Data {
 
 		[Obsolete( "Not a useable setting", true )]
 		public string _OLD_SETTINGS_BELOW_ = "";
+
+		[Obsolete( "Use NihilismConfigData.DefaultRecipesBlacklisted", true )]
+		public string DefaultRecipesBlacklistPattern = "(.*?)";
+		[Obsolete( "Use NihilismConfigData.DefaultItemsBlacklisted", true )]
+		public string DefaultItemsBlacklistPattern = "(.*?)";
+		[Obsolete( "Use NihilismConfigData.DefaultNpcBlacklisted", true )]
+		public string DefaultNpcBlacklistPattern = "(.*?)";
+		[Obsolete( "Use NihilismConfigData.DefaultNpcLootBlacklisted", true )]
+		public string DefaultNpcLootBlacklistPattern = "(.*?)";
 
 		[Obsolete( "Use NihilismFilterData.RecipesBlacklistChecksFirst", true )]
 		public bool RecipesBlacklistChecksFirst = false;

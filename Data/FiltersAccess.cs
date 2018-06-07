@@ -49,16 +49,16 @@ namespace Nihilism.Data {
 
 		public void OutputFilters() {
 			Main.NewText( "Is nihilated: " + this.Data.IsActive );
-			Main.NewText( "Items BL: " + this.Data.ItemsBlacklistPattern + ", WL count: " + this.Data.ItemWhitelist.Count );
-			Main.NewText( "Recipes BL: " + this.Data.RecipesBlacklistPattern + ", WL count: " + this.Data.RecipeWhitelist.Count );
-			Main.NewText( "NPCs BL: " + this.Data.NpcBlacklistPattern + ", WL count: " + this.Data.NpcWhitelist.Count );
-			Main.NewText( "Loot BL: " + this.Data.NpcLootBlacklistPattern + ", WL count: " + this.Data.NpcLootWhitelist.Count );
+			Main.NewText( "Items BL: " + this.Data.IsItemFilterOn + ", WL count: " + this.Data.ItemWhitelist.Count );
+			Main.NewText( "Recipes BL: " + this.Data.IsRecipeFilterOn + ", WL count: " + this.Data.RecipeWhitelist.Count );
+			Main.NewText( "NPCs BL: " + this.Data.IsNpcFilterOn + ", WL count: " + this.Data.NpcWhitelist.Count );
+			Main.NewText( "Loot BL: " + this.Data.IsNpcLootFilterOn + ", WL count: " + this.Data.NpcLootWhitelist.Count );
 
 			LogHelpers.Log( "Is nihilated: " + this.Data.IsActive );
-			LogHelpers.Log( "Items BL: " + this.Data.ItemsBlacklistPattern + ", WL count: " + string.Join( ", ", this.Data.ItemWhitelist.Keys ) );
-			LogHelpers.Log( "Recipes BL: " + this.Data.RecipesBlacklistPattern + ", WL count: " + string.Join( ", ", this.Data.RecipeWhitelist.Keys ) );
-			LogHelpers.Log( "NPCs BL: " + this.Data.NpcBlacklistPattern + ", WL count: " + string.Join( ", ", this.Data.NpcWhitelist.Keys ) );
-			LogHelpers.Log( "Loot BL: " + this.Data.NpcLootBlacklistPattern + ", WL count: " + string.Join( ", ", this.Data.NpcLootWhitelist.Keys ) );
+			LogHelpers.Log( "Items BL: " + this.Data.IsItemFilterOn + ", WL count: " + string.Join( ", ", this.Data.ItemWhitelist.Keys ) );
+			LogHelpers.Log( "Recipes BL: " + this.Data.IsRecipeFilterOn + ", WL count: " + string.Join( ", ", this.Data.RecipeWhitelist.Keys ) );
+			LogHelpers.Log( "NPCs BL: " + this.Data.IsNpcFilterOn + ", WL count: " + string.Join( ", ", this.Data.NpcWhitelist.Keys ) );
+			LogHelpers.Log( "Loot BL: " + this.Data.IsNpcLootFilterOn + ", WL count: " + string.Join( ", ", this.Data.NpcLootWhitelist.Keys ) );
 		}
 	}
 }

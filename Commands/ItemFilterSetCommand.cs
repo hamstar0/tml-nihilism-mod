@@ -4,10 +4,10 @@ using Terraria.ModLoader;
 
 
 namespace Nihilism.Commands {
-	class NpcBlacklistSetCommand : ModCommand {
+	class ItemFilterSetCommand : ModCommand {
 		public override string Command {
 			get {
-				return "nihnpcblacklistset";
+				return "nihitemfilter";
 			}
 		}
 		public override CommandType Type {
@@ -21,12 +21,12 @@ namespace Nihilism.Commands {
 		}
 		public override string Usage {
 			get {
-				return "/" + this.Command + " ^(Demon Eye)$|^(Zombie)$";
+				return "/" + this.Command + " <true/false>";
 			}
 		}
 		public override string Description {
 			get {
-				return "Sets the npc blacklist matching pattern. For regex help, visit: https://regexr.com/";
+				return "Sets items to be filtered or not.";
 			}
 		}
 
@@ -34,19 +34,21 @@ namespace Nihilism.Commands {
 		////////////////
 
 		public override void Action( CommandCaller caller, string input, string[] args ) {
-			if( args.Length == 0  ) {
-				caller.Reply( "No npc regex pattern specified.", Color.Yellow );
+			if( args.Length == 0 ) {
+				caller.Reply( "Missing parameter.", Color.Yellow );
 				return;
 			}
 
+			bool on;
+			if( !bool.TryParse(args[0], out on) ) { caller.Reply( "Invalid parameter." ); }
+
 			var mymod = NihilismMod.Instance;
 			var myworld = mymod.GetModWorld<NihilismWorld>();
-			string pattern = args[0];
 
-			myworld.Logic.Data.SetNpcBlacklistPattern( pattern );
+			myworld.Logic.Data.SetItemFilter( on );
 			myworld.Logic.SyncData();
 
-			caller.Reply( "Npc pattern "+ pattern + " set as blacklist.", Color.YellowGreen );
+			caller.Reply( "Item filter " + on + ".", Color.LimeGreen );
 		}
 	}
 }

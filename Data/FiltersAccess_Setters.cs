@@ -1,10 +1,7 @@
-﻿using HamstarHelpers.Utilities.Config;
-
-
-namespace Nihilism.Data {
+﻿namespace Nihilism.Data {
 	partial class NihilismFilterAccess {
-		public void SetItemsBlacklistPattern( string pattern ) {
-			this.Data.ItemsBlacklistPattern = pattern;
+		public void SetItemFilter( bool on ) {
+			this.Data.IsItemFilterOn = on;
 		}
 
 		public void SetItemWhitelistEntry( string item_name ) {
@@ -12,8 +9,8 @@ namespace Nihilism.Data {
 		}
 
 
-		public void SetRecipesBlacklistPattern( string pattern ) {
-			this.Data.RecipesBlacklistPattern = pattern;
+		public void SetRecipeFilter( bool on ) {
+			this.Data.IsRecipeFilterOn = on;
 		}
 
 		public void SetRecipeWhitelistEntry( string item_name ) {
@@ -21,8 +18,8 @@ namespace Nihilism.Data {
 		}
 
 
-		public void SetNpcLootBlacklistPattern( string pattern ) {
-			this.Data.NpcLootBlacklistPattern = pattern;
+		public void SetNpcLootFilter( bool on ) {
+			this.Data.IsNpcLootFilterOn = on;
 		}
 
 		public void SetNpcLootWhitelistEntry( string npc_name ) {
@@ -30,8 +27,8 @@ namespace Nihilism.Data {
 		}
 
 
-		public void SetNpcBlacklistPattern( string pattern ) {
-			this.Data.NpcBlacklistPattern = pattern;
+		public void SetNpcFilter( bool on ) {
+			this.Data.IsNpcFilterOn = on;
 		}
 
 		public void SetNpcWhitelistEntry( string npc_name ) {
