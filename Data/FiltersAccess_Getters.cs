@@ -1,5 +1,6 @@
 ﻿using HamstarHelpers.ItemHelpers;
 using HamstarHelpers.NPCHelpers;
+using HamstarHelpers.Utilities.EntityGroups;
 using Terraria;
 
 
@@ -8,10 +9,17 @@ namespace Nihilism.Data {
 		private bool IsItemWhitelisted( Item item ) {
 			string name = ItemIdentityHelpers.GetQualifiedName( item );
 
-			if( !this.Data.ItemWhitelist.ContainsKey( name ) ) {
-				return false;
+			if( this.Data.ItemWhitelist.ContainsKey( name ) ) {
+				return this.Data.ItemWhitelist[ name ];
 			}
-			return this.Data.ItemWhitelist[name];
+			
+			foreach( string grp_name in EntityGroups.GroupsPerItem[ item.type ] ) {
+				if( this.Data.ItemWhitelist.ContainsKey(grp_name) ) {
+					return true;
+				}
+			}
+
+			return false;
 		}
 
 		////
@@ -19,10 +27,17 @@ namespace Nihilism.Data {
 		private bool IsRecipeWhitelisted( Item item ) {
 			string name = ItemIdentityHelpers.GetQualifiedName( item );
 
-			if( !this.Data.RecipeWhitelist.ContainsKey( name ) ) {
-				return false;
+			if( this.Data.RecipeWhitelist.ContainsKey( name ) ) {
+				return this.Data.RecipeWhitelist[name];
 			}
-			return this.Data.RecipeWhitelist[name];
+
+			foreach( string grp_name in EntityGroups.GroupsPerItem[item.type] ) {
+				if( this.Data.RecipeWhitelist.ContainsKey( grp_name ) ) {
+					return true;
+				}
+			}
+
+			return false;
 		}
 
 		////
@@ -30,10 +45,17 @@ namespace Nihilism.Data {
 		private bool IsNpcWhitelisted( NPC npc ) {
 			string name = NPCIdentityHelpers.GetQualifiedName( npc );
 
-			if( !this.Data.NpcWhitelist.ContainsKey( name ) ) {
-				return false;
+			if( this.Data.NpcWhitelist.ContainsKey( name ) ) {
+				return this.Data.NpcWhitelist[name];
 			}
-			return this.Data.NpcWhitelist[name];
+
+			foreach( string grp_name in EntityGroups.GroupsPerItem[npc.type] ) {
+				if( this.Data.NpcWhitelist.ContainsKey( grp_name ) ) {
+					return true;
+				}
+			}
+
+			return false;
 		}
 
 		////
@@ -41,10 +63,17 @@ namespace Nihilism.Data {
 		private bool IsNpcLootWhitelisted( NPC npc ) {
 			string name = NPCIdentityHelpers.GetQualifiedName( npc );
 
-			if( !this.Data.NpcLootWhitelist.ContainsKey( name ) ) {
-				return false;
+			if( this.Data.NpcLootWhitelist.ContainsKey( name ) ) {
+				return this.Data.NpcLootWhitelist[name];
 			}
-			return this.Data.NpcLootWhitelist[name];
+
+			foreach( string grp_name in EntityGroups.GroupsPerItem[npc.type] ) {
+				if( this.Data.NpcLootWhitelist.ContainsKey( grp_name ) ) {
+					return true;
+				}
+			}
+
+			return false;
 		}
 
 

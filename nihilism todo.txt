@@ -17,10 +17,10 @@ v3.0
 	-	Progression multiplier
 	-	Night only
 	-	Day only
+
 v2.0
 -	Match respective entity groups with whitelist checks
 -	Change blacklists from regex to booleans
-
 v1.5.6
 -	Set ammo types to block weapons if not unlocked
 v1.4
