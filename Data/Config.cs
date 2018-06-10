@@ -20,10 +20,10 @@ namespace Nihilism.Data {
 		public bool DefaultNpcBlacklisted = true;
 		public bool DefaultNpcLootBlacklisted = true;
 
-		public IDictionary<string, bool> DefaultRecipeWhitelist = new Dictionary<string, bool> { };
-		public IDictionary<string, bool> DefaultItemWhitelist = new Dictionary<string, bool> { };
-		public IDictionary<string, bool> DefaultNpcWhitelist = new Dictionary<string, bool> { };
-		public IDictionary<string, bool> DefaultNpcLootWhitelist = new Dictionary<string, bool> { };
+		public ISet<string> DefaultRecipeWhitelist = new HashSet<string> { };
+		public ISet<string> DefaultItemWhitelist = new HashSet<string> { };
+		public ISet<string> DefaultNpcWhitelist = new HashSet<string> { };
+		public ISet<string> DefaultNpcLootWhitelist = new HashSet<string> { };
 
 		public bool EnableItemFilters = true;
 		public bool EnableItemEquipsFilters = true;
@@ -76,6 +76,21 @@ namespace Nihilism.Data {
 
 		////////////////
 
+		public override void OnLoad( bool success ) {
+			if( !success ) {
+				this.SetDefaults();
+			}
+		}
+
+
+		public void SetDefaults() {
+			this.DefaultItemWhitelist.Add( "Any Copper Or Tin Equipment" );
+			this.DefaultRecipeWhitelist.Add( "Any Copper Or Tin Equipment" );
+			this.DefaultNpcWhitelist.Add( "Any Slime" );
+			this.DefaultNpcLootWhitelist.Add( "Blue Slime" );
+		}
+
+
 		public bool UpdateToLatestVersion() {
 			var new_config = new NihilismConfigData();
 			var vers_since = this.VersionSinceUpdate != "" ?
@@ -84,6 +99,10 @@ namespace Nihilism.Data {
 
 			if( vers_since >= NihilismConfigData.ConfigVersion ) {
 				return false;
+			}
+
+			if( vers_since < new Version(2, 0, 0) ) {
+				this.SetDefaults();
 			}
 
 			this.VersionSinceUpdate = NihilismConfigData.ConfigVersion.ToString();

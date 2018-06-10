@@ -12,9 +12,9 @@ namespace Nihilism.NetProtocol {
 
 		private void SetMyDefaults() {
 			var myworld = NihilismMod.Instance.GetModWorld<NihilismWorld>();
-			if( myworld.Logic.Data == null ) { throw new Exception( "No filters to send" ); }
+			if( myworld.Logic.DataAccess == null ) { throw new Exception( "No filters to send" ); }
 
-			myworld.Logic.Data.Give( ref this.Filters );
+			myworld.Logic.DataAccess.Give( ref this.Filters );
 		}
 
 		public override void SetClientDefaults() {
@@ -43,7 +43,7 @@ namespace Nihilism.NetProtocol {
 			var mymod = NihilismMod.Instance;
 			var myworld = mymod.GetModWorld<NihilismWorld>();
 			
-			myworld.Logic.Data.Take( this.Filters );
+			myworld.Logic.DataAccess.Take( this.Filters );
 		}
 	}
 }

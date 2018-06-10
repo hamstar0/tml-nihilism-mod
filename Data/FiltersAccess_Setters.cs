@@ -5,7 +5,7 @@
 		}
 
 		public void SetItemWhitelistEntry( string item_name ) {
-			this.Data.ItemWhitelist[item_name] = true;
+			this.Data.ItemWhitelist.Add( item_name );
 		}
 
 
@@ -14,7 +14,7 @@
 		}
 
 		public void SetRecipeWhitelistEntry( string item_name ) {
-			this.Data.RecipeWhitelist[item_name] = true;
+			this.Data.RecipeWhitelist.Add( item_name );
 		}
 
 
@@ -23,7 +23,7 @@
 		}
 
 		public void SetNpcLootWhitelistEntry( string npc_name ) {
-			this.Data.NpcLootWhitelist[npc_name] = true;
+			this.Data.NpcLootWhitelist.Add( npc_name );
 		}
 
 
@@ -32,7 +32,7 @@
 		}
 
 		public void SetNpcWhitelistEntry( string npc_name ) {
-			this.Data.NpcWhitelist[npc_name] = true;
+			this.Data.NpcWhitelist.Add( npc_name );
 		}
 
 

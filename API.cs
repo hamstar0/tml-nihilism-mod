@@ -19,11 +19,11 @@ namespace Nihilism {
 
 		public static bool NihilateCurrentWorld() {
 			var myworld = NihilismMod.Instance.GetModWorld<NihilismWorld>();
-			if( myworld.Logic.Data.IsActive() ) {
+			if( myworld.Logic.DataAccess.IsActive() ) {
 				return false;
 			}
 
-			myworld.Logic.Data.Activate();
+			myworld.Logic.DataAccess.Activate();
 			myworld.Logic.SyncData();
 
 			return true;
@@ -31,11 +31,11 @@ namespace Nihilism {
 
 		public static bool UnnihilateCurrentWorld() {
 			var myworld = NihilismMod.Instance.GetModWorld<NihilismWorld>();
-			if( !myworld.Logic.Data.IsActive() ) {
+			if( !myworld.Logic.DataAccess.IsActive() ) {
 				return false;
 			}
 
-			myworld.Logic.Data.Deactivate();
+			myworld.Logic.DataAccess.Deactivate();
 			myworld.Logic.SyncData();
 
 			return true;
@@ -58,7 +58,7 @@ namespace Nihilism {
 			if( !TmlLoadHelpers.IsWorldLoaded() ) { throw new Exception("World not loaded"); }
 			
 			var myworld = NihilismMod.Instance.GetModWorld<NihilismWorld>();
-			myworld.Logic.Data.SetItemFilter( on );
+			myworld.Logic.DataAccess.SetItemFilter( on );
 
 			if( !local_only ) { myworld.Logic.SyncData(); }
 		}
@@ -67,7 +67,7 @@ namespace Nihilism {
 			if( !TmlLoadHelpers.IsWorldLoaded() ) { throw new Exception( "World not loaded" ); }
 			
 			var myworld = NihilismMod.Instance.GetModWorld<NihilismWorld>();
-			myworld.Logic.Data.SetItemWhitelistEntry( item_name );
+			myworld.Logic.DataAccess.SetItemWhitelistEntry( item_name );
 
 			if( !local_only ) { myworld.Logic.SyncData(); }
 		}
@@ -77,7 +77,7 @@ namespace Nihilism {
 			if( !TmlLoadHelpers.IsWorldLoaded() ) { throw new Exception( "World not loaded" ); }
 
 			var myworld = NihilismMod.Instance.GetModWorld<NihilismWorld>();
-			myworld.Logic.Data.SetRecipeFilter( on );
+			myworld.Logic.DataAccess.SetRecipeFilter( on );
 
 			if( !local_only ) { myworld.Logic.SyncData(); }
 		}
@@ -86,7 +86,7 @@ namespace Nihilism {
 			if( !TmlLoadHelpers.IsWorldLoaded() ) { throw new Exception( "World not loaded" ); }
 
 			var myworld = NihilismMod.Instance.GetModWorld<NihilismWorld>();
-			myworld.Logic.Data.SetRecipeWhitelistEntry( item_name );
+			myworld.Logic.DataAccess.SetRecipeWhitelistEntry( item_name );
 
 			if( !local_only ) { myworld.Logic.SyncData(); }
 		}
@@ -96,7 +96,7 @@ namespace Nihilism {
 			if( !TmlLoadHelpers.IsWorldLoaded() ) { throw new Exception( "World not loaded" ); }
 
 			var myworld = NihilismMod.Instance.GetModWorld<NihilismWorld>();
-			myworld.Logic.Data.SetNpcLootFilter( on );
+			myworld.Logic.DataAccess.SetNpcLootFilter( on );
 
 			if( !local_only ) { myworld.Logic.SyncData(); }
 		}
@@ -105,7 +105,7 @@ namespace Nihilism {
 			if( !TmlLoadHelpers.IsWorldLoaded() ) { throw new Exception( "World not loaded" ); }
 
 			var myworld = NihilismMod.Instance.GetModWorld<NihilismWorld>();
-			myworld.Logic.Data.SetNpcLootWhitelistEntry( npc_name );
+			myworld.Logic.DataAccess.SetNpcLootWhitelistEntry( npc_name );
 
 			if( !local_only ) { myworld.Logic.SyncData(); }
 		}
@@ -115,7 +115,7 @@ namespace Nihilism {
 			if( !TmlLoadHelpers.IsWorldLoaded() ) { throw new Exception( "World not loaded" ); }
 
 			var myworld = NihilismMod.Instance.GetModWorld<NihilismWorld>();
-			myworld.Logic.Data.SetNpcFilter( on );
+			myworld.Logic.DataAccess.SetNpcFilter( on );
 
 			if( !local_only ) { myworld.Logic.SyncData(); }
 		}
@@ -124,7 +124,7 @@ namespace Nihilism {
 			if( !TmlLoadHelpers.IsWorldLoaded() ) { throw new Exception( "World not loaded" ); }
 
 			var myworld = NihilismMod.Instance.GetModWorld<NihilismWorld>();
-			myworld.Logic.Data.SetNpcWhitelistEntry( npc_name );
+			myworld.Logic.DataAccess.SetNpcWhitelistEntry( npc_name );
 
 			if( !local_only ) { myworld.Logic.SyncData(); }
 		}
@@ -137,7 +137,7 @@ namespace Nihilism {
 			var mymod = NihilismMod.Instance;
 			var myworld = mymod.GetModWorld<NihilismWorld>();
 
-			myworld.Logic.Data.SetCurrentFiltersAsDefaults( mymod );
+			myworld.Logic.DataAccess.SetCurrentFiltersAsDefaults( mymod );
 		}
 
 		public static void ResetFiltersFromDefaults() {
@@ -146,7 +146,7 @@ namespace Nihilism {
 			var mymod = NihilismMod.Instance;
 			var myworld = mymod.GetModWorld<NihilismWorld>();
 
-			myworld.Logic.Data.ResetFiltersFromDefaults( mymod );
+			myworld.Logic.DataAccess.ResetFiltersFromDefaults( mymod );
 		}
 	}
 }

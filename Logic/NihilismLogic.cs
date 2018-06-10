@@ -9,24 +9,25 @@ using Terraria;
 
 namespace Nihilism.Logic {
 	partial class NihilismLogic {
-		public NihilismFilterAccess Data { get; private set; }
+		public NihilismFilterAccess DataAccess { get; private set; }
 
 
 		////////////////
 
-		public NihilismLogic() {
-			this.Data = new NihilismFilterAccess( new NihilismFilterData() );
+		public NihilismLogic( NihilismMod mymod ) {
+			var data = new NihilismFilterData( mymod );
+			this.DataAccess = new NihilismFilterAccess( data );
 		}
 
 
 		////////////////
 		
 		public void LoadWorldData( NihilismMod mymod ) {
-			this.Data.Load( mymod );
+			this.DataAccess.Load( mymod );
 		}
 
 		public void SaveWorldData( NihilismMod mymod ) {
-			this.Data.Save( mymod );
+			this.DataAccess.Save( mymod );
 		}
 
 
@@ -51,7 +52,7 @@ namespace Nihilism.Logic {
 
 				var myworld = mymod.GetModWorld<NihilismWorld>();
 
-				if( !myworld.Logic.Data.IsActive() ) {
+				if( !myworld.Logic.DataAccess.IsActive() ) {
 					string msg;
 					if( Main.netMode == 0 ) {
 						msg = "Enter the /nihon command to active Nihilism restrictions for the current world. Enter /help for a list of other commands.";
@@ -89,23 +90,23 @@ namespace Nihilism.Logic {
 		////////////////
 		
 		public bool AreItemFiltersEnabled( NihilismMod mymod ) {
-			return this.Data.IsActive() && mymod.Config.EnableItemFilters;
+			return this.DataAccess.IsActive() && mymod.Config.EnableItemFilters;
 		}
 
 		public bool AreItemEquipsFiltersEnabled( NihilismMod mymod ) {
-			return this.Data.IsActive() && mymod.Config.EnableItemEquipsFilters;
+			return this.DataAccess.IsActive() && mymod.Config.EnableItemEquipsFilters;
 		}
 
 		public bool AreRecipesFiltersEnabled( NihilismMod mymod ) {
-			return this.Data.IsActive() && mymod.Config.EnableRecipeFilters;
+			return this.DataAccess.IsActive() && mymod.Config.EnableRecipeFilters;
 		}
 
 		public bool AreNpcsFiltersEnabled( NihilismMod mymod ) {
-			return this.Data.IsActive() && mymod.Config.EnableNpcFilters;
+			return this.DataAccess.IsActive() && mymod.Config.EnableNpcFilters;
 		}
 
 		public bool AreNpcLootsFiltersEnabled( NihilismMod mymod ) {
-			return this.Data.IsActive() && mymod.Config.EnableNpcLootFilters;
+			return this.DataAccess.IsActive() && mymod.Config.EnableNpcLootFilters;
 		}
 	}
 }

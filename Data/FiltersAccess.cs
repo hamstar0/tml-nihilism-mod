@@ -55,10 +55,10 @@ namespace Nihilism.Data {
 			Main.NewText( "Loot BL: " + this.Data.IsNpcLootFilterOn + ", WL count: " + this.Data.NpcLootWhitelist.Count );
 
 			LogHelpers.Log( "Is nihilated: " + this.Data.IsActive );
-			LogHelpers.Log( "Items BL: " + this.Data.IsItemFilterOn + ", WL count: " + string.Join( ", ", this.Data.ItemWhitelist.Keys ) );
-			LogHelpers.Log( "Recipes BL: " + this.Data.IsRecipeFilterOn + ", WL count: " + string.Join( ", ", this.Data.RecipeWhitelist.Keys ) );
-			LogHelpers.Log( "NPCs BL: " + this.Data.IsNpcFilterOn + ", WL count: " + string.Join( ", ", this.Data.NpcWhitelist.Keys ) );
-			LogHelpers.Log( "Loot BL: " + this.Data.IsNpcLootFilterOn + ", WL count: " + string.Join( ", ", this.Data.NpcLootWhitelist.Keys ) );
+			LogHelpers.Log( "Items BL: " + this.Data.IsItemFilterOn + ", WL count: " + string.Join( ", ", this.Data.ItemWhitelist ) );
+			LogHelpers.Log( "Recipes BL: " + this.Data.IsRecipeFilterOn + ", WL count: " + string.Join( ", ", this.Data.RecipeWhitelist ) );
+			LogHelpers.Log( "NPCs BL: " + this.Data.IsNpcFilterOn + ", WL count: " + string.Join( ", ", this.Data.NpcWhitelist ) );
+			LogHelpers.Log( "Loot BL: " + this.Data.IsNpcLootFilterOn + ", WL count: " + string.Join( ", ", this.Data.NpcLootWhitelist ) );
 		}
 	}
 }

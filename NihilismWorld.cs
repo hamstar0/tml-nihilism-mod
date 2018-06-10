@@ -14,7 +14,7 @@ namespace Nihilism {
 		public override void Initialize() {
 			var mymod = (NihilismMod)this.mod;
 
-			this.Logic = new NihilismLogic();
+			this.Logic = new NihilismLogic( mymod );
 
 			if( mymod.Config.DebugModeInfo ) {
 				LogHelpers.Log( "Nihilism - World initialized." );

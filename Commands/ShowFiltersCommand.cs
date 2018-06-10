@@ -35,7 +35,7 @@ namespace Nihilism.Commands {
 
 		public override void Action( CommandCaller caller, string input, string[] args ) {
 			var myworld = this.mod.GetModWorld<NihilismWorld>();
-			myworld.Logic.Data.OutputFilters();
+			myworld.Logic.DataAccess.OutputFilters();
 		}
 	}
 }

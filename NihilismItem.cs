@@ -17,7 +17,7 @@ namespace Nihilism {
 
 			if( item == null || item.IsAir ) { return; }
 
-			if( !myworld.Logic.Data.IsItemEnabled( item ) ) {
+			if( !myworld.Logic.DataAccess.IsItemEnabled( item ) ) {
 				float pos_x = position.X + (((float)frame.Width / 2f) * scale) - (((float)mymod.DisabledItem.Width / 2f) * scale);
 				float pos_y = position.Y + (((float)frame.Height / 2f) * scale) - (((float)mymod.DisabledItem.Height / 2f) * scale);
 				var pos = new Vector2( pos_x, pos_y );
@@ -36,7 +36,7 @@ namespace Nihilism {
 				return base.CanUseItem( item, player );
 			}
 			
-			if( !myworld.Logic.Data.IsItemEnabled( item ) ) {
+			if( !myworld.Logic.DataAccess.IsItemEnabled( item ) ) {
 				return false;
 			} else if( item.useAmmo == 0 ) {
 				return true;
@@ -44,7 +44,7 @@ namespace Nihilism {
 
 			Item ammo_item = PlayerItemFinderHelpers.GetCurrentAmmo( player, item );
 			if( ammo_item != null ) {
-				return myworld.Logic.Data.IsItemEnabled( ammo_item );
+				return myworld.Logic.DataAccess.IsItemEnabled( ammo_item );
 			}
 
 			return false;
