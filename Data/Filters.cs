@@ -33,8 +33,8 @@ namespace Nihilism.Data {
 
 		////////////////
 
-		public NihilismFilterData( NihilismMod mymod ) {
-			this.ResetFiltersFromDefaults( mymod );
+		public NihilismFilterData() {
+			this.ResetFiltersFromDefaults( NihilismMod.Instance );
 		}
 
 

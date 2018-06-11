@@ -15,7 +15,7 @@ namespace Nihilism.Logic {
 		////////////////
 
 		public NihilismLogic( NihilismMod mymod ) {
-			var data = new NihilismFilterData( mymod );
+			var data = new NihilismFilterData();
 			this.DataAccess = new NihilismFilterAccess( data );
 		}
 

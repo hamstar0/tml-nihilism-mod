@@ -10,11 +10,15 @@ namespace Nihilism.Data {
 			string name = ItemIdentityHelpers.GetQualifiedName( item );
 
 			if( this.Data.ItemWhitelist.Contains( name ) ) {
-				return this.Data.ItemWhitelist.Add( name );
+				return true;
 			}
-			
-			foreach( string grp_name in EntityGroups.GroupsPerItem[ item.type ] ) {
-				if( this.Data.ItemWhitelist.Contains( grp_name) ) {
+
+			if( !EntityGroups.GroupsPerItem.ContainsKey( item.type ) ) {
+				return false;
+			}
+
+			foreach( string grp_name in EntityGroups.GroupsPerItem[item.type] ) {
+				if( this.Data.ItemWhitelist.Contains( grp_name ) ) {
 					return true;
 				}
 			}
@@ -28,10 +32,14 @@ namespace Nihilism.Data {
 			string name = ItemIdentityHelpers.GetQualifiedName( item );
 
 			if( this.Data.RecipeWhitelist.Contains( name ) ) {
-				return this.Data.RecipeWhitelist.Add( name );
+				return true;
 			}
 
-			foreach( string grp_name in EntityGroups.GroupsPerItem[item.type] ) {
+			if( !EntityGroups.GroupsPerItem.ContainsKey( item.type ) ) {
+				return false;
+			}
+
+			foreach( string grp_name in EntityGroups.GroupsPerItem[ item.type ] ) {
 				if( this.Data.RecipeWhitelist.Contains( grp_name ) ) {
 					return true;
 				}
@@ -46,10 +54,14 @@ namespace Nihilism.Data {
 			string name = NPCIdentityHelpers.GetQualifiedName( npc );
 
 			if( this.Data.NpcWhitelist.Contains( name ) ) {
-				return this.Data.NpcWhitelist.Add( name );
+				return true;
 			}
 
-			foreach( string grp_name in EntityGroups.GroupsPerItem[npc.type] ) {
+			if( !EntityGroups.GroupsPerNPC.ContainsKey( npc.type ) ) {
+				return false;
+			}
+
+			foreach( string grp_name in EntityGroups.GroupsPerNPC[ npc.type ] ) {
 				if( this.Data.NpcWhitelist.Contains( grp_name ) ) {
 					return true;
 				}
@@ -64,10 +76,14 @@ namespace Nihilism.Data {
 			string name = NPCIdentityHelpers.GetQualifiedName( npc );
 
 			if( this.Data.NpcLootWhitelist.Contains( name ) ) {
-				return this.Data.NpcLootWhitelist.Add( name );
+				return true;
 			}
 
-			foreach( string grp_name in EntityGroups.GroupsPerItem[npc.type] ) {
+			if( !EntityGroups.GroupsPerNPC.ContainsKey( npc.type ) ) {
+				return false;
+			}
+
+			foreach( string grp_name in EntityGroups.GroupsPerNPC[ npc.type ] ) {
 				if( this.Data.NpcLootWhitelist.Contains( grp_name ) ) {
 					return true;
 				}

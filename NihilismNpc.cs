@@ -11,7 +11,7 @@ namespace Nihilism {
 			if( myworld.Logic == null || !myworld.Logic.AreNpcLootsFiltersEnabled( mymod ) ) {
 				return base.PreNPCLoot(npc);
 			}
-			
+
 			return myworld.Logic.DataAccess.IsNpcLootEnabled( npc );
 		}
 
