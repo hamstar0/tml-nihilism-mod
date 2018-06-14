@@ -49,5 +49,16 @@ namespace Nihilism {
 
 			return false;
 		}
+
+		public override bool CanRightClick( Item item ) {
+			var mymod = (NihilismMod)this.mod;
+			var myworld = mymod.GetModWorld<NihilismWorld>();
+
+			if( !myworld.Logic.AreItemFiltersEnabled( mymod ) ) {
+				return base.CanRightClick( item );
+			}
+
+			return myworld.Logic.DataAccess.IsItemEnabled( item );
+		}
 	}
 }

@@ -39,7 +39,7 @@ namespace Nihilism.Logic {
 
 		internal void OnEnterWorldForClient( NihilismMod mymod, Player player ) {
 			PacketProtocol.QuickRequestToServer<ModSettingsProtocol>();
-			PacketProtocol.QuickRequestToServer<WorldFiltersProtocol>();
+			PacketProtocol.QuickRequestToServer<FiltersProtocol>();
 		}
 
 		internal void OnEnterWorldForServer( NihilismMod mymod, Player player ) { }
@@ -77,12 +77,12 @@ namespace Nihilism.Logic {
 			var mymod = NihilismMod.Instance;
 
 			if( Main.netMode == 1 ) {
-				PacketProtocol.QuickSyncToServerAndClients<WorldFiltersProtocol>();
+				PacketProtocol.QuickSyncToServerAndClients<FiltersProtocol>();
 			} else if( Main.netMode == 2 ) {
 				if( !mymod.SuppressAutoSaving ) {
 					this.SaveWorldData( NihilismMod.Instance );
 				}
-				PacketProtocol.QuickSendToClient<WorldFiltersProtocol>( -1, -1 );
+				PacketProtocol.QuickSendToClient<FiltersProtocol>( -1, -1 );
 			}
 		}
 

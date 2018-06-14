@@ -61,17 +61,18 @@ namespace Nihilism {
 			this.HasEnteredWorld = true;
 		}
 
+		////////////////
 
 		public override void PreUpdate() {
+			if( this.player.whoAmI != Main.myPlayer ) { return; }
+
 			var mymod = (NihilismMod)this.mod;
 			var myworld = mymod.GetModWorld<NihilismWorld>();
 
 			if( !myworld.Logic.DataAccess.IsActive() ) { return; }
 			if( !this.HasEnteredWorld ) { return; }
 
-			if( this.player.whoAmI == Main.myPlayer ) {
-				this.BlockEquipsIfDisabled();
-			}
+			this.BlockEquipsIfDisabled();
 		}
 
 		
@@ -89,6 +90,15 @@ namespace Nihilism {
 				if( myworld.Logic.DataAccess.IsItemEnabled( item ) ) { continue; }
 				
 				PlayerItemHelpers.DropEquippedItem( player, i );
+			}
+
+			for( int i = 0; i < this.player.miscEquips.Length; i++ ) {
+				Item item = this.player.armor[i];
+				if( item == null || item.IsAir ) { continue; }
+
+				if( myworld.Logic.DataAccess.IsItemEnabled( item ) ) { continue; }
+
+				PlayerItemHelpers.DropEquippedMiscItem( player, i );
 			}
 		}
 	}

@@ -4,35 +4,52 @@
 			this.Data.IsItemFilterOn = on;
 		}
 
-		public void SetItemWhitelistEntry( string item_name ) {
-			this.Data.ItemWhitelist.Add( item_name );
-		}
-
-
 		public void SetRecipeFilter( bool on ) {
 			this.Data.IsRecipeFilterOn = on;
 		}
 
-		public void SetRecipeWhitelistEntry( string item_name ) {
-			this.Data.RecipeWhitelist.Add( item_name );
+		public void SetNpcLootFilter( bool on ) {
+			this.Data.IsNpcLootFilterOn = on;
+		}
+
+		public void SetNpcFilter( bool on ) {
+			this.Data.IsNpcFilterOn = on;
 		}
 
 
-		public void SetNpcLootFilter( bool on ) {
-			this.Data.IsNpcLootFilterOn = on;
+		public void SetItemWhitelistEntry( string item_name ) {
+			this.Data.ItemWhitelist.Add( item_name );
+		}
+		
+		public void SetRecipeWhitelistEntry( string item_name ) {
+			this.Data.RecipeWhitelist.Add( item_name );
 		}
 
 		public void SetNpcLootWhitelistEntry( string npc_name ) {
 			this.Data.NpcLootWhitelist.Add( npc_name );
 		}
 
-
-		public void SetNpcFilter( bool on ) {
-			this.Data.IsNpcFilterOn = on;
-		}
-
 		public void SetNpcWhitelistEntry( string npc_name ) {
 			this.Data.NpcWhitelist.Add( npc_name );
+		}
+
+
+		////////////////
+
+		public void ClearItemWhitelist() {
+			this.Data.ItemWhitelist.Clear();
+		}
+
+		public void ClearRecipeWhitelist() {
+			this.Data.RecipeWhitelist.Clear();
+		}
+
+		public void ClearNpcLootWhitelist() {
+			this.Data.NpcLootWhitelist.Clear();
+		}
+
+		public void ClearNpcWhitelist() {
+			this.Data.NpcWhitelist.Clear();
 		}
 
 

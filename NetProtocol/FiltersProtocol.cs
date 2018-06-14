@@ -4,7 +4,7 @@ using System;
 
 
 namespace Nihilism.NetProtocol {
-	class WorldFiltersProtocol : PacketProtocol {
+	class FiltersProtocol : PacketProtocol {
 		public NihilismFilterData Filters;
 
 
@@ -31,8 +31,10 @@ namespace Nihilism.NetProtocol {
 
 			var mymod = NihilismMod.Instance;
 			var myworld = mymod.GetModWorld<NihilismWorld>();
+
 			myworld.Logic.OnFiltersLoad( mymod );
 		}
+
 		protected override void ReceiveWithServer( int from_who ) {
 			this.ReceiveOnAny();
 		}

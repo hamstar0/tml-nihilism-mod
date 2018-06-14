@@ -76,7 +76,7 @@
     <Compile Include="Data\FiltersAccess_Getters.cs" />
     <Compile Include="Data\Filters.cs" />
     <Compile Include="NetProtocol\ModSettingsProtocol.cs" />
-    <Compile Include="NetProtocol\WorldFiltersProtocol.cs" />
+    <Compile Include="NetProtocol\FiltersProtocol.cs" />
     <Compile Include="NihilismItem.cs" />
     <Compile Include="Logic\NihilismLogic.cs" />
     <Compile Include="NihilismMod.cs" />
