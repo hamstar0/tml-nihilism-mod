@@ -1,6 +1,7 @@
 ﻿using HamstarHelpers.Utilities.Network;
 using Nihilism.Data;
 using System;
+using Terraria;
 
 
 namespace Nihilism.NetProtocol {
@@ -24,28 +25,32 @@ namespace Nihilism.NetProtocol {
 			this.SetMyDefaults();
 		}
 
-		////////////////
-
-		protected override void ReceiveWithClient() {
-			this.ReceiveOnAny();
-
-			var mymod = NihilismMod.Instance;
-			var myworld = mymod.GetModWorld<NihilismWorld>();
-
-			myworld.Logic.OnFiltersLoad( mymod );
-		}
-
-		protected override void ReceiveWithServer( int from_who ) {
-			this.ReceiveOnAny();
-		}
 
 		////////////////
 
 		private void ReceiveOnAny() {
 			var mymod = NihilismMod.Instance;
 			var myworld = mymod.GetModWorld<NihilismWorld>();
-			
+
 			myworld.Logic.DataAccess.Take( this.Filters );
+		}
+
+		////////////////
+
+		protected override void ReceiveWithServer( int from_who ) {
+			this.ReceiveOnAny();
+		}
+
+		protected override void ReceiveWithClient() {
+			this.ReceiveOnAny();
+
+			var mymod = NihilismMod.Instance;
+			var myworld = mymod.GetModWorld<NihilismWorld>();
+			var myplayer = Main.LocalPlayer.GetModPlayer<NihilismPlayer>();
+
+			myworld.Logic.PostFiltersLoad( mymod );
+
+			myplayer.FinishFiltersSync();
 		}
 	}
 }

@@ -1,5 +1,6 @@
 ﻿using HamstarHelpers.Utilities.Network;
 using Nihilism.Data;
+using Terraria;
 
 
 namespace Nihilism.NetProtocol {
@@ -12,7 +13,12 @@ namespace Nihilism.NetProtocol {
 		}
 
 		protected override void ReceiveWithClient() {
-			NihilismMod.Instance.ConfigJson.SetData( this.Settings );
+			var mymod = NihilismMod.Instance;
+			var myplayer = Main.LocalPlayer.GetModPlayer<NihilismPlayer>();
+
+			mymod.ConfigJson.SetData( this.Settings );
+
+			myplayer.FinishModSettingsSync();
 		}
 	}
 }

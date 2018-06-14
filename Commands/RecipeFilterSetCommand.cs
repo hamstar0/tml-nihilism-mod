@@ -46,7 +46,7 @@ namespace Nihilism.Commands {
 			var myworld = mymod.GetModWorld<NihilismWorld>();
 
 			myworld.Logic.DataAccess.SetRecipeFilter( on );
-			myworld.Logic.SyncData();
+			myworld.Logic.SyncDataChanges();
 
 			caller.Reply( "Recipe filter " + on + ".", Color.LimeGreen );
 		}

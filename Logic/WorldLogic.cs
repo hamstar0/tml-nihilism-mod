@@ -8,13 +8,13 @@ using Terraria;
 
 
 namespace Nihilism.Logic {
-	partial class NihilismLogic {
+	partial class WorldLogic {
 		public NihilismFilterAccess DataAccess { get; private set; }
 
 
 		////////////////
 
-		public NihilismLogic( NihilismMod mymod ) {
+		public WorldLogic( NihilismMod mymod ) {
 			var data = new NihilismFilterData();
 			this.DataAccess = new NihilismFilterAccess( data );
 		}
@@ -29,24 +29,11 @@ namespace Nihilism.Logic {
 		public void SaveWorldData( NihilismMod mymod ) {
 			this.DataAccess.Save( mymod );
 		}
-
-
-		////////////////
-
-		internal void OnEnterWorldForSingle( NihilismMod mymod, Player player ) {
-			this.OnFiltersLoad( mymod );
-		}
-
-		internal void OnEnterWorldForClient( NihilismMod mymod, Player player ) {
-			PacketProtocol.QuickRequestToServer<ModSettingsProtocol>();
-			PacketProtocol.QuickRequestToServer<FiltersProtocol>();
-		}
-
-		internal void OnEnterWorldForServer( NihilismMod mymod, Player player ) { }
+		
 
 		////////////////
 
-		internal void OnFiltersLoad( NihilismMod mymod ) {
+		internal void PostFiltersLoad( NihilismMod mymod ) {
 			TmlLoadHelpers.AddWorldLoadOncePromise( () => {
 				if( Main.netMode == 2 ) { return; }
 
@@ -73,7 +60,7 @@ namespace Nihilism.Logic {
 
 		////////////////
 
-		public void SyncData() {
+		public void SyncDataChanges() {
 			var mymod = NihilismMod.Instance;
 
 			if( Main.netMode == 1 ) {

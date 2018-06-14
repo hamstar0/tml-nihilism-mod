@@ -44,7 +44,7 @@ namespace Nihilism.Commands {
 			string ent_name = string.Join( " ", args );
 
 			myworld.Logic.DataAccess.SetNpcLootWhitelistEntry( ent_name );
-			myworld.Logic.SyncData();
+			myworld.Logic.SyncDataChanges();
 
 			caller.Reply( "Lootable npc " + ent_name + " added to whitelist.", Color.YellowGreen );
 		}

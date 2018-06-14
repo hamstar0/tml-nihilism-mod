@@ -24,7 +24,7 @@ namespace Nihilism {
 			}
 
 			myworld.Logic.DataAccess.Activate();
-			myworld.Logic.SyncData();
+			myworld.Logic.SyncDataChanges();
 
 			return true;
 		}
@@ -36,7 +36,7 @@ namespace Nihilism {
 			}
 
 			myworld.Logic.DataAccess.Deactivate();
-			myworld.Logic.SyncData();
+			myworld.Logic.SyncDataChanges();
 
 			return true;
 		}
@@ -60,7 +60,7 @@ namespace Nihilism {
 			var myworld = NihilismMod.Instance.GetModWorld<NihilismWorld>();
 			myworld.Logic.DataAccess.SetItemFilter( on );
 
-			if( !local_only ) { myworld.Logic.SyncData(); }
+			if( !local_only ) { myworld.Logic.SyncDataChanges(); }
 		}
 
 		public static void SetRecipesFilter( bool on, bool local_only ) {
@@ -69,7 +69,7 @@ namespace Nihilism {
 			var myworld = NihilismMod.Instance.GetModWorld<NihilismWorld>();
 			myworld.Logic.DataAccess.SetRecipeFilter( on );
 
-			if( !local_only ) { myworld.Logic.SyncData(); }
+			if( !local_only ) { myworld.Logic.SyncDataChanges(); }
 		}
 
 		public static void SetNpcLootFilter( bool on, bool local_only ) {
@@ -78,7 +78,7 @@ namespace Nihilism {
 			var myworld = NihilismMod.Instance.GetModWorld<NihilismWorld>();
 			myworld.Logic.DataAccess.SetNpcLootFilter( on );
 
-			if( !local_only ) { myworld.Logic.SyncData(); }
+			if( !local_only ) { myworld.Logic.SyncDataChanges(); }
 		}
 
 		public static void SetNpcFilter( bool on, bool local_only ) {
@@ -87,7 +87,7 @@ namespace Nihilism {
 			var myworld = NihilismMod.Instance.GetModWorld<NihilismWorld>();
 			myworld.Logic.DataAccess.SetNpcFilter( on );
 
-			if( !local_only ) { myworld.Logic.SyncData(); }
+			if( !local_only ) { myworld.Logic.SyncDataChanges(); }
 		}
 
 
@@ -101,7 +101,7 @@ namespace Nihilism {
 			var myworld = NihilismMod.Instance.GetModWorld<NihilismWorld>();
 			myworld.Logic.DataAccess.SetItemWhitelistEntry( item_name );
 
-			if( !local_only ) { myworld.Logic.SyncData(); }
+			if( !local_only ) { myworld.Logic.SyncDataChanges(); }
 		}
 		
 		public static void SetRecipeWhitelistEntry( string item_name, bool local_only ) {
@@ -110,7 +110,7 @@ namespace Nihilism {
 			var myworld = NihilismMod.Instance.GetModWorld<NihilismWorld>();
 			myworld.Logic.DataAccess.SetRecipeWhitelistEntry( item_name );
 
-			if( !local_only ) { myworld.Logic.SyncData(); }
+			if( !local_only ) { myworld.Logic.SyncDataChanges(); }
 		}
 		
 		public static void SetNpcLootWhitelistEntry( string npc_name, bool local_only ) {
@@ -119,7 +119,7 @@ namespace Nihilism {
 			var myworld = NihilismMod.Instance.GetModWorld<NihilismWorld>();
 			myworld.Logic.DataAccess.SetNpcLootWhitelistEntry( npc_name );
 
-			if( !local_only ) { myworld.Logic.SyncData(); }
+			if( !local_only ) { myworld.Logic.SyncDataChanges(); }
 		}
 		
 		public static void SetNpcWhitelistEntry( string npc_name, bool local_only ) {
@@ -128,7 +128,7 @@ namespace Nihilism {
 			var myworld = NihilismMod.Instance.GetModWorld<NihilismWorld>();
 			myworld.Logic.DataAccess.SetNpcWhitelistEntry( npc_name );
 
-			if( !local_only ) { myworld.Logic.SyncData(); }
+			if( !local_only ) { myworld.Logic.SyncDataChanges(); }
 		}
 
 
@@ -140,7 +140,7 @@ namespace Nihilism {
 			var myworld = NihilismMod.Instance.GetModWorld<NihilismWorld>();
 			myworld.Logic.DataAccess.ClearItemWhitelist();
 
-			if( !local_only ) { myworld.Logic.SyncData(); }
+			if( !local_only ) { myworld.Logic.SyncDataChanges(); }
 		}
 
 		public static void ClearRecipeWhitelist( bool local_only ) {
@@ -149,7 +149,7 @@ namespace Nihilism {
 			var myworld = NihilismMod.Instance.GetModWorld<NihilismWorld>();
 			myworld.Logic.DataAccess.ClearRecipeWhitelist();
 
-			if( !local_only ) { myworld.Logic.SyncData(); }
+			if( !local_only ) { myworld.Logic.SyncDataChanges(); }
 		}
 
 		public static void ClearNpcWhitelist( bool local_only ) {
@@ -158,7 +158,7 @@ namespace Nihilism {
 			var myworld = NihilismMod.Instance.GetModWorld<NihilismWorld>();
 			myworld.Logic.DataAccess.ClearNpcWhitelist();
 
-			if( !local_only ) { myworld.Logic.SyncData(); }
+			if( !local_only ) { myworld.Logic.SyncDataChanges(); }
 		}
 
 		public static void ClearNpcLootWhitelist( bool local_only ) {
@@ -167,7 +167,7 @@ namespace Nihilism {
 			var myworld = NihilismMod.Instance.GetModWorld<NihilismWorld>();
 			myworld.Logic.DataAccess.ClearNpcLootWhitelist();
 
-			if( !local_only ) { myworld.Logic.SyncData(); }
+			if( !local_only ) { myworld.Logic.SyncDataChanges(); }
 		}
 		
 

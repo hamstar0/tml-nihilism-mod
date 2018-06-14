@@ -44,7 +44,7 @@ namespace Nihilism.Commands {
 			string ent_name = string.Join( " ", args );
 
 			myworld.Logic.DataAccess.SetRecipeWhitelistEntry( ent_name );
-			myworld.Logic.SyncData();
+			myworld.Logic.SyncDataChanges();
 
 			caller.Reply( "Recipe for item " + ent_name + " added to whitelist.", Color.YellowGreen );
 		}

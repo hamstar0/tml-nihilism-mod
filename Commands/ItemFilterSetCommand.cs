@@ -46,7 +46,7 @@ namespace Nihilism.Commands {
 			var myworld = mymod.GetModWorld<NihilismWorld>();
 
 			myworld.Logic.DataAccess.SetItemFilter( on );
-			myworld.Logic.SyncData();
+			myworld.Logic.SyncDataChanges();
 
 			caller.Reply( "Item filter " + on + ".", Color.LimeGreen );
 		}
