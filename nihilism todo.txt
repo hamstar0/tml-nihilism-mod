@@ -13,11 +13,15 @@ v3.0
 -	Weather filtering
 -	Music filtering
 -	Invasion filtering
+-	Block breaking filtering
 -	Time options
 	-	Progression multiplier
 	-	Night only
 	-	Day only
 
+v2.1
+-	Wing Slot compat
+-	Add set logic with whitelist entries
 v2.0
 -	Match respective entity groups with whitelist checks
 -	Change blacklists from regex to booleans

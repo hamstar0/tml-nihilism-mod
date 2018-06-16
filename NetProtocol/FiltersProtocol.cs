@@ -1,4 +1,4 @@
-﻿using HamstarHelpers.Utilities.Network;
+﻿using HamstarHelpers.Components.Network;
 using Nihilism.Data;
 using System;
 using Terraria;

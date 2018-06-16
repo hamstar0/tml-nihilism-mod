@@ -4,10 +4,10 @@ using Terraria.ModLoader;
 
 
 namespace Nihilism.Commands {
-	class RecipeFilterSetCommand : ModCommand {
+	class RecipeBlacklistAddCommand : ModCommand {
 		public override string Command {
 			get {
-				return "nihrecipefilter";
+				return "nihrecipeblacklistadd";
 			}
 		}
 		public override CommandType Type {
@@ -21,12 +21,12 @@ namespace Nihilism.Commands {
 		}
 		public override string Usage {
 			get {
-				return "/" + this.Command + " <true/false>";
+				return "/" + this.Command + " Excalibur";
 			}
 		}
 		public override string Description {
 			get {
-				return "Sets recipes to be filtered or not.";
+				return "Adds a recipe to the blacklist (checked before whitelist).";
 			}
 		}
 
@@ -35,20 +35,18 @@ namespace Nihilism.Commands {
 
 		public override void Action( CommandCaller caller, string input, string[] args ) {
 			if( args.Length == 0 ) {
-				caller.Reply( "Missing parameter.", Color.Yellow );
+				caller.Reply( "No item name specified.", Color.Yellow );
 				return;
 			}
 
-			bool on;
-			if( !bool.TryParse( args[0], out on ) ) { caller.Reply( "Invalid parameter." ); }
-
 			var mymod = NihilismMod.Instance;
 			var myworld = mymod.GetModWorld<NihilismWorld>();
+			string ent_name = string.Join( " ", args );
 
-			myworld.Logic.DataAccess.SetRecipeFilter( on );
+			myworld.Logic.DataAccess.SetRecipeBlacklistEntry( ent_name );
 			myworld.Logic.SyncDataChanges();
 
-			caller.Reply( "Recipe filter " + on + ".", Color.LimeGreen );
+			caller.Reply( "Recipe for item " + ent_name + " added to blacklist.", Color.YellowGreen );
 		}
 	}
 }

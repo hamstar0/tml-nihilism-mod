@@ -1,11 +1,95 @@
 ﻿using HamstarHelpers.ItemHelpers;
 using HamstarHelpers.NPCHelpers;
-using HamstarHelpers.Utilities.EntityGroups;
+using HamstarHelpers.Services.EntityGroups;
 using Terraria;
 
 
 namespace Nihilism.Data {
 	partial class NihilismFilterAccess {
+		private bool IsItemBlacklisted( Item item ) {
+			string name = ItemIdentityHelpers.GetQualifiedName( item );
+
+			if( this.Data.ItemBlacklist.Contains( name ) ) {
+				return true;
+			}
+
+			if( !EntityGroups.GroupsPerItem.ContainsKey( item.type ) ) {
+				return false;
+			}
+
+			foreach( string grp_name in EntityGroups.GroupsPerItem[item.type] ) {
+				if( this.Data.ItemBlacklist.Contains( grp_name ) ) {
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		private bool IsRecipeBlacklisted( Item item ) {
+			string name = ItemIdentityHelpers.GetQualifiedName( item );
+
+			if( this.Data.RecipeBlacklist.Contains( name ) ) {
+				return true;
+			}
+
+			if( !EntityGroups.GroupsPerItem.ContainsKey( item.type ) ) {
+				return false;
+			}
+
+			foreach( string grp_name in EntityGroups.GroupsPerItem[item.type] ) {
+				if( this.Data.RecipeBlacklist.Contains( grp_name ) ) {
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		private bool IsNpcBlacklisted( NPC npc ) {
+			string name = NPCIdentityHelpers.GetQualifiedName( npc );
+
+			if( this.Data.NpcBlacklist.Contains( name ) ) {
+				return true;
+			}
+
+			if( !EntityGroups.GroupsPerNPC.ContainsKey( npc.type ) ) {
+				return false;
+			}
+
+			foreach( string grp_name in EntityGroups.GroupsPerNPC[npc.type] ) {
+				if( this.Data.NpcBlacklist.Contains( grp_name ) ) {
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		private bool IsNpcLootBlacklisted( NPC npc ) {
+			string name = NPCIdentityHelpers.GetQualifiedName( npc );
+
+			if( this.Data.NpcLootBlacklist.Contains( name ) ) {
+				return true;
+			}
+
+			if( !EntityGroups.GroupsPerNPC.ContainsKey( npc.type ) ) {
+				return false;
+			}
+
+			foreach( string grp_name in EntityGroups.GroupsPerNPC[npc.type] ) {
+				if( this.Data.NpcLootBlacklist.Contains( grp_name ) ) {
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+
+
+		////////////////
+
 		private bool IsItemWhitelisted( Item item ) {
 			string name = ItemIdentityHelpers.GetQualifiedName( item );
 
@@ -25,8 +109,6 @@ namespace Nihilism.Data {
 
 			return false;
 		}
-
-		////
 
 		private bool IsRecipeWhitelisted( Item item ) {
 			string name = ItemIdentityHelpers.GetQualifiedName( item );
@@ -48,8 +130,6 @@ namespace Nihilism.Data {
 			return false;
 		}
 
-		////
-
 		private bool IsNpcWhitelisted( NPC npc ) {
 			string name = NPCIdentityHelpers.GetQualifiedName( npc );
 
@@ -69,8 +149,6 @@ namespace Nihilism.Data {
 
 			return false;
 		}
-
-		////
 
 		private bool IsNpcLootWhitelisted( NPC npc ) {
 			string name = NPCIdentityHelpers.GetQualifiedName( npc );
@@ -97,7 +175,7 @@ namespace Nihilism.Data {
 		////////////////
 
 		public bool IsItemEnabled( Item item ) {
-			if( !this.Data.IsItemFilterOn ) {
+			if( !this.IsItemBlacklisted( item ) ) {
 				return true;
 			}
 			return this.IsItemWhitelisted( item );
@@ -105,7 +183,7 @@ namespace Nihilism.Data {
 
 
 		public bool IsRecipeOfItemEnabled( Item item ) {
-			if( !this.Data.IsRecipeFilterOn ) {
+			if( !this.IsRecipeBlacklisted( item ) ) {
 				return true;
 			}
 			return this.IsRecipeWhitelisted( item );
@@ -113,7 +191,7 @@ namespace Nihilism.Data {
 
 
 		public bool IsNpcEnabled( NPC npc ) {
-			if( !this.Data.IsNpcFilterOn ) {
+			if( !this.IsNpcBlacklisted( npc ) ) {
 				return true;
 			}
 			return this.IsNpcWhitelisted( npc );
@@ -121,7 +199,7 @@ namespace Nihilism.Data {
 
 
 		public bool IsNpcLootEnabled( NPC npc ) {
-			if( !this.Data.IsNpcLootFilterOn ) {
+			if( !this.IsNpcLootBlacklisted( npc ) ) {
 				return true;
 			}
 			return this.IsNpcLootWhitelisted( npc );

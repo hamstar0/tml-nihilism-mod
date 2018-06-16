@@ -1,4 +1,5 @@
 ﻿using HamstarHelpers.DebugHelpers;
+using HamstarHelpers.DotNetHelpers;
 using HamstarHelpers.PlayerHelpers;
 using Terraria;
 using Terraria.ModLoader;
@@ -9,6 +10,8 @@ namespace Nihilism {
 		private bool IsModSettingsSynced = false;
 		private bool IsFiltersSynced = false;
 
+		private Mod WingSlotMod = null;
+
 
 		////////////////
 
@@ -16,6 +19,7 @@ namespace Nihilism {
 		
 		public override void Initialize() {
 			//this.HasEnteredWorld = false;
+			this.WingSlotMod = ModLoader.GetMod( "Wing Slot" );
 		}
 
 		public override void clientClone( ModPlayer client_clone ) {
@@ -86,6 +90,39 @@ namespace Nihilism {
 				if( myworld.Logic.DataAccess.IsItemEnabled( item ) ) { continue; }
 
 				PlayerItemHelpers.DropEquippedMiscItem( player, i );
+			}
+
+			if( this.WingSlotMod != null ) {
+				this.BlockWingSlotIfDisabled( "EquipSlot" );
+				this.BlockWingSlotIfDisabled( "VanitySlot" );
+			}
+		}
+
+
+		private void BlockWingSlotIfDisabled( string field_name ) {
+			bool success;
+			var myworld = this.mod.GetModWorld<NihilismWorld>();
+			ModPlayer mywingplayer = this.player.GetModPlayer( this.WingSlotMod, "WingSlotPlayer" );
+			object wing_equip_slot = ReflectionHelpers.GetField( mywingplayer, field_name, out success );
+
+			if( !success || wing_equip_slot == null ) { return; }
+
+			Item wing_item = (Item)ReflectionHelpers.GetProperty( wing_equip_slot, "Item", out success );
+
+			if( !success || wing_item == null || wing_item.IsAir ) { return; }
+
+			if( !myworld.Logic.DataAccess.IsItemEnabled( wing_item ) ) {
+				int idx = Item.NewItem( player.position, wing_item.width, wing_item.height, wing_item.type, wing_item.stack, false, wing_item.prefix, false, false );
+
+				wing_item.position = Main.item[idx].position;
+				Main.item[idx] = wing_item;
+
+				if( Main.netMode == 1 ) {   // Client
+					NetMessage.SendData( 21, -1, -1, null, idx, 1f, 0f, 0f, 0, 0, 0 );
+				}
+				
+				ReflectionHelpers.SetProperty( wing_equip_slot, "Item", new Item(), out success );
+				ReflectionHelpers.SetField( mywingplayer, field_name, wing_equip_slot, out success );
 			}
 		}
 	}

@@ -1,7 +1,7 @@
-﻿using HamstarHelpers.DebugHelpers;
+﻿using HamstarHelpers.Components.Network;
+using HamstarHelpers.DebugHelpers;
+using HamstarHelpers.Services.Messages;
 using HamstarHelpers.TmlHelpers;
-using HamstarHelpers.Utilities.Messages;
-using HamstarHelpers.Utilities.Network;
 using Nihilism.Data;
 using Nihilism.NetProtocol;
 using Terraria;

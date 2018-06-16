@@ -1,6 +1,6 @@
-﻿using HamstarHelpers.DebugHelpers;
-using HamstarHelpers.Utilities.Config;
-using HamstarHelpers.Utilities.Messages;
+﻿using HamstarHelpers.Components.Config;
+using HamstarHelpers.DebugHelpers;
+using HamstarHelpers.Services.Messages;
 using Microsoft.Xna.Framework.Graphics;
 using Nihilism.Data;
 using System;

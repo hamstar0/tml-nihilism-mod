@@ -30,7 +30,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="HamstarHelpers">
+    <Reference Include="HamstarHelpers, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Helpers\HamstarHelpers\bin\Release\HamstarHelpers.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
@@ -55,15 +56,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="API_Obsolete.cs" />
     <Compile Include="API_Call.cs" />
     <Compile Include="API.cs" />
+    <Compile Include="Commands\ItemBlacklistEntrySetCommand.cs" />
+    <Compile Include="Commands\LootBlacklistEntrySetCommand.cs" />
+    <Compile Include="Commands\NpcBlacklistEntrySetCommand.cs" />
+    <Compile Include="Commands\RecipeBlacklistAddCommand.cs" />
     <Compile Include="Commands\ShowFiltersCommand.cs" />
-    <Compile Include="Commands\NpcFilterSetCommand.cs" />
-    <Compile Include="Commands\LootFilterSetCommand.cs" />
-    <Compile Include="Commands\ItemFilterSetCommand.cs" />
     <Compile Include="Commands\LootWhitelistEntrySetCommand.cs" />
     <Compile Include="Commands\NpcWhitelistEntrySetCommand.cs" />
-    <Compile Include="Commands\RecipeFilterSetCommand.cs" />
     <Compile Include="Commands\RecipeWhitelistAddCommand.cs" />
     <Compile Include="Commands\ItemWhitelistEntrySetCommand.cs" />
     <Compile Include="Commands\NihilismOffCommand.cs" />

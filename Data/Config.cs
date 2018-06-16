@@ -1,4 +1,4 @@
-﻿using HamstarHelpers.Utilities.Config;
+﻿using HamstarHelpers.Components.Config;
 using System;
 using System.Collections.Generic;
 
@@ -15,13 +15,13 @@ namespace Nihilism.Data {
 
 		public bool DebugModeInfo = false;
 
-		public bool DefaultRecipesBlacklisted = true;
-		public bool DefaultItemsBlacklisted = true;
-		public bool DefaultNpcBlacklisted = true;
-		public bool DefaultNpcLootBlacklisted = true;
+		public ISet<string> DefaultItemBlacklist = new HashSet<string> { };
+		public ISet<string> DefaultRecipeBlacklist = new HashSet<string> { };
+		public ISet<string> DefaultNpcBlacklist = new HashSet<string> { };
+		public ISet<string> DefaultNpcLootBlacklist = new HashSet<string> { };
 
-		public ISet<string> DefaultRecipeWhitelist = new HashSet<string> { };
 		public ISet<string> DefaultItemWhitelist = new HashSet<string> { };
+		public ISet<string> DefaultRecipeWhitelist = new HashSet<string> { };
 		public ISet<string> DefaultNpcWhitelist = new HashSet<string> { };
 		public ISet<string> DefaultNpcLootWhitelist = new HashSet<string> { };
 
@@ -55,14 +55,23 @@ namespace Nihilism.Data {
 		[Obsolete( "Use NihilismFilterData.NpcItemDropsBlacklistChecksFirst", true )]
 		public bool NpcItemDropsBlacklistChecksFirst = false;
 
-		[Obsolete( "Use NihilismConfigData.DefaultRecipeWhitelist or NihilismFilterData.RecipesBlacklistPattern", true )]
-		public string RecipesBlacklistPattern = "(.*?)";
-		[Obsolete( "Use NihilismConfigData.DefaultItemWhitelist or NihilismFilterData.ItemsBlacklistPattern", true )]
+		[Obsolete( "Use NihilismConfigData.DefaultItemWhitelist or NihilismFilterData.DefaultItemBlacklist", true )]
 		public string ItemsBlacklistPattern = "(.*?)";
-		[Obsolete( "Use NihilismConfigData.DefaultNpcWhitelist or NihilismFilterData.NpcsBlacklistPattern", true )]
+		[Obsolete( "Use NihilismConfigData.DefaultRecipeWhitelist or NihilismFilterData.DefaultRecipeBlacklist", true )]
+		public string RecipesBlacklistPattern = "(.*?)";
+		[Obsolete( "Use NihilismConfigData.DefaultNpcWhitelist or NihilismFilterData.DefaultNpcBlacklist", true )]
 		public string NpcsBlacklistPattern = "(.*?)";
-		[Obsolete( "Use NihilismConfigData.DefaultNpcLootWhitelist or NihilismFilterData.NpcItemDropsBlacklistPattern", true )]
+		[Obsolete( "Use NihilismConfigData.DefaultNpcLootWhitelist or NihilismFilterData.DefaultNpcLootBlacklist", true )]
 		public string NpcItemDropsBlacklistPattern = "(.*?)";
+		
+		[Obsolete( "Use NihilismConfigData.DefaultRecipeWhitelist or NihilismFilterData.DefaultItemBlacklist", true )]
+		public bool DefaultItemsBlacklisted = true;
+		[Obsolete( "Use NihilismConfigData.DefaultRecipeWhitelist or NihilismFilterData.DefaultRecipeBlacklist", true )]
+		public bool DefaultRecipesBlacklisted = true;
+		[Obsolete( "Use NihilismConfigData.DefaultRecipeWhitelist or NihilismFilterData.DefaultNpcBlacklist", true )]
+		public bool DefaultNpcBlacklisted = true;
+		[Obsolete( "Use NihilismConfigData.DefaultRecipeWhitelist or NihilismFilterData.DefaultNpcLootBlacklist", true )]
+		public bool DefaultNpcLootBlacklisted = true;
 
 		[Obsolete( "Use NihilismConfigData.DefaultRecipeWhitelist or NihilismFilterData.RecipeWhitelist", true )]
 		public IDictionary<string, bool> RecipeWhitelist = new Dictionary<string, bool> { };
@@ -82,8 +91,13 @@ namespace Nihilism.Data {
 			}
 		}
 
-
+		
 		public void SetDefaults() {
+			this.DefaultItemBlacklist.Add( "Any Equipment" );
+			this.DefaultRecipeBlacklist.Add( "Any Equipment" );
+			this.DefaultNpcBlacklist.Add( "Any Hostile Npc" );
+			this.DefaultNpcLootBlacklist.Add( "Any Hostile Npc" );
+
 			this.DefaultItemWhitelist.Add( "Any Copper Or Tin Equipment" );
 			this.DefaultRecipeWhitelist.Add( "Any Copper Or Tin Equipment" );
 			this.DefaultNpcWhitelist.Add( "Any Slime" );

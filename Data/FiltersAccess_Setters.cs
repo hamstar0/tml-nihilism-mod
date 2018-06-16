@@ -1,21 +1,22 @@
 ﻿namespace Nihilism.Data {
 	partial class NihilismFilterAccess {
-		public void SetItemFilter( bool on ) {
-			this.Data.IsItemFilterOn = on;
+		public void SetItemBlacklistEntry( string item_name ) {
+			this.Data.ItemWhitelist.Add( item_name );
 		}
 
-		public void SetRecipeFilter( bool on ) {
-			this.Data.IsRecipeFilterOn = on;
+		public void SetRecipeBlacklistEntry( string item_name ) {
+			this.Data.RecipeWhitelist.Add( item_name );
 		}
 
-		public void SetNpcLootFilter( bool on ) {
-			this.Data.IsNpcLootFilterOn = on;
+		public void SetNpcLootBlacklistEntry( string npc_name ) {
+			this.Data.NpcLootWhitelist.Add( npc_name );
 		}
 
-		public void SetNpcFilter( bool on ) {
-			this.Data.IsNpcFilterOn = on;
+		public void SetNpcBlacklistEntry( string npc_name ) {
+			this.Data.NpcWhitelist.Add( npc_name );
 		}
 
+		////
 
 		public void SetItemWhitelistEntry( string item_name ) {
 			this.Data.ItemWhitelist.Add( item_name );
@@ -33,6 +34,24 @@
 			this.Data.NpcWhitelist.Add( npc_name );
 		}
 
+
+		////////////////
+
+		public void ClearItemBlacklist() {
+			this.Data.ItemBlacklist.Clear();
+		}
+
+		public void ClearRecipeBlacklist() {
+			this.Data.RecipeBlacklist.Clear();
+		}
+
+		public void ClearNpcLootBlacklist() {
+			this.Data.NpcLootBlacklist.Clear();
+		}
+
+		public void ClearNpcBlacklist() {
+			this.Data.NpcBlacklist.Clear();
+		}
 
 		////////////////
 
