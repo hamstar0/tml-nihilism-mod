@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Nihilism.Data {
 	public class NihilismConfigData : ConfigurationDataBase {
-		public readonly static Version ConfigVersion = new Version( 2, 0, 0 );
+		public readonly static Version ConfigVersion = new Version( 2, 1, 0 );
 		public readonly static string ConfigFileName = "Nihilism Config.json";
 
 
