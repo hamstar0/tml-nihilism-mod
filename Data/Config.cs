@@ -1,96 +1,115 @@
 ﻿using HamstarHelpers.Components.Config;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.Serialization;
+using Terraria.ModLoader;
 
 
 namespace Nihilism.Data {
-	public class NihilismConfigData : ConfigurationDataBase {
+	public class NihilismConfigMetaData {
 		public readonly static Version ConfigVersion = new Version( 2, 1, 0 );
 		public readonly static string ConfigFileName = "Nihilism Config.json";
+	}
+
+
+
+	[Label( "Game Settings" )]
+	public class NihilismConfigData : ModConfig {
+		public override MultiplayerSyncMode Mode {
+			get { return MultiplayerSyncMode.ServerDictates; }
+		}
+
+		public override void PostAutoLoad() {
+			var mymod = (NihilismMod)this.mod;
+			mymod.ServerConfig = this;
+		}
 
 
 		////////////////
 
-		public string VersionSinceUpdate = NihilismConfigData.ConfigVersion.ToString();
+		[OnDeserialized]
+		internal void OnDeserializedMethod( StreamingContext context ) {
+			var vers_since = this.VersionSinceUpdate != "" ?
+				new Version( this.VersionSinceUpdate ) :
+				new Version();
 
-		public bool DebugModeInfo = false;
+			if( vers_since < this.mod.Version ) {
+				this.VersionSinceUpdate = NihilismConfigMetaData.ConfigVersion.ToString();
+			}
+			if( this.DefaultItemBlacklist == null ) {
+				this.DefaultItemBlacklist = new HashSet<string> { };
+			}
+			if( this.DefaultRecipeBlacklist == null ) {
+				this.DefaultRecipeBlacklist = new HashSet<string> { };
+			}
+			if( this.DefaultNpcBlacklist == null ) {
+				this.DefaultNpcBlacklist = new HashSet<string> { };
+			}
+			if( this.DefaultNpcLootBlacklist == null ) {
+				this.DefaultNpcLootBlacklist = new HashSet<string> { };
+			}
+			if( this.DefaultItemWhitelist == null ) {
+				this.DefaultItemWhitelist = new HashSet<string> { };
+			}
+			if( this.DefaultRecipeWhitelist == null ) {
+				this.DefaultRecipeWhitelist = new HashSet<string> { };
+			}
+			if( this.DefaultNpcWhitelist == null ) {
+				this.DefaultNpcWhitelist = new HashSet<string> { };
+			}
+			if( this.DefaultNpcLootWhitelist == null ) {
+				this.DefaultNpcLootWhitelist = new HashSet<string> { };
+			}
 
-		public ISet<string> DefaultItemBlacklist = new HashSet<string> { };
-		public ISet<string> DefaultRecipeBlacklist = new HashSet<string> { };
-		public ISet<string> DefaultNpcBlacklist = new HashSet<string> { };
-		public ISet<string> DefaultNpcLootBlacklist = new HashSet<string> { };
+			this.SetDefaults();
+		}
+		
+		public override ModConfig Clone() {
+			var clone = (NihilismConfigData)base.Clone();
+			clone.DefaultItemBlacklist = new HashSet<string>( this.DefaultItemBlacklist );
+			clone.DefaultRecipeBlacklist = new HashSet<string>( this.DefaultRecipeBlacklist );
+			clone.DefaultNpcBlacklist = new HashSet<string>( this.DefaultNpcBlacklist );
+			clone.DefaultNpcLootBlacklist = new HashSet<string>( this.DefaultNpcLootBlacklist );
+			clone.DefaultItemWhitelist = new HashSet<string>( this.DefaultItemWhitelist );
+			clone.DefaultRecipeWhitelist = new HashSet<string>( this.DefaultRecipeWhitelist );
+			clone.DefaultNpcWhitelist = new HashSet<string>( this.DefaultNpcWhitelist );
+			clone.DefaultNpcLootWhitelist = new HashSet<string>( this.DefaultNpcLootWhitelist );
+			return clone;
+		}
 
-		public ISet<string> DefaultItemWhitelist = new HashSet<string> { };
-		public ISet<string> DefaultRecipeWhitelist = new HashSet<string> { };
-		public ISet<string> DefaultNpcWhitelist = new HashSet<string> { };
-		public ISet<string> DefaultNpcLootWhitelist = new HashSet<string> { };
 
+		////////////////
+
+		[DefaultValue( "" )]
+		public string VersionSinceUpdate;
+
+		[DefaultValue( false )]
+		public bool DebugModeInfo;
+
+		public ISet<string> DefaultItemBlacklist;
+		public ISet<string> DefaultRecipeBlacklist;
+		public ISet<string> DefaultNpcBlacklist;
+		public ISet<string> DefaultNpcLootBlacklist;
+
+		public ISet<string> DefaultItemWhitelist;
+		public ISet<string> DefaultRecipeWhitelist;
+		public ISet<string> DefaultNpcWhitelist;
+		public ISet<string> DefaultNpcLootWhitelist;
+
+		[DefaultValue( true )]
 		public bool EnableItemFilters = true;
+		[DefaultValue( true )]
 		public bool EnableItemEquipsFilters = true;
+		[DefaultValue( true )]
 		public bool EnableRecipeFilters = true;
+		[DefaultValue( true )]
 		public bool EnableNpcFilters = true;
+		[DefaultValue( true )]
 		public bool EnableNpcLootFilters = true;
 
 
-		////////
-
-		[Obsolete( "Not a useable setting", true )]
-		public string _OLD_SETTINGS_BELOW_ = "";
-
-		[Obsolete( "Use NihilismConfigData.DefaultRecipesBlacklisted", true )]
-		public string DefaultRecipesBlacklistPattern = "(.*?)";
-		[Obsolete( "Use NihilismConfigData.DefaultItemsBlacklisted", true )]
-		public string DefaultItemsBlacklistPattern = "(.*?)";
-		[Obsolete( "Use NihilismConfigData.DefaultNpcBlacklisted", true )]
-		public string DefaultNpcBlacklistPattern = "(.*?)";
-		[Obsolete( "Use NihilismConfigData.DefaultNpcLootBlacklisted", true )]
-		public string DefaultNpcLootBlacklistPattern = "(.*?)";
-
-		[Obsolete( "Use NihilismFilterData.RecipesBlacklistChecksFirst", true )]
-		public bool RecipesBlacklistChecksFirst = false;
-		[Obsolete( "Use NihilismFilterData.ItemsBlacklistChecksFirst", true )]
-		public bool ItemsBlacklistChecksFirst = false;
-		[Obsolete( "Use NihilismFilterData.NpcsBlacklistChecksFirst", true )]
-		public bool NpcsBlacklistChecksFirst = false;
-		[Obsolete( "Use NihilismFilterData.NpcItemDropsBlacklistChecksFirst", true )]
-		public bool NpcItemDropsBlacklistChecksFirst = false;
-
-		[Obsolete( "Use NihilismConfigData.DefaultItemWhitelist or NihilismFilterData.DefaultItemBlacklist", true )]
-		public string ItemsBlacklistPattern = "(.*?)";
-		[Obsolete( "Use NihilismConfigData.DefaultRecipeWhitelist or NihilismFilterData.DefaultRecipeBlacklist", true )]
-		public string RecipesBlacklistPattern = "(.*?)";
-		[Obsolete( "Use NihilismConfigData.DefaultNpcWhitelist or NihilismFilterData.DefaultNpcBlacklist", true )]
-		public string NpcsBlacklistPattern = "(.*?)";
-		[Obsolete( "Use NihilismConfigData.DefaultNpcLootWhitelist or NihilismFilterData.DefaultNpcLootBlacklist", true )]
-		public string NpcItemDropsBlacklistPattern = "(.*?)";
-		
-		[Obsolete( "Use NihilismConfigData.DefaultRecipeWhitelist or NihilismFilterData.DefaultItemBlacklist", true )]
-		public bool DefaultItemsBlacklisted = true;
-		[Obsolete( "Use NihilismConfigData.DefaultRecipeWhitelist or NihilismFilterData.DefaultRecipeBlacklist", true )]
-		public bool DefaultRecipesBlacklisted = true;
-		[Obsolete( "Use NihilismConfigData.DefaultRecipeWhitelist or NihilismFilterData.DefaultNpcBlacklist", true )]
-		public bool DefaultNpcBlacklisted = true;
-		[Obsolete( "Use NihilismConfigData.DefaultRecipeWhitelist or NihilismFilterData.DefaultNpcLootBlacklist", true )]
-		public bool DefaultNpcLootBlacklisted = true;
-
-		[Obsolete( "Use NihilismConfigData.DefaultRecipeWhitelist or NihilismFilterData.RecipeWhitelist", true )]
-		public IDictionary<string, bool> RecipeWhitelist = new Dictionary<string, bool> { };
-		[Obsolete( "Use NihilismConfigData.DefaultItemWhitelist or NihilismFilterData.ItemWhitelist", true )]
-		public IDictionary<string, bool> ItemWhitelist = new Dictionary<string, bool> { };
-		[Obsolete( "Use NihilismConfigData.DefaultNpcWhitelist or NihilismFilterData.NpcWhitelist", true )]
-		public IDictionary<string, bool> NpcWhitelist = new Dictionary<string, bool> { };
-		[Obsolete( "Use NihilismConfigData.DefaultNpcItemDropWhitelist or NihilismFilterData.NpcItemDropWhitelist", true )]
-		public IDictionary<string, bool> NpcItemDropWhitelist = new Dictionary<string, bool> { };
-
-
 		////////////////
-
-		public override void OnLoad( bool success ) {
-			if( !success ) {
-				this.SetDefaults();
-			}
-		}
-
 		
 		public void SetDefaults() {
 			this.DefaultItemBlacklist.Add( "Any Equipment" );
@@ -102,26 +121,6 @@ namespace Nihilism.Data {
 			this.DefaultRecipeWhitelist.Add( "Any Copper Or Tin Equipment" );
 			this.DefaultNpcWhitelist.Add( "Any Slime" );
 			this.DefaultNpcLootWhitelist.Add( "Blue Slime" );
-		}
-
-
-		public bool UpdateToLatestVersion() {
-			var new_config = new NihilismConfigData();
-			var vers_since = this.VersionSinceUpdate != "" ?
-				new Version( this.VersionSinceUpdate ) :
-				new Version();
-
-			if( vers_since >= NihilismConfigData.ConfigVersion ) {
-				return false;
-			}
-
-			if( vers_since < new Version(2, 0, 0) ) {
-				this.SetDefaults();
-			}
-
-			this.VersionSinceUpdate = NihilismConfigData.ConfigVersion.ToString();
-
-			return true;
 		}
 	}
 }

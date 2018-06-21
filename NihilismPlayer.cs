@@ -69,7 +69,7 @@ namespace Nihilism {
 
 		private void BlockEquipsIfDisabled() {
 			var mymod = (NihilismMod)this.mod;
-			if( !mymod.Config.EnableItemEquipsFilters ) { return; }
+			if( !mymod.ServerConfig.EnableItemEquipsFilters ) { return; }
 
 			var myworld = mymod.GetModWorld<NihilismWorld>();
 			if( !myworld.Logic.DataAccess.IsActive() ) { return; }

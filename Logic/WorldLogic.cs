@@ -77,23 +77,23 @@ namespace Nihilism.Logic {
 		////////////////
 		
 		public bool AreItemFiltersEnabled( NihilismMod mymod ) {
-			return this.DataAccess.IsActive() && mymod.Config.EnableItemFilters;
+			return this.DataAccess.IsActive() && mymod.ServerConfig.EnableItemFilters;
 		}
 
 		public bool AreItemEquipsFiltersEnabled( NihilismMod mymod ) {
-			return this.DataAccess.IsActive() && mymod.Config.EnableItemEquipsFilters;
+			return this.DataAccess.IsActive() && mymod.ServerConfig.EnableItemEquipsFilters;
 		}
 
 		public bool AreRecipesFiltersEnabled( NihilismMod mymod ) {
-			return this.DataAccess.IsActive() && mymod.Config.EnableRecipeFilters;
+			return this.DataAccess.IsActive() && mymod.ServerConfig.EnableRecipeFilters;
 		}
 
 		public bool AreNpcsFiltersEnabled( NihilismMod mymod ) {
-			return this.DataAccess.IsActive() && mymod.Config.EnableNpcFilters;
+			return this.DataAccess.IsActive() && mymod.ServerConfig.EnableNpcFilters;
 		}
 
 		public bool AreNpcLootsFiltersEnabled( NihilismMod mymod ) {
-			return this.DataAccess.IsActive() && mymod.Config.EnableNpcLootFilters;
+			return this.DataAccess.IsActive() && mymod.ServerConfig.EnableNpcLootFilters;
 		}
 	}
 }

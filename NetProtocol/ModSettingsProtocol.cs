@@ -9,7 +9,7 @@ namespace Nihilism.NetProtocol {
 
 
 		public override void SetServerDefaults() {
-			this.Settings = NihilismMod.Instance.Config;
+			this.Settings = NihilismMod.Instance.ServerConfig;
 		}
 
 		protected override void ReceiveWithClient() {

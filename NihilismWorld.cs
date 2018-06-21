@@ -16,7 +16,7 @@ namespace Nihilism {
 
 			this.Logic = new WorldLogic( mymod );
 
-			if( mymod.Config.DebugModeInfo ) {
+			if( mymod.ServerConfig.DebugModeInfo ) {
 				LogHelpers.Log( "Nihilism - World initialized." );
 			}
 		}

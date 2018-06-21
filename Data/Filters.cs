@@ -49,15 +49,15 @@ namespace Nihilism.Data {
 		////////////////
 		
 		public void SetCurrentFiltersAsDefaults( NihilismMod mymod ) {
-			mymod.Config.DefaultItemBlacklist = this.ItemBlacklist;
-			mymod.Config.DefaultRecipeBlacklist = this.RecipeBlacklist;
-			mymod.Config.DefaultNpcBlacklist = this.NpcBlacklist;
-			mymod.Config.DefaultNpcLootBlacklist = this.NpcLootBlacklist;
+			mymod.ServerConfig.DefaultItemBlacklist = this.ItemBlacklist;
+			mymod.ServerConfig.DefaultRecipeBlacklist = this.RecipeBlacklist;
+			mymod.ServerConfig.DefaultNpcBlacklist = this.NpcBlacklist;
+			mymod.ServerConfig.DefaultNpcLootBlacklist = this.NpcLootBlacklist;
 
-			mymod.Config.DefaultRecipeWhitelist = new HashSet<string>( this.RecipeWhitelist );
-			mymod.Config.DefaultItemWhitelist = new HashSet<string>( this.ItemWhitelist );
-			mymod.Config.DefaultNpcWhitelist = new HashSet<string>( this.NpcWhitelist );
-			mymod.Config.DefaultNpcLootWhitelist = new HashSet<string>( this.NpcLootWhitelist );
+			mymod.ServerConfig.DefaultRecipeWhitelist = new HashSet<string>( this.RecipeWhitelist );
+			mymod.ServerConfig.DefaultItemWhitelist = new HashSet<string>( this.ItemWhitelist );
+			mymod.ServerConfig.DefaultNpcWhitelist = new HashSet<string>( this.NpcWhitelist );
+			mymod.ServerConfig.DefaultNpcLootWhitelist = new HashSet<string>( this.NpcLootWhitelist );
 
 			if( !mymod.SuppressAutoSaving ) {
 				mymod.ConfigJson.SaveFile();
@@ -65,15 +65,15 @@ namespace Nihilism.Data {
 		}
 
 		public void ResetFiltersFromDefaults( NihilismMod mymod ) {
-			this.ItemBlacklist = mymod.Config.DefaultItemBlacklist;
-			this.RecipeBlacklist = mymod.Config.DefaultRecipeBlacklist;
-			this.NpcBlacklist = mymod.Config.DefaultNpcBlacklist;
-			this.NpcLootBlacklist = mymod.Config.DefaultNpcLootBlacklist;
+			this.ItemBlacklist = mymod.ServerConfig.DefaultItemBlacklist;
+			this.RecipeBlacklist = mymod.ServerConfig.DefaultRecipeBlacklist;
+			this.NpcBlacklist = mymod.ServerConfig.DefaultNpcBlacklist;
+			this.NpcLootBlacklist = mymod.ServerConfig.DefaultNpcLootBlacklist;
 
-			this.RecipeWhitelist = new HashSet<string>( mymod.Config.DefaultRecipeWhitelist );
-			this.ItemWhitelist = new HashSet<string>( mymod.Config.DefaultItemWhitelist );
-			this.NpcWhitelist = new HashSet<string>( mymod.Config.DefaultNpcWhitelist );
-			this.NpcLootWhitelist = new HashSet<string>( mymod.Config.DefaultNpcLootWhitelist );
+			this.RecipeWhitelist = new HashSet<string>( mymod.ServerConfig.DefaultRecipeWhitelist );
+			this.ItemWhitelist = new HashSet<string>( mymod.ServerConfig.DefaultItemWhitelist );
+			this.NpcWhitelist = new HashSet<string>( mymod.ServerConfig.DefaultNpcWhitelist );
+			this.NpcLootWhitelist = new HashSet<string>( mymod.ServerConfig.DefaultNpcLootWhitelist );
 		}
 	}
 }

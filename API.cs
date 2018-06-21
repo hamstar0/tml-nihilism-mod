@@ -7,7 +7,7 @@ using System;
 namespace Nihilism {
 	public static partial class NihilismAPI {
 		public static NihilismConfigData GetModSettings() {
-			return NihilismMod.Instance.Config;
+			return NihilismMod.Instance.ServerConfig;
 		}
 
 		public static void SaveModSettingsChanges() {
