@@ -1,18 +1,24 @@
-﻿using HamstarHelpers.Utilities.Network;
+﻿using HamstarHelpers.Components.Network;
 using Nihilism.Data;
+using Terraria;
 
 
 namespace Nihilism.NetProtocol {
 	class ModSettingsProtocol : PacketProtocol {
 		public NihilismConfigData Settings;
 
-		
+
 		public override void SetServerDefaults() {
 			this.Settings = NihilismMod.Instance.Config;
 		}
-		
+
 		protected override void ReceiveWithClient() {
-			NihilismMod.Instance.JsonConfig.SetData( this.Settings );
+			var mymod = NihilismMod.Instance;
+			var myplayer = Main.LocalPlayer.GetModPlayer<NihilismPlayer>();
+
+			mymod.ConfigJson.SetData( this.Settings );
+
+			myplayer.FinishModSettingsSync();
 		}
 	}
 }

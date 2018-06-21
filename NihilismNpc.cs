@@ -8,11 +8,11 @@ namespace Nihilism {
 			var mymod = (NihilismMod)this.mod;
 			var myworld = mymod.GetModWorld<NihilismWorld>();
 
-			if( myworld.Logic == null || !myworld.Logic.AreNpcLootsFiltered( mymod ) ) {
+			if( myworld.Logic == null || !myworld.Logic.AreNpcLootsFiltersEnabled( mymod ) ) {
 				return base.PreNPCLoot(npc);
 			}
-			
-			return myworld.Logic.Data.IsNpcLootEnabled( npc );
+
+			return myworld.Logic.DataAccess.IsNpcLootEnabled( npc );
 		}
 
 
@@ -20,11 +20,11 @@ namespace Nihilism {
 			var mymod = (NihilismMod)this.mod;
 			var myworld = mymod.GetModWorld<NihilismWorld>();
 
-			if( myworld.Logic == null || !myworld.Logic.AreNpcsFiltered( mymod ) ) {
+			if( myworld.Logic == null || !myworld.Logic.AreNpcsFiltersEnabled( mymod ) ) {
 				return base.PreAI(npc);
 			}
 			
-			bool is_enabled = myworld.Logic.Data.IsNpcEnabled( npc );
+			bool is_enabled = myworld.Logic.DataAccess.IsNpcEnabled( npc );
 
 			if( !is_enabled ) {
 				npc.active = false;

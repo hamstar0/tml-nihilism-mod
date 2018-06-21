@@ -4,10 +4,10 @@ using Terraria.ModLoader;
 
 
 namespace Nihilism.Commands {
-	class RecipeBlacklistSetCommand : ModCommand {
+	class LootBlacklistEntrySetCommand : ModCommand {
 		public override string Command {
 			get {
-				return "nihrecipeblacklistset";
+				return "nihlootblacklistadd";
 			}
 		}
 		public override CommandType Type {
@@ -21,12 +21,12 @@ namespace Nihilism.Commands {
 		}
 		public override string Usage {
 			get {
-				return "/" + this.Command + " ^(Torch)$|^(Wood Sword)$";
+				return "/" + this.Command + " Zombie";
 			}
 		}
 		public override string Description {
 			get {
-				return "Sets the recipe blacklist matching pattern. For regex help, visit: https://regexr.com/";
+				return "Adds a lootable npc to the blacklist (checked before whitelist).";
 			}
 		}
 
@@ -35,18 +35,18 @@ namespace Nihilism.Commands {
 
 		public override void Action( CommandCaller caller, string input, string[] args ) {
 			if( args.Length == 0 ) {
-				caller.Reply( "No recipe regex pattern specified.", Color.Yellow );
+				caller.Reply( "No npc name specified.", Color.Yellow );
 				return;
 			}
 
 			var mymod = NihilismMod.Instance;
 			var myworld = mymod.GetModWorld<NihilismWorld>();
-			string pattern = args[0];
+			string ent_name = string.Join( " ", args );
 
-			myworld.Logic.Data.SetRecipesBlacklistPattern( pattern );
-			myworld.Logic.SyncData();
+			myworld.Logic.DataAccess.SetNpcLootBlacklistEntry( ent_name );
+			myworld.Logic.SyncDataChanges();
 
-			caller.Reply( "Recipe pattern " + pattern + " set as blacklist.", Color.YellowGreen );
+			caller.Reply( "Lootable npc " + ent_name + " added to blacklist.", Color.YellowGreen );
 		}
 	}
 }

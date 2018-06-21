@@ -6,7 +6,7 @@ using Terraria.ModLoader.IO;
 
 namespace Nihilism {
 	class NihilismWorld : ModWorld {
-		public NihilismLogic Logic;
+		public WorldLogic Logic;
 
 
 		////////////////
@@ -14,7 +14,7 @@ namespace Nihilism {
 		public override void Initialize() {
 			var mymod = (NihilismMod)this.mod;
 
-			this.Logic = new NihilismLogic();
+			this.Logic = new WorldLogic( mymod );
 
 			if( mymod.Config.DebugModeInfo ) {
 				LogHelpers.Log( "Nihilism - World initialized." );

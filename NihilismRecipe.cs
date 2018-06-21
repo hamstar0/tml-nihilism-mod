@@ -8,7 +8,7 @@ namespace Nihilism {
 			var mymod = (NihilismMod)this.mod;
 			var myworld = mymod.GetModWorld<NihilismWorld>();
 
-			if( !myworld.Logic.AreRecipesFiltered( mymod ) ) {
+			if( !myworld.Logic.AreRecipesFiltersEnabled( mymod ) ) {
 				return base.RecipeAvailable( recipe );
 			}
 
@@ -18,7 +18,7 @@ namespace Nihilism {
 				return base.RecipeAvailable( recipe );
 			}
 
-			return myworld.Logic.Data.IsRecipeOfItemEnabled( item );
+			return myworld.Logic.DataAccess.IsRecipeOfItemEnabled( item );
 		}
 	}
 }

@@ -1,4 +1,4 @@
-v3.0
+v4.0
 -	Whitelist/blacklist block breaking
 -	Add occluding colored mist cloud objects
 -	Add Avoid Blocks (invisible, invincible, non-solid, kills all)
@@ -7,14 +7,24 @@ v3.0
 
 
 
-v2.0
--	Whitelist/blacklist buffs
--	Add option to lock weather
--	Add option to stop weather
--	Add option to stop music
--	Add option to stop time
--	Add option to stop invasions
+v3.0
+-	Buff filters
+-	Weather locking
+-	Weather filtering
+-	Music filtering
+-	Invasion filtering
+-	Block breaking filtering
+-	Time options
+	-	Progression multiplier
+	-	Night only
+	-	Day only
 
+v2.1
+-	Wing Slot compat
+-	Add set logic with whitelist entries
+v2.0
+-	Match respective entity groups with whitelist checks
+-	Change blacklists from regex to booleans
 v1.5.6
 -	Set ammo types to block weapons if not unlocked
 v1.4

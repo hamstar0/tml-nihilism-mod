@@ -9,13 +9,13 @@ namespace Nihilism {
 			var mymod = (NihilismMod)this.mod;
 			var myworld = mymod.GetModWorld<NihilismWorld>();
 
-			if( !myworld.Logic.AreItemsFiltered( mymod ) ) {
+			if( !myworld.Logic.AreItemFiltersEnabled( mymod ) ) {
 				return null;
 			}
 
 			Item grapple_item = PlayerItemHelpers.GetGrappleItem( player );
 			
-			if( grapple_item != null && myworld.Logic.Data.IsItemEnabled( grapple_item ) ) {
+			if( grapple_item != null && myworld.Logic.DataAccess.IsItemEnabled( grapple_item ) ) {
 				return null;
 			}
 			return false;

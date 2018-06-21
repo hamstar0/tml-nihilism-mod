@@ -1,74 +1,79 @@
-﻿using HamstarHelpers.Utilities.Config;
+﻿using HamstarHelpers.Components.Config;
+using System;
 using System.Collections.Generic;
-using System.Linq;
 
 
 namespace Nihilism.Data {
 	class NihilismFilterData : ConfigurationDataBase {
 		public bool IsActive = false;
 
-		public bool RecipesBlacklistChecksFirst = false;
-		public bool ItemsBlacklistChecksFirst = false;
-		public bool NpcsBlacklistChecksFirst = false;
-		public bool NpcLootBlacklistChecksFirst = false;
+		public ISet<string> ItemBlacklist = new HashSet<string> { };
+		public ISet<string> RecipeBlacklist = new HashSet<string> { };
+		public ISet<string> NpcBlacklist = new HashSet<string> { };
+		public ISet<string> NpcLootBlacklist = new HashSet<string> { };
 
-		public string RecipesBlacklistPattern;
+		public ISet<string> RecipeWhitelist = new HashSet<string> { };
+		public ISet<string> ItemWhitelist = new HashSet<string> { };
+		public ISet<string> NpcWhitelist = new HashSet<string> { };
+		public ISet<string> NpcLootWhitelist = new HashSet<string> { };
+
+		[Obsolete( "Not a useable setting", true )]
+		public string _OLD_SETTINGS_BELOW_ = "";
+
+		[Obsolete( "Use NihilismFilterData.ItemBlacklist", true )]
 		public string ItemsBlacklistPattern;
+		[Obsolete( "Use NihilismFilterData.RecipeBlacklist", true )]
+		public string RecipesBlacklistPattern;
+		[Obsolete( "Use NihilismFilterData.NpcBlacklist", true )]
 		public string NpcBlacklistPattern;
+		[Obsolete( "Use NihilismFilterData.NpcLootBlacklist", true )]
 		public string NpcLootBlacklistPattern;
-
-		public IDictionary<string, bool> RecipeWhitelist = new Dictionary<string, bool> { };
-		public IDictionary<string, bool> ItemWhitelist = new Dictionary<string, bool> { };
-		public IDictionary<string, bool> NpcWhitelist = new Dictionary<string, bool> { };
-		public IDictionary<string, bool> NpcLootWhitelist = new Dictionary<string, bool> { };
+		[Obsolete( "Use NihilismFilterData.ItemBlacklist", true )]
+		public bool IsRecipeFilterOn;
+		[Obsolete( "Use NihilismFilterData.RecipeBlacklist", true )]
+		public bool IsItemFilterOn;
+		[Obsolete( "Use NihilismFilterData.NpcBlacklist", true )]
+		public bool IsNpcFilterOn;
+		[Obsolete( "Use NihilismFilterData.NpcLootBlacklist", true )]
+		public bool IsNpcLootFilterOn;
 
 
 
 		////////////////
 
 		public NihilismFilterData() {
-			var mymod = NihilismMod.Instance;
-
-			this.RecipesBlacklistPattern = mymod.Config.DefaultRecipesBlacklistPattern;
-			this.ItemsBlacklistPattern = mymod.Config.DefaultItemsBlacklistPattern;
-			this.NpcBlacklistPattern = mymod.Config.DefaultNpcBlacklistPattern;
-			this.NpcLootBlacklistPattern = mymod.Config.DefaultNpcLootBlacklistPattern;
-			
-			this.RecipeWhitelist = mymod.Config.DefaultRecipeWhitelist.ToDictionary( entry => entry.Key, entry => entry.Value );
-			this.ItemWhitelist = mymod.Config.DefaultItemWhitelist.ToDictionary( entry => entry.Key, entry => entry.Value );
-			this.NpcWhitelist = mymod.Config.DefaultNpcWhitelist.ToDictionary( entry => entry.Key, entry => entry.Value );
-			this.NpcLootWhitelist = mymod.Config.DefaultNpcLootWhitelist.ToDictionary( entry => entry.Key, entry => entry.Value );
+			this.ResetFiltersFromDefaults( NihilismMod.Instance );
 		}
 
 
 		////////////////
 		
 		public void SetCurrentFiltersAsDefaults( NihilismMod mymod ) {
-			mymod.Config.DefaultItemsBlacklistPattern = this.ItemsBlacklistPattern;
-			mymod.Config.DefaultRecipesBlacklistPattern = this.RecipesBlacklistPattern;
-			mymod.Config.DefaultNpcLootBlacklistPattern = this.NpcLootBlacklistPattern;
-			mymod.Config.DefaultNpcBlacklistPattern = this.NpcBlacklistPattern;
-			
-			mymod.Config.DefaultRecipeWhitelist = this.RecipeWhitelist.ToDictionary( entry => entry.Key, entry => entry.Value );
-			mymod.Config.DefaultItemWhitelist = this.ItemWhitelist.ToDictionary( entry => entry.Key, entry => entry.Value );
-			mymod.Config.DefaultNpcWhitelist = this.NpcWhitelist.ToDictionary( entry => entry.Key, entry => entry.Value );
-			mymod.Config.DefaultNpcLootWhitelist = this.NpcLootWhitelist.ToDictionary( entry => entry.Key, entry => entry.Value );
+			mymod.Config.DefaultItemBlacklist = this.ItemBlacklist;
+			mymod.Config.DefaultRecipeBlacklist = this.RecipeBlacklist;
+			mymod.Config.DefaultNpcBlacklist = this.NpcBlacklist;
+			mymod.Config.DefaultNpcLootBlacklist = this.NpcLootBlacklist;
+
+			mymod.Config.DefaultRecipeWhitelist = new HashSet<string>( this.RecipeWhitelist );
+			mymod.Config.DefaultItemWhitelist = new HashSet<string>( this.ItemWhitelist );
+			mymod.Config.DefaultNpcWhitelist = new HashSet<string>( this.NpcWhitelist );
+			mymod.Config.DefaultNpcLootWhitelist = new HashSet<string>( this.NpcLootWhitelist );
 
 			if( !mymod.SuppressAutoSaving ) {
-				mymod.JsonConfig.SaveFile();
+				mymod.ConfigJson.SaveFile();
 			}
 		}
 
 		public void ResetFiltersFromDefaults( NihilismMod mymod ) {
-			this.ItemsBlacklistPattern = mymod.Config.DefaultItemsBlacklistPattern;
-			this.RecipesBlacklistPattern = mymod.Config.DefaultRecipesBlacklistPattern;
-			this.NpcLootBlacklistPattern = mymod.Config.DefaultNpcLootBlacklistPattern;
-			this.NpcBlacklistPattern = mymod.Config.DefaultNpcBlacklistPattern;
-			
-			this.RecipeWhitelist = mymod.Config.DefaultRecipeWhitelist.ToDictionary( entry => entry.Key, entry => entry.Value );
-			this.ItemWhitelist = mymod.Config.DefaultItemWhitelist.ToDictionary( entry => entry.Key, entry => entry.Value );
-			this.NpcWhitelist = mymod.Config.DefaultNpcWhitelist.ToDictionary( entry => entry.Key, entry => entry.Value );
-			this.NpcLootWhitelist = mymod.Config.DefaultNpcLootWhitelist.ToDictionary( entry => entry.Key, entry => entry.Value );
+			this.ItemBlacklist = mymod.Config.DefaultItemBlacklist;
+			this.RecipeBlacklist = mymod.Config.DefaultRecipeBlacklist;
+			this.NpcBlacklist = mymod.Config.DefaultNpcBlacklist;
+			this.NpcLootBlacklist = mymod.Config.DefaultNpcLootBlacklist;
+
+			this.RecipeWhitelist = new HashSet<string>( mymod.Config.DefaultRecipeWhitelist );
+			this.ItemWhitelist = new HashSet<string>( mymod.Config.DefaultItemWhitelist );
+			this.NpcWhitelist = new HashSet<string>( mymod.Config.DefaultNpcWhitelist );
+			this.NpcLootWhitelist = new HashSet<string>( mymod.Config.DefaultNpcLootWhitelist );
 		}
 	}
 }

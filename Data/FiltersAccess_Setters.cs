@@ -1,41 +1,74 @@
-﻿using HamstarHelpers.Utilities.Config;
-
-
-namespace Nihilism.Data {
+﻿namespace Nihilism.Data {
 	partial class NihilismFilterAccess {
-		public void SetItemsBlacklistPattern( string pattern ) {
-			this.Data.ItemsBlacklistPattern = pattern;
+		public void SetItemBlacklistEntry( string item_name ) {
+			this.Data.ItemBlacklist.Add( item_name );
 		}
+
+		public void SetRecipeBlacklistEntry( string item_name ) {
+			this.Data.RecipeBlacklist.Add( item_name );
+		}
+
+		public void SetNpcLootBlacklistEntry( string npc_name ) {
+			this.Data.NpcLootBlacklist.Add( npc_name );
+		}
+
+		public void SetNpcBlacklistEntry( string npc_name ) {
+			this.Data.NpcBlacklist.Add( npc_name );
+		}
+
+		////
 
 		public void SetItemWhitelistEntry( string item_name ) {
-			this.Data.ItemWhitelist[item_name] = true;
+			this.Data.ItemWhitelist.Add( item_name );
 		}
-
-
-		public void SetRecipesBlacklistPattern( string pattern ) {
-			this.Data.RecipesBlacklistPattern = pattern;
-		}
-
+		
 		public void SetRecipeWhitelistEntry( string item_name ) {
-			this.Data.RecipeWhitelist[item_name] = true;
-		}
-
-
-		public void SetNpcLootBlacklistPattern( string pattern ) {
-			this.Data.NpcLootBlacklistPattern = pattern;
+			this.Data.RecipeWhitelist.Add( item_name );
 		}
 
 		public void SetNpcLootWhitelistEntry( string npc_name ) {
-			this.Data.NpcLootWhitelist[npc_name] = true;
-		}
-
-
-		public void SetNpcBlacklistPattern( string pattern ) {
-			this.Data.NpcBlacklistPattern = pattern;
+			this.Data.NpcLootWhitelist.Add( npc_name );
 		}
 
 		public void SetNpcWhitelistEntry( string npc_name ) {
-			this.Data.NpcWhitelist[npc_name] = true;
+			this.Data.NpcWhitelist.Add( npc_name );
+		}
+
+
+		////////////////
+
+		public void ClearItemBlacklist() {
+			this.Data.ItemBlacklist.Clear();
+		}
+
+		public void ClearRecipeBlacklist() {
+			this.Data.RecipeBlacklist.Clear();
+		}
+
+		public void ClearNpcLootBlacklist() {
+			this.Data.NpcLootBlacklist.Clear();
+		}
+
+		public void ClearNpcBlacklist() {
+			this.Data.NpcBlacklist.Clear();
+		}
+
+		////////////////
+
+		public void ClearItemWhitelist() {
+			this.Data.ItemWhitelist.Clear();
+		}
+
+		public void ClearRecipeWhitelist() {
+			this.Data.RecipeWhitelist.Clear();
+		}
+
+		public void ClearNpcLootWhitelist() {
+			this.Data.NpcLootWhitelist.Clear();
+		}
+
+		public void ClearNpcWhitelist() {
+			this.Data.NpcWhitelist.Clear();
 		}
 
 

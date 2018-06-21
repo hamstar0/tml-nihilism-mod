@@ -4,10 +4,10 @@ using Terraria.ModLoader;
 
 
 namespace Nihilism.Commands {
-	class LootBlacklistSetCommand : ModCommand {
+	class NpcBlacklistEntrySetCommand : ModCommand {
 		public override string Command {
 			get {
-				return "nihlootblacklistset";
+				return "nihnpcblacklistadd";
 			}
 		}
 		public override CommandType Type {
@@ -21,12 +21,12 @@ namespace Nihilism.Commands {
 		}
 		public override string Usage {
 			get {
-				return "/" + this.Command + " ^(Zombie)$|^(Dungeon Guardian)$";
+				return "/" + this.Command + " Zombie";
 			}
 		}
 		public override string Description {
 			get {
-				return "Sets the loot dropping npc blacklist matching pattern. For regex help, visit: https://regexr.com/";
+				return "Adds an npc to the blacklist (checked before whitelist).";
 			}
 		}
 
@@ -35,18 +35,18 @@ namespace Nihilism.Commands {
 
 		public override void Action( CommandCaller caller, string input, string[] args ) {
 			if( args.Length == 0 ) {
-				caller.Reply( "No npc regex pattern specified.", Color.Yellow );
+				caller.Reply( "No npc name specified.", Color.Yellow );
 				return;
 			}
 
 			var mymod = NihilismMod.Instance;
 			var myworld = mymod.GetModWorld<NihilismWorld>();
-			string pattern = args[0];
+			string ent_name = string.Join( " ", args );
 
-			myworld.Logic.Data.SetNpcLootBlacklistPattern( pattern );
-			myworld.Logic.SyncData();
+			myworld.Logic.DataAccess.SetNpcBlacklistEntry( ent_name );
+			myworld.Logic.SyncDataChanges();
 
-			caller.Reply( "Npc loot pattern " + pattern + " set as blacklist.", Color.YellowGreen );
+			caller.Reply( "Npc " + ent_name + " added to blacklist.", Color.YellowGreen );
 		}
 	}
 }

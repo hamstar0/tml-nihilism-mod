@@ -1,16 +1,88 @@
-﻿using HamstarHelpers.Utilities.Config;
-using System.Text.RegularExpressions;
+﻿using HamstarHelpers.DebugHelpers;
+using HamstarHelpers.ItemHelpers;
+using HamstarHelpers.NPCHelpers;
+using HamstarHelpers.Services.EntityGroups;
 using Terraria;
 
 
 namespace Nihilism.Data {
 	partial class NihilismFilterAccess {
-		public static string GetItemName( Item item ) {
-			return Lang.GetItemNameValue( item.type );  //item.Name;
+		private bool IsItemBlacklisted( Item item ) {
+			string name = ItemIdentityHelpers.GetQualifiedName( item );
+
+			if( this.Data.ItemBlacklist.Contains( name ) ) {
+				return true;
+			}
+
+			if( EntityGroups.GroupsPerItem.ContainsKey( item.type ) ) {
+				foreach( string grp_name in EntityGroups.GroupsPerItem[item.type] ) {
+					if( this.Data.ItemBlacklist.Contains( grp_name ) ) {
+						return true;
+					}
+				}
+			}
+
+			return false;
 		}
 
-		public static string GetNpcName( NPC npc ) {
-			return npc.TypeName;
+		private bool IsRecipeBlacklisted( Item item ) {
+			string name = ItemIdentityHelpers.GetQualifiedName( item );
+
+			if( this.Data.RecipeBlacklist.Contains( name ) ) {
+				return true;
+			}
+
+			if( !EntityGroups.GroupsPerItem.ContainsKey( item.type ) ) {
+				return false;
+			}
+
+			foreach( string grp_name in EntityGroups.GroupsPerItem[item.type] ) {
+				if( this.Data.RecipeBlacklist.Contains( grp_name ) ) {
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		private bool IsNpcBlacklisted( NPC npc ) {
+			string name = NPCIdentityHelpers.GetQualifiedName( npc );
+
+			if( this.Data.NpcBlacklist.Contains( name ) ) {
+				return true;
+			}
+
+			if( !EntityGroups.GroupsPerNPC.ContainsKey( npc.type ) ) {
+				return false;
+			}
+
+			foreach( string grp_name in EntityGroups.GroupsPerNPC[npc.type] ) {
+				if( this.Data.NpcBlacklist.Contains( grp_name ) ) {
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		private bool IsNpcLootBlacklisted( NPC npc ) {
+			string name = NPCIdentityHelpers.GetQualifiedName( npc );
+
+			if( this.Data.NpcLootBlacklist.Contains( name ) ) {
+				return true;
+			}
+
+			if( !EntityGroups.GroupsPerNPC.ContainsKey( npc.type ) ) {
+				return false;
+			}
+
+			foreach( string grp_name in EntityGroups.GroupsPerNPC[npc.type] ) {
+				if( this.Data.NpcLootBlacklist.Contains( grp_name ) ) {
+					return true;
+				}
+			}
+
+			return false;
 		}
 
 
@@ -18,73 +90,83 @@ namespace Nihilism.Data {
 		////////////////
 
 		private bool IsItemWhitelisted( Item item ) {
-			string name = NihilismFilterAccess.GetItemName( item );
+			string name = ItemIdentityHelpers.GetQualifiedName( item );
 
-			if( !this.Data.ItemWhitelist.ContainsKey( name ) ) {
+			if( this.Data.ItemWhitelist.Contains( name ) ) {
+				return true;
+			}
+
+			if( !EntityGroups.GroupsPerItem.ContainsKey( item.type ) ) {
 				return false;
 			}
-			return this.Data.ItemWhitelist[name];
-		}
 
-		private bool IsItemBlacklisted( Item item ) {
-			string name = NihilismFilterAccess.GetItemName( item );
-			Regex regex = this.GetRegex( this.Data.ItemsBlacklistPattern );
-			
-			return regex.IsMatch( name );
-		}
+			foreach( string grp_name in EntityGroups.GroupsPerItem[item.type] ) {
+				if( this.Data.ItemWhitelist.Contains( grp_name ) ) {
+					return true;
+				}
+			}
 
-		////
+			return false;
+		}
 
 		private bool IsRecipeWhitelisted( Item item ) {
-			string name = NihilismFilterAccess.GetItemName( item );
+			string name = ItemIdentityHelpers.GetQualifiedName( item );
 
-			if( !this.Data.RecipeWhitelist.ContainsKey( name ) ) {
+			if( this.Data.RecipeWhitelist.Contains( name ) ) {
+				return true;
+			}
+
+			if( !EntityGroups.GroupsPerItem.ContainsKey( item.type ) ) {
 				return false;
 			}
-			return this.Data.RecipeWhitelist[name];
+
+			foreach( string grp_name in EntityGroups.GroupsPerItem[ item.type ] ) {
+				if( this.Data.RecipeWhitelist.Contains( grp_name ) ) {
+					return true;
+				}
+			}
+
+			return false;
 		}
-
-		private bool IsRecipeBlacklisted( Item item ) {
-			string name = NihilismFilterAccess.GetItemName( item );
-			Regex regex = this.GetRegex( this.Data.RecipesBlacklistPattern );
-
-			return regex.IsMatch( name );
-		}
-
-		////
 
 		private bool IsNpcWhitelisted( NPC npc ) {
-			string name = NihilismFilterAccess.GetNpcName( npc );
+			string name = NPCIdentityHelpers.GetQualifiedName( npc );
 
-			if( !this.Data.NpcWhitelist.ContainsKey( name ) ) {
+			if( this.Data.NpcWhitelist.Contains( name ) ) {
+				return true;
+			}
+
+			if( !EntityGroups.GroupsPerNPC.ContainsKey( npc.type ) ) {
 				return false;
 			}
-			return this.Data.NpcWhitelist[name];
+
+			foreach( string grp_name in EntityGroups.GroupsPerNPC[ npc.type ] ) {
+				if( this.Data.NpcWhitelist.Contains( grp_name ) ) {
+					return true;
+				}
+			}
+
+			return false;
 		}
-
-		private bool IsNpcBlacklisted( NPC npc ) {
-			string name = NihilismFilterAccess.GetNpcName( npc );
-			Regex regex = this.GetRegex( this.Data.NpcBlacklistPattern );
-
-			return regex.IsMatch( name );
-		}
-
-		////
 
 		private bool IsNpcLootWhitelisted( NPC npc ) {
-			string name = NihilismFilterAccess.GetNpcName( npc );
+			string name = NPCIdentityHelpers.GetQualifiedName( npc );
 
-			if( !this.Data.NpcLootWhitelist.ContainsKey( name ) ) {
+			if( this.Data.NpcLootWhitelist.Contains( name ) ) {
+				return true;
+			}
+
+			if( !EntityGroups.GroupsPerNPC.ContainsKey( npc.type ) ) {
 				return false;
 			}
-			return this.Data.NpcLootWhitelist[name];
-		}
 
-		private bool IsNpcLootBlacklisted( NPC npc ) {
-			string name = NihilismFilterAccess.GetNpcName( npc );
-			Regex regex = this.GetRegex( this.Data.NpcLootBlacklistPattern );
+			foreach( string grp_name in EntityGroups.GroupsPerNPC[ npc.type ] ) {
+				if( this.Data.NpcLootWhitelist.Contains( grp_name ) ) {
+					return true;
+				}
+			}
 
-			return regex.IsMatch( name );
+			return false;
 		}
 
 
@@ -92,62 +174,34 @@ namespace Nihilism.Data {
 		////////////////
 
 		public bool IsItemEnabled( Item item ) {
-			if( this.Data.ItemsBlacklistChecksFirst ) {
-				if( this.IsItemBlacklisted( item ) ) {
-					return false;
-				}
-				return this.IsItemWhitelisted( item );
-			} else {
-				if( this.IsItemWhitelisted( item ) ) {
-					return true;
-				}
-				return !this.IsItemBlacklisted( item );
+			if( !this.IsItemBlacklisted( item ) ) {
+				return true;
 			}
+			return this.IsItemWhitelisted( item );
 		}
 
 
 		public bool IsRecipeOfItemEnabled( Item item ) {
-			if( this.Data.RecipesBlacklistChecksFirst ) {
-				if( this.IsRecipeBlacklisted( item ) ) {
-					return false;
-				}
-				return this.IsRecipeWhitelisted( item );
-			} else {
-				if( this.IsRecipeWhitelisted( item ) ) {
-					return true;
-				}
-				return !this.IsRecipeBlacklisted( item );
+			if( !this.IsRecipeBlacklisted( item ) ) {
+				return true;
 			}
+			return this.IsRecipeWhitelisted( item );
 		}
 
 
 		public bool IsNpcEnabled( NPC npc ) {
-			if( this.Data.NpcsBlacklistChecksFirst ) {
-				if( this.IsNpcBlacklisted( npc ) ) {
-					return false;
-				}
-				return this.IsNpcWhitelisted( npc );
-			} else {
-				if( this.IsNpcWhitelisted( npc ) ) {
-					return true;
-				}
-				return !this.IsNpcBlacklisted( npc );
+			if( !this.IsNpcBlacklisted( npc ) ) {
+				return true;
 			}
+			return this.IsNpcWhitelisted( npc );
 		}
 
 
 		public bool IsNpcLootEnabled( NPC npc ) {
-			if( this.Data.NpcLootBlacklistChecksFirst ) {
-				if( this.IsNpcLootBlacklisted( npc ) ) {
-					return false;
-				}
-				return this.IsNpcLootWhitelisted( npc );
-			} else {
-				if( this.IsNpcLootWhitelisted( npc ) ) {
-					return true;
-				}
-				return !this.IsNpcLootBlacklisted( npc );
+			if( !this.IsNpcLootBlacklisted( npc ) ) {
+				return true;
 			}
+			return this.IsNpcLootWhitelisted( npc );
 		}
 	}
 }

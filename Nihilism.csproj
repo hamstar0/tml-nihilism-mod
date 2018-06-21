@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Nihilism</RootNamespace>
     <AssemblyName>Nihilism</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,7 +31,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="HamstarHelpers">
+    <Reference Include="HamstarHelpers, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Helpers\HamstarHelpers\bin\Release\HamstarHelpers.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
@@ -55,15 +57,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="API_Obsolete.cs" />
     <Compile Include="API_Call.cs" />
     <Compile Include="API.cs" />
+    <Compile Include="Commands\ItemBlacklistEntrySetCommand.cs" />
+    <Compile Include="Commands\LootBlacklistEntrySetCommand.cs" />
+    <Compile Include="Commands\NpcBlacklistEntrySetCommand.cs" />
+    <Compile Include="Commands\RecipeBlacklistAddCommand.cs" />
     <Compile Include="Commands\ShowFiltersCommand.cs" />
-    <Compile Include="Commands\NpcBlacklistSetCommand.cs" />
-    <Compile Include="Commands\LootBlacklistSetCommand.cs" />
-    <Compile Include="Commands\ItemBlacklistSetCommand.cs" />
     <Compile Include="Commands\LootWhitelistEntrySetCommand.cs" />
     <Compile Include="Commands\NpcWhitelistEntrySetCommand.cs" />
-    <Compile Include="Commands\RecipeBlacklistSetCommand.cs" />
     <Compile Include="Commands\RecipeWhitelistAddCommand.cs" />
     <Compile Include="Commands\ItemWhitelistEntrySetCommand.cs" />
     <Compile Include="Commands\NihilismOffCommand.cs" />
@@ -75,13 +78,13 @@
     <Compile Include="Data\FiltersAccess_Setters.cs" />
     <Compile Include="Data\FiltersAccess_Getters.cs" />
     <Compile Include="Data\Filters.cs" />
-    <Compile Include="Data\FiltersAccess_Regex.cs" />
-    <Compile Include="NetProtocol\WorldFiltersProtocol.cs" />
     <Compile Include="NetProtocol\ModSettingsProtocol.cs" />
+    <Compile Include="NetProtocol\FiltersProtocol.cs" />
     <Compile Include="NihilismItem.cs" />
-    <Compile Include="Logic\NihilismLogic.cs" />
+    <Compile Include="Logic\WorldLogic.cs" />
     <Compile Include="NihilismMod.cs" />
     <Compile Include="NihilismNpc.cs" />
+    <Compile Include="NihilismPlayer_Load.cs" />
     <Compile Include="NihilismPlayer.cs" />
     <Compile Include="NihilismProjectile.cs" />
     <Compile Include="NihilismRecipe.cs" />

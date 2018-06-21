@@ -1,10 +1,11 @@
-﻿using HamstarHelpers.Utilities.Network;
+﻿using HamstarHelpers.Components.Network;
 using Nihilism.Data;
 using System;
+using Terraria;
 
 
 namespace Nihilism.NetProtocol {
-	class WorldFiltersProtocol : PacketProtocol {
+	class FiltersProtocol : PacketProtocol {
 		public NihilismFilterData Filters;
 
 
@@ -12,9 +13,9 @@ namespace Nihilism.NetProtocol {
 
 		private void SetMyDefaults() {
 			var myworld = NihilismMod.Instance.GetModWorld<NihilismWorld>();
-			if( myworld.Logic.Data == null ) { throw new Exception( "No filters to send" ); }
+			if( myworld.Logic.DataAccess == null ) { throw new Exception( "No filters to send" ); }
 
-			myworld.Logic.Data.Give( ref this.Filters );
+			myworld.Logic.DataAccess.Give( ref this.Filters );
 		}
 
 		public override void SetClientDefaults() {
@@ -24,26 +25,32 @@ namespace Nihilism.NetProtocol {
 			this.SetMyDefaults();
 		}
 
-		////////////////
-
-		protected override void ReceiveWithClient() {
-			this.ReceiveOnAny();
-
-			var mymod = NihilismMod.Instance;
-			var myworld = mymod.GetModWorld<NihilismWorld>();
-			myworld.Logic.OnFiltersLoad( mymod );
-		}
-		protected override void ReceiveWithServer( int from_who ) {
-			this.ReceiveOnAny();
-		}
 
 		////////////////
 
 		private void ReceiveOnAny() {
 			var mymod = NihilismMod.Instance;
 			var myworld = mymod.GetModWorld<NihilismWorld>();
-			
-			myworld.Logic.Data.Take( this.Filters );
+
+			myworld.Logic.DataAccess.Take( this.Filters );
+		}
+
+		////////////////
+
+		protected override void ReceiveWithServer( int from_who ) {
+			this.ReceiveOnAny();
+		}
+
+		protected override void ReceiveWithClient() {
+			this.ReceiveOnAny();
+
+			var mymod = NihilismMod.Instance;
+			var myworld = mymod.GetModWorld<NihilismWorld>();
+			var myplayer = Main.LocalPlayer.GetModPlayer<NihilismPlayer>();
+
+			myworld.Logic.PostFiltersLoad( mymod );
+
+			myplayer.FinishFiltersSync();
 		}
 	}
 }
