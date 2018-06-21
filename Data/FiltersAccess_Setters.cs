@@ -1,19 +1,19 @@
 ﻿namespace Nihilism.Data {
 	partial class NihilismFilterAccess {
 		public void SetItemBlacklistEntry( string item_name ) {
-			this.Data.ItemWhitelist.Add( item_name );
+			this.Data.ItemBlacklist.Add( item_name );
 		}
 
 		public void SetRecipeBlacklistEntry( string item_name ) {
-			this.Data.RecipeWhitelist.Add( item_name );
+			this.Data.RecipeBlacklist.Add( item_name );
 		}
 
 		public void SetNpcLootBlacklistEntry( string npc_name ) {
-			this.Data.NpcLootWhitelist.Add( npc_name );
+			this.Data.NpcLootBlacklist.Add( npc_name );
 		}
 
 		public void SetNpcBlacklistEntry( string npc_name ) {
-			this.Data.NpcWhitelist.Add( npc_name );
+			this.Data.NpcBlacklist.Add( npc_name );
 		}
 
 		////

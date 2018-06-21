@@ -1,4 +1,5 @@
-﻿using HamstarHelpers.ItemHelpers;
+﻿using HamstarHelpers.DebugHelpers;
+using HamstarHelpers.ItemHelpers;
 using HamstarHelpers.NPCHelpers;
 using HamstarHelpers.Services.EntityGroups;
 using Terraria;
@@ -13,13 +14,11 @@ namespace Nihilism.Data {
 				return true;
 			}
 
-			if( !EntityGroups.GroupsPerItem.ContainsKey( item.type ) ) {
-				return false;
-			}
-
-			foreach( string grp_name in EntityGroups.GroupsPerItem[item.type] ) {
-				if( this.Data.ItemBlacklist.Contains( grp_name ) ) {
-					return true;
+			if( EntityGroups.GroupsPerItem.ContainsKey( item.type ) ) {
+				foreach( string grp_name in EntityGroups.GroupsPerItem[item.type] ) {
+					if( this.Data.ItemBlacklist.Contains( grp_name ) ) {
+						return true;
+					}
 				}
 			}
 
