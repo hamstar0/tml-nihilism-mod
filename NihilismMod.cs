@@ -31,6 +31,13 @@ namespace Nihilism {
 				NihilismMod.Instance.ConfigJson.SaveFile();
 			}
 		}
+		public static void ResetConfigFromDefaults() {
+			if( Main.netMode != 0 ) {
+				throw new Exception( "Cannot reset to default configs outside of single player." );
+			}
+			NihilismMod.Instance.ConfigJson.SetData( new NihilismConfigData() );
+			NihilismMod.Instance.ConfigJson.SaveFile();
+		}
 
 
 		////////////////
