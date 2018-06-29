@@ -8,6 +8,7 @@ namespace Nihilism {
 		public override bool? CanUseGrapple( int proj_type, Player player ) {
 			var mymod = (NihilismMod)this.mod;
 			var myworld = mymod.GetModWorld<NihilismWorld>();
+			if( myworld.Logic == null ) { return null; }
 
 			if( !myworld.Logic.AreItemFiltersEnabled( mymod ) ) {
 				return null;

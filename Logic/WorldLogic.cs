@@ -1,6 +1,7 @@
 ﻿using HamstarHelpers.Components.Network;
 using HamstarHelpers.DebugHelpers;
 using HamstarHelpers.Services.Messages;
+using HamstarHelpers.Services.Promises;
 using HamstarHelpers.TmlHelpers;
 using Nihilism.Data;
 using Nihilism.NetProtocol;
@@ -34,7 +35,7 @@ namespace Nihilism.Logic {
 		////////////////
 
 		internal void PostFiltersLoad( NihilismMod mymod ) {
-			TmlLoadHelpers.AddWorldLoadOncePromise( () => {
+			Promises.AddWorldLoadOncePromise( () => {
 				if( Main.netMode == 2 ) { return; }
 
 				var myworld = mymod.GetModWorld<NihilismWorld>();
@@ -50,9 +51,9 @@ namespace Nihilism.Logic {
 					InboxMessages.SetMessage( "nihilism_init", msg, false );
 				}
 
-				TmlLoadHelpers.TriggerCustomPromise( "NihilismOnEnterWorld" );
-				TmlLoadHelpers.AddWorldUnloadOncePromise( () => {
-					TmlLoadHelpers.ClearCustomPromise( "NihilismOnEnterWorld" );
+				Promises.TriggerCustomPromise( "NihilismOnEnterWorld" );
+				Promises.AddWorldUnloadOncePromise( () => {
+					Promises.ClearCustomPromise( "NihilismOnEnterWorld" );
 				} );
 			} );
 		}

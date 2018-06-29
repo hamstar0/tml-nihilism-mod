@@ -7,6 +7,7 @@ namespace Nihilism {
 		public override bool RecipeAvailable( Recipe recipe ) {
 			var mymod = (NihilismMod)this.mod;
 			var myworld = mymod.GetModWorld<NihilismWorld>();
+			if( myworld.Logic == null ) { return base.RecipeAvailable( recipe ); }
 
 			if( !myworld.Logic.AreRecipesFiltersEnabled( mymod ) ) {
 				return base.RecipeAvailable( recipe );

@@ -56,6 +56,7 @@ namespace Nihilism {
 
 			var mymod = (NihilismMod)this.mod;
 			var myworld = mymod.GetModWorld<NihilismWorld>();
+			if( myworld.Logic == null ) { return; }
 
 			if( myworld.Logic.DataAccess.IsActive() ) {
 				if( this.IsSynced() ) {
@@ -72,6 +73,7 @@ namespace Nihilism {
 			if( !mymod.Config.EnableItemEquipsFilters ) { return; }
 
 			var myworld = mymod.GetModWorld<NihilismWorld>();
+			if( myworld.Logic == null ) { return; }
 			if( !myworld.Logic.DataAccess.IsActive() ) { return; }
 
 			for( int i=0; i<this.player.armor.Length; i++ ) {
@@ -102,6 +104,8 @@ namespace Nihilism {
 		private void BlockWingSlotIfDisabled( string field_name ) {
 			bool success;
 			var myworld = this.mod.GetModWorld<NihilismWorld>();
+			if( myworld.Logic == null ) { return; }
+
 			ModPlayer mywingplayer = this.player.GetModPlayer( this.WingSlotMod, "WingSlotPlayer" );
 			object wing_equip_slot = ReflectionHelpers.GetField( mywingplayer, field_name, out success );
 

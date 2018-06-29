@@ -10,6 +10,7 @@ namespace Nihilism {
 		public override void PostDrawInInventory( Item item, SpriteBatch sb, Vector2 position, Rectangle frame, Color draw_color, Color item_color, Vector2 origin, float scale ) {
 			var mymod = (NihilismMod)this.mod;
 			var myworld = mymod.GetModWorld<NihilismWorld>();
+			if( myworld.Logic == null ) { return; }
 
 			if( !myworld.Logic.AreItemFiltersEnabled( mymod ) ) {
 				return;
@@ -31,6 +32,7 @@ namespace Nihilism {
 		public override bool CanUseItem( Item item, Player player ) {
 			var mymod = (NihilismMod)this.mod;
 			var myworld = mymod.GetModWorld<NihilismWorld>();
+			if( myworld.Logic == null ) { return base.CanUseItem( item, player ); }
 
 			if( !myworld.Logic.AreItemFiltersEnabled( mymod ) ) {
 				return base.CanUseItem( item, player );
@@ -53,6 +55,7 @@ namespace Nihilism {
 		public override bool CanRightClick( Item item ) {
 			var mymod = (NihilismMod)this.mod;
 			var myworld = mymod.GetModWorld<NihilismWorld>();
+			if( myworld.Logic == null ) { return base.CanRightClick( item ); }
 
 			if( !myworld.Logic.AreItemFiltersEnabled( mymod ) ) {
 				return base.CanRightClick( item );

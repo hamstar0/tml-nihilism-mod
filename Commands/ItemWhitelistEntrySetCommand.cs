@@ -12,7 +12,7 @@ namespace Nihilism.Commands {
 		}
 		public override CommandType Type {
 			get {
-				if( Main.netMode == 0 ) {
+				if( Main.netMode == 0 && !Main.dedServ ) {
 					return CommandType.World;
 				} else {
 					return CommandType.Console;
