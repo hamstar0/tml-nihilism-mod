@@ -7,7 +7,6 @@ using Terraria.ModLoader;
 
 namespace Nihilism {
 	partial class NihilismPlayer : ModPlayer {
-		private bool IsModSettingsSynced = false;
 		private bool IsFiltersSynced = false;
 
 		private Mod WingSlotMod = null;

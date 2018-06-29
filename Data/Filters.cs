@@ -49,10 +49,10 @@ namespace Nihilism.Data {
 		////////////////
 		
 		public void SetCurrentFiltersAsDefaults( NihilismMod mymod ) {
-			mymod.ServerConfig.DefaultItemBlacklist = this.ItemBlacklist;
-			mymod.ServerConfig.DefaultRecipeBlacklist = this.RecipeBlacklist;
-			mymod.ServerConfig.DefaultNpcBlacklist = this.NpcBlacklist;
-			mymod.ServerConfig.DefaultNpcLootBlacklist = this.NpcLootBlacklist;
+			mymod.ServerConfig.DefaultItemBlacklist = new HashSet<string>( this.ItemBlacklist );
+			mymod.ServerConfig.DefaultRecipeBlacklist = new HashSet<string>( this.RecipeBlacklist );
+			mymod.ServerConfig.DefaultNpcBlacklist = new HashSet<string>( this.NpcBlacklist );
+			mymod.ServerConfig.DefaultNpcLootBlacklist = new HashSet<string>( this.NpcLootBlacklist );
 
 			mymod.ServerConfig.DefaultRecipeWhitelist = new HashSet<string>( this.RecipeWhitelist );
 			mymod.ServerConfig.DefaultItemWhitelist = new HashSet<string>( this.ItemWhitelist );
@@ -60,15 +60,15 @@ namespace Nihilism.Data {
 			mymod.ServerConfig.DefaultNpcLootWhitelist = new HashSet<string>( this.NpcLootWhitelist );
 
 			if( !mymod.SuppressAutoSaving ) {
-				mymod.ConfigJson.SaveFile();
+				//mymod.ConfigJson.SaveFile();
 			}
 		}
 
 		public void ResetFiltersFromDefaults( NihilismMod mymod ) {
-			this.ItemBlacklist = mymod.ServerConfig.DefaultItemBlacklist;
-			this.RecipeBlacklist = mymod.ServerConfig.DefaultRecipeBlacklist;
-			this.NpcBlacklist = mymod.ServerConfig.DefaultNpcBlacklist;
-			this.NpcLootBlacklist = mymod.ServerConfig.DefaultNpcLootBlacklist;
+			this.ItemBlacklist = new HashSet<string>( mymod.ServerConfig.DefaultItemBlacklist );
+			this.RecipeBlacklist = new HashSet<string>( mymod.ServerConfig.DefaultRecipeBlacklist );
+			this.NpcBlacklist = new HashSet<string>( mymod.ServerConfig.DefaultNpcBlacklist );
+			this.NpcLootBlacklist = new HashSet<string>( mymod.ServerConfig.DefaultNpcLootBlacklist );
 
 			this.RecipeWhitelist = new HashSet<string>( mymod.ServerConfig.DefaultRecipeWhitelist );
 			this.ItemWhitelist = new HashSet<string>( mymod.ServerConfig.DefaultItemWhitelist );

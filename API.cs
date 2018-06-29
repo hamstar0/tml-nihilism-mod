@@ -11,7 +11,7 @@ namespace Nihilism {
 		}
 
 		public static void SaveModSettingsChanges() {
-			NihilismMod.Instance.ConfigJson.SaveFile();
+			//NihilismMod.Instance.ConfigJson.SaveFile();
 		}
 
 
