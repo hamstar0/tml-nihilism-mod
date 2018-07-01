@@ -7,13 +7,13 @@ using Terraria;
 
 namespace Nihilism.Data {
 	partial class NihilismFilterAccess {
-		private bool IsItemBlacklisted( Item item ) {
+		internal bool IsItemBlacklisted( Item item ) {
 			string name = ItemIdentityHelpers.GetQualifiedName( item );
 
 			if( this.Data.ItemBlacklist.Contains( name ) ) {
 				return true;
 			}
-
+			
 			if( EntityGroups.GroupsPerItem.ContainsKey( item.type ) ) {
 				foreach( string grp_name in EntityGroups.GroupsPerItem[item.type] ) {
 					if( this.Data.ItemBlacklist.Contains( grp_name ) ) {
@@ -89,7 +89,7 @@ namespace Nihilism.Data {
 
 		////////////////
 
-		private bool IsItemWhitelisted( Item item ) {
+		internal bool IsItemWhitelisted( Item item ) {
 			string name = ItemIdentityHelpers.GetQualifiedName( item );
 
 			if( this.Data.ItemWhitelist.Contains( name ) ) {

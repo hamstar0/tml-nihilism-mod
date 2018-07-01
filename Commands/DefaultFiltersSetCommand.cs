@@ -26,7 +26,7 @@ namespace Nihilism.Commands {
 		}
 		public override string Description {
 			get {
-				return "Set current white and blacklists as defaults for each new world.";
+				return "Set current white and blacklists as the initial defaults for every world.";
 			}
 		}
 

@@ -9,8 +9,10 @@ namespace Nihilism.Data {
 		private NihilismFilterData Data;
 
 
-		public NihilismFilterAccess( NihilismFilterData data ) {
-			this.Data = data;
+		////////////////
+
+		public NihilismFilterAccess() {
+			this.Data = new NihilismFilterData();
 		}
 
 

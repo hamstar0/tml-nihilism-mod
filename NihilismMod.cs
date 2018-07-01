@@ -1,5 +1,6 @@
 ﻿using HamstarHelpers.Components.Config;
 using HamstarHelpers.DebugHelpers;
+using HamstarHelpers.Services.EntityGroups;
 using HamstarHelpers.Services.Messages;
 using Microsoft.Xna.Framework.Graphics;
 using Nihilism.Data;
@@ -35,7 +36,11 @@ namespace Nihilism {
 			if( Main.netMode != 0 ) {
 				throw new Exception( "Cannot reset to default configs outside of single player." );
 			}
-			NihilismMod.Instance.ConfigJson.SetData( new NihilismConfigData() );
+
+			var config_data = new NihilismConfigData();
+			config_data.SetDefaults();
+
+			NihilismMod.Instance.ConfigJson.SetData( config_data );
 			NihilismMod.Instance.ConfigJson.SaveFile();
 		}
 
@@ -73,6 +78,8 @@ namespace Nihilism {
 			if( Main.netMode != 2 ) {   // Not server
 				this.DisabledItem = ModLoader.GetTexture( "Terraria/MapDeath" );
 			}
+
+			EntityGroups.Enable();
 
 			this.LoadConfig();
 		}

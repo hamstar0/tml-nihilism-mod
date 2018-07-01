@@ -26,7 +26,7 @@ namespace Nihilism.Commands {
 		}
 		public override string Description {
 			get {
-				return "Sets config's white and blacklists to override the current world's.";
+				return "Sets default config's white and blacklists to override the current world's.";
 			}
 		}
 

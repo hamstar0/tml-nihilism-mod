@@ -80,9 +80,9 @@ namespace Nihilism {
 				Item item = this.player.armor[i];
 				if( item == null || item.IsAir ) { continue; }
 
-				if( myworld.Logic.DataAccess.IsItemEnabled( item ) ) { continue; }
-				
-				PlayerItemHelpers.DropEquippedItem( player, i );
+				if( !myworld.Logic.DataAccess.IsItemEnabled( item ) ) {
+					PlayerItemHelpers.DropEquippedItem( player, i );
+				}
 			}
 
 			for( int i = 0; i < this.player.miscEquips.Length; i++ ) {

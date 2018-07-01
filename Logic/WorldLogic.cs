@@ -16,8 +16,7 @@ namespace Nihilism.Logic {
 		////////////////
 
 		public WorldLogic( NihilismMod mymod ) {
-			var data = new NihilismFilterData();
-			this.DataAccess = new NihilismFilterAccess( data );
+			this.DataAccess = new NihilismFilterAccess();
 		}
 
 

@@ -1,6 +1,9 @@
-﻿using HamstarHelpers.PlayerHelpers;
+﻿using HamstarHelpers.DebugHelpers;
+using HamstarHelpers.ItemHelpers;
+using HamstarHelpers.PlayerHelpers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -33,23 +36,22 @@ namespace Nihilism {
 			var mymod = (NihilismMod)this.mod;
 			var myworld = mymod.GetModWorld<NihilismWorld>();
 			if( myworld.Logic == null ) { return base.CanUseItem( item, player ); }
-
+			
 			if( !myworld.Logic.AreItemFiltersEnabled( mymod ) ) {
 				return base.CanUseItem( item, player );
 			}
 			
 			if( !myworld.Logic.DataAccess.IsItemEnabled( item ) ) {
 				return false;
-			} else if( item.useAmmo == 0 ) {
-				return true;
-			}
+			} else if( item.useAmmo != 0 ) {
+				Item ammo_item = PlayerItemFinderHelpers.GetCurrentAmmo( player, item );
 
-			Item ammo_item = PlayerItemFinderHelpers.GetCurrentAmmo( player, item );
-			if( ammo_item != null ) {
-				return myworld.Logic.DataAccess.IsItemEnabled( ammo_item );
+				if( ammo_item != null ) {
+					return myworld.Logic.DataAccess.IsItemEnabled( ammo_item );
+				}
 			}
-
-			return false;
+			
+			return true;
 		}
 
 		public override bool CanRightClick( Item item ) {
@@ -60,8 +62,63 @@ namespace Nihilism {
 			if( !myworld.Logic.AreItemFiltersEnabled( mymod ) ) {
 				return base.CanRightClick( item );
 			}
+			
+			return myworld.Logic.DataAccess.IsItemEnabled( item );
+		}
+
+		public override bool AltFunctionUse( Item item, Player player ) {
+			var mymod = (NihilismMod)this.mod;
+			var myworld = mymod.GetModWorld<NihilismWorld>();
+			if( myworld.Logic == null ) { return base.AltFunctionUse( item, player ); }
+
+			if( !myworld.Logic.AreItemFiltersEnabled( mymod ) ) {
+				return base.AltFunctionUse( item, player );
+			}
 
 			return myworld.Logic.DataAccess.IsItemEnabled( item );
+		}
+
+		public override bool PreOpenVanillaBag( string context, Player player, int arg ) {
+			var mymod = (NihilismMod)this.mod;
+			var myworld = mymod.GetModWorld<NihilismWorld>();
+			if( myworld.Logic == null ) {
+				return base.PreOpenVanillaBag( context, player, arg );
+			}
+
+			if( !myworld.Logic.AreItemFiltersEnabled( mymod ) ) {
+				return base.PreOpenVanillaBag( context, player, arg );
+			}
+
+			IList<int> containers = ItemFinderHelpers.FindMatches( player.inventory, ( item ) => {
+				if( item == null || item.IsAir ) { return false; }
+				if( ItemAttributeHelpers.GetContainerContext( item ) != context ) { return false; }
+				if( arg != 0 ) { return item.type == arg; }
+				return true;
+			} );
+			if( containers.Count == 0 ) {
+				LogHelpers.Log( "NihilismItem.PreOpenVanillaBag - Unknown bad of context " + context + ", " + arg );
+				return base.PreOpenVanillaBag( context, player, arg );	// Shouldn't happen?
+			}
+
+			Item container = player.inventory[ containers[0] ];
+			bool is_air = container.IsAir;
+
+			if( is_air ) {
+				container = new Item();
+				container.SetDefaults( arg != 0 ? arg : ItemAttributeHelpers.GetContainerItemTypes(context)[0] );
+			}
+
+			bool can_open = myworld.Logic.DataAccess.IsItemEnabled( container );
+
+			if( !can_open ) {
+				if( containers.Count > 1 || is_air ) {
+					Main.NewText( "Due to a tModLoader bug, opening blacklisted bags and boxes will sometimes consume the item. Sorry. :(", Color.Red );
+				} else {
+					container.stack++;
+				}
+			}
+
+			return can_open;
 		}
 	}
 }
