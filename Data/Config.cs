@@ -115,8 +115,27 @@ namespace Nihilism.Data {
 				return false;
 			}
 			
-			if( vers_since < new Version(2, 1, 2, 1) ) {
-				this.SetDefaults();
+			if( vers_since < new Version(2, 1, 2, 2) ) {
+				if( this.DefaultItemBlacklist.Count == 1 &&
+						this.DefaultRecipeBlacklist.Count == 1 &&
+						this.DefaultNpcBlacklist.Count == 1 &&
+						this.DefaultNpcLootBlacklist.Count == 1 &&
+						this.DefaultItemWhitelist.Count == 1 &&
+						this.DefaultRecipeWhitelist.Count == 1 &&
+						this.DefaultNpcWhitelist.Count == 1 &&
+						this.DefaultNpcLootWhitelist.Count == 1 ) {
+					this.DefaultItemBlacklist.Clear();
+					this.DefaultRecipeBlacklist.Clear();
+					this.DefaultNpcBlacklist.Clear();
+					this.DefaultNpcLootBlacklist.Clear();
+
+					this.DefaultItemWhitelist.Clear();
+					this.DefaultRecipeWhitelist.Clear();
+					this.DefaultNpcWhitelist.Clear();
+					this.DefaultNpcLootWhitelist.Clear();
+
+					this.SetDefaults();
+				}
 			}
 
 			this.VersionSinceUpdate = NihilismConfigData.ConfigVersion.ToString();

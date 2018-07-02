@@ -45,6 +45,7 @@ namespace Nihilism {
 		}
 
 
+
 		////////////////
 
 		public JsonConfig<NihilismConfigData> ConfigJson { get; private set; }
