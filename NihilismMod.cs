@@ -89,10 +89,10 @@ namespace Nihilism {
 			this.WingSlotMod = ModLoader.GetMod( "Wing Slot" );
 			if( this.WingSlotMod == null ) {
 				if( this.Config.DebugModeInfo ) {
-					LogHelpers.Log( "NihilismPlayer.Initialize - Wing Mod not detected; ignoring wing slots..." );
-				} else {
-					LogHelpers.Log( "NihilismPlayer.Initialize - Wing Mod not detected; ignoring wing slots..." );
+					LogHelpers.Log( "NihilismMod.Load - Wing Mod not detected; ignoring wing slots..." );
 				}
+			} else {
+				LogHelpers.Log( "NihilismMod.Load - Wing Mod detected. Compatibility will be attempted." );
 			}
 		}
 
