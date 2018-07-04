@@ -47,11 +47,13 @@ namespace Nihilism {
 				Item ammo_item = PlayerItemFinderHelpers.GetCurrentAmmo( player, item );
 
 				if( ammo_item != null ) {
-					return myworld.Logic.DataAccess.IsItemEnabled( ammo_item );
+					if( !myworld.Logic.DataAccess.IsItemEnabled( ammo_item ) ) {
+						return false;
+					}
 				}
 			}
 			
-			return true;
+			return base.CanUseItem( item, player );
 		}
 
 		public override bool CanRightClick( Item item ) {
@@ -63,7 +65,10 @@ namespace Nihilism {
 				return base.CanRightClick( item );
 			}
 			
-			return myworld.Logic.DataAccess.IsItemEnabled( item );
+			if( !myworld.Logic.DataAccess.IsItemEnabled( item ) ) {
+				return false;
+			}
+			return base.CanRightClick( item );
 		}
 
 		public override bool AltFunctionUse( Item item, Player player ) {
@@ -75,7 +80,10 @@ namespace Nihilism {
 				return base.AltFunctionUse( item, player );
 			}
 
-			return myworld.Logic.DataAccess.IsItemEnabled( item );
+			if( !myworld.Logic.DataAccess.IsItemEnabled( item ) ) {
+				return false;
+			}
+			return base.AltFunctionUse( item, player );
 		}
 
 		public override bool PreOpenVanillaBag( string context, Player player, int arg ) {
@@ -116,9 +124,11 @@ namespace Nihilism {
 				} else {
 					container.stack++;
 				}
+
+				return false;
 			}
 
-			return can_open;
+			return base.PreOpenVanillaBag( context, player, arg );
 		}
 	}
 }

@@ -10,17 +10,12 @@ namespace Nihilism {
 		private bool IsModSettingsSynced = false;
 		private bool IsFiltersSynced = false;
 
-		private Mod WingSlotMod = null;
-
 
 		////////////////
 
 		public override bool CloneNewInstances { get { return false; } }
 		
-		public override void Initialize() {
-			//this.HasEnteredWorld = false;
-			this.WingSlotMod = ModLoader.GetMod( "Wing Slot" );
-		}
+		public override void Initialize() { }
 
 		public override void clientClone( ModPlayer client_clone ) {
 			var clone = (NihilismPlayer)client_clone;
@@ -94,7 +89,7 @@ namespace Nihilism {
 				PlayerItemHelpers.DropEquippedMiscItem( player, i );
 			}
 
-			if( this.WingSlotMod != null ) {
+			if( mymod.WingSlotMod != null ) {
 				this.BlockWingSlotIfDisabled( "EquipSlot" );
 				this.BlockWingSlotIfDisabled( "VanitySlot" );
 			}
@@ -103,10 +98,11 @@ namespace Nihilism {
 
 		private void BlockWingSlotIfDisabled( string field_name ) {
 			bool success;
-			var myworld = this.mod.GetModWorld<NihilismWorld>();
+			var mymod = (NihilismMod)this.mod;
+			var myworld = mymod.GetModWorld<NihilismWorld>();
 			if( myworld.Logic == null ) { return; }
 
-			ModPlayer mywingplayer = this.player.GetModPlayer( this.WingSlotMod, "WingSlotPlayer" );
+			ModPlayer mywingplayer = this.player.GetModPlayer( mymod.WingSlotMod, "WingSlotPlayer" );
 			object wing_equip_slot = ReflectionHelpers.GetField( mywingplayer, field_name, out success );
 
 			if( !success || wing_equip_slot == null ) { return; }
