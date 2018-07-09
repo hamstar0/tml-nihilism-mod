@@ -32,6 +32,8 @@ namespace Nihilism {
 			}
 		}
 
+		////////////////
+
 		public override bool CanUseItem( Item item, Player player ) {
 			var mymod = (NihilismMod)this.mod;
 			var myworld = mymod.GetModWorld<NihilismWorld>();
@@ -56,6 +58,7 @@ namespace Nihilism {
 			return base.CanUseItem( item, player );
 		}
 
+
 		public override bool CanRightClick( Item item ) {
 			var mymod = (NihilismMod)this.mod;
 			var myworld = mymod.GetModWorld<NihilismWorld>();
@@ -71,6 +74,7 @@ namespace Nihilism {
 			return base.CanRightClick( item );
 		}
 
+
 		public override bool AltFunctionUse( Item item, Player player ) {
 			var mymod = (NihilismMod)this.mod;
 			var myworld = mymod.GetModWorld<NihilismWorld>();
@@ -85,6 +89,39 @@ namespace Nihilism {
 			}
 			return base.AltFunctionUse( item, player );
 		}
+
+
+		public override bool ConsumeItem( Item item, Player player ) {
+			var mymod = (NihilismMod)this.mod;
+			var myworld = mymod.GetModWorld<NihilismWorld>();
+			if( myworld.Logic == null ) { return base.ConsumeItem( item, player ); }
+
+			if( !myworld.Logic.AreItemFiltersEnabled( mymod ) ) {
+				return base.ConsumeItem( item, player );
+			}
+
+			if( !myworld.Logic.DataAccess.IsItemEnabled( item ) ) {
+				return false;
+			}
+			return base.ConsumeItem( item, player );
+		}
+
+
+		public override bool ConsumeAmmo( Item item, Player player ) {
+			var mymod = (NihilismMod)this.mod;
+			var myworld = mymod.GetModWorld<NihilismWorld>();
+			if( myworld.Logic == null ) { return base.ConsumeAmmo( item, player ); }
+
+			if( !myworld.Logic.AreItemFiltersEnabled( mymod ) ) {
+				return base.ConsumeAmmo( item, player );
+			}
+
+			if( !myworld.Logic.DataAccess.IsItemEnabled( item ) ) {
+				return false;
+			}
+			return base.ConsumeAmmo( item, player );
+		}
+
 
 		public override bool PreOpenVanillaBag( string context, Player player, int arg ) {
 			var mymod = (NihilismMod)this.mod;
