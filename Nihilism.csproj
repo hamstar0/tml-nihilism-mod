@@ -82,6 +82,7 @@
     <Compile Include="NetProtocol\FiltersProtocol.cs" />
     <Compile Include="NihilismItem.cs" />
     <Compile Include="Logic\WorldLogic.cs" />
+    <Compile Include="NihilismMod_Meta.cs" />
     <Compile Include="NihilismMod.cs" />
     <Compile Include="NihilismNpc.cs" />
     <Compile Include="NihilismPlayer_Load.cs" />

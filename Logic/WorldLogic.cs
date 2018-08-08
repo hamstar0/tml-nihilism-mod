@@ -1,8 +1,7 @@
 ﻿using HamstarHelpers.Components.Network;
-using HamstarHelpers.DebugHelpers;
+using HamstarHelpers.Helpers.DebugHelpers;
 using HamstarHelpers.Services.Messages;
 using HamstarHelpers.Services.Promises;
-using HamstarHelpers.TmlHelpers;
 using Nihilism.Data;
 using Nihilism.NetProtocol;
 using Terraria;
@@ -10,6 +9,19 @@ using Terraria;
 
 namespace Nihilism.Logic {
 	partial class WorldLogic {
+		internal readonly static object MyValidatorKey;
+		public readonly static PromiseValidator LoadAllValidator;
+
+
+		////////////////
+
+		static WorldLogic() {
+			WorldLogic.MyValidatorKey = new object();
+			WorldLogic.LoadAllValidator = new PromiseValidator( WorldLogic.MyValidatorKey );
+		}
+
+
+		////////////////
 		public NihilismFilterAccess DataAccess { get; private set; }
 
 
@@ -50,9 +62,9 @@ namespace Nihilism.Logic {
 					InboxMessages.SetMessage( "nihilism_init", msg, false );
 				}
 
-				Promises.TriggerCustomPromise( "NihilismOnEnterWorld" );
+				Promises.TriggerValidatedPromise( WorldLogic.LoadAllValidator, WorldLogic.MyValidatorKey );
 				Promises.AddWorldUnloadOncePromise( () => {
-					Promises.ClearCustomPromise( "NihilismOnEnterWorld" );
+					Promises.ClearValidatedPromise( WorldLogic.LoadAllValidator );
 				} );
 			} );
 		}

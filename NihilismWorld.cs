@@ -1,4 +1,4 @@
-﻿using HamstarHelpers.DebugHelpers;
+﻿using HamstarHelpers.Helpers.DebugHelpers;
 using Nihilism.Logic;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;

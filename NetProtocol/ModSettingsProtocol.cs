@@ -8,9 +8,13 @@ namespace Nihilism.NetProtocol {
 		public NihilismConfigData Settings;
 
 
-		public override void SetServerDefaults() {
+		////////////////
+
+		protected override void SetServerDefaults() {
 			this.Settings = NihilismMod.Instance.Config;
 		}
+
+		////////////////
 
 		protected override void ReceiveWithClient() {
 			var mymod = NihilismMod.Instance;

@@ -1,5 +1,5 @@
 ﻿using HamstarHelpers.Components.Network;
-using HamstarHelpers.DebugHelpers;
+using HamstarHelpers.Helpers.DebugHelpers;
 using Nihilism.Data;
 using Nihilism.NetProtocol;
 using Terraria.ModLoader;
