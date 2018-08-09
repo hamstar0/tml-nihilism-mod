@@ -64,7 +64,7 @@ namespace Nihilism.Logic {
 
 				Promises.TriggerValidatedPromise( WorldLogic.LoadAllValidator, WorldLogic.MyValidatorKey );
 				Promises.AddWorldUnloadOncePromise( () => {
-					Promises.ClearValidatedPromise( WorldLogic.LoadAllValidator );
+					Promises.ClearValidatedPromise( WorldLogic.LoadAllValidator, WorldLogic.MyValidatorKey );
 				} );
 			} );
 		}
