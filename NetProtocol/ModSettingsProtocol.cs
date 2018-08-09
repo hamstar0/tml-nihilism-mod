@@ -1,4 +1,5 @@
 ﻿using HamstarHelpers.Components.Network;
+using HamstarHelpers.Components.Network.Data;
 using Nihilism.Data;
 using Terraria;
 
@@ -9,6 +10,8 @@ namespace Nihilism.NetProtocol {
 
 
 		////////////////
+
+		private ModSettingsProtocol( PacketProtocolDataConstructorLock ctor_lock ) { }
 
 		protected override void SetServerDefaults() {
 			this.Settings = NihilismMod.Instance.Config;
