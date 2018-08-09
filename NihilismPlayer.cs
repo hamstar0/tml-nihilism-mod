@@ -34,8 +34,8 @@ namespace Nihilism {
 		}
 
 		public override void OnEnterWorld( Player player ) {
-			if( player.whoAmI == Main.myPlayer ) { return; }
-			if( this.player.whoAmI == Main.myPlayer ) { return; }
+			if( player.whoAmI != Main.myPlayer ) { return; }
+			if( this.player.whoAmI != Main.myPlayer ) { return; }
 
 			if( Main.netMode == 0 ) {
 				this.OnEnterWorldForSingle();
