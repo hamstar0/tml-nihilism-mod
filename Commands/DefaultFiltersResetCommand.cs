@@ -7,7 +7,7 @@ namespace Nihilism.Commands {
 	class DefaultFiltersResetCommand : ModCommand {
 		public override string Command {
 			get {
-				return "nihdefaultsreset";
+				return "nih-defaults-reset";
 			}
 		}
 		public override CommandType Type {

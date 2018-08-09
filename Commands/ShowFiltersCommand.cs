@@ -7,7 +7,7 @@ namespace Nihilism.Commands {
 	class ShowFiltersCommand : ModCommand {
 		public override string Command {
 			get {
-				return "nihshowfilters";
+				return "nih-show-filters";
 			}
 		}
 		public override CommandType Type {

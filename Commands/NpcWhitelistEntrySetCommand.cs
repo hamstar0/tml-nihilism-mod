@@ -7,7 +7,7 @@ namespace Nihilism.Commands {
 	class NpcWhitelistEntrySetCommand : ModCommand {
 		public override string Command {
 			get {
-				return "nihnpcwhitelistadd";
+				return "nih-npc-whitelist-add";
 			}
 		}
 		public override CommandType Type {

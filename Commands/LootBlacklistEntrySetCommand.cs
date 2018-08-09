@@ -7,7 +7,7 @@ namespace Nihilism.Commands {
 	class LootBlacklistEntrySetCommand : ModCommand {
 		public override string Command {
 			get {
-				return "nihlootblacklistadd";
+				return "nih-loot-blacklist-add";
 			}
 		}
 		public override CommandType Type {

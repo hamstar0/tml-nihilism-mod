@@ -7,7 +7,7 @@ namespace Nihilism.Commands {
 	class NihilismOffCommand : ModCommand {
 		public override string Command {
 			get {
-				return "nihoff";
+				return "nih-off";
 			}
 		}
 		public override CommandType Type {
