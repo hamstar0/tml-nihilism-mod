@@ -37,6 +37,43 @@
 
 		////////////////
 
+		public void UnsetItemBlacklistEntry( string item_name ) {
+			this.Data.ItemBlacklist.Remove( item_name );
+		}
+
+		public void UnsetRecipeBlacklistEntry( string item_name ) {
+			this.Data.RecipeBlacklist.Remove( item_name );
+		}
+
+		public void UnsetNpcLootBlacklistEntry( string npc_name ) {
+			this.Data.NpcLootBlacklist.Remove( npc_name );
+		}
+
+		public void UnsetNpcBlacklistEntry( string npc_name ) {
+			this.Data.NpcBlacklist.Remove( npc_name );
+		}
+
+		////
+
+		public void UnsetItemWhitelistEntry( string item_name ) {
+			this.Data.ItemWhitelist.Remove( item_name );
+		}
+
+		public void UnsetRecipeWhitelistEntry( string item_name ) {
+			this.Data.RecipeWhitelist.Remove( item_name );
+		}
+
+		public void UnsetNpcLootWhitelistEntry( string npc_name ) {
+			this.Data.NpcLootWhitelist.Remove( npc_name );
+		}
+
+		public void UnsetNpcWhitelistEntry( string npc_name ) {
+			this.Data.NpcWhitelist.Remove( npc_name );
+		}
+
+
+		////////////////
+
 		public void ClearItemBlacklist() {
 			this.Data.ItemBlacklist.Clear();
 		}
