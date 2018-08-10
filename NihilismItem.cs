@@ -14,11 +14,11 @@ namespace Nihilism {
 			var mymod = (NihilismMod)this.mod;
 			var myworld = mymod.GetModWorld<NihilismWorld>();
 			if( myworld.Logic == null ) { return; }
-
+			
 			if( !myworld.Logic.AreItemFiltersEnabled( mymod ) ) {
 				return;
 			}
-
+			
 			if( item == null || item.IsAir ) { return; }
 
 			if( !myworld.Logic.DataAccess.IsItemEnabled( item ) ) {

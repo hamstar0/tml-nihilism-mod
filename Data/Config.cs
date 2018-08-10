@@ -32,57 +32,6 @@ namespace Nihilism.Data {
 		public bool EnableNpcLootFilters = true;
 
 
-		////////
-
-		[Obsolete( "Not a useable setting", true )]
-		public string _OLD_SETTINGS_BELOW_ = "";
-
-		[Obsolete( "Use NihilismConfigData.DefaultRecipesBlacklisted", true )]
-		public string DefaultRecipesBlacklistPattern = "(.*?)";
-		[Obsolete( "Use NihilismConfigData.DefaultItemsBlacklisted", true )]
-		public string DefaultItemsBlacklistPattern = "(.*?)";
-		[Obsolete( "Use NihilismConfigData.DefaultNpcBlacklisted", true )]
-		public string DefaultNpcBlacklistPattern = "(.*?)";
-		[Obsolete( "Use NihilismConfigData.DefaultNpcLootBlacklisted", true )]
-		public string DefaultNpcLootBlacklistPattern = "(.*?)";
-
-		[Obsolete( "Use NihilismFilterData.RecipesBlacklistChecksFirst", true )]
-		public bool RecipesBlacklistChecksFirst = false;
-		[Obsolete( "Use NihilismFilterData.ItemsBlacklistChecksFirst", true )]
-		public bool ItemsBlacklistChecksFirst = false;
-		[Obsolete( "Use NihilismFilterData.NpcsBlacklistChecksFirst", true )]
-		public bool NpcsBlacklistChecksFirst = false;
-		[Obsolete( "Use NihilismFilterData.NpcItemDropsBlacklistChecksFirst", true )]
-		public bool NpcItemDropsBlacklistChecksFirst = false;
-
-		[Obsolete( "Use NihilismConfigData.DefaultItemWhitelist or NihilismFilterData.DefaultItemBlacklist", true )]
-		public string ItemsBlacklistPattern = "(.*?)";
-		[Obsolete( "Use NihilismConfigData.DefaultRecipeWhitelist or NihilismFilterData.DefaultRecipeBlacklist", true )]
-		public string RecipesBlacklistPattern = "(.*?)";
-		[Obsolete( "Use NihilismConfigData.DefaultNpcWhitelist or NihilismFilterData.DefaultNpcBlacklist", true )]
-		public string NpcsBlacklistPattern = "(.*?)";
-		[Obsolete( "Use NihilismConfigData.DefaultNpcLootWhitelist or NihilismFilterData.DefaultNpcLootBlacklist", true )]
-		public string NpcItemDropsBlacklistPattern = "(.*?)";
-		
-		[Obsolete( "Use NihilismConfigData.DefaultRecipeWhitelist or NihilismFilterData.DefaultItemBlacklist", true )]
-		public bool DefaultItemsBlacklisted = true;
-		[Obsolete( "Use NihilismConfigData.DefaultRecipeWhitelist or NihilismFilterData.DefaultRecipeBlacklist", true )]
-		public bool DefaultRecipesBlacklisted = true;
-		[Obsolete( "Use NihilismConfigData.DefaultRecipeWhitelist or NihilismFilterData.DefaultNpcBlacklist", true )]
-		public bool DefaultNpcBlacklisted = true;
-		[Obsolete( "Use NihilismConfigData.DefaultRecipeWhitelist or NihilismFilterData.DefaultNpcLootBlacklist", true )]
-		public bool DefaultNpcLootBlacklisted = true;
-
-		[Obsolete( "Use NihilismConfigData.DefaultRecipeWhitelist or NihilismFilterData.RecipeWhitelist", true )]
-		public IDictionary<string, bool> RecipeWhitelist = new Dictionary<string, bool> { };
-		[Obsolete( "Use NihilismConfigData.DefaultItemWhitelist or NihilismFilterData.ItemWhitelist", true )]
-		public IDictionary<string, bool> ItemWhitelist = new Dictionary<string, bool> { };
-		[Obsolete( "Use NihilismConfigData.DefaultNpcWhitelist or NihilismFilterData.NpcWhitelist", true )]
-		public IDictionary<string, bool> NpcWhitelist = new Dictionary<string, bool> { };
-		[Obsolete( "Use NihilismConfigData.DefaultNpcItemDropWhitelist or NihilismFilterData.NpcItemDropWhitelist", true )]
-		public IDictionary<string, bool> NpcItemDropWhitelist = new Dictionary<string, bool> { };
-
-
 		////////////////
 
 		public override void OnLoad( bool success ) {

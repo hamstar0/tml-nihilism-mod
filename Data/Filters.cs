@@ -1,5 +1,4 @@
 ﻿using HamstarHelpers.Components.Config;
-using System;
 using System.Collections.Generic;
 
 
@@ -16,26 +15,6 @@ namespace Nihilism.Data {
 		public ISet<string> ItemWhitelist = new HashSet<string> { };
 		public ISet<string> NpcWhitelist = new HashSet<string> { };
 		public ISet<string> NpcLootWhitelist = new HashSet<string> { };
-
-		[Obsolete( "Not a useable setting", true )]
-		public string _OLD_SETTINGS_BELOW_ = "";
-
-		[Obsolete( "Use NihilismFilterData.ItemBlacklist", true )]
-		public string ItemsBlacklistPattern;
-		[Obsolete( "Use NihilismFilterData.RecipeBlacklist", true )]
-		public string RecipesBlacklistPattern;
-		[Obsolete( "Use NihilismFilterData.NpcBlacklist", true )]
-		public string NpcBlacklistPattern;
-		[Obsolete( "Use NihilismFilterData.NpcLootBlacklist", true )]
-		public string NpcLootBlacklistPattern;
-		[Obsolete( "Use NihilismFilterData.ItemBlacklist", true )]
-		public bool IsRecipeFilterOn;
-		[Obsolete( "Use NihilismFilterData.RecipeBlacklist", true )]
-		public bool IsItemFilterOn;
-		[Obsolete( "Use NihilismFilterData.NpcBlacklist", true )]
-		public bool IsNpcFilterOn;
-		[Obsolete( "Use NihilismFilterData.NpcLootBlacklist", true )]
-		public bool IsNpcLootFilterOn;
 
 
 
