@@ -33,12 +33,6 @@ namespace Nihilism {
 		////////////////
 
 		public NihilismMod() {
-			this.Properties = new ModProperties() {
-				Autoload = true,
-				AutoloadGores = true,
-				AutoloadSounds = true
-			};
-
 			this.ConfigJson = new JsonConfig<NihilismConfigData>( NihilismConfigData.ConfigFileName,
 					ConfigurationDataBase.RelativePath, new NihilismConfigData() );
 		}

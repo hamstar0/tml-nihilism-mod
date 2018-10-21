@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 
 namespace Nihilism {
 	partial class NihilismPlayer : ModPlayer {
-		internal void OnEnterWorldForSingle() {
+		internal void OnConnectSingle() {
 			var mymod = (NihilismMod)this.mod;
 			var myworld = this.mod.GetModWorld<NihilismWorld>();
 
@@ -24,7 +24,7 @@ namespace Nihilism {
 			this.FinishFiltersSync();
 		}
 
-		internal void OnEnterWorldForClient() {
+		internal void OnConnectClient() {
 			PacketProtocol.QuickRequestToServer<ModSettingsProtocol>();
 			PacketProtocol.QuickRequestToServer<FiltersProtocol>();
 		}

@@ -38,9 +38,9 @@ namespace Nihilism {
 			if( this.player.whoAmI != Main.myPlayer ) { return; }
 
 			if( Main.netMode == 0 ) {
-				this.OnEnterWorldForSingle();
+				this.OnConnectSingle();
 			} else if( Main.netMode == 1 ) {
-				this.OnEnterWorldForClient();
+				this.OnConnectClient();
 			}
 		}
 
@@ -48,8 +48,10 @@ namespace Nihilism {
 		////////////////
 
 		public override void PreUpdate() {
-			if( this.player.whoAmI != Main.myPlayer ) { return; }
-
+			if( Main.netMode != 2 ) {
+				if( this.player.whoAmI != Main.myPlayer ) { return; }
+			}
+			
 			var mymod = (NihilismMod)this.mod;
 			var myworld = mymod.GetModWorld<NihilismWorld>();
 			if( myworld.Logic == null ) { return; }
@@ -104,13 +106,16 @@ namespace Nihilism {
 			if( myworld.Logic == null ) { return; }
 
 			ModPlayer mywingplayer = this.player.GetModPlayer( mymod.WingSlotMod, "WingSlotPlayer" );
-			object wing_equip_slot = ReflectionHelpers.GetField( mywingplayer, field_name, out success );
+			object wing_equip_slot;
+			
+			if( !ReflectionHelpers.GetField( mywingplayer, field_name, out wing_equip_slot ) || wing_equip_slot == null ) {
+				return;
+			}
 
-			if( !success || wing_equip_slot == null ) { return; }
-
-			Item wing_item = (Item)ReflectionHelpers.GetProperty( wing_equip_slot, "Item", out success );
-
-			if( !success || wing_item == null || wing_item.IsAir ) { return; }
+			Item wing_item;
+			if( !ReflectionHelpers.GetProperty( wing_equip_slot, "Item", out wing_item ) || wing_item == null || wing_item.IsAir ) {
+				return;
+			}
 
 			if( !myworld.Logic.DataAccess.IsItemEnabled( wing_item ) ) {
 				int idx = Item.NewItem( player.position, wing_item.width, wing_item.height, wing_item.type, wing_item.stack, false, wing_item.prefix, false, false );
@@ -122,8 +127,8 @@ namespace Nihilism {
 					NetMessage.SendData( 21, -1, -1, null, idx, 1f, 0f, 0f, 0, 0, 0 );
 				}
 				
-				ReflectionHelpers.SetProperty( wing_equip_slot, "Item", new Item(), out success );
-				ReflectionHelpers.SetField( mywingplayer, field_name, wing_equip_slot, out success );
+				ReflectionHelpers.SetProperty( wing_equip_slot, "Item", new Item() );
+				ReflectionHelpers.SetField( mywingplayer, field_name, wing_equip_slot );
 			}
 		}
 	}
