@@ -26,7 +26,7 @@ namespace Nihilism.NetProtocol {
 		protected override void SetClientDefaults() {
 			this.SetMyDefaults();
 		}
-		protected override void SetServerDefaults() {
+		protected override void SetServerDefaults( int to_who ) {
 			this.SetMyDefaults();
 		}
 
