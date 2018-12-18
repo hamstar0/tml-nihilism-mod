@@ -6,13 +6,13 @@ using Terraria;
 
 
 namespace Nihilism.NetProtocol {
-	class FiltersProtocol : PacketProtocol {
+	class FiltersProtocol : PacketProtocolSentToEither {
 		public NihilismFilterData Filters;
 
 
 		////////////////
 
-		private FiltersProtocol( PacketProtocolDataConstructorLock ctor_lock ) { }
+		protected FiltersProtocol( PacketProtocolDataConstructorLock ctor_lock ) : base( ctor_lock ) { }
 		
 		////////////////
 
@@ -42,11 +42,11 @@ namespace Nihilism.NetProtocol {
 
 		////////////////
 
-		protected override void ReceiveWithServer( int from_who ) {
+		protected override void ReceiveOnServer( int from_who ) {
 			this.ReceiveOnAny();
 		}
 
-		protected override void ReceiveWithClient() {
+		protected override void ReceiveOnClient() {
 			this.ReceiveOnAny();
 
 			var mymod = NihilismMod.Instance;
