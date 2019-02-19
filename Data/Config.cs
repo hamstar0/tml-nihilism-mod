@@ -63,12 +63,11 @@ namespace Nihilism.Data {
 		}
 
 		public void UpdateToLatestVersion() {
-			var new_config = new NihilismConfigData();
-			var vers_since = this.VersionSinceUpdate != "" ?
+			var versSince = this.VersionSinceUpdate != "" ?
 				new Version( this.VersionSinceUpdate ) :
 				new Version();
 			
-			if( vers_since < new Version(2, 1, 2, 2) ) {
+			if( versSince < new Version(2, 1, 2, 2) ) {
 				if( this.DefaultItemBlacklist.Count == 1 &&
 						this.DefaultRecipeBlacklist.Count == 1 &&
 						this.DefaultNpcBlacklist.Count == 1 &&

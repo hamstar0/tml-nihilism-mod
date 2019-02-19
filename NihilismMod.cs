@@ -93,13 +93,21 @@ namespace Nihilism {
 		////////////////
 
 		public override object Call( params object[] args ) {
-			if( args == null || args.Length == 0 ) { throw new HamstarException( "Undefined call type." ); }
+			//return ModBoilerplateHelpers.HandleModCall( typeof( BetterPaintAPI ), args );
+			if( args == null || args.Length == 0 ) { throw new HamstarException( "Undefined call." ); }
 
 			string callType = args[0] as string;
-			if( callType == null ) { throw new HamstarException( "Invalid call type." ); }
+			if( callType == null ) {
+				LogHelpers.Alert( "Invalid call binding: " + args[0] );
+				return null;
+			}
 
 			var methodInfo = typeof( NihilismAPI ).GetMethod( callType );
-			if( methodInfo == null ) { throw new HamstarException( "Invalid call type " + callType ); }
+			if( methodInfo == null ) {
+				LogHelpers.Alert( "Unrecognized call binding " + callType + " with args:\n"
+					+ string.Join( ",\n  ", args.SafeSelect( a => a.GetType().Name + ": " + a == null ? "null" : a.ToString() ) ) );
+				return null;
+			}
 
 			var newArgs = new object[args.Length - 1];
 			Array.Copy( args, 1, newArgs, 0, args.Length - 1 );

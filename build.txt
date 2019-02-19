@@ -1,5 +1,5 @@
 author = hamstar
-version = 2.1.7
+version = 2.1.7.1
 displayName = Nihilism
 modReferences = HamstarHelpers@4.2.1
 buildIgnore = *.csproj, *.user, *.bat, obj\*, bin\*, .vs\*, .git\*
