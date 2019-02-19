@@ -1,7 +1,6 @@
-﻿using HamstarHelpers.Components.Network;
-using HamstarHelpers.Components.Network.Data;
+﻿using HamstarHelpers.Components.Errors;
+using HamstarHelpers.Components.Network;
 using Nihilism.Data;
-using System;
 using Terraria;
 
 
@@ -12,13 +11,13 @@ namespace Nihilism.NetProtocol {
 
 		////////////////
 
-		protected FiltersProtocol( PacketProtocolDataConstructorLock ctor_lock ) : base( ctor_lock ) { }
+		private FiltersProtocol() { }
 		
 		////////////////
 
 		private void SetMyDefaults() {
 			var myworld = NihilismMod.Instance.GetModWorld<NihilismWorld>();
-			if( myworld.Logic.DataAccess == null ) { throw new Exception( "No filters to send" ); }
+			if( myworld.Logic.DataAccess == null ) { throw new HamstarException( "No filters to send" ); }
 
 			myworld.Logic.DataAccess.Give( ref this.Filters );
 		}
@@ -26,7 +25,7 @@ namespace Nihilism.NetProtocol {
 		protected override void SetClientDefaults() {
 			this.SetMyDefaults();
 		}
-		protected override void SetServerDefaults( int to_who ) {
+		protected override void SetServerDefaults( int toWho ) {
 			this.SetMyDefaults();
 		}
 
@@ -53,7 +52,7 @@ namespace Nihilism.NetProtocol {
 			var myworld = mymod.GetModWorld<NihilismWorld>();
 			var myplayer = Main.LocalPlayer.GetModPlayer<NihilismPlayer>();
 
-			myworld.Logic.PostFiltersLoad( mymod );
+			myworld.Logic.PostFiltersLoad();
 
 			myplayer.FinishFiltersSync();
 		}

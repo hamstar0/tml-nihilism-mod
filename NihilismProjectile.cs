@@ -5,18 +5,18 @@ using Terraria.ModLoader;
 
 namespace Nihilism {
 	class NihilismProjectile : GlobalProjectile {
-		public override bool? CanUseGrapple( int proj_type, Player player ) {
+		public override bool? CanUseGrapple( int projType, Player player ) {
 			var mymod = (NihilismMod)this.mod;
 			var myworld = mymod.GetModWorld<NihilismWorld>();
 			if( myworld.Logic == null ) { return null; }
 
-			if( !myworld.Logic.AreItemFiltersEnabled( mymod ) ) {
+			if( !myworld.Logic.AreItemFiltersEnabled() ) {
 				return null;
 			}
 
-			Item grapple_item = PlayerItemHelpers.GetGrappleItem( player );
+			Item grappleItem = PlayerItemHelpers.GetGrappleItem( player );
 			
-			if( grapple_item != null && myworld.Logic.DataAccess.IsItemEnabled( grapple_item ) ) {
+			if( grappleItem != null && myworld.Logic.DataAccess.IsItemEnabled( grappleItem ) ) {
 				return null;
 			}
 			return false;

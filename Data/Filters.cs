@@ -21,13 +21,14 @@ namespace Nihilism.Data {
 		////////////////
 
 		public NihilismFilterData() {
-			this.ResetFiltersFromDefaults( NihilismMod.Instance );
+			this.ResetFiltersFromDefaults();
 		}
 
 
 		////////////////
 		
-		public void SetCurrentFiltersAsDefaults( NihilismMod mymod ) {
+		public void SetCurrentFiltersAsDefaults() {
+			var mymod = NihilismMod.Instance;
 			mymod.Config.DefaultItemBlacklist = this.ItemBlacklist;
 			mymod.Config.DefaultRecipeBlacklist = this.RecipeBlacklist;
 			mymod.Config.DefaultNpcBlacklist = this.NpcBlacklist;
@@ -43,7 +44,8 @@ namespace Nihilism.Data {
 			}
 		}
 
-		public void ResetFiltersFromDefaults( NihilismMod mymod ) {
+		public void ResetFiltersFromDefaults() {
+			var mymod = NihilismMod.Instance;
 			this.ItemBlacklist = mymod.Config.DefaultItemBlacklist;
 			this.RecipeBlacklist = mymod.Config.DefaultRecipeBlacklist;
 			this.NpcBlacklist = mymod.Config.DefaultNpcBlacklist;

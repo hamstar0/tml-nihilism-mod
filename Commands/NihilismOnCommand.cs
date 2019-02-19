@@ -5,11 +5,7 @@ using Terraria.ModLoader;
 
 namespace Nihilism.Commands {
 	class NihilismOnCommand : ModCommand {
-		public override string Command {
-			get {
-				return "nih-on";
-			}
-		}
+		public override string Command => "nih-on";
 		public override CommandType Type {
 			get {
 				if( Main.netMode == 0 && !Main.dedServ ) {
@@ -19,16 +15,9 @@ namespace Nihilism.Commands {
 				}
 			}
 		}
-		public override string Usage {
-			get {
-				return "/" + this.Command;
-			}
-		}
-		public override string Description {
-			get {
-				return "Activates Nihilism mod for the current world. Use /help and the arrow keys to see a list of commands to adjust available items, npcs, loot, and recipes.";
-			}
-		}
+		public override string Usage => "/" + this.Command;
+		public override string Description => "Activates Nihilism mod for the current world. "
+			+"Use /help and the arrow keys to see a list of commands to adjust available items, npcs, loot, and recipes.";
 
 
 		////////////////

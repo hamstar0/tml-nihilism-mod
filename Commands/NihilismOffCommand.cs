@@ -5,11 +5,7 @@ using Terraria.ModLoader;
 
 namespace Nihilism.Commands {
 	class NihilismOffCommand : ModCommand {
-		public override string Command {
-			get {
-				return "nih-off";
-			}
-		}
+		public override string Command => "nih-off";
 		public override CommandType Type {
 			get {
 				if( Main.netMode == 0 && !Main.dedServ ) {
@@ -19,16 +15,8 @@ namespace Nihilism.Commands {
 				}
 			}
 		}
-		public override string Usage {
-			get {
-				return "/" + this.Command;
-			}
-		}
-		public override string Description {
-			get {
-				return "Deactivates Nihilism mod for the current world.";
-			}
-		}
+		public override string Usage => "/" + this.Command;
+		public override string Description => "Deactivates Nihilism mod for the current world.";
 
 
 		////////////////

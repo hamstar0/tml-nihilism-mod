@@ -11,8 +11,8 @@ using Terraria.ModLoader;
 
 namespace Nihilism {
 	partial class NihilismMod : Mod {
-		public static string GithubUserName { get { return "hamstar0"; } }
-		public static string GithubProjectName { get { return "tml-nihilism-mod"; } }
+		public static string GithubUserName => "hamstar0";
+		public static string GithubProjectName => "tml-nihilism-mod";
 
 		public static string ConfigFileRelativePath {
 			get { return ConfigurationDataBase.RelativePath + Path.DirectorySeparatorChar + NihilismConfigData.ConfigFileName; }
@@ -36,10 +36,10 @@ namespace Nihilism {
 				throw new Exception( "Cannot reset to default configs outside of single player." );
 			}
 
-			var config_data = new NihilismConfigData();
-			config_data.SetDefaults();
+			var configData = new NihilismConfigData();
+			configData.SetDefaults();
 
-			NihilismMod.Instance.ConfigJson.SetData( config_data );
+			NihilismMod.Instance.ConfigJson.SetData( configData );
 			NihilismMod.Instance.ConfigJson.SaveFile();
 		}
 	}

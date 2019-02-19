@@ -5,11 +5,7 @@ using Terraria.ModLoader;
 
 namespace Nihilism.Commands {
 	class LootWhitelistEntrySetCommand : ModCommand {
-		public override string Command {
-			get {
-				return "nih-loot-whitelist-add";
-			}
-		}
+		public override string Command => "nih-loot-whitelist-add";
 		public override CommandType Type {
 			get {
 				if( Main.netMode == 0 && !Main.dedServ ) {
@@ -19,16 +15,8 @@ namespace Nihilism.Commands {
 				}
 			}
 		}
-		public override string Usage {
-			get {
-				return "/" + this.Command + " Zombie";
-			}
-		}
-		public override string Description {
-			get {
-				return "Adds a lootable npc to the whitelist as an exception to the blacklist.";
-			}
-		}
+		public override string Usage => "/" + this.Command + " Zombie";
+		public override string Description => "Adds a lootable npc to the whitelist as an exception to the blacklist.";
 
 
 		////////////////
@@ -41,12 +29,12 @@ namespace Nihilism.Commands {
 
 			var mymod = NihilismMod.Instance;
 			var myworld = mymod.GetModWorld<NihilismWorld>();
-			string ent_name = string.Join( " ", args );
+			string entName = string.Join( " ", args );
 
-			myworld.Logic.DataAccess.SetNpcLootWhitelistEntry( ent_name );
+			myworld.Logic.DataAccess.SetNpcLootWhitelistEntry( entName );
 			myworld.Logic.SyncDataChanges();
 
-			caller.Reply( "Lootable npc " + ent_name + " added to whitelist.", Color.YellowGreen );
+			caller.Reply( "Lootable npc " + entName + " added to whitelist.", Color.YellowGreen );
 		}
 	}
 }

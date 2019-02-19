@@ -9,6 +9,7 @@ namespace Nihilism.Data {
 		private NihilismFilterData Data;
 
 
+
 		////////////////
 
 		public NihilismFilterAccess() {
@@ -22,7 +23,8 @@ namespace Nihilism.Data {
 			return WorldHelpers.GetUniqueIdWithSeed() + " Filters";
 		}
 
-		public void Load( NihilismMod mymod ) {
+		public void Load() {
+			var mymod = NihilismMod.Instance;
 			bool success;
 			var filters = DataFileHelpers.LoadJson<NihilismFilterData>( mymod, this.GetDataFileName(), out success );
 
@@ -31,7 +33,8 @@ namespace Nihilism.Data {
 			}
 		}
 
-		public void Save( NihilismMod mymod ) {
+		public void Save() {
+			var mymod = NihilismMod.Instance;
 			DataFileHelpers.SaveAsJson<NihilismFilterData>( mymod, this.GetDataFileName(), this.Data );
 		}
 

@@ -9,27 +9,26 @@ namespace Nihilism {
 		public WorldLogic Logic;
 
 
+
 		////////////////
 
 		public override void Initialize() {
-			var mymod = (NihilismMod)this.mod;
-
-			this.Logic = new WorldLogic( mymod );
+			var mymod = NihilismMod.Instance;
+			this.Logic = new WorldLogic();
 
 			if( mymod.Config.DebugModeInfo ) {
-				LogHelpers.Log( "Nihilism - World initialized." );
+				LogHelpers.Alert( "World initialized." );
 			}
 		}
 
 		public override void Load( TagCompound tag ) {
-			var mymod = (NihilismMod)this.mod;
-			this.Logic.LoadWorldData( mymod );
+			this.Logic.LoadWorldData();
 		}
 
 		public override TagCompound Save() {
 			var mymod = (NihilismMod)this.mod;
 			if( !mymod.SuppressAutoSaving ) {
-				this.Logic.SaveWorldData( mymod );
+				this.Logic.SaveWorldData();
 			}
 			return new TagCompound();
 		}

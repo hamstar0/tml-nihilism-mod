@@ -5,11 +5,7 @@ using Terraria.ModLoader;
 
 namespace Nihilism.Commands {
 	class ShowFiltersCommand : ModCommand {
-		public override string Command {
-			get {
-				return "nih-show-filters";
-			}
-		}
+		public override string Command => "nih-show-filters";
 		public override CommandType Type {
 			get {
 				if( Main.netMode == 0 && !Main.dedServ ) {
@@ -19,16 +15,8 @@ namespace Nihilism.Commands {
 				}
 			}
 		}
-		public override string Usage {
-			get {
-				return "/" + this.Command;
-			}
-		}
-		public override string Description {
-			get {
-				return "Displays each filter currently active or the world.";
-			}
-		}
+		public override string Usage => "/" + this.Command;
+		public override string Description => "Displays each filter currently active or the world.";
 
 
 		////////////////

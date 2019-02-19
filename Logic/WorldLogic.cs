@@ -13,6 +13,7 @@ namespace Nihilism.Logic {
 		public readonly static PromiseValidator LoadAllValidator;
 
 
+
 		////////////////
 
 		static WorldLogic() {
@@ -27,28 +28,29 @@ namespace Nihilism.Logic {
 
 		////////////////
 
-		public WorldLogic( NihilismMod mymod ) {
+		public WorldLogic() {
 			this.DataAccess = new NihilismFilterAccess();
 		}
 
 
 		////////////////
 		
-		public void LoadWorldData( NihilismMod mymod ) {
-			this.DataAccess.Load( mymod );
+		public void LoadWorldData() {
+			this.DataAccess.Load();
 		}
 
-		public void SaveWorldData( NihilismMod mymod ) {
-			this.DataAccess.Save( mymod );
+		public void SaveWorldData() {
+			this.DataAccess.Save();
 		}
 		
 
 		////////////////
 
-		internal void PostFiltersLoad( NihilismMod mymod ) {
+		internal void PostFiltersLoad() {
 			Promises.AddWorldLoadOncePromise( () => {
 				if( Main.netMode == 2 ) { return; }
 
+				var mymod = NihilismMod.Instance;
 				var myworld = mymod.GetModWorld<NihilismWorld>();
 
 				if( !myworld.Logic.DataAccess.IsActive() ) {
@@ -79,7 +81,7 @@ namespace Nihilism.Logic {
 				PacketProtocol.QuickSyncToServerAndClients<FiltersProtocol>();
 			} else if( Main.netMode == 2 ) {
 				if( !mymod.SuppressAutoSaving ) {
-					this.SaveWorldData( NihilismMod.Instance );
+					this.SaveWorldData();
 				}
 				PacketProtocol.QuickSendToClient<FiltersProtocol>( -1, -1 );
 			}
@@ -88,23 +90,28 @@ namespace Nihilism.Logic {
 
 		////////////////
 		
-		public bool AreItemFiltersEnabled( NihilismMod mymod ) {
+		public bool AreItemFiltersEnabled() {
+			var mymod = NihilismMod.Instance;
 			return this.DataAccess.IsActive() && mymod.Config.EnableItemFilters;
 		}
 
-		public bool AreItemEquipsFiltersEnabled( NihilismMod mymod ) {
+		public bool AreItemEquipsFiltersEnabled() {
+			var mymod = NihilismMod.Instance;
 			return this.DataAccess.IsActive() && mymod.Config.EnableItemEquipsFilters;
 		}
 
-		public bool AreRecipesFiltersEnabled( NihilismMod mymod ) {
+		public bool AreRecipesFiltersEnabled() {
+			var mymod = NihilismMod.Instance;
 			return this.DataAccess.IsActive() && mymod.Config.EnableRecipeFilters;
 		}
 
-		public bool AreNpcsFiltersEnabled( NihilismMod mymod ) {
+		public bool AreNpcsFiltersEnabled() {
+			var mymod = NihilismMod.Instance;
 			return this.DataAccess.IsActive() && mymod.Config.EnableNpcFilters;
 		}
 
-		public bool AreNpcLootsFiltersEnabled( NihilismMod mymod ) {
+		public bool AreNpcLootsFiltersEnabled() {
+			var mymod = NihilismMod.Instance;
 			return this.DataAccess.IsActive() && mymod.Config.EnableNpcLootFilters;
 		}
 	}

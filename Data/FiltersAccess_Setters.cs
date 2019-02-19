@@ -1,74 +1,74 @@
 ﻿namespace Nihilism.Data {
 	partial class NihilismFilterAccess {
-		public void SetItemBlacklistEntry( string item_name ) {
-			this.Data.ItemBlacklist.Add( item_name );
+		public void SetItemBlacklistEntry( string itemName ) {
+			this.Data.ItemBlacklist.Add( itemName );
 		}
 
-		public void SetRecipeBlacklistEntry( string item_name ) {
-			this.Data.RecipeBlacklist.Add( item_name );
+		public void SetRecipeBlacklistEntry( string itemName ) {
+			this.Data.RecipeBlacklist.Add( itemName );
 		}
 
-		public void SetNpcLootBlacklistEntry( string npc_name ) {
-			this.Data.NpcLootBlacklist.Add( npc_name );
+		public void SetNpcLootBlacklistEntry( string npcName ) {
+			this.Data.NpcLootBlacklist.Add( npcName );
 		}
 
-		public void SetNpcBlacklistEntry( string npc_name ) {
-			this.Data.NpcBlacklist.Add( npc_name );
+		public void SetNpcBlacklistEntry( string npcName ) {
+			this.Data.NpcBlacklist.Add( npcName );
 		}
 
 		////
 
-		public void SetItemWhitelistEntry( string item_name ) {
-			this.Data.ItemWhitelist.Add( item_name );
+		public void SetItemWhitelistEntry( string itemName ) {
+			this.Data.ItemWhitelist.Add( itemName );
 		}
 		
-		public void SetRecipeWhitelistEntry( string item_name ) {
-			this.Data.RecipeWhitelist.Add( item_name );
+		public void SetRecipeWhitelistEntry( string itemName ) {
+			this.Data.RecipeWhitelist.Add( itemName );
 		}
 
-		public void SetNpcLootWhitelistEntry( string npc_name ) {
-			this.Data.NpcLootWhitelist.Add( npc_name );
+		public void SetNpcLootWhitelistEntry( string npcName ) {
+			this.Data.NpcLootWhitelist.Add( npcName );
 		}
 
-		public void SetNpcWhitelistEntry( string npc_name ) {
-			this.Data.NpcWhitelist.Add( npc_name );
+		public void SetNpcWhitelistEntry( string npcName ) {
+			this.Data.NpcWhitelist.Add( npcName );
 		}
 
 
 		////////////////
 
-		public void UnsetItemBlacklistEntry( string item_name ) {
-			this.Data.ItemBlacklist.Remove( item_name );
+		public void UnsetItemBlacklistEntry( string itemName ) {
+			this.Data.ItemBlacklist.Remove( itemName );
 		}
 
-		public void UnsetRecipeBlacklistEntry( string item_name ) {
-			this.Data.RecipeBlacklist.Remove( item_name );
+		public void UnsetRecipeBlacklistEntry( string itemName ) {
+			this.Data.RecipeBlacklist.Remove( itemName );
 		}
 
-		public void UnsetNpcLootBlacklistEntry( string npc_name ) {
-			this.Data.NpcLootBlacklist.Remove( npc_name );
+		public void UnsetNpcLootBlacklistEntry( string npcName ) {
+			this.Data.NpcLootBlacklist.Remove( npcName );
 		}
 
-		public void UnsetNpcBlacklistEntry( string npc_name ) {
-			this.Data.NpcBlacklist.Remove( npc_name );
+		public void UnsetNpcBlacklistEntry( string npcName ) {
+			this.Data.NpcBlacklist.Remove( npcName );
 		}
 
 		////
 
-		public void UnsetItemWhitelistEntry( string item_name ) {
-			this.Data.ItemWhitelist.Remove( item_name );
+		public void UnsetItemWhitelistEntry( string itemName ) {
+			this.Data.ItemWhitelist.Remove( itemName );
 		}
 
-		public void UnsetRecipeWhitelistEntry( string item_name ) {
-			this.Data.RecipeWhitelist.Remove( item_name );
+		public void UnsetRecipeWhitelistEntry( string itemName ) {
+			this.Data.RecipeWhitelist.Remove( itemName );
 		}
 
-		public void UnsetNpcLootWhitelistEntry( string npc_name ) {
-			this.Data.NpcLootWhitelist.Remove( npc_name );
+		public void UnsetNpcLootWhitelistEntry( string npcName ) {
+			this.Data.NpcLootWhitelist.Remove( npcName );
 		}
 
-		public void UnsetNpcWhitelistEntry( string npc_name ) {
-			this.Data.NpcWhitelist.Remove( npc_name );
+		public void UnsetNpcWhitelistEntry( string npcName ) {
+			this.Data.NpcWhitelist.Remove( npcName );
 		}
 
 
@@ -111,12 +111,12 @@
 
 		////////////////
 
-		public void SetCurrentFiltersAsDefaults( NihilismMod mymod ) {
-			this.Data.SetCurrentFiltersAsDefaults( mymod );
+		public void SetCurrentFiltersAsDefaults() {
+			this.Data.SetCurrentFiltersAsDefaults();
 		}
 
-		public void ResetFiltersFromDefaults( NihilismMod mymod ) {
-			this.Data.ResetFiltersFromDefaults( mymod );
+		public void ResetFiltersFromDefaults() {
+			this.Data.ResetFiltersFromDefaults();
 		}
 
 

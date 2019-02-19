@@ -1,4 +1,5 @@
-﻿using HamstarHelpers.Helpers.DebugHelpers;
+﻿using HamstarHelpers.Components.Errors;
+using HamstarHelpers.Helpers.DebugHelpers;
 using HamstarHelpers.Helpers.TmlHelpers;
 using Nihilism.Data;
 using System;
@@ -55,21 +56,21 @@ namespace Nihilism {
 		////////////////
 
 		public static void SetCurrentFiltersAsDefaults() {
-			if( !LoadHelpers.IsWorldLoaded() ) { throw new Exception( "World not loaded" ); }
+			if( !LoadHelpers.IsWorldLoaded() ) { throw new HamstarException( "World not loaded" ); }
 
 			var mymod = NihilismMod.Instance;
 			var myworld = mymod.GetModWorld<NihilismWorld>();
 
-			myworld.Logic.DataAccess.SetCurrentFiltersAsDefaults( mymod );
+			myworld.Logic.DataAccess.SetCurrentFiltersAsDefaults();
 		}
 
 		public static void ResetFiltersFromDefaults() {
-			if( !LoadHelpers.IsWorldLoaded() ) { throw new Exception( "World not loaded" ); }
+			if( !LoadHelpers.IsWorldLoaded() ) { throw new HamstarException( "World not loaded" ); }
 
 			var mymod = NihilismMod.Instance;
 			var myworld = mymod.GetModWorld<NihilismWorld>();
 
-			myworld.Logic.DataAccess.ResetFiltersFromDefaults( mymod );
+			myworld.Logic.DataAccess.ResetFiltersFromDefaults();
 		}
 	}
 }

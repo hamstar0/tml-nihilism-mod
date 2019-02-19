@@ -1,5 +1,7 @@
 ﻿using HamstarHelpers.Components.Config;
+using HamstarHelpers.Components.Errors;
 using HamstarHelpers.Helpers.DebugHelpers;
+using HamstarHelpers.Helpers.DotNetHelpers;
 using HamstarHelpers.Services.EntityGroups;
 using HamstarHelpers.Services.Messages;
 using Microsoft.Xna.Framework.Graphics;
@@ -18,7 +20,7 @@ namespace Nihilism {
 		////////////////
 
 		public JsonConfig<NihilismConfigData> ConfigJson { get; private set; }
-		public NihilismConfigData Config { get { return this.ConfigJson.Data; } }
+		public NihilismConfigData Config => this.ConfigJson.Data;
 
 
 		public Texture2D DisabledItem { get; private set; }
@@ -28,6 +30,7 @@ namespace Nihilism {
 		private bool HasUpdated = false;
 
 		internal Mod WingSlotMod = null;
+
 
 
 		////////////////
@@ -53,24 +56,25 @@ namespace Nihilism {
 			this.WingSlotMod = ModLoader.GetMod( "WingSlot" );
 			if( this.WingSlotMod == null ) {
 				if( this.Config.DebugModeInfo ) {
-					LogHelpers.Log( "NihilismMod.Load - Wing Mod not detected; ignoring wing slots..." );
+					LogHelpers.Alert( "Wing Mod not detected; ignoring wing slots..." );
 				}
 			} else {
-				LogHelpers.Log( "NihilismMod.Load - Wing Mod detected. Compatibility will be attempted." );
+				LogHelpers.Alert( "Wing Mod detected. Compatibility will be attempted." );
 			}
 		}
 
 		private void LoadConfig() {
 			if( !this.ConfigJson.LoadFile() ) {
+				LogHelpers.Alert( "Creating rewards configs anew..." );
 				this.ConfigJson.SaveFile();
-				ErrorLogger.Log( "Nihilism config " + NihilismConfigData.ConfigVersion.ToString() + " created." );
 			}
 
-			this.HasUpdated = this.Config.UpdateToLatestVersion();
+			if( this.Config.CanUpdateVersion() ) {
+				this.Config.UpdateToLatestVersion();
+				LogHelpers.Alert( "Nihilism settings updated to " + this.Version.ToString() );
 
-			if( this.HasUpdated ) {
-				ErrorLogger.Log( "Nihilism updated to " + NihilismConfigData.ConfigVersion.ToString() );
 				this.ConfigJson.SaveFile();
+				this.HasUpdated = true;
 			}
 		}
 
@@ -89,15 +93,22 @@ namespace Nihilism {
 		////////////////
 
 		public override object Call( params object[] args ) {
-			if( args.Length == 0 ) { throw new Exception( "Undefined call type." ); }
+			if( args == null || args.Length == 0 ) { throw new HamstarException( "Undefined call type." ); }
 
-			string call_type = args[0] as string;
-			if( args == null ) { throw new Exception( "Invalid call type." ); }
+			string callType = args[0] as string;
+			if( callType == null ) { throw new HamstarException( "Invalid call type." ); }
 
-			var new_args = new object[args.Length - 1];
-			Array.Copy( args, 1, new_args, 0, args.Length - 1 );
+			var methodInfo = typeof( NihilismAPI ).GetMethod( callType );
+			if( methodInfo == null ) { throw new HamstarException( "Invalid call type " + callType ); }
 
-			return NihilismAPI.Call( call_type, new_args );
+			var newArgs = new object[args.Length - 1];
+			Array.Copy( args, 1, newArgs, 0, args.Length - 1 );
+
+			try {
+				return ReflectionHelpers.SafeCall( methodInfo, null, newArgs );
+			} catch( Exception e ) {
+				throw new HamstarException( "Bad API call.", e );
+			}
 		}
 	}
 }

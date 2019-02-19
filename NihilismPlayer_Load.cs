@@ -1,35 +1,34 @@
 ﻿using HamstarHelpers.Components.Network;
 using HamstarHelpers.Helpers.DebugHelpers;
-using Nihilism.Data;
 using Nihilism.NetProtocol;
 using Terraria.ModLoader;
 
 
 namespace Nihilism {
 	partial class NihilismPlayer : ModPlayer {
-		internal void OnConnectSingle() {
+		internal void OnEnterWorldOnSingle() {
 			var mymod = (NihilismMod)this.mod;
 			var myworld = this.mod.GetModWorld<NihilismWorld>();
 
 			if( !mymod.SuppressAutoSaving ) {
 				if( !mymod.ConfigJson.LoadFile() ) {
 					mymod.ConfigJson.SaveFile();
-					LogHelpers.Log( "Nihilism config " + NihilismConfigData.ConfigVersion.ToString() + " created (ModPlayer.OnEnterWorld())." );
+					LogHelpers.Alert( "Nihilism config " + mymod.Version.ToString() + " created." );
 				}
 			}
 
-			myworld.Logic.PostFiltersLoad( mymod );
+			myworld.Logic.PostFiltersLoad();
 
 			this.FinishModSettingsSync();
 			this.FinishFiltersSync();
 		}
 
-		internal void OnConnectClient() {
-			PacketProtocol.QuickRequestToServer<ModSettingsProtocol>();
-			PacketProtocol.QuickRequestToServer<FiltersProtocol>();
+		internal void OnEnterWorldOnClient() {
+			PacketProtocolRequestToServer.QuickRequest<ModSettingsProtocol>( -1 );
+			PacketProtocolSentToEither.QuickRequestToServer<FiltersProtocol>( -1 );
 		}
 
-		internal void OnEnterWorldForServer() {
+		internal void OnEnterWorldOnServer() {
 			this.IsModSettingsSynced = true;
 			this.IsFiltersSynced = true;
 		}

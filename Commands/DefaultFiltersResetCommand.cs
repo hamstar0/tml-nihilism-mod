@@ -5,11 +5,7 @@ using Terraria.ModLoader;
 
 namespace Nihilism.Commands {
 	class DefaultFiltersResetCommand : ModCommand {
-		public override string Command {
-			get {
-				return "nih-defaults-reset";
-			}
-		}
+		public override string Command => "nih-defaults-reset";
 		public override CommandType Type {
 			get {
 				if( Main.netMode == 0 && !Main.dedServ ) {
@@ -19,16 +15,8 @@ namespace Nihilism.Commands {
 				}
 			}
 		}
-		public override string Usage {
-			get {
-				return "/" + this.Command;
-			}
-		}
-		public override string Description {
-			get {
-				return "Sets default config's white and blacklists to override the current world's.";
-			}
-		}
+		public override string Usage => "/" + this.Command;
+		public override string Description => "Sets default config's white and blacklists to override the current world's.";
 
 
 		////////////////

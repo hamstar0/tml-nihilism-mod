@@ -9,26 +9,30 @@ namespace Nihilism {
 	partial class NihilismPlayer : ModPlayer {
 		private bool IsModSettingsSynced = false;
 		private bool IsFiltersSynced = false;
+		
+		////////////////
+
+		public override bool CloneNewInstances => false;
+
 
 
 		////////////////
 
-		public override bool CloneNewInstances { get { return false; } }
-		
 		public override void Initialize() { }
 
-		public override void clientClone( ModPlayer client_clone ) {
-			var clone = (NihilismPlayer)client_clone;
-			//clone.HasEnteredWorld = this.HasEnteredWorld;
+		public override void clientClone( ModPlayer clientClone ) {
+			var clone = (NihilismPlayer)clientClone;
+			clone.IsModSettingsSynced = this.IsModSettingsSynced;
+			clone.IsFiltersSynced = this.IsFiltersSynced;
 		}
 
 
 		////////////////
 
-		public override void SyncPlayer( int to_who, int from_who, bool new_player ) {
+		public override void SyncPlayer( int toEho, int fromWho, bool newPlayer ) {
 			if( Main.netMode == 2 ) {
-				if( to_who == -1 && from_who == this.player.whoAmI ) {
-					this.OnEnterWorldForServer();
+				if( toEho == -1 && fromWho == this.player.whoAmI ) {
+					this.OnEnterWorldOnServer();
 				}
 			}
 		}
@@ -38,9 +42,9 @@ namespace Nihilism {
 			if( this.player.whoAmI != Main.myPlayer ) { return; }
 
 			if( Main.netMode == 0 ) {
-				this.OnConnectSingle();
+				this.OnEnterWorldOnSingle();
 			} else if( Main.netMode == 1 ) {
-				this.OnConnectClient();
+				this.OnEnterWorldOnClient();
 			}
 		}
 
@@ -98,37 +102,37 @@ namespace Nihilism {
 			}
 		}
 
+		////
 
-		private void BlockWingSlotIfDisabled( string field_name ) {
-			bool success;
+		private void BlockWingSlotIfDisabled( string fieldName ) {
 			var mymod = (NihilismMod)this.mod;
 			var myworld = mymod.GetModWorld<NihilismWorld>();
 			if( myworld.Logic == null ) { return; }
 
 			ModPlayer mywingplayer = this.player.GetModPlayer( mymod.WingSlotMod, "WingSlotPlayer" );
-			object wing_equip_slot;
+			object wingEquipSlot;
 			
-			if( !ReflectionHelpers.GetField( mywingplayer, field_name, out wing_equip_slot ) || wing_equip_slot == null ) {
+			if( !ReflectionHelpers.GetField( mywingplayer, fieldName, out wingEquipSlot ) || wingEquipSlot == null ) {
 				return;
 			}
 
-			Item wing_item;
-			if( !ReflectionHelpers.GetProperty( wing_equip_slot, "Item", out wing_item ) || wing_item == null || wing_item.IsAir ) {
+			Item wingItem;
+			if( !ReflectionHelpers.GetProperty( wingEquipSlot, "Item", out wingItem ) || wingItem == null || wingItem.IsAir ) {
 				return;
 			}
 
-			if( !myworld.Logic.DataAccess.IsItemEnabled( wing_item ) ) {
-				int idx = Item.NewItem( player.position, wing_item.width, wing_item.height, wing_item.type, wing_item.stack, false, wing_item.prefix, false, false );
+			if( !myworld.Logic.DataAccess.IsItemEnabled( wingItem ) ) {
+				int idx = Item.NewItem( player.position, wingItem.width, wingItem.height, wingItem.type, wingItem.stack, false, wingItem.prefix, false, false );
 
-				wing_item.position = Main.item[idx].position;
-				Main.item[idx] = wing_item;
+				wingItem.position = Main.item[idx].position;
+				Main.item[idx] = wingItem;
 
 				if( Main.netMode == 1 ) {   // Client
 					NetMessage.SendData( 21, -1, -1, null, idx, 1f, 0f, 0f, 0, 0, 0 );
 				}
 				
-				ReflectionHelpers.SetProperty( wing_equip_slot, "Item", new Item() );
-				ReflectionHelpers.SetField( mywingplayer, field_name, wing_equip_slot );
+				ReflectionHelpers.SetProperty( wingEquipSlot, "Item", new Item() );
+				ReflectionHelpers.SetField( mywingplayer, fieldName, wingEquipSlot );
 			}
 		}
 	}

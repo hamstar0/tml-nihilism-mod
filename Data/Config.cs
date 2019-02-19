@@ -5,13 +5,12 @@ using System.Collections.Generic;
 
 namespace Nihilism.Data {
 	public class NihilismConfigData : ConfigurationDataBase {
-		public readonly static Version ConfigVersion = new Version( 2, 1, 2, 1 );
 		public readonly static string ConfigFileName = "Nihilism Config.json";
 
 
 		////////////////
 
-		public string VersionSinceUpdate = NihilismConfigData.ConfigVersion.ToString();
+		public string VersionSinceUpdate = "";
 
 		public bool DebugModeInfo = false;
 
@@ -39,7 +38,6 @@ namespace Nihilism.Data {
 				this.SetDefaults();
 			}
 		}
-
 		
 		public void SetDefaults() {
 			this.DefaultItemBlacklist.Add( "Any Equipment" );
@@ -54,15 +52,21 @@ namespace Nihilism.Data {
 		}
 
 
-		public bool UpdateToLatestVersion() {
+		////////////////
+
+		public bool CanUpdateVersion() {
+			if( this.VersionSinceUpdate == "" ) {
+				return true;
+			}
+			var versSince = new Version( this.VersionSinceUpdate );
+			return versSince < NihilismMod.Instance.Version;
+		}
+
+		public void UpdateToLatestVersion() {
 			var new_config = new NihilismConfigData();
 			var vers_since = this.VersionSinceUpdate != "" ?
 				new Version( this.VersionSinceUpdate ) :
 				new Version();
-
-			if( vers_since >= NihilismConfigData.ConfigVersion ) {
-				return false;
-			}
 			
 			if( vers_since < new Version(2, 1, 2, 2) ) {
 				if( this.DefaultItemBlacklist.Count == 1 &&
@@ -87,9 +91,7 @@ namespace Nihilism.Data {
 				}
 			}
 
-			this.VersionSinceUpdate = NihilismConfigData.ConfigVersion.ToString();
-
-			return true;
+			this.VersionSinceUpdate = NihilismMod.Instance.Version.ToString();
 		}
 	}
 }

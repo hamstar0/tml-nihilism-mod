@@ -15,8 +15,8 @@ namespace Nihilism.Data {
 			}
 			
 			if( EntityGroups.GroupsPerItem.ContainsKey( item.type ) ) {
-				foreach( string grp_name in EntityGroups.GroupsPerItem[item.type] ) {
-					if( this.Data.ItemBlacklist.Contains( grp_name ) ) {
+				foreach( string grpName in EntityGroups.GroupsPerItem[item.type] ) {
+					if( this.Data.ItemBlacklist.Contains( grpName ) ) {
 						return true;
 					}
 				}
@@ -36,8 +36,8 @@ namespace Nihilism.Data {
 				return false;
 			}
 
-			foreach( string grp_name in EntityGroups.GroupsPerItem[item.type] ) {
-				if( this.Data.RecipeBlacklist.Contains( grp_name ) ) {
+			foreach( string grpName in EntityGroups.GroupsPerItem[item.type] ) {
+				if( this.Data.RecipeBlacklist.Contains( grpName ) ) {
 					return true;
 				}
 			}
@@ -56,8 +56,8 @@ namespace Nihilism.Data {
 				return false;
 			}
 
-			foreach( string grp_name in EntityGroups.GroupsPerNPC[npc.type] ) {
-				if( this.Data.NpcBlacklist.Contains( grp_name ) ) {
+			foreach( string grpName in EntityGroups.GroupsPerNPC[npc.type] ) {
+				if( this.Data.NpcBlacklist.Contains( grpName ) ) {
 					return true;
 				}
 			}
@@ -76,16 +76,15 @@ namespace Nihilism.Data {
 				return false;
 			}
 
-			foreach( string grp_name in EntityGroups.GroupsPerNPC[npc.type] ) {
-				if( this.Data.NpcLootBlacklist.Contains( grp_name ) ) {
+			foreach( string grpName in EntityGroups.GroupsPerNPC[npc.type] ) {
+				if( this.Data.NpcLootBlacklist.Contains( grpName ) ) {
 					return true;
 				}
 			}
 
 			return false;
 		}
-
-
+		
 
 		////////////////
 
@@ -120,8 +119,8 @@ namespace Nihilism.Data {
 				return false;
 			}
 
-			foreach( string grp_name in EntityGroups.GroupsPerItem[ item.type ] ) {
-				if( this.Data.RecipeWhitelist.Contains( grp_name ) ) {
+			foreach( string grpName in EntityGroups.GroupsPerItem[ item.type ] ) {
+				if( this.Data.RecipeWhitelist.Contains( grpName ) ) {
 					return true;
 				}
 			}
@@ -140,8 +139,8 @@ namespace Nihilism.Data {
 				return false;
 			}
 
-			foreach( string grp_name in EntityGroups.GroupsPerNPC[ npc.type ] ) {
-				if( this.Data.NpcWhitelist.Contains( grp_name ) ) {
+			foreach( string grpName in EntityGroups.GroupsPerNPC[ npc.type ] ) {
+				if( this.Data.NpcWhitelist.Contains( grpName ) ) {
 					return true;
 				}
 			}
@@ -160,8 +159,8 @@ namespace Nihilism.Data {
 				return false;
 			}
 
-			foreach( string grp_name in EntityGroups.GroupsPerNPC[ npc.type ] ) {
-				if( this.Data.NpcLootWhitelist.Contains( grp_name ) ) {
+			foreach( string grpName in EntityGroups.GroupsPerNPC[ npc.type ] ) {
+				if( this.Data.NpcLootWhitelist.Contains( grpName ) ) {
 					return true;
 				}
 			}
@@ -169,8 +168,7 @@ namespace Nihilism.Data {
 			return false;
 		}
 
-
-
+		
 		////////////////
 
 		public bool IsItemEnabled( Item item ) {
