@@ -26,7 +26,7 @@ namespace Nihilism.Commands {
 			var myworld = this.mod.GetModWorld<NihilismWorld>();
 
 			if( NihilismAPI.NihilateCurrentWorld() ) {
-				caller.Reply( "Current world is nihilated. Type /nihoff to revert.", Color.YellowGreen );
+				caller.Reply( "Current world is nihilated. Type /nih-off to revert.", Color.YellowGreen );
 			}  else {
 				caller.Reply( "Current world is already nihilated.", Color.Yellow );
 			}
