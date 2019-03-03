@@ -112,12 +112,12 @@ namespace Nihilism {
 			ModPlayer mywingplayer = this.player.GetModPlayer( mymod.WingSlotMod, "WingSlotPlayer" );
 			object wingEquipSlot;
 			
-			if( !ReflectionHelpers.GetField( mywingplayer, fieldName, out wingEquipSlot ) || wingEquipSlot == null ) {
+			if( !ReflectionHelpers.Get( mywingplayer, fieldName, out wingEquipSlot ) || wingEquipSlot == null ) {
 				return;
 			}
 
 			Item wingItem;
-			if( !ReflectionHelpers.GetProperty( wingEquipSlot, "Item", out wingItem ) || wingItem == null || wingItem.IsAir ) {
+			if( !ReflectionHelpers.Get( wingEquipSlot, "Item", out wingItem ) || wingItem == null || wingItem.IsAir ) {
 				return;
 			}
 
@@ -131,8 +131,8 @@ namespace Nihilism {
 					NetMessage.SendData( 21, -1, -1, null, idx, 1f, 0f, 0f, 0, 0, 0 );
 				}
 				
-				ReflectionHelpers.SetProperty( wingEquipSlot, "Item", new Item() );
-				ReflectionHelpers.SetField( mywingplayer, fieldName, wingEquipSlot );
+				ReflectionHelpers.Set( wingEquipSlot, "Item", new Item() );
+				ReflectionHelpers.Set( mywingplayer, fieldName, wingEquipSlot );
 			}
 		}
 	}

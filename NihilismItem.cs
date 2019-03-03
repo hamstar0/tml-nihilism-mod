@@ -13,7 +13,10 @@ namespace Nihilism {
 		public override void PostDrawInInventory( Item item, SpriteBatch sb, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale ) {
 			var mymod = (NihilismMod)this.mod;
 			var myworld = mymod.GetModWorld<NihilismWorld>();
-			if( myworld.Logic == null ) { return; }
+			if( myworld.Logic == null ) {
+				LogHelpers.Warn( "Logic not loaded." );
+				return;
+			}
 			
 			if( !myworld.Logic.AreItemFiltersEnabled() ) {
 				return;
@@ -37,7 +40,10 @@ namespace Nihilism {
 		public override bool CanUseItem( Item item, Player player ) {
 			var mymod = (NihilismMod)this.mod;
 			var myworld = mymod.GetModWorld<NihilismWorld>();
-			if( myworld.Logic == null ) { return base.CanUseItem( item, player ); }
+			if( myworld.Logic == null ) {
+				LogHelpers.Warn( "Logic not loaded." );
+				return base.CanUseItem( item, player );
+			}
 			
 			if( !myworld.Logic.AreItemFiltersEnabled() ) {
 				return base.CanUseItem( item, player );
@@ -62,7 +68,10 @@ namespace Nihilism {
 		public override bool CanRightClick( Item item ) {
 			var mymod = (NihilismMod)this.mod;
 			var myworld = mymod.GetModWorld<NihilismWorld>();
-			if( myworld.Logic == null ) { return base.CanRightClick( item ); }
+			if( myworld.Logic == null ) {
+				LogHelpers.Warn( "Logic not loaded." );
+				return base.CanRightClick( item );
+			}
 
 			if( !myworld.Logic.AreItemFiltersEnabled() ) {
 				return base.CanRightClick( item );
@@ -78,7 +87,10 @@ namespace Nihilism {
 		public override bool AltFunctionUse( Item item, Player player ) {
 			var mymod = (NihilismMod)this.mod;
 			var myworld = mymod.GetModWorld<NihilismWorld>();
-			if( myworld.Logic == null ) { return base.AltFunctionUse( item, player ); }
+			if( myworld.Logic == null ) {
+				LogHelpers.Warn( "Logic not loaded." );
+				return base.AltFunctionUse( item, player );
+			}
 
 			if( !myworld.Logic.AreItemFiltersEnabled() ) {
 				return base.AltFunctionUse( item, player );
@@ -94,7 +106,10 @@ namespace Nihilism {
 		public override bool ConsumeItem( Item item, Player player ) {
 			var mymod = (NihilismMod)this.mod;
 			var myworld = mymod.GetModWorld<NihilismWorld>();
-			if( myworld.Logic == null ) { return base.ConsumeItem( item, player ); }
+			if( myworld.Logic == null ) {
+				LogHelpers.Warn( "Logic not loaded." );
+				return base.ConsumeItem( item, player );
+			}
 
 			if( !myworld.Logic.AreItemFiltersEnabled() ) {
 				return base.ConsumeItem( item, player );
@@ -110,7 +125,10 @@ namespace Nihilism {
 		public override bool ConsumeAmmo( Item item, Player player ) {
 			var mymod = (NihilismMod)this.mod;
 			var myworld = mymod.GetModWorld<NihilismWorld>();
-			if( myworld.Logic == null ) { return base.ConsumeAmmo( item, player ); }
+			if( myworld.Logic == null ) {
+				LogHelpers.Warn( "Logic not loaded." );
+				return base.ConsumeAmmo( item, player );
+			}
 
 			if( !myworld.Logic.AreItemFiltersEnabled() ) {
 				return base.ConsumeAmmo( item, player );
@@ -127,6 +145,7 @@ namespace Nihilism {
 			var mymod = (NihilismMod)this.mod;
 			var myworld = mymod.GetModWorld<NihilismWorld>();
 			if( myworld.Logic == null ) {
+				LogHelpers.Warn( "Logic not loaded." );
 				return base.PreOpenVanillaBag( context, player, arg );
 			}
 
@@ -149,8 +168,9 @@ namespace Nihilism {
 			bool isAir = container.IsAir;
 
 			if( isAir ) {
+				int containerType = arg != 0 ? arg : ItemAttributeHelpers.GetContainerItemTypes( context )[0];
 				container = new Item();
-				container.SetDefaults( arg != 0 ? arg : ItemAttributeHelpers.GetContainerItemTypes(context)[0] );
+				container.SetDefaults( containerType, true );
 			}
 
 			bool canOpen = myworld.Logic.DataAccess.IsItemEnabled( container );
@@ -158,10 +178,7 @@ namespace Nihilism {
 			if( !canOpen ) {
 				if( containers.Count > 1 || isAir ) {
 					Main.NewText( "Due to a tModLoader bug, opening blacklisted bags and boxes will sometimes consume the item. Sorry. :(", Color.Red );
-				} else {
-					container.stack++;
 				}
-
 				return false;
 			}
 

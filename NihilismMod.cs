@@ -2,6 +2,7 @@
 using HamstarHelpers.Components.Errors;
 using HamstarHelpers.Helpers.DebugHelpers;
 using HamstarHelpers.Helpers.DotNetHelpers;
+using HamstarHelpers.Helpers.TmlHelpers;
 using HamstarHelpers.Helpers.TmlHelpers.ModHelpers;
 using HamstarHelpers.Services.EntityGroups;
 using HamstarHelpers.Services.Messages;
@@ -44,6 +45,9 @@ namespace Nihilism {
 		////////////////
 
 		public override void Load() {
+			string depErr = TmlHelpers.ReportBadDependencyMods( this );
+			if( depErr != null ) { throw new HamstarException( depErr ); }
+
 			NihilismMod.Instance = this;
 
 			if( Main.netMode != 2 ) {   // Not server
