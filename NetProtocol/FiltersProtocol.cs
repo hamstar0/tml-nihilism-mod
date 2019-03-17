@@ -1,5 +1,6 @@
 ﻿using HamstarHelpers.Components.Errors;
 using HamstarHelpers.Components.Network;
+using HamstarHelpers.Helpers.TmlHelpers;
 using Nihilism.Data;
 using Terraria;
 
@@ -50,7 +51,7 @@ namespace Nihilism.NetProtocol {
 
 			var mymod = NihilismMod.Instance;
 			var myworld = mymod.GetModWorld<NihilismWorld>();
-			var myplayer = Main.LocalPlayer.GetModPlayer<NihilismPlayer>();
+			var myplayer = (NihilismPlayer)TmlHelpers.SafelyGetModPlayer( Main.LocalPlayer, mymod, "NihilismPlayer" );
 
 			myworld.Logic.PostFiltersLoad();
 
