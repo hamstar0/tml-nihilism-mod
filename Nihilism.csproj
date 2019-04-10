@@ -82,6 +82,9 @@
     <Compile Include="Commands\CurrentFiltersClearCommand.cs" />
     <Compile Include="Data\Config.cs" />
     <Compile Include="Data\FiltersAccess.cs" />
+    <Compile Include="Data\FiltersAccess_Getters_Enabled.cs" />
+    <Compile Include="Data\FiltersAccess_Setters_Clear.cs" />
+    <Compile Include="Data\FiltersAccess_Setters_Unset.cs" />
     <Compile Include="Data\FiltersAccess_Setters.cs" />
     <Compile Include="Data\FiltersAccess_Getters.cs" />
     <Compile Include="Data\Filters.cs" />

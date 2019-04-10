@@ -178,59 +178,91 @@ namespace Nihilism.Data {
 			return false;
 		}
 
-		
+
 		////////////////
 
-		public bool IsItemEnabled( Item item, out bool isBlackList, out bool isGroup ) {
-			isBlackList = this.IsItemBlacklisted( item, out isGroup );
+		internal bool IsItemBlacklisted2( Item item, out bool isGroup ) {
+			string name = ItemIdentityHelpers.GetQualifiedName( item );
 
-			if( isBlackList ) {
-				if( this.IsItemWhitelisted( item, out isGroup ) ) {
-					return !this.IsItemBlacklisted2( item, out isGroup );
-				}
-				Main.spriteBatch.Draw
-			} else {
+			if( this.Data.ItemBlacklist2.Contains( name ) ) {
+				isGroup = false;
 				return true;
 			}
+
+			if( EntityGroups.GroupsPerItem.ContainsKey( item.type ) ) {
+				foreach( string grpName in EntityGroups.GroupsPerItem[item.type] ) {
+					if( this.Data.ItemBlacklist2.Contains( grpName ) ) {
+						isGroup = true;
+						return true;
+					}
+				}
+			}
+
+			isGroup = false;
+			return false;
 		}
 
+		private bool IsRecipeBlacklisted2( Item item, out bool isGroup ) {
+			string name = ItemIdentityHelpers.GetQualifiedName( item );
 
-		public bool IsRecipeOfItemEnabled( Item item, out bool isBlackList, out bool isGroup ) {
-			isBlackList = this.IsRecipeBlacklisted( item, out isGroup );
-
-			if( isBlackList ) {
-				if( this.IsRecipeWhitelisted( item, out isGroup ) ) {
-					return !this.IsRecipeBlacklisted2( item, out isGroup );
-				}
-			} else {
+			if( this.Data.RecipeBlacklist2.Contains( name ) ) {
+				isGroup = false;
 				return true;
 			}
+
+			if( EntityGroups.GroupsPerItem.ContainsKey( item.type ) ) {
+				foreach( string grpName in EntityGroups.GroupsPerItem[item.type] ) {
+					if( this.Data.RecipeBlacklist2.Contains( grpName ) ) {
+						isGroup = true;
+						return true;
+					}
+				}
+			}
+
+			isGroup = false;
+			return false;
 		}
 
+		private bool IsNpcBlacklisted2( NPC npc, out bool isGroup ) {
+			string name = NPCIdentityHelpers.GetQualifiedName( npc );
 
-		public bool IsNpcEnabled( NPC npc, out bool isBlackList, out bool isGroup ) {
-			isBlackList = this.IsNpcBlacklisted( npc, out isGroup );
-
-			if( isBlackList ) {
-				if( this.IsNpcWhitelisted( npc, out isGroup ) ) {
-					return !this.IsNpcBlacklisted2( npc, out isGroup );
-				}
-			} else {
+			if( this.Data.NpcBlacklist2.Contains( name ) ) {
+				isGroup = false;
 				return true;
 			}
+
+			if( EntityGroups.GroupsPerNPC.ContainsKey( npc.type ) ) {
+				foreach( string grpName in EntityGroups.GroupsPerNPC[npc.type] ) {
+					if( this.Data.NpcBlacklist2.Contains( grpName ) ) {
+						isGroup = true;
+						return true;
+					}
+				}
+			}
+
+			isGroup = false;
+			return false;
 		}
 
+		private bool IsNpcLootBlacklisted2( NPC npc, out bool isGroup ) {
+			string name = NPCIdentityHelpers.GetQualifiedName( npc );
 
-		public bool IsNpcLootEnabled( NPC npc, out bool isBlackList, out bool isGroup ) {
-			isBlackList = this.IsNpcLootBlacklisted( npc, out isGroup );
-
-			if( isBlackList ) {
-				if( this.IsNpcLootWhitelisted( npc, out isGroup ) ) {
-					return !this.IsNpcLootBlacklisted2( npc, out isGroup );
-				}
-			} else {
+			if( this.Data.NpcLootBlacklist.Contains( name ) ) {
+				isGroup = false;
 				return true;
 			}
+
+			if( EntityGroups.GroupsPerNPC.ContainsKey( npc.type ) ) {
+				foreach( string grpName in EntityGroups.GroupsPerNPC[npc.type] ) {
+					if( this.Data.NpcLootBlacklist2.Contains( grpName ) ) {
+						isGroup = true;
+						return true;
+					}
+				}
+			}
+
+			isGroup = false;
+			return false;
 		}
 	}
 }
