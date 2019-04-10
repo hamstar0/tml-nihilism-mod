@@ -4,8 +4,8 @@ using Terraria.ModLoader;
 
 
 namespace Nihilism.Commands {
-	class ItemWhitelistEntrySetCommand : ModCommand {
-		public override string Command => "nih-item-whitelist-set";
+	class RecipeBlacklist2SetCommand : ModCommand {
+		public override string Command => "nih-recipe-blacklist2-set";
 		public override CommandType Type {
 			get {
 				if( Main.netMode == 0 && !Main.dedServ ) {
@@ -16,7 +16,7 @@ namespace Nihilism.Commands {
 			}
 		}
 		public override string Usage => "/" + this.Command + " Excalibur";
-		public override string Description => "Adds an item to the whitelist as an exception to the blacklist.";
+		public override string Description => "Sets a recipe to be an exception to the whitelist (in turn after the blacklist).";
 
 
 
@@ -30,12 +30,12 @@ namespace Nihilism.Commands {
 
 			var mymod = NihilismMod.Instance;
 			var myworld = mymod.GetModWorld<NihilismWorld>();
-			string entName = string.Join(" ", args);
-
-			myworld.Logic.DataAccess.SetItemWhitelistEntry( entName );
+			string entName = string.Join( " ", args );
+			
+			myworld.Logic.DataAccess.SetRecipeBlacklist2Entry( entName );
 			myworld.Logic.SyncDataChanges();
 
-			caller.Reply( "Item " + entName + " added to whitelist.", Color.YellowGreen );
+			caller.Reply( "Recipe for item " + entName + " added to whitelist exceptions (secondary blacklist).", Color.YellowGreen );
 		}
 	}
 }

@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Nihilism.Commands {
 	class NpcBlacklistEntrySetCommand : ModCommand {
-		public override string Command => "nih-npc-blacklist-add";
+		public override string Command => "nih-npc-blacklist-set";
 		public override CommandType Type {
 			get {
 				if( Main.netMode == 0 && !Main.dedServ ) {
@@ -17,6 +17,7 @@ namespace Nihilism.Commands {
 		}
 		public override string Usage => "/" + this.Command + " Zombie";
 		public override string Description => "Adds an npc to the blacklist (checked before whitelist).";
+
 
 
 		////////////////

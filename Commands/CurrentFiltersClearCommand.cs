@@ -4,8 +4,8 @@ using Terraria.ModLoader;
 
 
 namespace Nihilism.Commands {
-	class DefaultFiltersSetCommand : ModCommand {
-		public override string Command => "nih-defaults-set";
+	class DefaultFiltersClearCommand : ModCommand {
+		public override string Command => "nih-clear";
 		public override CommandType Type {
 			get {
 				if( Main.netMode == 0 && !Main.dedServ ) {
@@ -16,7 +16,8 @@ namespace Nihilism.Commands {
 			}
 		}
 		public override string Usage => "/" + this.Command;
-		public override string Description => "Set current world's white and blacklists as the (initial) defaults for every world.";
+		public override string Description => "Empties the current world's white and blacklists.";
+
 
 
 		////////////////

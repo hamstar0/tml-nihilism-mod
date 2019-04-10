@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Nihilism.Commands {
 	class ItemBlacklistEntrySetCommand : ModCommand {
-		public override string Command => "nih-item-blacklist-add";
+		public override string Command => "nih-item-blacklist-set";
 		public override CommandType Type {
 			get {
 				if( Main.netMode == 0 && !Main.dedServ ) {
@@ -17,6 +17,7 @@ namespace Nihilism.Commands {
 		}
 		public override string Usage => "/" + this.Command + " Excalibur";
 		public override string Description => "Adds an item to the blacklist (checked before whitelist).";
+
 
 
 		////////////////

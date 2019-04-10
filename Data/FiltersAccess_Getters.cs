@@ -182,42 +182,46 @@ namespace Nihilism.Data {
 		////////////////
 
 		public bool IsItemEnabled( Item item, out bool isBlackList, out bool isGroup ) {
-			if( !this.IsItemBlacklisted( item, out isGroup ) ) {
-				isBlackList = false;
+			isBlackList = this.IsItemBlacklisted( item, out isGroup );
+
+			if( isBlackList ) {
+				return this.IsItemWhitelisted( item, out isGroup );
+			} else {
 				return true;
 			}
-			isBlackList = true;
-			return this.IsItemWhitelisted( item, out isGroup );
 		}
 
 
 		public bool IsRecipeOfItemEnabled( Item item, out bool isBlackList, out bool isGroup ) {
-			if( !this.IsRecipeBlacklisted( item, out isGroup ) ) {
-				isBlackList = false;
+			isBlackList = this.IsRecipeBlacklisted( item, out isGroup );
+
+			if( isBlackList ) {
+				return this.IsRecipeWhitelisted( item, out isGroup );
+			} else {
 				return true;
 			}
-			isBlackList = true;
-			return this.IsRecipeWhitelisted( item, out isGroup );
 		}
 
 
 		public bool IsNpcEnabled( NPC npc, out bool isBlackList, out bool isGroup ) {
-			if( !this.IsNpcBlacklisted( npc, out isGroup ) ) {
-				isBlackList = false;
+			isBlackList = this.IsNpcBlacklisted( npc, out isGroup );
+
+			if( isBlackList ) {
+				return this.IsNpcWhitelisted( npc, out isGroup );
+			} else {
 				return true;
 			}
-			isBlackList = true;
-			return this.IsNpcWhitelisted( npc, out isGroup );
 		}
 
 
 		public bool IsNpcLootEnabled( NPC npc, out bool isBlackList, out bool isGroup ) {
-			if( !this.IsNpcLootBlacklisted( npc, out isGroup ) ) {
-				isBlackList = false;
+			isBlackList = this.IsNpcLootBlacklisted( npc, out isGroup );
+
+			if( isBlackList ) {
+				return this.IsNpcLootWhitelisted( npc, out isGroup );
+			} else {
 				return true;
 			}
-			isBlackList = true;
-			return this.IsNpcLootWhitelisted( npc, out isGroup );
 		}
 	}
 }

@@ -72,5 +72,29 @@ namespace Nihilism {
 
 			myworld.Logic.DataAccess.ResetFiltersFromDefaults();
 		}
+
+		////
+
+		public static void ClearFiltersForCurrentWorld() {
+			if( !LoadHelpers.IsWorldLoaded() ) { throw new HamstarException( "World not loaded" ); }
+
+			var mymod = NihilismMod.Instance;
+			var myworld = mymod.GetModWorld<NihilismWorld>();
+
+			myworld.Logic.DataAccess.ClearItemBlacklist();
+			myworld.Logic.DataAccess.ClearNpcBlacklist();
+			myworld.Logic.DataAccess.ClearNpcLootBlacklist();
+			myworld.Logic.DataAccess.ClearRecipeBlacklist();
+
+			myworld.Logic.DataAccess.ClearItemWhitelist();
+			myworld.Logic.DataAccess.ClearNpcLootWhitelist();
+			myworld.Logic.DataAccess.ClearNpcWhitelist();
+			myworld.Logic.DataAccess.ClearRecipeWhitelist();
+
+			myworld.Logic.DataAccess.ClearItemBlacklist2();
+			myworld.Logic.DataAccess.ClearNpcBlacklist2();
+			myworld.Logic.DataAccess.ClearNpcLootBlacklist2();
+			myworld.Logic.DataAccess.ClearRecipeBlacklist2();
+		}
 	}
 }

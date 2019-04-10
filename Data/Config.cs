@@ -24,6 +24,11 @@ namespace Nihilism.Data {
 		public ISet<string> DefaultNpcWhitelist = new HashSet<string> { };
 		public ISet<string> DefaultNpcLootWhitelist = new HashSet<string> { };
 
+		public ISet<string> DefaultItemBlacklist2 = new HashSet<string> { };
+		public ISet<string> DefaultRecipeBlacklist2 = new HashSet<string> { };
+		public ISet<string> DefaultNpcBlacklist2 = new HashSet<string> { };
+		public ISet<string> DefaultNpcLootBlacklist2 = new HashSet<string> { };
+
 		public bool EnableItemFilters = true;
 		public bool EnableItemEquipsFilters = true;
 		public bool EnableRecipeFilters = true;
@@ -49,6 +54,8 @@ namespace Nihilism.Data {
 			this.DefaultRecipeWhitelist.Add( "Any Copper Or Tin Equipment" );
 			this.DefaultNpcWhitelist.Add( "Any Slime" );
 			this.DefaultNpcLootWhitelist.Add( "Blue Slime" );
+
+			this.DefaultItemBlacklist2.Add( "Copper Shortsword" );
 		}
 
 

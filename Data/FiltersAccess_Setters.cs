@@ -34,6 +34,24 @@
 			this.Data.NpcWhitelist.Add( npcName );
 		}
 
+		////
+
+		public void SetItemBlacklist2Entry( string itemName ) {
+			this.Data.ItemBlacklist2.Add( itemName );
+		}
+
+		public void SetNpcLootBlacklist2Entry( string itemName ) {
+			this.Data.RecipeBlacklist2.Add( itemName );
+		}
+
+		public void SetNpcBlacklist2Entry( string npcName ) {
+			this.Data.NpcLootBlacklist2.Add( npcName );
+		}
+
+		public void SetRecipeBlacklist2Entry( string npcName ) {
+			this.Data.NpcBlacklist2.Add( npcName );
+		}
+
 
 		////////////////
 
@@ -71,6 +89,24 @@
 			this.Data.NpcWhitelist.Remove( npcName );
 		}
 
+		////
+
+		public void UnsetItemBlacklist2Entry( string itemName ) {
+			this.Data.ItemBlacklist2.Remove( itemName );
+		}
+
+		public void UnsetRecipeBlacklist2Entry( string itemName ) {
+			this.Data.RecipeBlacklist2.Remove( itemName );
+		}
+
+		public void UnsetNpcLootBlacklist2Entry( string npcName ) {
+			this.Data.NpcLootBlacklist2.Remove( npcName );
+		}
+
+		public void UnsetNpcBlacklist2Entry( string npcName ) {
+			this.Data.NpcBlacklist2.Remove( npcName );
+		}
+
 
 		////////////////
 
@@ -90,7 +126,7 @@
 			this.Data.NpcBlacklist.Clear();
 		}
 
-		////////////////
+		/////
 
 		public void ClearItemWhitelist() {
 			this.Data.ItemWhitelist.Clear();
@@ -106,6 +142,24 @@
 
 		public void ClearNpcWhitelist() {
 			this.Data.NpcWhitelist.Clear();
+		}
+
+		/////
+
+		public void ClearItemBlacklist2() {
+			this.Data.ItemBlacklist2.Clear();
+		}
+
+		public void ClearRecipeBlacklist2() {
+			this.Data.RecipeBlacklist2.Clear();
+		}
+
+		public void ClearNpcLootBlacklist2() {
+			this.Data.NpcLootBlacklist2.Clear();
+		}
+
+		public void ClearNpcBlacklist2() {
+			this.Data.NpcBlacklist2.Clear();
 		}
 
 

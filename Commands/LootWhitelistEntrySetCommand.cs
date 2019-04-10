@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 
 namespace Nihilism.Commands {
 	class LootWhitelistEntrySetCommand : ModCommand {
-		public override string Command => "nih-loot-whitelist-add";
+		public override string Command => "nih-loot-whitelist-set";
 		public override CommandType Type {
 			get {
 				if( Main.netMode == 0 && !Main.dedServ ) {
@@ -17,6 +17,7 @@ namespace Nihilism.Commands {
 		}
 		public override string Usage => "/" + this.Command + " Zombie";
 		public override string Description => "Adds a lootable npc to the whitelist as an exception to the blacklist.";
+
 
 
 		////////////////
