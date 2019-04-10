@@ -185,7 +185,10 @@ namespace Nihilism.Data {
 			isBlackList = this.IsItemBlacklisted( item, out isGroup );
 
 			if( isBlackList ) {
-				return this.IsItemWhitelisted( item, out isGroup );
+				if( this.IsItemWhitelisted( item, out isGroup ) ) {
+					return !this.IsItemBlacklisted2( item, out isGroup );
+				}
+				Main.spriteBatch.Draw
 			} else {
 				return true;
 			}
@@ -196,7 +199,9 @@ namespace Nihilism.Data {
 			isBlackList = this.IsRecipeBlacklisted( item, out isGroup );
 
 			if( isBlackList ) {
-				return this.IsRecipeWhitelisted( item, out isGroup );
+				if( this.IsRecipeWhitelisted( item, out isGroup ) ) {
+					return !this.IsRecipeBlacklisted2( item, out isGroup );
+				}
 			} else {
 				return true;
 			}
@@ -207,7 +212,9 @@ namespace Nihilism.Data {
 			isBlackList = this.IsNpcBlacklisted( npc, out isGroup );
 
 			if( isBlackList ) {
-				return this.IsNpcWhitelisted( npc, out isGroup );
+				if( this.IsNpcWhitelisted( npc, out isGroup ) ) {
+					return !this.IsNpcBlacklisted2( npc, out isGroup );
+				}
 			} else {
 				return true;
 			}
@@ -218,7 +225,9 @@ namespace Nihilism.Data {
 			isBlackList = this.IsNpcLootBlacklisted( npc, out isGroup );
 
 			if( isBlackList ) {
-				return this.IsNpcLootWhitelisted( npc, out isGroup );
+				if( this.IsNpcLootWhitelisted( npc, out isGroup ) ) {
+					return !this.IsNpcLootBlacklisted2( npc, out isGroup );
+				}
 			} else {
 				return true;
 			}
