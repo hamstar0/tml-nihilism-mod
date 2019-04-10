@@ -1,5 +1,5 @@
 ﻿using HamstarHelpers.Helpers.DebugHelpers;
-using HamstarHelpers.Helpers.DotNetHelpers;
+using HamstarHelpers.Helpers.DotNetHelpers.Reflection;
 using HamstarHelpers.Helpers.PlayerHelpers;
 using Terraria;
 using Terraria.ModLoader;
@@ -78,11 +78,12 @@ namespace Nihilism {
 			if( myworld.Logic == null ) { return; }
 			if( !myworld.Logic.DataAccess.IsActive() ) { return; }
 
+			bool _;
 			for( int i=0; i<this.player.armor.Length; i++ ) {
 				Item item = this.player.armor[i];
 				if( item == null || item.IsAir ) { continue; }
 
-				if( !myworld.Logic.DataAccess.IsItemEnabled( item ) ) {
+				if( !myworld.Logic.DataAccess.IsItemEnabled( item, out _, out _ ) ) {
 					PlayerItemHelpers.DropEquippedItem( player, i );
 				}
 			}
@@ -91,7 +92,7 @@ namespace Nihilism {
 				Item item = this.player.armor[i];
 				if( item == null || item.IsAir ) { continue; }
 
-				if( myworld.Logic.DataAccess.IsItemEnabled( item ) ) { continue; }
+				if( myworld.Logic.DataAccess.IsItemEnabled( item, out _, out _ ) ) { continue; }
 
 				PlayerItemHelpers.DropEquippedMiscItem( player, i );
 			}
@@ -121,7 +122,8 @@ namespace Nihilism {
 				return;
 			}
 
-			if( !myworld.Logic.DataAccess.IsItemEnabled( wingItem ) ) {
+			bool _;
+			if( !myworld.Logic.DataAccess.IsItemEnabled( wingItem, out _, out _ ) ) {
 				int idx = Item.NewItem( player.position, wingItem.width, wingItem.height, wingItem.type, wingItem.stack, false, wingItem.prefix, false, false );
 
 				wingItem.position = Main.item[idx].position;

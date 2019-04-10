@@ -12,7 +12,8 @@ namespace Nihilism {
 				return base.PreNPCLoot(npc);
 			}
 
-			return myworld.Logic.DataAccess.IsNpcLootEnabled( npc );
+			bool _;
+			return myworld.Logic.DataAccess.IsNpcLootEnabled( npc, out _, out _ );
 		}
 
 
@@ -23,8 +24,9 @@ namespace Nihilism {
 			if( myworld.Logic == null || !myworld.Logic.AreNpcsFiltersEnabled() ) {
 				return base.PreAI(npc);
 			}
-			
-			bool isEnabled = myworld.Logic.DataAccess.IsNpcEnabled( npc );
+
+			bool _;
+			bool isEnabled = myworld.Logic.DataAccess.IsNpcEnabled( npc, out _, out _ );
 
 			if( !isEnabled ) {
 				npc.active = false;

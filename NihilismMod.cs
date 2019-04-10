@@ -2,8 +2,10 @@
 using HamstarHelpers.Components.Errors;
 using HamstarHelpers.Helpers.DebugHelpers;
 using HamstarHelpers.Helpers.DotNetHelpers;
+using HamstarHelpers.Helpers.ItemHelpers;
 using HamstarHelpers.Helpers.TmlHelpers;
 using HamstarHelpers.Helpers.TmlHelpers.ModHelpers;
+using HamstarHelpers.Services.DataDumper;
 using HamstarHelpers.Services.EntityGroups;
 using HamstarHelpers.Services.Messages;
 using Microsoft.Xna.Framework.Graphics;
@@ -30,6 +32,8 @@ namespace Nihilism {
 		public bool SuppressAutoSaving { get; internal set; }
 
 		private bool HasUpdated = false;
+
+		////
 
 		internal Mod WingSlotMod = null;
 
@@ -89,6 +93,27 @@ namespace Nihilism {
 
 
 		public override void PostAddRecipes() {
+			DataDumper.SetDumpSource( "NihilismShowFiltersForMouseItem", () => {
+				if( Main.mouseItem == null || Main.mouseItem.IsAir ) {
+					return "  No mouse item selected.";
+				}
+
+				var myworld = this.GetModWorld<NihilismWorld>();
+				if( myworld.Logic == null ) {
+					return "  Logic not loaded.";
+				}
+
+				if( !myworld.Logic.AreItemFiltersEnabled() ) {
+					return "  Item filters not enabled.";
+				}
+				
+				string name = ItemIdentityHelpers.GetQualifiedName( Main.mouseItem );
+				bool isEnabled, isBlackList, isGroup;
+				isEnabled = myworld.Logic.DataAccess.IsItemEnabled( Main.mouseItem, out isBlackList, out isGroup );
+
+				return "  Item " + name + " enabled? "+isEnabled+", blacklisted? " + isBlackList + ", is group? " + isGroup;
+			} );
+
 			if( this.HasUpdated && this.Version == new Version( 1, 5, 9 ) ) {
 				InboxMessages.SetMessage( "nihilism_update", "A version update has put your world data into a new file. You may need to manually copy this (see Documents/My Games/Terraria/ModLoader/Mod Specific Data/Nihilism).", true );
 			}

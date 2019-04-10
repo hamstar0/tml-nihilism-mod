@@ -19,7 +19,8 @@ namespace Nihilism {
 				return base.RecipeAvailable( recipe );
 			}
 
-			return myworld.Logic.DataAccess.IsRecipeOfItemEnabled( item );
+			bool _;
+			return myworld.Logic.DataAccess.IsRecipeOfItemEnabled( item, out _, out _ );
 		}
 	}
 }

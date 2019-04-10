@@ -24,7 +24,8 @@ namespace Nihilism {
 			
 			if( item == null || item.IsAir ) { return; }
 
-			if( !myworld.Logic.DataAccess.IsItemEnabled( item ) ) {
+			bool _;
+			if( !myworld.Logic.DataAccess.IsItemEnabled( item, out _, out _ ) ) {
 				float posX = position.X + (((float)frame.Width / 2f) * scale) - (((float)mymod.DisabledItem.Width / 2f) * scale);
 				float posY = position.Y + (((float)frame.Height / 2f) * scale) - (((float)mymod.DisabledItem.Height / 2f) * scale);
 				var pos = new Vector2( posX, posY );
@@ -48,14 +49,15 @@ namespace Nihilism {
 			if( !myworld.Logic.AreItemFiltersEnabled() ) {
 				return base.CanUseItem( item, player );
 			}
-			
-			if( !myworld.Logic.DataAccess.IsItemEnabled( item ) ) {
+
+			bool _;
+			if( !myworld.Logic.DataAccess.IsItemEnabled( item, out _, out _ ) ) {
 				return false;
 			} else if( item.useAmmo != 0 ) {
 				Item ammoItem = PlayerItemFinderHelpers.GetCurrentAmmo( player, item );
 
 				if( ammoItem != null ) {
-					if( !myworld.Logic.DataAccess.IsItemEnabled( ammoItem ) ) {
+					if( !myworld.Logic.DataAccess.IsItemEnabled( ammoItem, out _, out _ ) ) {
 						return false;
 					}
 				}
@@ -76,8 +78,9 @@ namespace Nihilism {
 			if( !myworld.Logic.AreItemFiltersEnabled() ) {
 				return base.CanRightClick( item );
 			}
-			
-			if( !myworld.Logic.DataAccess.IsItemEnabled( item ) ) {
+
+			bool _;
+			if( !myworld.Logic.DataAccess.IsItemEnabled( item, out _, out _ ) ) {
 				return false;
 			}
 			return base.CanRightClick( item );
@@ -96,7 +99,8 @@ namespace Nihilism {
 				return base.AltFunctionUse( item, player );
 			}
 
-			if( !myworld.Logic.DataAccess.IsItemEnabled( item ) ) {
+			bool _;
+			if( !myworld.Logic.DataAccess.IsItemEnabled( item, out _, out _ ) ) {
 				return false;
 			}
 			return base.AltFunctionUse( item, player );
@@ -115,7 +119,8 @@ namespace Nihilism {
 				return base.ConsumeItem( item, player );
 			}
 
-			if( !myworld.Logic.DataAccess.IsItemEnabled( item ) ) {
+			bool _;
+			if( !myworld.Logic.DataAccess.IsItemEnabled( item, out _, out _ ) ) {
 				return false;
 			}
 			return base.ConsumeItem( item, player );
@@ -134,7 +139,8 @@ namespace Nihilism {
 				return base.ConsumeAmmo( item, player );
 			}
 
-			if( !myworld.Logic.DataAccess.IsItemEnabled( item ) ) {
+			bool _;
+			if( !myworld.Logic.DataAccess.IsItemEnabled( item, out _, out _ ) ) {
 				return false;
 			}
 			return base.ConsumeAmmo( item, player );
@@ -173,7 +179,8 @@ namespace Nihilism {
 				container.SetDefaults( containerType, true );
 			}
 
-			bool canOpen = myworld.Logic.DataAccess.IsItemEnabled( container );
+			bool _;
+			bool canOpen = myworld.Logic.DataAccess.IsItemEnabled( container, out _, out _ );
 
 			if( !canOpen ) {
 				if( containers.Count > 1 || isAir ) {

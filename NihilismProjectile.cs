@@ -15,8 +15,9 @@ namespace Nihilism {
 			}
 
 			Item grappleItem = PlayerItemHelpers.GetGrappleItem( player );
-			
-			if( grappleItem != null && myworld.Logic.DataAccess.IsItemEnabled( grappleItem ) ) {
+
+			bool _;
+			if( grappleItem != null && myworld.Logic.DataAccess.IsItemEnabled( grappleItem, out _, out _ ) ) {
 				return null;
 			}
 			return false;
