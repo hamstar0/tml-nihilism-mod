@@ -23,9 +23,9 @@ namespace Nihilism.Commands {
 		////////////////
 
 		public override void Action( CommandCaller caller, string input, string[] args ) {
-			NihilismAPI.SetCurrentFiltersAsDefaults();
+			NihilismAPI.ClearFiltersForCurrentWorld();
 
-			caller.Reply( "Current world's filters as the new defaults.", Color.YellowGreen );
+			caller.Reply( "Cleared all blacklists and whitelists.", Color.YellowGreen );
 		}
 	}
 }
