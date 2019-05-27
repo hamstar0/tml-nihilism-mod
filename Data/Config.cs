@@ -13,6 +13,7 @@ namespace Nihilism.Data {
 		public string VersionSinceUpdate = "";
 
 		public bool DebugModeInfo = false;
+		public bool DebugModePerItemInfo = false;
 
 		public ISet<string> DefaultItemBlacklist = new HashSet<string> { };
 		public ISet<string> DefaultRecipeBlacklist = new HashSet<string> { };

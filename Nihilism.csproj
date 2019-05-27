@@ -31,9 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="HamstarHelpers, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="HamstarHelpers, Version=0.0.0.0, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Helpers\HamstarHelpers\bin\Release\HamstarHelpers.dll</HintPath>
+      <HintPath>..\..\Mod Helpers\HamstarHelpers\bin\Release\HamstarHelpers.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -90,6 +90,7 @@
     <Compile Include="Data\FiltersAccess_Setters.cs" />
     <Compile Include="Data\FiltersAccess_Getters.cs" />
     <Compile Include="Data\Filters.cs" />
+    <Compile Include="MyItem_Draw.cs" />
     <Compile Include="NetProtocol\ModSettingsProtocol.cs" />
     <Compile Include="NetProtocol\FiltersProtocol.cs" />
     <Compile Include="MyItem.cs" />

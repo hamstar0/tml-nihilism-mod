@@ -2,42 +2,13 @@
 using HamstarHelpers.Helpers.ItemHelpers;
 using HamstarHelpers.Helpers.PlayerHelpers;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ModLoader;
 
 
 namespace Nihilism {
-	class NihilismItem : GlobalItem {
-		public override void PostDrawInInventory( Item item, SpriteBatch sb, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale ) {
-			var mymod = (NihilismMod)this.mod;
-			var myworld = mymod.GetModWorld<NihilismWorld>();
-			if( myworld.Logic == null ) {
-				LogHelpers.Warn( "Logic not loaded." );
-				return;
-			}
-			
-			if( !myworld.Logic.AreItemFiltersEnabled() ) {
-				return;
-			}
-			
-			if( item == null || item.IsAir ) { return; }
-
-			bool _;
-			if( !myworld.Logic.DataAccess.IsItemEnabled( item, out _, out _ ) ) {
-				float posX = position.X + (((float)frame.Width / 2f) * scale) - (((float)mymod.DisabledItem.Width / 2f) * scale);
-				float posY = position.Y + (((float)frame.Height / 2f) * scale) - (((float)mymod.DisabledItem.Height / 2f) * scale);
-				var pos = new Vector2( posX, posY );
-				var rect = new Rectangle( 0, 0, mymod.DisabledItem.Width, mymod.DisabledItem.Height );
-				var color = Color.White * 0.625f;
-
-				sb.Draw( mymod.DisabledItem, pos, rect, color, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f );
-			}
-		}
-
-		////////////////
-
+	partial class NihilismItem : GlobalItem {
 		public override bool CanUseItem( Item item, Player player ) {
 			var mymod = (NihilismMod)this.mod;
 			var myworld = mymod.GetModWorld<NihilismWorld>();

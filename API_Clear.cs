@@ -14,7 +14,7 @@ namespace Nihilism {
 
 			if( !localOnly ) { myworld.Logic.SyncDataChanges(); }
 		}
-		
+
 		public static void ClearRecipeBlacklist( bool localOnly ) {
 			if( !LoadHelpers.IsWorldLoaded() ) { throw new HamstarException( "World not loaded" ); }
 
@@ -38,6 +38,45 @@ namespace Nihilism {
 
 			var myworld = NihilismMod.Instance.GetModWorld<NihilismWorld>();
 			myworld.Logic.DataAccess.ClearNpcLootBlacklist();
+
+			if( !localOnly ) { myworld.Logic.SyncDataChanges(); }
+		}
+
+
+		////////////////
+
+		public static void ClearItemBlacklist2( bool localOnly ) {
+			if( !LoadHelpers.IsWorldLoaded() ) { throw new HamstarException( "World not loaded" ); }
+
+			var myworld = NihilismMod.Instance.GetModWorld<NihilismWorld>();
+			myworld.Logic.DataAccess.ClearItemBlacklist2();
+
+			if( !localOnly ) { myworld.Logic.SyncDataChanges(); }
+		}
+
+		public static void ClearRecipeBlacklist2( bool localOnly ) {
+			if( !LoadHelpers.IsWorldLoaded() ) { throw new HamstarException( "World not loaded" ); }
+
+			var myworld = NihilismMod.Instance.GetModWorld<NihilismWorld>();
+			myworld.Logic.DataAccess.ClearRecipeBlacklist2();
+
+			if( !localOnly ) { myworld.Logic.SyncDataChanges(); }
+		}
+
+		public static void ClearNpcBlacklist2( bool localOnly ) {
+			if( !LoadHelpers.IsWorldLoaded() ) { throw new HamstarException( "World not loaded" ); }
+
+			var myworld = NihilismMod.Instance.GetModWorld<NihilismWorld>();
+			myworld.Logic.DataAccess.ClearNpcBlacklist2();
+
+			if( !localOnly ) { myworld.Logic.SyncDataChanges(); }
+		}
+
+		public static void ClearNpcLootBlacklist2( bool localOnly ) {
+			if( !LoadHelpers.IsWorldLoaded() ) { throw new HamstarException( "World not loaded" ); }
+
+			var myworld = NihilismMod.Instance.GetModWorld<NihilismWorld>();
+			myworld.Logic.DataAccess.ClearNpcLootBlacklist2();
 
 			if( !localOnly ) { myworld.Logic.SyncDataChanges(); }
 		}

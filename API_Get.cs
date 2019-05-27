@@ -8,21 +8,21 @@ using Terraria;
 
 namespace Nihilism {
 	public static partial class NihilismAPI {
-		public static IEnumerable<string> GetItemBlacklistGroupsForItem( Item item ) {
+		public static IList<string> GetItemBlacklistGroupsForItem( Item item ) {
 			if( !LoadHelpers.IsWorldLoaded() ) { throw new HamstarException( "World not loaded" ); }
 
 			var myworld = NihilismMod.Instance.GetModWorld<NihilismWorld>();
 			return myworld.Logic?.DataAccess?.GetItemBlacklistGroupEntriesForItem( item );
 		}
 
-		public static IEnumerable<string> GetItemWhitelistGroupsForItem( Item item ) {
+		public static IList<string> GetItemWhitelistGroupsForItem( Item item ) {
 			if( !LoadHelpers.IsWorldLoaded() ) { throw new HamstarException( "World not loaded" ); }
 
 			var myworld = NihilismMod.Instance.GetModWorld<NihilismWorld>();
 			return myworld.Logic?.DataAccess?.GetItemWhitelistGroupEntriesForItem( item );
 		}
 
-		public static IEnumerable<string> GetItemBlacklist2GroupsForItem( Item item ) {
+		public static IList<string> GetItemBlacklist2GroupsForItem( Item item ) {
 			if( !LoadHelpers.IsWorldLoaded() ) { throw new HamstarException( "World not loaded" ); }
 
 			var myworld = NihilismMod.Instance.GetModWorld<NihilismWorld>();
@@ -31,21 +31,21 @@ namespace Nihilism {
 
 		////
 
-		public static IEnumerable<string> GetRecipeBlacklistGroupsForItem( Item item ) {
+		public static IList<string> GetRecipeBlacklistGroupsForItem( Item item ) {
 			if( !LoadHelpers.IsWorldLoaded() ) { throw new HamstarException( "World not loaded" ); }
 
 			var myworld = NihilismMod.Instance.GetModWorld<NihilismWorld>();
 			return myworld.Logic?.DataAccess?.GetRecipeBlacklistGroupEntriesForItemRecipe( item );
 		}
 
-		public static IEnumerable<string> GetRecipeWhitelistGroupsForItem( Item item ) {
+		public static IList<string> GetRecipeWhitelistGroupsForItem( Item item ) {
 			if( !LoadHelpers.IsWorldLoaded() ) { throw new HamstarException( "World not loaded" ); }
 
 			var myworld = NihilismMod.Instance.GetModWorld<NihilismWorld>();
 			return myworld.Logic?.DataAccess?.GetRecipeWhitelistGroupEntriesForItemRecipe( item );
 		}
 
-		public static IEnumerable<string> GetRecipeBlacklist2GroupsForItem( Item item ) {
+		public static IList<string> GetRecipeBlacklist2GroupsForItem( Item item ) {
 			if( !LoadHelpers.IsWorldLoaded() ) { throw new HamstarException( "World not loaded" ); }
 
 			var myworld = NihilismMod.Instance.GetModWorld<NihilismWorld>();
@@ -54,21 +54,21 @@ namespace Nihilism {
 
 		////
 
-		public static IEnumerable<string> GetNpcBlacklistGroupsForNpc( NPC npc ) {
+		public static IList<string> GetNpcBlacklistGroupsForNpc( NPC npc ) {
 			if( !LoadHelpers.IsWorldLoaded() ) { throw new HamstarException( "World not loaded" ); }
 
 			var myworld = NihilismMod.Instance.GetModWorld<NihilismWorld>();
 			return myworld.Logic?.DataAccess?.GetNpcBlacklistGroupEntriesForNpc( npc );
 		}
 
-		public static IEnumerable<string> GetNpcWhitelistGroupsForNpc( NPC npc ) {
+		public static IList<string> GetNpcWhitelistGroupsForNpc( NPC npc ) {
 			if( !LoadHelpers.IsWorldLoaded() ) { throw new HamstarException( "World not loaded" ); }
 
 			var myworld = NihilismMod.Instance.GetModWorld<NihilismWorld>();
 			return myworld.Logic?.DataAccess?.GetNpcWhitelistGroupEntriesForNpc( npc );
 		}
 
-		public static IEnumerable<string> GetNpcBlacklist2GroupsForNpc( NPC npc ) {
+		public static IList<string> GetNpcBlacklist2GroupsForNpc( NPC npc ) {
 			if( !LoadHelpers.IsWorldLoaded() ) { throw new HamstarException( "World not loaded" ); }
 
 			var myworld = NihilismMod.Instance.GetModWorld<NihilismWorld>();
@@ -77,21 +77,21 @@ namespace Nihilism {
 
 		////
 
-		public static IEnumerable<string> GetNpcLootBlacklistGroupsForNpc( NPC npc ) {
+		public static IList<string> GetNpcLootBlacklistGroupsForNpc( NPC npc ) {
 			if( !LoadHelpers.IsWorldLoaded() ) { throw new HamstarException( "World not loaded" ); }
 
 			var myworld = NihilismMod.Instance.GetModWorld<NihilismWorld>();
 			return myworld.Logic?.DataAccess?.GetNpcLootBlacklistGroupEntriesForNpc( npc );
 		}
 
-		public static IEnumerable<string> GetNpcLootWhitelistGroupsForNpc( NPC npc ) {
+		public static IList<string> GetNpcLootWhitelistGroupsForNpc( NPC npc ) {
 			if( !LoadHelpers.IsWorldLoaded() ) { throw new HamstarException( "World not loaded" ); }
 
 			var myworld = NihilismMod.Instance.GetModWorld<NihilismWorld>();
 			return myworld.Logic?.DataAccess?.GetNpcLootWhitelistGroupEntriesForNpc( npc );
 		}
 
-		public static IEnumerable<string> GetNpcLootBlacklist2GroupsForNpc( NPC npc ) {
+		public static IList<string> GetNpcLootBlacklist2GroupsForNpc( NPC npc ) {
 			if( !LoadHelpers.IsWorldLoaded() ) { throw new HamstarException( "World not loaded" ); }
 
 			var myworld = NihilismMod.Instance.GetModWorld<NihilismWorld>();
