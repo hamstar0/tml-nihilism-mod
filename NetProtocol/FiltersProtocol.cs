@@ -10,6 +10,7 @@ namespace Nihilism.NetProtocol {
 		public NihilismFilterData Filters;
 
 
+
 		////////////////
 
 		private FiltersProtocol() { }

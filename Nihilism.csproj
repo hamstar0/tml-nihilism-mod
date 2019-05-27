@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="API_Clear.cs" />
+    <Compile Include="API_Get.cs" />
     <Compile Include="API_Set.cs" />
     <Compile Include="API_Obsolete.cs" />
     <Compile Include="API.cs" />
@@ -82,6 +83,7 @@
     <Compile Include="Commands\CurrentFiltersClearCommand.cs" />
     <Compile Include="Data\Config.cs" />
     <Compile Include="Data\FiltersAccess.cs" />
+    <Compile Include="Data\FiltersAccess_List.cs" />
     <Compile Include="Data\FiltersAccess_Getters_Enabled.cs" />
     <Compile Include="Data\FiltersAccess_Setters_Clear.cs" />
     <Compile Include="Data\FiltersAccess_Setters_Unset.cs" />
@@ -90,16 +92,16 @@
     <Compile Include="Data\Filters.cs" />
     <Compile Include="NetProtocol\ModSettingsProtocol.cs" />
     <Compile Include="NetProtocol\FiltersProtocol.cs" />
-    <Compile Include="NihilismItem.cs" />
+    <Compile Include="MyItem.cs" />
     <Compile Include="Logic\WorldLogic.cs" />
-    <Compile Include="NihilismMod_Meta.cs" />
-    <Compile Include="NihilismMod.cs" />
-    <Compile Include="NihilismNpc.cs" />
-    <Compile Include="NihilismPlayer_Load.cs" />
-    <Compile Include="NihilismPlayer.cs" />
-    <Compile Include="NihilismProjectile.cs" />
-    <Compile Include="NihilismRecipe.cs" />
-    <Compile Include="NihilismWorld.cs" />
+    <Compile Include="MyMod_Meta.cs" />
+    <Compile Include="MyMod.cs" />
+    <Compile Include="MyNpc.cs" />
+    <Compile Include="MyPlayer_Load.cs" />
+    <Compile Include="MyPlayer.cs" />
+    <Compile Include="MyProjectile.cs" />
+    <Compile Include="MyRecipe.cs" />
+    <Compile Include="MyWorld.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

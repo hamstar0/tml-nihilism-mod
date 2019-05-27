@@ -9,6 +9,7 @@ namespace Nihilism.NetProtocol {
 		public NihilismConfigData Settings;
 
 
+
 		////////////////
 
 		private ModSettingsProtocol() { }
