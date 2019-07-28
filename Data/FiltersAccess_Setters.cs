@@ -1,55 +1,77 @@
-﻿namespace Nihilism.Data {
+﻿using HamstarHelpers.Helpers.Items;
+using Terraria.ModLoader.Config;
+
+
+namespace Nihilism.Data {
 	partial class NihilismFilterAccess {
-		public void SetItemBlacklistEntry( string itemName ) {
-			this.FilterConfig.ItemBlacklist.Add( itemName );
+		public void SetItemBlacklistEntry( int itemType ) {
+			string key = ItemIdentityHelpers.GetUniqueKey( itemType );
+			string[] parts = key.Split( new char[] { ' ' }, 2 );
+			if( parts.Length != 2 ) {
+				return;
+			}
+
+			this.FilterConfig.ItemBlacklist.Add( new ItemDefinition(parts[0], parts[1]) );
 		}
 
-		public void SetRecipeBlacklistEntry( string itemName ) {
-			this.FilterConfig.RecipeBlacklist.Add( itemName );
+		public void SetRecipeBlacklistEntry( int itemType ) {
+			this.FilterConfig.RecipeBlacklist.Add( itemType );
 		}
 
-		public void SetNpcLootBlacklistEntry( string npcName ) {
-			this.FilterConfig.NpcLootBlacklist.Add( npcName );
+		public void SetNpcBlacklistEntry( int npcType ) {
+			this.FilterConfig.NpcBlacklist.Add( npcType );
 		}
 
-		public void SetNpcBlacklistEntry( string npcName ) {
-			this.FilterConfig.NpcBlacklist.Add( npcName );
+		public void SetNpcLootBlacklistEntry( int npcType ) {
+			this.FilterConfig.NpcLootBlacklist.Add( npcType );
 		}
 
 		////
 
-		public void SetItemWhitelistEntry( string itemName ) {
-			this.FilterConfig.ItemWhitelist.Add( itemName );
+		public void SetItemWhitelistEntry( int itemType ) {
+			this.FilterConfig.ItemWhitelist.Add( itemType );
 		}
 		
-		public void SetRecipeWhitelistEntry( string itemName ) {
-			this.FilterConfig.RecipeWhitelist.Add( itemName );
+		public void SetRecipeWhitelistEntry( int itemType ) {
+			this.FilterConfig.RecipeWhitelist.Add( itemType );
 		}
 
-		public void SetNpcLootWhitelistEntry( string npcName ) {
-			this.FilterConfig.NpcLootWhitelist.Add( npcName );
+		public void SetNpcWhitelistEntry( int npcType ) {
+			this.FilterConfig.NpcWhitelist.Add( npcType );
 		}
 
-		public void SetNpcWhitelistEntry( string npcName ) {
-			this.FilterConfig.NpcWhitelist.Add( npcName );
+		public void SetNpcLootWhitelistEntry( int npcType ) {
+			this.FilterConfig.NpcLootWhitelist.Add( npcType );
 		}
 
 		////
 
-		public void SetItemBlacklist2Entry( string itemName ) {
-			this.FilterConfig.ItemBlacklist2.Add( itemName );
+		public void SetItemBlacklist2Entry( int itemType ) {
+			string key = ItemIdentityHelpers.GetUniqueKey( itemType );
+			string[] parts = key.Split( new char[] { ' ' }, 2 );
+			if( parts.Length != 2 ) {
+				return;
+			}
+
+			this.FilterConfig.ItemBlacklist2.Add( new ItemDefinition( parts[0], parts[1] ) );
 		}
 
-		public void SetNpcLootBlacklist2Entry( string itemName ) {
-			this.FilterConfig.RecipeBlacklist2.Add( itemName );
+		public void SetRecipeBlacklist2Entry( int npcType ) {
+			this.FilterConfig.NpcBlacklist2.Add( npcType );
 		}
 
-		public void SetNpcBlacklist2Entry( string npcName ) {
-			this.FilterConfig.NpcLootBlacklist2.Add( npcName );
+		public void SetNpcBlacklist2Entry( int npcType ) {
+			this.FilterConfig.NpcLootBlacklist2.Add( npcType );
 		}
 
-		public void SetRecipeBlacklist2Entry( string npcName ) {
-			this.FilterConfig.NpcBlacklist2.Add( npcName );
+		public void SetNpcLootBlacklist2Entry( int itemType ) {
+			string key = ItemIdentityHelpers.GetUniqueKey( itemType );
+			string[] parts = key.Split( new char[] { ' ' }, 2 );
+			if( parts.Length != 2 ) {
+				return;
+			}
+
+			this.FilterConfig.RecipeBlacklist2.Add( new ItemDefinition( parts[0], parts[1] ) );
 		}
 
 

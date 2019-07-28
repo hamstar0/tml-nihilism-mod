@@ -21,7 +21,7 @@ namespace Nihilism.Data {
 
 				if( EntityGroups.TryGetGroupsPerItem( item.type, out grpsPerItem ) ) {
 					foreach( string grpName in grpsPerItem ) {
-						if( this.FilterConfig.ItemBlacklist.Contains( grpName ) ) {
+						if( this.FilterConfig.ItemGroupBlacklist.Contains( grpName ) ) {
 							isGroup = true;
 							return true;
 						}
@@ -46,7 +46,7 @@ namespace Nihilism.Data {
 
 				if( EntityGroups.TryGetGroupsPerItem( item.type, out grpsPerItem ) ) {
 					foreach( string grpName in grpsPerItem ) {
-						if( this.FilterConfig.RecipeBlacklist.Contains( grpName ) ) {
+						if( this.FilterConfig.RecipeGroupBlacklist.Contains( grpName ) ) {
 							isGroup = true;
 							return true;
 						}
@@ -71,7 +71,7 @@ namespace Nihilism.Data {
 
 				if( EntityGroups.TryGetGroupsPerNPC( npc.type, out grpsPerNPC ) ) {
 					foreach( string grpName in grpsPerNPC ) {
-						if( this.FilterConfig.NpcBlacklist.Contains( grpName ) ) {
+						if( this.FilterConfig.NpcGroupBlacklist.Contains( grpName ) ) {
 							isGroup = true;
 							return true;
 						}
@@ -96,7 +96,7 @@ namespace Nihilism.Data {
 
 				if( EntityGroups.TryGetGroupsPerNPC( npc.type, out grpsPerNPC ) ) {
 					foreach( string grpName in grpsPerNPC ) {
-						if( this.FilterConfig.NpcLootBlacklist.Contains( grpName ) ) {
+						if( this.FilterConfig.NpcLootGroupBlacklist.Contains( grpName ) ) {
 							isGroup = true;
 							return true;
 						}
@@ -124,7 +124,7 @@ namespace Nihilism.Data {
 
 				if( EntityGroups.TryGetGroupsPerItem( item.type, out grpsPerItem ) ) {
 					foreach( string grpName in grpsPerItem ) {
-						if( this.FilterConfig.ItemWhitelist.Contains( grpName ) ) {
+						if( this.FilterConfig.ItemGroupWhitelist.Contains( grpName ) ) {
 							isGroup = true;
 							return true;
 						}
@@ -149,7 +149,7 @@ namespace Nihilism.Data {
 
 				if( EntityGroups.TryGetGroupsPerItem( item.type, out grpsPerItem ) ) {
 					foreach( string grpName in grpsPerItem ) {
-						if( this.FilterConfig.RecipeWhitelist.Contains( grpName ) ) {
+						if( this.FilterConfig.RecipeGroupWhitelist.Contains( grpName ) ) {
 							isGroup = true;
 							return true;
 						}
@@ -174,7 +174,7 @@ namespace Nihilism.Data {
 
 				if( EntityGroups.TryGetGroupsPerNPC( npc.type, out grpsPerNPC ) ) {
 					foreach( string grpName in grpsPerNPC ) {
-						if( this.FilterConfig.NpcWhitelist.Contains( grpName ) ) {
+						if( this.FilterConfig.NpcGroupWhitelist.Contains( grpName ) ) {
 							isGroup = true;
 							return true;
 						}
@@ -199,7 +199,7 @@ namespace Nihilism.Data {
 
 				if( EntityGroups.TryGetGroupsPerNPC( npc.type, out grpsPerNPC ) ) {
 					foreach( string grpName in grpsPerNPC ) {
-						if( this.FilterConfig.NpcLootWhitelist.Contains( grpName ) ) {
+						if( this.FilterConfig.NpcLootGroupWhitelist.Contains( grpName ) ) {
 							isGroup = true;
 							return true;
 						}
@@ -227,7 +227,7 @@ namespace Nihilism.Data {
 
 				if( EntityGroups.TryGetGroupsPerItem( item.type, out grpsPerItem ) ) {
 					foreach( string grpName in grpsPerItem ) {
-						if( this.FilterConfig.ItemBlacklist2.Contains( grpName ) ) {
+						if( this.FilterConfig.ItemGroupBlacklist2.Contains( grpName ) ) {
 							isGroup = true;
 							return true;
 						}
@@ -252,7 +252,7 @@ namespace Nihilism.Data {
 
 				if( EntityGroups.TryGetGroupsPerItem( item.type, out grpsPerItem ) ) {
 					foreach( string grpName in grpsPerItem ) {
-						if( this.FilterConfig.RecipeBlacklist2.Contains( grpName ) ) {
+						if( this.FilterConfig.RecipeGroupBlacklist2.Contains( grpName ) ) {
 							isGroup = true;
 							return true;
 						}
@@ -277,7 +277,7 @@ namespace Nihilism.Data {
 
 				if( EntityGroups.TryGetGroupsPerNPC( npc.type, out grpsPerNPC ) ) {
 					foreach( string grpName in grpsPerNPC ) {
-						if( this.FilterConfig.NpcBlacklist2.Contains( grpName ) ) {
+						if( this.FilterConfig.NpcGroupBlacklist2.Contains( grpName ) ) {
 							isGroup = true;
 							return true;
 						}
@@ -302,7 +302,7 @@ namespace Nihilism.Data {
 
 				if( EntityGroups.TryGetGroupsPerNPC( npc.type, out grpsPerNPC ) ) {
 					foreach( string grpName in grpsPerNPC ) {
-						if( this.FilterConfig.NpcLootBlacklist2.Contains( grpName ) ) {
+						if( this.FilterConfig.NpcLootGroupBlacklist2.Contains( grpName ) ) {
 							isGroup = true;
 							return true;
 						}

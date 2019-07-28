@@ -15,20 +15,35 @@ namespace Nihilism.Data {
 		public bool DebugModeInfo = false;
 		public bool DebugModePerItemInfo = false;
 
-		public ISet<string> DefaultItemBlacklist = new HashSet<string> { };
-		public ISet<string> DefaultRecipeBlacklist = new HashSet<string> { };
-		public ISet<string> DefaultNpcBlacklist = new HashSet<string> { };
-		public ISet<string> DefaultNpcLootBlacklist = new HashSet<string> { };
+		public ISet<ItemDefinition> DefaultItemBlacklist = new HashSet<ItemDefinition> { };
+		public ISet<ItemDefinition> DefaultRecipeBlacklist = new HashSet<ItemDefinition> { };
+		public ISet<ItemDefinition> DefaultNpcBlacklist = new HashSet<ItemDefinition> { };
+		public ISet<ItemDefinition> DefaultNpcLootBlacklist = new HashSet<ItemDefinition> { };
 
-		public ISet<string> DefaultItemWhitelist = new HashSet<string> { };
-		public ISet<string> DefaultRecipeWhitelist = new HashSet<string> { };
-		public ISet<string> DefaultNpcWhitelist = new HashSet<string> { };
-		public ISet<string> DefaultNpcLootWhitelist = new HashSet<string> { };
+		public ISet<ItemDefinition> DefaultItemWhitelist = new HashSet<ItemDefinition> { };
+		public ISet<ItemDefinition> DefaultRecipeWhitelist = new HashSet<ItemDefinition> { };
+		public ISet<ItemDefinition> DefaultNpcWhitelist = new HashSet<ItemDefinition> { };
+		public ISet<ItemDefinition> DefaultNpcLootWhitelist = new HashSet<ItemDefinition> { };
 
-		public ISet<string> DefaultItemBlacklist2 = new HashSet<string> { };
-		public ISet<string> DefaultRecipeBlacklist2 = new HashSet<string> { };
-		public ISet<string> DefaultNpcBlacklist2 = new HashSet<string> { };
-		public ISet<string> DefaultNpcLootBlacklist2 = new HashSet<string> { };
+		public ISet<ItemDefinition> DefaultItemBlacklist2 = new HashSet<ItemDefinition> { };
+		public ISet<ItemDefinition> DefaultRecipeBlacklist2 = new HashSet<ItemDefinition> { };
+		public ISet<ItemDefinition> DefaultNpcBlacklist2 = new HashSet<ItemDefinition> { };
+		public ISet<ItemDefinition> DefaultNpcLootBlacklist2 = new HashSet<ItemDefinition> { };
+
+		public ISet<string> DefaultItemGroupBlacklist = new HashSet<string> { };
+		public ISet<string> DefaultRecipeGroupBlacklist = new HashSet<string> { };
+		public ISet<string> DefaultNpcGroupBlacklist = new HashSet<string> { };
+		public ISet<string> DefaultNpcLootGroupBlacklist = new HashSet<string> { };
+
+		public ISet<string> DefaultItemGroupWhitelist = new HashSet<string> { };
+		public ISet<string> DefaultRecipeGroupWhitelist = new HashSet<string> { };
+		public ISet<string> DefaultNpcGroupWhitelist = new HashSet<string> { };
+		public ISet<string> DefaultNpcLootGroupWhitelist = new HashSet<string> { };
+
+		public ISet<string> DefaultItemGroupBlacklist2 = new HashSet<string> { };
+		public ISet<string> DefaultRecipeGroupBlacklist2 = new HashSet<string> { };
+		public ISet<string> DefaultNpcGroupBlacklist2 = new HashSet<string> { };
+		public ISet<string> DefaultNpcLootGroupBlacklist2 = new HashSet<string> { };
 
 		[DefaultValue(true)]
 		public bool EnableItemFilters = true;
@@ -51,20 +66,35 @@ namespace Nihilism.Data {
 				return;
 			}
 
-			this.DefaultItemBlacklist = new HashSet<string> { "Any Equipment" };
-			this.DefaultRecipeBlacklist = new HashSet<string> { "Any Equipment" };
-			this.DefaultNpcBlacklist = new HashSet<string> { "Any Hostile NPC" };
-			this.DefaultNpcLootBlacklist = new HashSet<string> { "Any Hostile NPC" };
+			this.DefaultItemBlacklist = new HashSet<ItemDefinition>();
+			this.DefaultRecipeBlacklist = new HashSet<ItemDefinition>();
+			this.DefaultNpcBlacklist = new HashSet<ItemDefinition>();
+			this.DefaultNpcLootBlacklist = new HashSet<ItemDefinition>();
 
-			this.DefaultItemWhitelist = new HashSet<string> { "Any Copper Or Tin Equipment" };
-			this.DefaultRecipeWhitelist = new HashSet<string> { "Any Copper Or Tin Equipment" };
-			this.DefaultNpcWhitelist = new HashSet<string> { "Any Slime" };
-			this.DefaultNpcLootWhitelist = new HashSet<string> { "Any Slime" };
+			this.DefaultItemWhitelist = new HashSet<ItemDefinition>();
+			this.DefaultRecipeWhitelist = new HashSet<ItemDefinition>();
+			this.DefaultNpcWhitelist = new HashSet<ItemDefinition>();
+			this.DefaultNpcLootWhitelist = new HashSet<ItemDefinition>();
 
-			this.DefaultItemBlacklist2 = new HashSet<string> { "Copper Shortsword" };
-			this.DefaultRecipeBlacklist2 = new HashSet<string> { };
-			this.DefaultNpcBlacklist2 = new HashSet<string> { };
-			this.DefaultNpcLootBlacklist2 = new HashSet<string> { };
+			this.DefaultItemBlacklist2 = new HashSet<ItemDefinition>();
+			this.DefaultRecipeBlacklist2 = new HashSet<ItemDefinition>();
+			this.DefaultNpcBlacklist2 = new HashSet<ItemDefinition>();
+			this.DefaultNpcLootBlacklist2 = new HashSet<ItemDefinition>();
+
+			this.DefaultItemGroupBlacklist = new HashSet<string> { "Any Equipment" };
+			this.DefaultRecipeGroupBlacklist = new HashSet<string> { "Any Equipment" };
+			this.DefaultNpcGroupBlacklist = new HashSet<string> { "Any Hostile NPC" };
+			this.DefaultNpcLootGroupBlacklist = new HashSet<string> { "Any Hostile NPC" };
+
+			this.DefaultItemGroupWhitelist = new HashSet<string> { "Any Copper Or Tin Equipment" };
+			this.DefaultRecipeGroupWhitelist = new HashSet<string> { "Any Copper Or Tin Equipment" };
+			this.DefaultNpcGroupWhitelist = new HashSet<string> { "Any Slime" };
+			this.DefaultNpcLootGroupWhitelist = new HashSet<string> { "Any Slime" };
+
+			this.DefaultItemGroupBlacklist2 = new HashSet<string> { "Copper Shortsword" };
+			this.DefaultRecipeGroupBlacklist2 = new HashSet<string> { };
+			this.DefaultNpcGroupBlacklist2 = new HashSet<string> { };
+			this.DefaultNpcLootGroupBlacklist2 = new HashSet<string> { };
 		}
 	}
 }
