@@ -1,12 +1,9 @@
-﻿using HamstarHelpers.Components.Config;
-using HamstarHelpers.Components.Errors;
-using HamstarHelpers.Helpers.DebugHelpers;
-using HamstarHelpers.Helpers.DotNetHelpers;
-using HamstarHelpers.Helpers.ItemHelpers;
-using HamstarHelpers.Helpers.TmlHelpers.ModHelpers;
-using HamstarHelpers.Services.DataDumper;
+﻿using HamstarHelpers.Components.Errors;
+using HamstarHelpers.Helpers.Debug;
+using HamstarHelpers.Helpers.Items;
+using HamstarHelpers.Helpers.TModLoader.Mods;
+using HamstarHelpers.Services.Debug.DataDumper;
 using HamstarHelpers.Services.EntityGroups;
-using HamstarHelpers.Services.Messages;
 using Microsoft.Xna.Framework.Graphics;
 using Nihilism.Data;
 using System;
@@ -22,15 +19,12 @@ namespace Nihilism {
 
 		////////////////
 
-		public JsonConfig<NihilismConfigData> ConfigJson { get; private set; }
-		public NihilismConfigData Config => this.ConfigJson.Data;
+		public NihilismConfig Config => this.GetConfig<NihilismConfig>();
 
 
-		public Texture2D DisabledItem { get; private set; }
+		public Texture2D DisabledItemTex { get; private set; }
 
-		public bool SuppressAutoSaving { get; internal set; }
-
-		private bool HasUpdated = false;
+		public bool InstancedFilters { get; internal set; }
 
 		////
 
@@ -41,26 +35,18 @@ namespace Nihilism {
 		////////////////
 
 		public NihilismMod() {
-			this.ConfigJson = new JsonConfig<NihilismConfigData>( NihilismConfigData.ConfigFileName,
-					ConfigurationDataBase.RelativePath, new NihilismConfigData() );
+			NihilismMod.Instance = this;
 		}
 
 		////////////////
 
 		public override void Load() {
-			string depErr = ModIdentityHelpers.FormatBadDependencyModList( this );
-			if( depErr != null ) { throw new HamstarException( depErr ); }
-
-			NihilismMod.Instance = this;
-
 			if( Main.netMode != 2 ) {   // Not server
-				this.DisabledItem = ModLoader.GetTexture( "Terraria/MapDeath" );
+				this.DisabledItemTex = ModContent.GetTexture( "Terraria/MapDeath" );
 			}
 
 			EntityGroups.Enable();
 
-			this.LoadConfig();
-			
 			this.WingSlotMod = ModLoader.GetMod( "WingSlot" );
 			if( this.WingSlotMod == null ) {
 				if( this.Config.DebugModeInfo ) {
@@ -68,21 +54,6 @@ namespace Nihilism {
 				}
 			} else {
 				LogHelpers.Alert( "Wing Mod detected. Compatibility will be attempted." );
-			}
-		}
-
-		private void LoadConfig() {
-			if( !this.ConfigJson.LoadFile() ) {
-				LogHelpers.Alert( "Creating rewards configs anew..." );
-				this.ConfigJson.SaveFile();
-			}
-
-			if( this.Config.CanUpdateVersion() ) {
-				this.Config.UpdateToLatestVersion();
-				LogHelpers.Alert( "Nihilism settings updated to " + this.Version.ToString() );
-
-				this.ConfigJson.SaveFile();
-				this.HasUpdated = true;
 			}
 		}
 
@@ -106,16 +77,12 @@ namespace Nihilism {
 					return "  Item filters not enabled.";
 				}
 				
-				string name = ItemIdentityHelpers.GetQualifiedName( Main.mouseItem );
+				string name = ItemIdentityHelpers.GetUniqueKey( Main.mouseItem );
 				bool isEnabled, isBlackList, isGroup;
 				isEnabled = myworld.Logic.DataAccess.IsItemEnabled( Main.mouseItem, out isBlackList, out isGroup );
 
 				return "  Item " + name + " enabled? "+isEnabled+", blacklisted? " + isBlackList + ", is group? " + isGroup;
 			} );
-
-			if( this.HasUpdated && this.Version == new Version( 1, 5, 9 ) ) {
-				InboxMessages.SetMessage( "nihilism_update", "A version update has put your world data into a new file. You may need to manually copy this (see Documents/My Games/Terraria/ModLoader/Mod Specific Data/Nihilism).", true );
-			}
 		}
 
 

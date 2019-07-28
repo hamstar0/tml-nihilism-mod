@@ -1,8 +1,10 @@
-﻿using HamstarHelpers.Helpers.DebugHelpers;
-using HamstarHelpers.Helpers.ItemHelpers;
-using HamstarHelpers.Helpers.PlayerHelpers;
+﻿using HamstarHelpers.Helpers.Debug;
+using HamstarHelpers.Helpers.Items;
+using HamstarHelpers.Helpers.Items.Attributes;
+using HamstarHelpers.Helpers.Players;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
+using System.Linq;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -130,12 +132,16 @@ namespace Nihilism {
 				return base.PreOpenVanillaBag( context, player, arg );
 			}
 
-			IList<int> containers = ItemFinderHelpers.FindMatches( player.inventory, ( item ) => {
-				if( item == null || item.IsAir ) { return false; }
-				if( ItemAttributeHelpers.GetContainerContext( item ) != context ) { return false; }
-				if( arg != 0 ) { return item.type == arg; }
-				return true;
-			} );
+			IList<int> containers = player.inventory
+				.Where( ( item ) => {
+					if( item == null || item.IsAir ) { return false; }
+					if( ItemAttributeHelpers.GetVanillaContainerContext( item ) != context ) { return false; }
+					if( arg != 0 ) { return item.type == arg; }
+					return true;
+				} )
+				.Select( item => item.type )
+				.ToList();
+
 			if( containers.Count == 0 ) {
 				LogHelpers.Alert( "Unknown bad of context " + context + ", " + arg );
 				return base.PreOpenVanillaBag( context, player, arg );	// Shouldn't happen?
@@ -145,7 +151,7 @@ namespace Nihilism {
 			bool isAir = container.IsAir;
 
 			if( isAir ) {
-				int containerType = arg != 0 ? arg : ItemAttributeHelpers.GetContainerItemTypes( context )[0];
+				int containerType = arg != 0 ? arg : ItemGroupIdentityHelpers.GetVanillaContainerItemTypes( context )[0];
 				container = new Item();
 				container.SetDefaults( containerType, true );
 			}

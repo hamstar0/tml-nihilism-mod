@@ -1,6 +1,7 @@
-﻿using HamstarHelpers.Helpers.DebugHelpers;
-using HamstarHelpers.Helpers.ItemHelpers;
-using HamstarHelpers.Helpers.NPCHelpers;
+﻿using HamstarHelpers.Components.DataStructures;
+using HamstarHelpers.Helpers.Debug;
+using HamstarHelpers.Helpers.Items;
+using HamstarHelpers.Helpers.NPCs;
 using HamstarHelpers.Services.EntityGroups;
 using Terraria;
 
@@ -8,18 +9,22 @@ using Terraria;
 namespace Nihilism.Data {
 	partial class NihilismFilterAccess {
 		internal bool IsItemBlacklisted( Item item, out bool isGroup ) {
-			string name = ItemIdentityHelpers.GetQualifiedName( item );
+			string name = ItemIdentityHelpers.GetUniqueKey( item );
 
-			if( this.Data.ItemBlacklist.Contains( name ) ) {
+			if( this.FilterConfig.ItemBlacklist.Contains( name ) ) {
 				isGroup = false;
 				return true;
 			}
-			
-			if( EntityGroups.GroupsPerItem.ContainsKey( item.type ) ) {
-				foreach( string grpName in EntityGroups.GroupsPerItem[item.type] ) {
-					if( this.Data.ItemBlacklist.Contains( grpName ) ) {
-						isGroup = true;
-						return true;
+
+			lock( NihilismFilterAccess.MyLock ) {
+				IReadOnlySet<string> grpsPerItem;
+
+				if( EntityGroups.TryGetGroupsPerItem( item.type, out grpsPerItem ) ) {
+					foreach( string grpName in grpsPerItem ) {
+						if( this.FilterConfig.ItemBlacklist.Contains( grpName ) ) {
+							isGroup = true;
+							return true;
+						}
 					}
 				}
 			}
@@ -29,18 +34,22 @@ namespace Nihilism.Data {
 		}
 
 		private bool IsRecipeBlacklisted( Item item, out bool isGroup ) {
-			string name = ItemIdentityHelpers.GetQualifiedName( item );
+			string name = ItemIdentityHelpers.GetUniqueKey( item );
 
-			if( this.Data.RecipeBlacklist.Contains( name ) ) {
+			if( this.FilterConfig.RecipeBlacklist.Contains( name ) ) {
 				isGroup = false;
 				return true;
 			}
 
-			if( EntityGroups.GroupsPerItem.ContainsKey( item.type ) ) {
-				foreach( string grpName in EntityGroups.GroupsPerItem[item.type] ) {
-					if( this.Data.RecipeBlacklist.Contains( grpName ) ) {
-						isGroup = true;
-						return true;
+			lock( NihilismFilterAccess.MyLock ) {
+				IReadOnlySet<string> grpsPerItem;
+
+				if( EntityGroups.TryGetGroupsPerItem( item.type, out grpsPerItem ) ) {
+					foreach( string grpName in grpsPerItem ) {
+						if( this.FilterConfig.RecipeBlacklist.Contains( grpName ) ) {
+							isGroup = true;
+							return true;
+						}
 					}
 				}
 			}
@@ -50,18 +59,22 @@ namespace Nihilism.Data {
 		}
 
 		private bool IsNpcBlacklisted( NPC npc, out bool isGroup ) {
-			string name = NPCIdentityHelpers.GetQualifiedName( npc );
+			string name = NPCIdentityHelpers.GetUniqueKey( npc );
 
-			if( this.Data.NpcBlacklist.Contains( name ) ) {
+			if( this.FilterConfig.NpcBlacklist.Contains( name ) ) {
 				isGroup = false;
 				return true;
 			}
 
-			if( EntityGroups.GroupsPerNPC.ContainsKey( npc.type ) ) {
-				foreach( string grpName in EntityGroups.GroupsPerNPC[npc.type] ) {
-					if( this.Data.NpcBlacklist.Contains( grpName ) ) {
-						isGroup = true;
-						return true;
+			lock( NihilismFilterAccess.MyLock ) {
+				IReadOnlySet<string> grpsPerNPC;
+
+				if( EntityGroups.TryGetGroupsPerNPC( npc.type, out grpsPerNPC ) ) {
+					foreach( string grpName in grpsPerNPC ) {
+						if( this.FilterConfig.NpcBlacklist.Contains( grpName ) ) {
+							isGroup = true;
+							return true;
+						}
 					}
 				}
 			}
@@ -71,18 +84,22 @@ namespace Nihilism.Data {
 		}
 
 		private bool IsNpcLootBlacklisted( NPC npc, out bool isGroup ) {
-			string name = NPCIdentityHelpers.GetQualifiedName( npc );
+			string name = NPCIdentityHelpers.GetUniqueKey( npc );
 
-			if( this.Data.NpcLootBlacklist.Contains( name ) ) {
+			if( this.FilterConfig.NpcLootBlacklist.Contains( name ) ) {
 				isGroup = false;
 				return true;
 			}
 
-			if( EntityGroups.GroupsPerNPC.ContainsKey( npc.type ) ) {
-				foreach( string grpName in EntityGroups.GroupsPerNPC[npc.type] ) {
-					if( this.Data.NpcLootBlacklist.Contains( grpName ) ) {
-						isGroup = true;
-						return true;
+			lock( NihilismFilterAccess.MyLock ) {
+				IReadOnlySet<string> grpsPerNPC;
+
+				if( EntityGroups.TryGetGroupsPerNPC( npc.type, out grpsPerNPC ) ) {
+					foreach( string grpName in grpsPerNPC ) {
+						if( this.FilterConfig.NpcLootBlacklist.Contains( grpName ) ) {
+							isGroup = true;
+							return true;
+						}
 					}
 				}
 			}
@@ -95,18 +112,22 @@ namespace Nihilism.Data {
 		////////////////
 
 		internal bool IsItemWhitelisted( Item item, out bool isGroup ) {
-			string name = ItemIdentityHelpers.GetQualifiedName( item );
+			string name = ItemIdentityHelpers.GetUniqueKey( item );
 
-			if( this.Data.ItemWhitelist.Contains( name ) ) {
+			if( this.FilterConfig.ItemWhitelist.Contains( name ) ) {
 				isGroup = false;
 				return true;
 			}
 
-			if( EntityGroups.GroupsPerItem.ContainsKey( item.type ) ) {
-				foreach( string grpName in EntityGroups.GroupsPerItem[item.type] ) {
-					if( this.Data.ItemWhitelist.Contains( grpName ) ) {
-						isGroup = true;
-						return true;
+			lock( NihilismFilterAccess.MyLock ) {
+				IReadOnlySet<string> grpsPerItem;
+
+				if( EntityGroups.TryGetGroupsPerItem( item.type, out grpsPerItem ) ) {
+					foreach( string grpName in grpsPerItem ) {
+						if( this.FilterConfig.ItemWhitelist.Contains( grpName ) ) {
+							isGroup = true;
+							return true;
+						}
 					}
 				}
 			}
@@ -116,18 +137,22 @@ namespace Nihilism.Data {
 		}
 
 		private bool IsRecipeWhitelisted( Item item, out bool isGroup ) {
-			string name = ItemIdentityHelpers.GetQualifiedName( item );
+			string name = ItemIdentityHelpers.GetUniqueKey( item );
 
-			if( this.Data.RecipeWhitelist.Contains( name ) ) {
+			if( this.FilterConfig.RecipeWhitelist.Contains( name ) ) {
 				isGroup = false;
 				return true;
 			}
 
-			if( EntityGroups.GroupsPerItem.ContainsKey( item.type ) ) {
-				foreach( string grpName in EntityGroups.GroupsPerItem[item.type] ) {
-					if( this.Data.RecipeWhitelist.Contains( grpName ) ) {
-						isGroup = true;
-						return true;
+			lock( NihilismFilterAccess.MyLock ) {
+				IReadOnlySet<string> grpsPerItem;
+
+				if( EntityGroups.TryGetGroupsPerItem( item.type, out grpsPerItem ) ) {
+					foreach( string grpName in grpsPerItem ) {
+						if( this.FilterConfig.RecipeWhitelist.Contains( grpName ) ) {
+							isGroup = true;
+							return true;
+						}
 					}
 				}
 			}
@@ -137,18 +162,22 @@ namespace Nihilism.Data {
 		}
 
 		private bool IsNpcWhitelisted( NPC npc, out bool isGroup ) {
-			string name = NPCIdentityHelpers.GetQualifiedName( npc );
+			string name = NPCIdentityHelpers.GetUniqueKey( npc );
 
-			if( this.Data.NpcWhitelist.Contains( name ) ) {
+			if( this.FilterConfig.NpcWhitelist.Contains( name ) ) {
 				isGroup = false;
 				return true;
 			}
 
-			if( EntityGroups.GroupsPerNPC.ContainsKey( npc.type ) ) {
-				foreach( string grpName in EntityGroups.GroupsPerNPC[npc.type] ) {
-					if( this.Data.NpcWhitelist.Contains( grpName ) ) {
-						isGroup = true;
-						return true;
+			lock( NihilismFilterAccess.MyLock ) {
+				IReadOnlySet<string> grpsPerNPC;
+
+				if( EntityGroups.TryGetGroupsPerNPC( npc.type, out grpsPerNPC ) ) {
+					foreach( string grpName in grpsPerNPC ) {
+						if( this.FilterConfig.NpcWhitelist.Contains( grpName ) ) {
+							isGroup = true;
+							return true;
+						}
 					}
 				}
 			}
@@ -158,18 +187,22 @@ namespace Nihilism.Data {
 		}
 
 		private bool IsNpcLootWhitelisted( NPC npc, out bool isGroup ) {
-			string name = NPCIdentityHelpers.GetQualifiedName( npc );
+			string name = NPCIdentityHelpers.GetUniqueKey( npc );
 
-			if( this.Data.NpcLootWhitelist.Contains( name ) ) {
+			if( this.FilterConfig.NpcLootWhitelist.Contains( name ) ) {
 				isGroup = false;
 				return true;
 			}
 
-			if( EntityGroups.GroupsPerNPC.ContainsKey( npc.type ) ) {
-				foreach( string grpName in EntityGroups.GroupsPerNPC[npc.type] ) {
-					if( this.Data.NpcLootWhitelist.Contains( grpName ) ) {
-						isGroup = true;
-						return true;
+			lock( NihilismFilterAccess.MyLock ) {
+				IReadOnlySet<string> grpsPerNPC;
+
+				if( EntityGroups.TryGetGroupsPerNPC( npc.type, out grpsPerNPC ) ) {
+					foreach( string grpName in grpsPerNPC ) {
+						if( this.FilterConfig.NpcLootWhitelist.Contains( grpName ) ) {
+							isGroup = true;
+							return true;
+						}
 					}
 				}
 			}
@@ -182,18 +215,22 @@ namespace Nihilism.Data {
 		////////////////
 
 		internal bool IsItemBlacklisted2( Item item, out bool isGroup ) {
-			string name = ItemIdentityHelpers.GetQualifiedName( item );
+			string name = ItemIdentityHelpers.GetUniqueKey( item );
 
-			if( this.Data.ItemBlacklist2.Contains( name ) ) {
+			if( this.FilterConfig.ItemBlacklist2.Contains( name ) ) {
 				isGroup = false;
 				return true;
 			}
 
-			if( EntityGroups.GroupsPerItem.ContainsKey( item.type ) ) {
-				foreach( string grpName in EntityGroups.GroupsPerItem[item.type] ) {
-					if( this.Data.ItemBlacklist2.Contains( grpName ) ) {
-						isGroup = true;
-						return true;
+			lock( NihilismFilterAccess.MyLock ) {
+				IReadOnlySet<string> grpsPerItem;
+
+				if( EntityGroups.TryGetGroupsPerItem( item.type, out grpsPerItem ) ) {
+					foreach( string grpName in grpsPerItem ) {
+						if( this.FilterConfig.ItemBlacklist2.Contains( grpName ) ) {
+							isGroup = true;
+							return true;
+						}
 					}
 				}
 			}
@@ -203,18 +240,22 @@ namespace Nihilism.Data {
 		}
 
 		private bool IsRecipeBlacklisted2( Item item, out bool isGroup ) {
-			string name = ItemIdentityHelpers.GetQualifiedName( item );
+			string name = ItemIdentityHelpers.GetUniqueKey( item );
 
-			if( this.Data.RecipeBlacklist2.Contains( name ) ) {
+			if( this.FilterConfig.RecipeBlacklist2.Contains( name ) ) {
 				isGroup = false;
 				return true;
 			}
 
-			if( EntityGroups.GroupsPerItem.ContainsKey( item.type ) ) {
-				foreach( string grpName in EntityGroups.GroupsPerItem[item.type] ) {
-					if( this.Data.RecipeBlacklist2.Contains( grpName ) ) {
-						isGroup = true;
-						return true;
+			lock( NihilismFilterAccess.MyLock ) {
+				IReadOnlySet<string> grpsPerItem;
+
+				if( EntityGroups.TryGetGroupsPerItem( item.type, out grpsPerItem ) ) {
+					foreach( string grpName in grpsPerItem ) {
+						if( this.FilterConfig.RecipeBlacklist2.Contains( grpName ) ) {
+							isGroup = true;
+							return true;
+						}
 					}
 				}
 			}
@@ -224,18 +265,22 @@ namespace Nihilism.Data {
 		}
 
 		private bool IsNpcBlacklisted2( NPC npc, out bool isGroup ) {
-			string name = NPCIdentityHelpers.GetQualifiedName( npc );
+			string name = NPCIdentityHelpers.GetUniqueKey( npc );
 
-			if( this.Data.NpcBlacklist2.Contains( name ) ) {
+			if( this.FilterConfig.NpcBlacklist2.Contains( name ) ) {
 				isGroup = false;
 				return true;
 			}
 
-			if( EntityGroups.GroupsPerNPC.ContainsKey( npc.type ) ) {
-				foreach( string grpName in EntityGroups.GroupsPerNPC[npc.type] ) {
-					if( this.Data.NpcBlacklist2.Contains( grpName ) ) {
-						isGroup = true;
-						return true;
+			lock( NihilismFilterAccess.MyLock ) {
+				IReadOnlySet<string> grpsPerNPC;
+
+				if( EntityGroups.TryGetGroupsPerNPC( npc.type, out grpsPerNPC ) ) {
+					foreach( string grpName in grpsPerNPC ) {
+						if( this.FilterConfig.NpcBlacklist2.Contains( grpName ) ) {
+							isGroup = true;
+							return true;
+						}
 					}
 				}
 			}
@@ -245,18 +290,22 @@ namespace Nihilism.Data {
 		}
 
 		private bool IsNpcLootBlacklisted2( NPC npc, out bool isGroup ) {
-			string name = NPCIdentityHelpers.GetQualifiedName( npc );
+			string name = NPCIdentityHelpers.GetUniqueKey( npc );
 
-			if( this.Data.NpcLootBlacklist.Contains( name ) ) {
+			if( this.FilterConfig.NpcLootBlacklist.Contains( name ) ) {
 				isGroup = false;
 				return true;
 			}
 
-			if( EntityGroups.GroupsPerNPC.ContainsKey( npc.type ) ) {
-				foreach( string grpName in EntityGroups.GroupsPerNPC[npc.type] ) {
-					if( this.Data.NpcLootBlacklist2.Contains( grpName ) ) {
-						isGroup = true;
-						return true;
+			lock( NihilismFilterAccess.MyLock ) {
+				IReadOnlySet<string> grpsPerNPC;
+
+				if( EntityGroups.TryGetGroupsPerNPC( npc.type, out grpsPerNPC ) ) {
+					foreach( string grpName in grpsPerNPC ) {
+						if( this.FilterConfig.NpcLootBlacklist2.Contains( grpName ) ) {
+							isGroup = true;
+							return true;
+						}
 					}
 				}
 			}

@@ -1,23 +1,11 @@
 ﻿using HamstarHelpers.Components.Errors;
-using HamstarHelpers.Helpers.DebugHelpers;
-using HamstarHelpers.Helpers.TmlHelpers;
+using HamstarHelpers.Helpers.TModLoader;
 using Nihilism.Data;
 using System;
 
 
 namespace Nihilism {
 	public static partial class NihilismAPI {
-		public static NihilismConfigData GetModSettings() {
-			return NihilismMod.Instance.Config;
-		}
-
-		public static void SaveModSettingsChanges() {
-			NihilismMod.Instance.ConfigJson.SaveFile();
-		}
-
-
-		////////////////
-
 		public static bool NihilateCurrentWorld() {
 			var myworld = NihilismMod.Instance.GetModWorld<NihilismWorld>();
 			if( myworld.Logic.DataAccess.IsActive() ) {
@@ -44,12 +32,12 @@ namespace Nihilism {
 
 		////////////////
 
-		public static void SuppressAutoSavingOn() {
-			NihilismMod.Instance.SuppressAutoSaving = true;
+		public static void InstancedFiltersOn() {
+			NihilismMod.Instance.InstancedFilters = true;
 		}
 		
-		public static void SuppressAutoSavingOff() {
-			NihilismMod.Instance.SuppressAutoSaving = false;
+		public static void InstancedFiltersOff() {
+			NihilismMod.Instance.InstancedFilters = false;
 		}
 
 

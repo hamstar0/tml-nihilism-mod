@@ -1,6 +1,6 @@
-﻿using HamstarHelpers.Helpers.DebugHelpers;
-using HamstarHelpers.Helpers.DotNetHelpers.Reflection;
-using HamstarHelpers.Helpers.PlayerHelpers;
+﻿using HamstarHelpers.Helpers.Debug;
+using HamstarHelpers.Helpers.DotNET.Reflection;
+using HamstarHelpers.Helpers.Players;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -83,8 +83,8 @@ namespace Nihilism {
 				Item item = this.player.armor[i];
 				if( item == null || item.IsAir ) { continue; }
 
-				if( !myworld.Logic.DataAccess.IsItemEnabled( item, out _, out _ ) ) {
-					PlayerItemHelpers.DropEquippedItem( player, i );
+				if( !myworld.Logic.DataAccess.IsItemEnabled(item, out _, out _) ) {
+					PlayerItemHelpers.DropEquippedArmorItem( player, i );
 				}
 			}
 
@@ -92,9 +92,9 @@ namespace Nihilism {
 				Item item = this.player.armor[i];
 				if( item == null || item.IsAir ) { continue; }
 
-				if( myworld.Logic.DataAccess.IsItemEnabled( item, out _, out _ ) ) { continue; }
-
-				PlayerItemHelpers.DropEquippedMiscItem( player, i );
+				if( !myworld.Logic.DataAccess.IsItemEnabled( item, out _, out _ ) ) {
+					PlayerItemHelpers.DropEquippedMiscItem( player, i );
+				}
 			}
 
 			if( mymod.WingSlotMod != null ) {

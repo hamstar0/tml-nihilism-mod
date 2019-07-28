@@ -1,4 +1,4 @@
-﻿using HamstarHelpers.Helpers.DebugHelpers;
+﻿using HamstarHelpers.Helpers.Debug;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
@@ -49,13 +49,13 @@ namespace Nihilism {
 
 			bool _;
 			if( !myworld.Logic.DataAccess.IsItemEnabled( item, out _, out _ ) ) {
-				float posX = position.X + (((float)frame.Width / 2f) * scale) - (((float)mymod.DisabledItem.Width / 2f) * scale);
-				float posY = position.Y + (((float)frame.Height / 2f) * scale) - (((float)mymod.DisabledItem.Height / 2f) * scale);
+				float posX = position.X + (((float)frame.Width / 2f) * scale) - (((float)mymod.DisabledItemTex.Width / 2f) * scale);
+				float posY = position.Y + (((float)frame.Height / 2f) * scale) - (((float)mymod.DisabledItemTex.Height / 2f) * scale);
 				var pos = new Vector2( posX, posY );
-				var rect = new Rectangle( 0, 0, mymod.DisabledItem.Width, mymod.DisabledItem.Height );
+				var rect = new Rectangle( 0, 0, mymod.DisabledItemTex.Width, mymod.DisabledItemTex.Height );
 				var color = Color.White * 0.625f;
 
-				sb.Draw( mymod.DisabledItem, pos, rect, color, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f );
+				sb.Draw( mymod.DisabledItemTex, pos, rect, color, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f );
 			}
 		}
 	}

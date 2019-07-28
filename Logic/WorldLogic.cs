@@ -1,7 +1,6 @@
-﻿using HamstarHelpers.Components.Network;
-using HamstarHelpers.Helpers.DebugHelpers;
-using HamstarHelpers.Services.Messages;
-using HamstarHelpers.Services.Promises;
+﻿using HamstarHelpers.Helpers.Debug;
+using HamstarHelpers.Services.Hooks.LoadHooks;
+using HamstarHelpers.Services.Messages.Inbox;
 using Nihilism.Data;
 using Nihilism.NetProtocol;
 using Terraria;
@@ -10,7 +9,7 @@ using Terraria;
 namespace Nihilism.Logic {
 	partial class WorldLogic {
 		internal readonly static object MyValidatorKey;
-		public readonly static PromiseValidator LoadAllValidator;
+		public readonly static CustomLoadHookValidator<object> LoadAllValidator;
 
 
 
@@ -18,7 +17,7 @@ namespace Nihilism.Logic {
 
 		static WorldLogic() {
 			WorldLogic.MyValidatorKey = new object();
-			WorldLogic.LoadAllValidator = new PromiseValidator( WorldLogic.MyValidatorKey );
+			WorldLogic.LoadAllValidator = new CustomLoadHookValidator<object>( WorldLogic.MyValidatorKey );
 		}
 
 
@@ -47,7 +46,7 @@ namespace Nihilism.Logic {
 		////////////////
 
 		internal void PostFiltersLoad() {
-			Promises.AddWorldLoadOncePromise( () => {
+			LoadHooks.AddWorldLoadOnceHook( () => {
 				if( Main.netMode == 2 ) { return; }
 
 				var mymod = NihilismMod.Instance;
@@ -64,9 +63,9 @@ namespace Nihilism.Logic {
 					InboxMessages.SetMessage( "nihilism_init", msg, false );
 				}
 
-				Promises.TriggerValidatedPromise( WorldLogic.LoadAllValidator, WorldLogic.MyValidatorKey );
-				Promises.AddWorldUnloadOncePromise( () => {
-					Promises.ClearValidatedPromise( WorldLogic.LoadAllValidator, WorldLogic.MyValidatorKey );
+				CustomLoadHooks.TriggerHook( WorldLogic.LoadAllValidator, WorldLogic.MyValidatorKey );
+				LoadHooks.AddWorldUnloadOnceHook( () => {
+					CustomLoadHooks.ClearHook( WorldLogic.LoadAllValidator, WorldLogic.MyValidatorKey );
 				} );
 			} );
 		}
@@ -78,12 +77,12 @@ namespace Nihilism.Logic {
 			var mymod = NihilismMod.Instance;
 
 			if( Main.netMode == 1 ) {
-				PacketProtocol.QuickSyncToServerAndClients<FiltersProtocol>();
+				FiltersProtocol.SyncFromMe();
 			} else if( Main.netMode == 2 ) {
-				if( !mymod.SuppressAutoSaving ) {
+				if( !mymod.InstancedFilters ) {
 					this.SaveWorldData();
 				}
-				PacketProtocol.QuickSendToClient<FiltersProtocol>( -1, -1 );
+				FiltersProtocol.QuickSendToClient();
 			}
 		}
 

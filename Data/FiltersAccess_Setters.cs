@@ -1,81 +1,81 @@
 ﻿namespace Nihilism.Data {
 	partial class NihilismFilterAccess {
 		public void SetItemBlacklistEntry( string itemName ) {
-			this.Data.ItemBlacklist.Add( itemName );
+			this.FilterConfig.ItemBlacklist.Add( itemName );
 		}
 
 		public void SetRecipeBlacklistEntry( string itemName ) {
-			this.Data.RecipeBlacklist.Add( itemName );
+			this.FilterConfig.RecipeBlacklist.Add( itemName );
 		}
 
 		public void SetNpcLootBlacklistEntry( string npcName ) {
-			this.Data.NpcLootBlacklist.Add( npcName );
+			this.FilterConfig.NpcLootBlacklist.Add( npcName );
 		}
 
 		public void SetNpcBlacklistEntry( string npcName ) {
-			this.Data.NpcBlacklist.Add( npcName );
+			this.FilterConfig.NpcBlacklist.Add( npcName );
 		}
 
 		////
 
 		public void SetItemWhitelistEntry( string itemName ) {
-			this.Data.ItemWhitelist.Add( itemName );
+			this.FilterConfig.ItemWhitelist.Add( itemName );
 		}
 		
 		public void SetRecipeWhitelistEntry( string itemName ) {
-			this.Data.RecipeWhitelist.Add( itemName );
+			this.FilterConfig.RecipeWhitelist.Add( itemName );
 		}
 
 		public void SetNpcLootWhitelistEntry( string npcName ) {
-			this.Data.NpcLootWhitelist.Add( npcName );
+			this.FilterConfig.NpcLootWhitelist.Add( npcName );
 		}
 
 		public void SetNpcWhitelistEntry( string npcName ) {
-			this.Data.NpcWhitelist.Add( npcName );
+			this.FilterConfig.NpcWhitelist.Add( npcName );
 		}
 
 		////
 
 		public void SetItemBlacklist2Entry( string itemName ) {
-			this.Data.ItemBlacklist2.Add( itemName );
+			this.FilterConfig.ItemBlacklist2.Add( itemName );
 		}
 
 		public void SetNpcLootBlacklist2Entry( string itemName ) {
-			this.Data.RecipeBlacklist2.Add( itemName );
+			this.FilterConfig.RecipeBlacklist2.Add( itemName );
 		}
 
 		public void SetNpcBlacklist2Entry( string npcName ) {
-			this.Data.NpcLootBlacklist2.Add( npcName );
+			this.FilterConfig.NpcLootBlacklist2.Add( npcName );
 		}
 
 		public void SetRecipeBlacklist2Entry( string npcName ) {
-			this.Data.NpcBlacklist2.Add( npcName );
+			this.FilterConfig.NpcBlacklist2.Add( npcName );
 		}
 
 
 		////////////////
 
 		public void SetCurrentFiltersAsDefaults() {
-			this.Data.SetCurrentFiltersAsDefaults();
+			this.FilterConfig.SetCurrentFiltersAsDefaults();
 		}
 
 		public void ResetFiltersFromDefaults() {
-			this.Data.ResetFiltersFromDefaults();
+			this.FilterConfig.ResetFiltersFromDefaults();
 		}
 
 
 		////////////////
 
 		public bool IsActive() {
-			return this.Data.IsActive;
+			return this.FilterConfig.IsActive;
 		}
 
 		public void Activate() {
-			this.Data.IsActive = true;
+			this.FilterConfig.IsActive = true;
 		}
 
 		public void Deactivate() {
-			this.Data.IsActive = false;
+			this.FilterConfig.IsActive = false;
 		}
 	}
 }

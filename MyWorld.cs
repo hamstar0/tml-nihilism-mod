@@ -1,4 +1,4 @@
-﻿using HamstarHelpers.Helpers.DebugHelpers;
+﻿using HamstarHelpers.Helpers.Debug;
 using Nihilism.Logic;
 using Terraria;
 using Terraria.ModLoader;
@@ -31,7 +31,7 @@ namespace Nihilism {
 		public override TagCompound Save() {
 			if( Main.netMode != 1 ) {
 				var mymod = (NihilismMod)this.mod;
-				if( !mymod.SuppressAutoSaving ) {
+				if( !mymod.InstancedFilters ) {
 					this.Logic.SaveWorldData();
 				}
 			}

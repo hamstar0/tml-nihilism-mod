@@ -1,75 +1,79 @@
-﻿using HamstarHelpers.Helpers.DebugHelpers;
-using HamstarHelpers.Helpers.MiscHelpers;
-using HamstarHelpers.Helpers.WorldHelpers;
+﻿using HamstarHelpers.Helpers.Debug;
+using HamstarHelpers.Helpers.Misc;
+using HamstarHelpers.Helpers.World;
 using System.Collections.Generic;
 using Terraria;
 
 
 namespace Nihilism.Data {
 	partial class NihilismFilterAccess {
-		private NihilismFilterData Data;
+		private static object MyLock = new object();
 
 
 
 		////////////////
 
-		public NihilismFilterAccess() {
-			this.Data = new NihilismFilterData();
+		private NihilismFilterConfig FilterConfig {
+			get {
+				var mymod = NihilismMod.Instance;
+
+				if( mymod.InstancedFilters ) {
+					if( this.ConfigCache == null ) {
+						this.ConfigCache = (NihilismFilterConfig)mymod.GetConfig<NihilismFilterConfig>().Clone();
+					}
+					return this.ConfigCache;
+				} else {
+					return mymod.GetConfig<NihilismFilterConfig>();
+				}
+			}
 		}
+
+		private NihilismFilterConfig ConfigCache = null;
+
+
+
+		////////////////
+
+		public NihilismFilterAccess() { }
 
 
 		////////////////
 
 		private string GetDataFileName() {
-			return WorldHelpers.GetUniqueIdWithSeed() + " Filters";
-		}
-
-		public void Load() {
-			var mymod = NihilismMod.Instance;
-			bool success;
-			var filters = DataFileHelpers.LoadJson<NihilismFilterData>( mymod, this.GetDataFileName(), out success );
-
-			if( success ) {
-				this.Data = filters;
-			}
-		}
-
-		public void Save() {
-			var mymod = NihilismMod.Instance;
-			DataFileHelpers.SaveAsJson<NihilismFilterData>( mymod, this.GetDataFileName(), this.Data );
+			return WorldHelpers.GetUniqueIdForCurrentWorld(true) + " Filters";
 		}
 
 
 		////////////////
 
-		internal void Give( ref NihilismFilterData data ) {
-			data = this.Data;
+		internal void Give( ref NihilismFilterConfig data ) {
+			data = this.FilterConfig;
 		}
 
-		internal void Take( NihilismFilterData data ) {
-			this.Data = data;
+		internal void Take( NihilismFilterConfig data ) {
+			this.FilterConfig.CopyFrom( data );
 		}
 
 
 		////////////////
 
 		public IEnumerable<string> GetFormattedFilterData( string subspace="  " ) {
-			return new string[] { "Is nihilated: " + this.Data.IsActive,
-				"Items BL:\n  " + string.Join( ", ", this.Data.ItemBlacklist ),
-				"Items WL:\n  " + string.Join( ", ", this.Data.ItemWhitelist ),
-				"Recipes BL:\n  " + string.Join( ", ", this.Data.RecipeBlacklist ),
-				"Recipes WL:\n  " + string.Join( ", ", this.Data.RecipeWhitelist ),
-				"NPCs BL:\n  " + string.Join( ", ", this.Data.NpcBlacklist ),
-				"Loot WL:\n  " + string.Join( ", ", this.Data.NpcLootWhitelist )
+			return new string[] { "Is nihilated: " + this.FilterConfig.IsActive,
+				"Items BL:\n  " + string.Join( ", ", this.FilterConfig.ItemBlacklist ),
+				"Items WL:\n  " + string.Join( ", ", this.FilterConfig.ItemWhitelist ),
+				"Recipes BL:\n  " + string.Join( ", ", this.FilterConfig.RecipeBlacklist ),
+				"Recipes WL:\n  " + string.Join( ", ", this.FilterConfig.RecipeWhitelist ),
+				"NPCs BL:\n  " + string.Join( ", ", this.FilterConfig.NpcBlacklist ),
+				"Loot WL:\n  " + string.Join( ", ", this.FilterConfig.NpcLootWhitelist )
 			};
 		}
 		
 		public void OutputFormattedFilterData() {
-			Main.NewText( "Is nihilated: " + this.Data.IsActive );
-			Main.NewText( "Items BL: " + this.Data.ItemBlacklist.Count + ", WL count: " + this.Data.ItemWhitelist.Count );
-			Main.NewText( "Recipes BL: " + this.Data.RecipeBlacklist.Count + ", WL count: " + this.Data.RecipeWhitelist.Count );
-			Main.NewText( "NPCs BL: " + this.Data.NpcBlacklist.Count + ", WL count: " + this.Data.NpcWhitelist.Count );
-			Main.NewText( "Loot BL: " + this.Data.NpcLootBlacklist.Count + ", WL count: " + this.Data.NpcLootWhitelist.Count );
+			Main.NewText( "Is nihilated: " + this.FilterConfig.IsActive );
+			Main.NewText( "Items BL: " + this.FilterConfig.ItemBlacklist.Count + ", WL count: " + this.FilterConfig.ItemWhitelist.Count );
+			Main.NewText( "Recipes BL: " + this.FilterConfig.RecipeBlacklist.Count + ", WL count: " + this.FilterConfig.RecipeWhitelist.Count );
+			Main.NewText( "NPCs BL: " + this.FilterConfig.NpcBlacklist.Count + ", WL count: " + this.FilterConfig.NpcWhitelist.Count );
+			Main.NewText( "Loot BL: " + this.FilterConfig.NpcLootBlacklist.Count + ", WL count: " + this.FilterConfig.NpcLootWhitelist.Count );
 
 			LogHelpers.Log( string.Join("\n", this.GetFormattedFilterData()) );
 		}

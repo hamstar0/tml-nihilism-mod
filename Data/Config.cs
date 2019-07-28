@@ -1,16 +1,16 @@
-﻿using HamstarHelpers.Components.Config;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.Serialization;
+using Terraria.ModLoader.Config;
 
 
 namespace Nihilism.Data {
-	public class NihilismConfigData : ConfigurationDataBase {
-		public readonly static string ConfigFileName = "Nihilism Config.json";
+	public class NihilismConfig : ModConfig {
+		public override ConfigScope Mode => ConfigScope.ServerSide;
 
 
-		////////////////
-
-		public string VersionSinceUpdate = "";
+		////
 
 		public bool DebugModeInfo = false;
 		public bool DebugModePerItemInfo = false;
@@ -30,75 +30,41 @@ namespace Nihilism.Data {
 		public ISet<string> DefaultNpcBlacklist2 = new HashSet<string> { };
 		public ISet<string> DefaultNpcLootBlacklist2 = new HashSet<string> { };
 
+		[DefaultValue(true)]
 		public bool EnableItemFilters = true;
+		[DefaultValue( true )]
 		public bool EnableItemEquipsFilters = true;
+		[DefaultValue( true )]
 		public bool EnableRecipeFilters = true;
+		[DefaultValue( true )]
 		public bool EnableNpcFilters = true;
+		[DefaultValue( true )]
 		public bool EnableNpcLootFilters = true;
 
 
-		////////////////
-
-		public override void OnLoad( bool success ) {
-			if( !success ) {
-				this.SetDefaults();
-			}
-		}
-		
-		public void SetDefaults() {
-			this.DefaultItemBlacklist.Add( "Any Equipment" );
-			this.DefaultRecipeBlacklist.Add( "Any Equipment" );
-			this.DefaultNpcBlacklist.Add( "Any Hostile NPC" );
-			this.DefaultNpcLootBlacklist.Add( "Any Hostile NPC" );
-
-			this.DefaultItemWhitelist.Add( "Any Copper Or Tin Equipment" );
-			this.DefaultRecipeWhitelist.Add( "Any Copper Or Tin Equipment" );
-			this.DefaultNpcWhitelist.Add( "Any Slime" );
-			this.DefaultNpcLootWhitelist.Add( "Blue Slime" );
-
-			this.DefaultItemBlacklist2.Add( "Copper Shortsword" );
-		}
-
 
 		////////////////
 
-		public bool CanUpdateVersion() {
-			if( this.VersionSinceUpdate == "" ) {
-				return true;
-			}
-			var versSince = new Version( this.VersionSinceUpdate );
-			return versSince < NihilismMod.Instance.Version;
-		}
-
-		public void UpdateToLatestVersion() {
-			var versSince = this.VersionSinceUpdate != "" ?
-				new Version( this.VersionSinceUpdate ) :
-				new Version();
-			
-			if( versSince < new Version(2, 1, 2, 2) ) {
-				if( this.DefaultItemBlacklist.Count == 1 &&
-						this.DefaultRecipeBlacklist.Count == 1 &&
-						this.DefaultNpcBlacklist.Count == 1 &&
-						this.DefaultNpcLootBlacklist.Count == 1 &&
-						this.DefaultItemWhitelist.Count == 1 &&
-						this.DefaultRecipeWhitelist.Count == 1 &&
-						this.DefaultNpcWhitelist.Count == 1 &&
-						this.DefaultNpcLootWhitelist.Count == 1 ) {
-					this.DefaultItemBlacklist.Clear();
-					this.DefaultRecipeBlacklist.Clear();
-					this.DefaultNpcBlacklist.Clear();
-					this.DefaultNpcLootBlacklist.Clear();
-
-					this.DefaultItemWhitelist.Clear();
-					this.DefaultRecipeWhitelist.Clear();
-					this.DefaultNpcWhitelist.Clear();
-					this.DefaultNpcLootWhitelist.Clear();
-
-					this.SetDefaults();
-				}
+		[OnDeserialized]
+		internal void OnDeserializedMethod( StreamingContext context ) {
+			if( this.DefaultItemBlacklist != null ) {
+				return;
 			}
 
-			this.VersionSinceUpdate = NihilismMod.Instance.Version.ToString();
+			this.DefaultItemBlacklist = new HashSet<string> { "Any Equipment" };
+			this.DefaultRecipeBlacklist = new HashSet<string> { "Any Equipment" };
+			this.DefaultNpcBlacklist = new HashSet<string> { "Any Hostile NPC" };
+			this.DefaultNpcLootBlacklist = new HashSet<string> { "Any Hostile NPC" };
+
+			this.DefaultItemWhitelist = new HashSet<string> { "Any Copper Or Tin Equipment" };
+			this.DefaultRecipeWhitelist = new HashSet<string> { "Any Copper Or Tin Equipment" };
+			this.DefaultNpcWhitelist = new HashSet<string> { "Any Slime" };
+			this.DefaultNpcLootWhitelist = new HashSet<string> { "Any Slime" };
+
+			this.DefaultItemBlacklist2 = new HashSet<string> { "Copper Shortsword" };
+			this.DefaultRecipeBlacklist2 = new HashSet<string> { };
+			this.DefaultNpcBlacklist2 = new HashSet<string> { };
+			this.DefaultNpcLootBlacklist2 = new HashSet<string> { };
 		}
 	}
 }
