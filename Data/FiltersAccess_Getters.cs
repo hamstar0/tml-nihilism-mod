@@ -11,7 +11,7 @@ namespace Nihilism.Data {
 		internal bool IsItemBlacklisted( Item item, out bool isGroup ) {
 			string name = ItemIdentityHelpers.GetUniqueKey( item );
 
-			if( this.FilterConfig.ItemBlacklist.Contains( name ) ) {
+			if( this.FilterConfig.ItemBlacklistMapping.ContainsKey( name ) ) {
 				isGroup = false;
 				return true;
 			}
@@ -36,7 +36,7 @@ namespace Nihilism.Data {
 		private bool IsRecipeBlacklisted( Item item, out bool isGroup ) {
 			string name = ItemIdentityHelpers.GetUniqueKey( item );
 
-			if( this.FilterConfig.RecipeBlacklist.Contains( name ) ) {
+			if( this.FilterConfig.RecipeBlacklistMapping.ContainsKey( name ) ) {
 				isGroup = false;
 				return true;
 			}
@@ -61,7 +61,7 @@ namespace Nihilism.Data {
 		private bool IsNpcBlacklisted( NPC npc, out bool isGroup ) {
 			string name = NPCIdentityHelpers.GetUniqueKey( npc );
 
-			if( this.FilterConfig.NpcBlacklist.Contains( name ) ) {
+			if( this.FilterConfig.NpcBlacklistMapping.ContainsKey( name ) ) {
 				isGroup = false;
 				return true;
 			}
@@ -86,7 +86,7 @@ namespace Nihilism.Data {
 		private bool IsNpcLootBlacklisted( NPC npc, out bool isGroup ) {
 			string name = NPCIdentityHelpers.GetUniqueKey( npc );
 
-			if( this.FilterConfig.NpcLootBlacklist.Contains( name ) ) {
+			if( this.FilterConfig.NpcLootBlacklistMapping.ContainsKey( name ) ) {
 				isGroup = false;
 				return true;
 			}
@@ -114,7 +114,7 @@ namespace Nihilism.Data {
 		internal bool IsItemWhitelisted( Item item, out bool isGroup ) {
 			string name = ItemIdentityHelpers.GetUniqueKey( item );
 
-			if( this.FilterConfig.ItemWhitelist.Contains( name ) ) {
+			if( this.FilterConfig.ItemWhitelistMapping.ContainsKey( name ) ) {
 				isGroup = false;
 				return true;
 			}
@@ -139,7 +139,7 @@ namespace Nihilism.Data {
 		private bool IsRecipeWhitelisted( Item item, out bool isGroup ) {
 			string name = ItemIdentityHelpers.GetUniqueKey( item );
 
-			if( this.FilterConfig.RecipeWhitelist.Contains( name ) ) {
+			if( this.FilterConfig.RecipeWhitelistMapping.ContainsKey( name ) ) {
 				isGroup = false;
 				return true;
 			}
@@ -164,7 +164,7 @@ namespace Nihilism.Data {
 		private bool IsNpcWhitelisted( NPC npc, out bool isGroup ) {
 			string name = NPCIdentityHelpers.GetUniqueKey( npc );
 
-			if( this.FilterConfig.NpcWhitelist.Contains( name ) ) {
+			if( this.FilterConfig.NpcWhitelistMapping.ContainsKey( name ) ) {
 				isGroup = false;
 				return true;
 			}
@@ -189,7 +189,7 @@ namespace Nihilism.Data {
 		private bool IsNpcLootWhitelisted( NPC npc, out bool isGroup ) {
 			string name = NPCIdentityHelpers.GetUniqueKey( npc );
 
-			if( this.FilterConfig.NpcLootWhitelist.Contains( name ) ) {
+			if( this.FilterConfig.NpcLootWhitelistMapping.ContainsKey( name ) ) {
 				isGroup = false;
 				return true;
 			}
@@ -217,7 +217,7 @@ namespace Nihilism.Data {
 		internal bool IsItemBlacklisted2( Item item, out bool isGroup ) {
 			string name = ItemIdentityHelpers.GetUniqueKey( item );
 
-			if( this.FilterConfig.ItemBlacklist2.Contains( name ) ) {
+			if( this.FilterConfig.ItemBlacklist2Mapping.ContainsKey( name ) ) {
 				isGroup = false;
 				return true;
 			}
@@ -242,7 +242,7 @@ namespace Nihilism.Data {
 		private bool IsRecipeBlacklisted2( Item item, out bool isGroup ) {
 			string name = ItemIdentityHelpers.GetUniqueKey( item );
 
-			if( this.FilterConfig.RecipeBlacklist2.Contains( name ) ) {
+			if( this.FilterConfig.RecipeBlacklist2Mapping.ContainsKey( name ) ) {
 				isGroup = false;
 				return true;
 			}
@@ -267,7 +267,7 @@ namespace Nihilism.Data {
 		private bool IsNpcBlacklisted2( NPC npc, out bool isGroup ) {
 			string name = NPCIdentityHelpers.GetUniqueKey( npc );
 
-			if( this.FilterConfig.NpcBlacklist2.Contains( name ) ) {
+			if( this.FilterConfig.NpcBlacklist2Mapping.ContainsKey( name ) ) {
 				isGroup = false;
 				return true;
 			}
@@ -292,7 +292,7 @@ namespace Nihilism.Data {
 		private bool IsNpcLootBlacklisted2( NPC npc, out bool isGroup ) {
 			string name = NPCIdentityHelpers.GetUniqueKey( npc );
 
-			if( this.FilterConfig.NpcLootBlacklist.Contains( name ) ) {
+			if( this.FilterConfig.NpcLootBlacklistMapping.ContainsKey( name ) ) {
 				isGroup = false;
 				return true;
 			}

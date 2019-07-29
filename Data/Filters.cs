@@ -4,7 +4,7 @@ using Terraria.ModLoader.Config;
 
 
 namespace Nihilism.Data {
-	class NihilismFilterConfig : ModConfig {
+	partial class NihilismFilterConfig : ModConfig {
 		public override ConfigScope Mode => ConfigScope.ServerSide;
 
 
@@ -12,20 +12,20 @@ namespace Nihilism.Data {
 
 		public bool IsActive = false;
 
-		public ISet<ItemDefinition> ItemBlacklist = new HashSet<ItemDefinition> { };
-		public ISet<ItemDefinition> RecipeBlacklist = new HashSet<ItemDefinition> { };
-		public ISet<ItemDefinition> NpcBlacklist = new HashSet<ItemDefinition> { };
-		public ISet<ItemDefinition> NpcLootBlacklist = new HashSet<ItemDefinition> { };
+		public IList<ItemDefinition> ItemBlacklist = new List<ItemDefinition> { };
+		public IList<ItemDefinition> RecipeBlacklist = new List<ItemDefinition> { };
+		public IList<ItemDefinition> NpcBlacklist = new List<ItemDefinition> { };
+		public IList<ItemDefinition> NpcLootBlacklist = new List<ItemDefinition> { };
 
-		public ISet<ItemDefinition> RecipeWhitelist = new HashSet<ItemDefinition> { };
-		public ISet<ItemDefinition> ItemWhitelist = new HashSet<ItemDefinition> { };
-		public ISet<ItemDefinition> NpcWhitelist = new HashSet<ItemDefinition> { };
-		public ISet<ItemDefinition> NpcLootWhitelist = new HashSet<ItemDefinition> { };
+		public IList<ItemDefinition> RecipeWhitelist = new List<ItemDefinition> { };
+		public IList<ItemDefinition> ItemWhitelist = new List<ItemDefinition> { };
+		public IList<ItemDefinition> NpcWhitelist = new List<ItemDefinition> { };
+		public IList<ItemDefinition> NpcLootWhitelist = new List<ItemDefinition> { };
 
-		public ISet<ItemDefinition> ItemBlacklist2 = new HashSet<ItemDefinition> { };
-		public ISet<ItemDefinition> RecipeBlacklist2 = new HashSet<ItemDefinition> { };
-		public ISet<ItemDefinition> NpcBlacklist2 = new HashSet<ItemDefinition> { };
-		public ISet<ItemDefinition> NpcLootBlacklist2 = new HashSet<ItemDefinition> { };
+		public IList<ItemDefinition> ItemBlacklist2 = new List<ItemDefinition> { };
+		public IList<ItemDefinition> RecipeBlacklist2 = new List<ItemDefinition> { };
+		public IList<ItemDefinition> NpcBlacklist2 = new List<ItemDefinition> { };
+		public IList<ItemDefinition> NpcLootBlacklist2 = new List<ItemDefinition> { };
 
 		public ISet<string> ItemGroupBlacklist = new HashSet<string> { };
 		public ISet<string> RecipeGroupBlacklist = new HashSet<string> { };
@@ -60,18 +60,18 @@ namespace Nihilism.Data {
 
 		internal void CopyFrom( NihilismFilterConfig copy ) {
 			this.IsActive = copy.IsActive;
-			this.ItemBlacklist = new HashSet<ItemDefinition>( copy.ItemBlacklist );
-			this.RecipeBlacklist = new HashSet<ItemDefinition>( copy.RecipeBlacklist );
-			this.NpcBlacklist = new HashSet<ItemDefinition>( copy.NpcBlacklist );
-			this.NpcLootBlacklist = new HashSet<ItemDefinition>( copy.NpcLootBlacklist );
-			this.RecipeWhitelist = new HashSet<ItemDefinition>( copy.RecipeWhitelist );
-			this.ItemWhitelist = new HashSet<ItemDefinition>( copy.ItemWhitelist );
-			this.NpcWhitelist = new HashSet<ItemDefinition>( copy.NpcWhitelist );
-			this.NpcLootWhitelist = new HashSet<ItemDefinition>( copy.NpcLootWhitelist );
-			this.ItemBlacklist2 = new HashSet<ItemDefinition>( copy.ItemBlacklist2 );
-			this.RecipeBlacklist2 = new HashSet<ItemDefinition>( copy.RecipeBlacklist2 );
-			this.NpcBlacklist2 = new HashSet<ItemDefinition>( copy.NpcBlacklist2 );
-			this.NpcLootBlacklist2 = new HashSet<ItemDefinition>( copy.NpcLootBlacklist2 );
+			this.ItemBlacklist = new List<ItemDefinition>( copy.ItemBlacklist );
+			this.RecipeBlacklist = new List<ItemDefinition>( copy.RecipeBlacklist );
+			this.NpcBlacklist = new List<ItemDefinition>( copy.NpcBlacklist );
+			this.NpcLootBlacklist = new List<ItemDefinition>( copy.NpcLootBlacklist );
+			this.RecipeWhitelist = new List<ItemDefinition>( copy.RecipeWhitelist );
+			this.ItemWhitelist = new List<ItemDefinition>( copy.ItemWhitelist );
+			this.NpcWhitelist = new List<ItemDefinition>( copy.NpcWhitelist );
+			this.NpcLootWhitelist = new List<ItemDefinition>( copy.NpcLootWhitelist );
+			this.ItemBlacklist2 = new List<ItemDefinition>( copy.ItemBlacklist2 );
+			this.RecipeBlacklist2 = new List<ItemDefinition>( copy.RecipeBlacklist2 );
+			this.NpcBlacklist2 = new List<ItemDefinition>( copy.NpcBlacklist2 );
+			this.NpcLootBlacklist2 = new List<ItemDefinition>( copy.NpcLootBlacklist2 );
 
 			this.ItemGroupBlacklist = new HashSet<string>( copy.ItemGroupBlacklist );
 			this.RecipeGroupBlacklist = new HashSet<string>( copy.RecipeGroupBlacklist );
@@ -92,20 +92,20 @@ namespace Nihilism.Data {
 		public void ResetFiltersFromDefaults() {
 			var mymod = NihilismMod.Instance;
 
-			this.ItemBlacklist = new HashSet<ItemDefinition>( mymod.Config.DefaultItemBlacklist );  // Was there a reason these weren't cloned?
-			this.RecipeBlacklist = new HashSet<ItemDefinition>( mymod.Config.DefaultRecipeBlacklist );//
-			this.NpcBlacklist = new HashSet<ItemDefinition>( mymod.Config.DefaultNpcBlacklist );//
-			this.NpcLootBlacklist = new HashSet<ItemDefinition>( mymod.Config.DefaultNpcLootBlacklist );//
+			this.ItemBlacklist = new List<ItemDefinition>( mymod.Config.DefaultItemBlacklist );  // Was there a reason these weren't cloned?
+			this.RecipeBlacklist = new List<ItemDefinition>( mymod.Config.DefaultRecipeBlacklist );//
+			this.NpcBlacklist = new List<ItemDefinition>( mymod.Config.DefaultNpcBlacklist );//
+			this.NpcLootBlacklist = new List<ItemDefinition>( mymod.Config.DefaultNpcLootBlacklist );//
 
-			this.RecipeWhitelist = new HashSet<ItemDefinition>( mymod.Config.DefaultRecipeWhitelist );
-			this.ItemWhitelist = new HashSet<ItemDefinition>( mymod.Config.DefaultItemWhitelist );
-			this.NpcWhitelist = new HashSet<ItemDefinition>( mymod.Config.DefaultNpcWhitelist );
-			this.NpcLootWhitelist = new HashSet<ItemDefinition>( mymod.Config.DefaultNpcLootWhitelist );
+			this.RecipeWhitelist = new List<ItemDefinition>( mymod.Config.DefaultRecipeWhitelist );
+			this.ItemWhitelist = new List<ItemDefinition>( mymod.Config.DefaultItemWhitelist );
+			this.NpcWhitelist = new List<ItemDefinition>( mymod.Config.DefaultNpcWhitelist );
+			this.NpcLootWhitelist = new List<ItemDefinition>( mymod.Config.DefaultNpcLootWhitelist );
 
-			this.ItemBlacklist2 = new HashSet<ItemDefinition>( mymod.Config.DefaultItemBlacklist2 );
-			this.RecipeBlacklist2 = new HashSet<ItemDefinition>( mymod.Config.DefaultRecipeBlacklist2 );
-			this.NpcBlacklist2 = new HashSet<ItemDefinition>( mymod.Config.DefaultNpcBlacklist2 );
-			this.NpcLootBlacklist2 = new HashSet<ItemDefinition>( mymod.Config.DefaultNpcLootBlacklist2 );
+			this.ItemBlacklist2 = new List<ItemDefinition>( mymod.Config.DefaultItemBlacklist2 );
+			this.RecipeBlacklist2 = new List<ItemDefinition>( mymod.Config.DefaultRecipeBlacklist2 );
+			this.NpcBlacklist2 = new List<ItemDefinition>( mymod.Config.DefaultNpcBlacklist2 );
+			this.NpcLootBlacklist2 = new List<ItemDefinition>( mymod.Config.DefaultNpcLootBlacklist2 );
 
 
 			this.ItemGroupBlacklist = new HashSet<string>( mymod.Config.DefaultItemGroupBlacklist );

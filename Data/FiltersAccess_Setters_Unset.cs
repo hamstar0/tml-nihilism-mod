@@ -1,55 +1,58 @@
-﻿namespace Nihilism.Data {
+﻿using Terraria.ModLoader.Config;
+
+
+namespace Nihilism.Data {
 	partial class NihilismFilterAccess {
-		public void UnsetItemBlacklistEntry( string itemName ) {
-			this.FilterConfig.ItemBlacklist.Remove( itemName );
+		public void UnsetItemBlacklistEntry( string itemKey ) {
+			this.FilterConfig.UnsetItemBlacklistEntry( itemKey );
 		}
 
-		public void UnsetRecipeBlacklistEntry( string itemName ) {
-			this.FilterConfig.RecipeBlacklist.Remove( itemName );
+		public void UnsetRecipeBlacklistEntry( string itemKey ) {
+			this.FilterConfig.UnsetRecipeBlacklistEntry( itemKey );
 		}
 
-		public void UnsetNpcLootBlacklistEntry( string npcName ) {
-			this.FilterConfig.NpcLootBlacklist.Remove( npcName );
+		public void UnsetNpcLootBlacklistEntry( string npcKey ) {
+			this.FilterConfig.UnsetNpcLootBlacklistEntry( npcKey );
 		}
 
-		public void UnsetNpcBlacklistEntry( string npcName ) {
-			this.FilterConfig.NpcBlacklist.Remove( npcName );
-		}
-
-		////
-
-		public void UnsetItemWhitelistEntry( string itemName ) {
-			this.FilterConfig.ItemWhitelist.Remove( itemName );
-		}
-
-		public void UnsetRecipeWhitelistEntry( string itemName ) {
-			this.FilterConfig.RecipeWhitelist.Remove( itemName );
-		}
-
-		public void UnsetNpcLootWhitelistEntry( string npcName ) {
-			this.FilterConfig.NpcLootWhitelist.Remove( npcName );
-		}
-
-		public void UnsetNpcWhitelistEntry( string npcName ) {
-			this.FilterConfig.NpcWhitelist.Remove( npcName );
+		public void UnsetNpcBlacklistEntry( string npcKey ) {
+			this.FilterConfig.UnsetNpcBlacklistEntry( npcKey );
 		}
 
 		////
 
-		public void UnsetItemBlacklist2Entry( string itemName ) {
-			this.FilterConfig.ItemBlacklist2.Remove( itemName );
+		public void UnsetItemWhitelistEntry( string itemKey ) {
+			this.FilterConfig.UnsetItemWhitelistEntry( itemKey );
 		}
 
-		public void UnsetRecipeBlacklist2Entry( string itemName ) {
-			this.FilterConfig.RecipeBlacklist2.Remove( itemName );
+		public void UnsetRecipeWhitelistEntry( string itemKey ) {
+			this.FilterConfig.UnsetRecipeWhitelistEntry( itemKey );
 		}
 
-		public void UnsetNpcLootBlacklist2Entry( string npcName ) {
-			this.FilterConfig.NpcLootBlacklist2.Remove( npcName );
+		public void UnsetNpcLootWhitelistEntry( string npcKey ) {
+			this.FilterConfig.UnsetNpcLootWhitelistEntry( npcKey );
 		}
 
-		public void UnsetNpcBlacklist2Entry( string npcName ) {
-			this.FilterConfig.NpcBlacklist2.Remove( npcName );
+		public void UnsetNpcWhitelistEntry( string npcKey ) {
+			this.FilterConfig.UnsetNpcWhitelistEntry( npcKey );
+		}
+
+		////
+
+		public void UnsetItemBlacklist2Entry( string itemKey ) {
+			this.FilterConfig.UnsetItemBlacklist2Entry( itemKey );
+		}
+
+		public void UnsetRecipeBlacklist2Entry( string itemKey ) {
+			this.FilterConfig.UnsetRecipeBlacklist2Entry( itemKey );
+		}
+
+		public void UnsetNpcLootBlacklist2Entry( string npcKey ) {
+			this.FilterConfig.UnsetNpcLootBlacklist2Entry( npcKey );
+		}
+
+		public void UnsetNpcBlacklist2Entry( string npcKey ) {
+			this.FilterConfig.UnsetNpcBlacklist2Entry( npcKey );
 		}
 	}
 }

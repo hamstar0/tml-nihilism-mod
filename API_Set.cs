@@ -1,4 +1,6 @@
 ﻿using HamstarHelpers.Components.Errors;
+using HamstarHelpers.Helpers.Items;
+using HamstarHelpers.Helpers.NPCs;
 using HamstarHelpers.Helpers.TModLoader;
 using System;
 
@@ -85,7 +87,7 @@ namespace Nihilism {
 			if( !LoadHelpers.IsWorldLoaded() ) { throw new HamstarException( "World not loaded" ); }
 
 			var myworld = NihilismMod.Instance.GetModWorld<NihilismWorld>();
-			myworld.Logic.DataAccess.UnsetItemBlacklistEntry( itemType );
+			myworld.Logic.DataAccess.UnsetItemBlacklistEntry( ItemIdentityHelpers.GetUniqueKey(itemType) );
 
 			if( !localOnly ) { myworld.Logic.SyncDataChanges(); }
 		}
@@ -94,7 +96,7 @@ namespace Nihilism {
 			if( !LoadHelpers.IsWorldLoaded() ) { throw new HamstarException( "World not loaded" ); }
 
 			var myworld = NihilismMod.Instance.GetModWorld<NihilismWorld>();
-			myworld.Logic.DataAccess.UnsetRecipeBlacklistEntry( itemType );
+			myworld.Logic.DataAccess.UnsetRecipeBlacklistEntry( ItemIdentityHelpers.GetUniqueKey(itemType) );
 
 			if( !localOnly ) { myworld.Logic.SyncDataChanges(); }
 		}
@@ -103,7 +105,7 @@ namespace Nihilism {
 			if( !LoadHelpers.IsWorldLoaded() ) { throw new HamstarException( "World not loaded" ); }
 
 			var myworld = NihilismMod.Instance.GetModWorld<NihilismWorld>();
-			myworld.Logic.DataAccess.UnsetNpcBlacklistEntry( npcType );
+			myworld.Logic.DataAccess.UnsetNpcBlacklistEntry( NPCIdentityHelpers.GetUniqueKey(npcType) );
 
 			if( !localOnly ) { myworld.Logic.SyncDataChanges(); }
 		}
@@ -112,7 +114,7 @@ namespace Nihilism {
 			if( !LoadHelpers.IsWorldLoaded() ) { throw new HamstarException( "World not loaded" ); }
 
 			var myworld = NihilismMod.Instance.GetModWorld<NihilismWorld>();
-			myworld.Logic.DataAccess.UnsetNpcLootBlacklistEntry( npcType );
+			myworld.Logic.DataAccess.UnsetNpcLootBlacklistEntry( NPCIdentityHelpers.GetUniqueKey(npcType) );
 
 			if( !localOnly ) { myworld.Logic.SyncDataChanges(); }
 		}
@@ -122,7 +124,7 @@ namespace Nihilism {
 			if( !LoadHelpers.IsWorldLoaded() ) { throw new HamstarException( "World not loaded" ); }
 
 			var myworld = NihilismMod.Instance.GetModWorld<NihilismWorld>();
-			myworld.Logic.DataAccess.UnsetItemWhitelistEntry( itemType );
+			myworld.Logic.DataAccess.UnsetItemWhitelistEntry( ItemIdentityHelpers.GetUniqueKey(itemType) );
 
 			if( !localOnly ) { myworld.Logic.SyncDataChanges(); }
 		}
@@ -131,7 +133,7 @@ namespace Nihilism {
 			if( !LoadHelpers.IsWorldLoaded() ) { throw new HamstarException( "World not loaded" ); }
 
 			var myworld = NihilismMod.Instance.GetModWorld<NihilismWorld>();
-			myworld.Logic.DataAccess.UnsetRecipeWhitelistEntry( itemType );
+			myworld.Logic.DataAccess.UnsetRecipeWhitelistEntry( ItemIdentityHelpers.GetUniqueKey(itemType) );
 
 			if( !localOnly ) { myworld.Logic.SyncDataChanges(); }
 		}
@@ -140,7 +142,7 @@ namespace Nihilism {
 			if( !LoadHelpers.IsWorldLoaded() ) { throw new HamstarException( "World not loaded" ); }
 
 			var myworld = NihilismMod.Instance.GetModWorld<NihilismWorld>();
-			myworld.Logic.DataAccess.UnsetNpcWhitelistEntry( npcType );
+			myworld.Logic.DataAccess.UnsetNpcWhitelistEntry( NPCIdentityHelpers.GetUniqueKey(npcType) );
 
 			if( !localOnly ) { myworld.Logic.SyncDataChanges(); }
 		}
@@ -149,7 +151,7 @@ namespace Nihilism {
 			if( !LoadHelpers.IsWorldLoaded() ) { throw new HamstarException( "World not loaded" ); }
 
 			var myworld = NihilismMod.Instance.GetModWorld<NihilismWorld>();
-			myworld.Logic.DataAccess.UnsetNpcLootWhitelistEntry( npcType );
+			myworld.Logic.DataAccess.UnsetNpcLootWhitelistEntry( NPCIdentityHelpers.GetUniqueKey(npcType) );
 
 			if( !localOnly ) { myworld.Logic.SyncDataChanges(); }
 		}

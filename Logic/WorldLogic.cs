@@ -35,11 +35,11 @@ namespace Nihilism.Logic {
 		////////////////
 		
 		public void LoadWorldData() {
-			this.DataAccess.Load();
+			//this.DataAccess.Load();
 		}
 
 		public void SaveWorldData() {
-			this.DataAccess.Save();
+			//this.DataAccess.Save();
 		}
 		
 

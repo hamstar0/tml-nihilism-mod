@@ -1,77 +1,73 @@
 ﻿using HamstarHelpers.Helpers.Items;
+using HamstarHelpers.Helpers.NPCs;
+using System;
 using Terraria.ModLoader.Config;
 
 
 namespace Nihilism.Data {
 	partial class NihilismFilterAccess {
 		public void SetItemBlacklistEntry( int itemType ) {
-			string key = ItemIdentityHelpers.GetUniqueKey( itemType );
-			string[] parts = key.Split( new char[] { ' ' }, 2 );
-			if( parts.Length != 2 ) {
-				return;
-			}
-
-			this.FilterConfig.ItemBlacklist.Add( new ItemDefinition(parts[0], parts[1]) );
+			Tuple<string, string> segs = ItemIdentityHelpers.GetUniqueKeySegs( itemType );
+			this.FilterConfig.ItemBlacklist.Add( new ItemDefinition(segs.Item1, segs.Item2) );
 		}
 
 		public void SetRecipeBlacklistEntry( int itemType ) {
-			this.FilterConfig.RecipeBlacklist.Add( itemType );
+			Tuple<string, string> segs = ItemIdentityHelpers.GetUniqueKeySegs( itemType );
+			this.FilterConfig.RecipeBlacklist.Add( new ItemDefinition( segs.Item1, segs.Item2 ) );
 		}
 
 		public void SetNpcBlacklistEntry( int npcType ) {
-			this.FilterConfig.NpcBlacklist.Add( npcType );
+			Tuple<string, string> segs = NPCIdentityHelpers.GetUniqueKeySegs( npcType );
+			this.FilterConfig.NpcBlacklist.Add( new NPCDefinition( segs.Item1, segs.Item2 ) );
 		}
 
 		public void SetNpcLootBlacklistEntry( int npcType ) {
-			this.FilterConfig.NpcLootBlacklist.Add( npcType );
+			Tuple<string, string> segs = NPCIdentityHelpers.GetUniqueKeySegs( npcType );
+			this.FilterConfig.NpcLootBlacklist.Add( new NPCDefinition( segs.Item1, segs.Item2 ) );
 		}
 
 		////
 
 		public void SetItemWhitelistEntry( int itemType ) {
-			this.FilterConfig.ItemWhitelist.Add( itemType );
+			Tuple<string, string> segs = ItemIdentityHelpers.GetUniqueKeySegs( itemType );
+			this.FilterConfig.ItemWhitelist.Add( new ItemDefinition( segs.Item1, segs.Item2 ) );
 		}
 		
 		public void SetRecipeWhitelistEntry( int itemType ) {
-			this.FilterConfig.RecipeWhitelist.Add( itemType );
+			Tuple<string, string> segs = ItemIdentityHelpers.GetUniqueKeySegs( itemType );
+			this.FilterConfig.RecipeWhitelist.Add( new ItemDefinition( segs.Item1, segs.Item2 ) );
 		}
 
 		public void SetNpcWhitelistEntry( int npcType ) {
-			this.FilterConfig.NpcWhitelist.Add( npcType );
+			Tuple<string, string> segs = NPCIdentityHelpers.GetUniqueKeySegs( npcType );
+			this.FilterConfig.NpcWhitelist.Add( new NPCDefinition( segs.Item1, segs.Item2 ) );
 		}
 
 		public void SetNpcLootWhitelistEntry( int npcType ) {
-			this.FilterConfig.NpcLootWhitelist.Add( npcType );
+			Tuple<string, string> segs = NPCIdentityHelpers.GetUniqueKeySegs( npcType );
+			this.FilterConfig.NpcLootWhitelist.Add( new NPCDefinition( segs.Item1, segs.Item2 ) );
 		}
 
 		////
 
 		public void SetItemBlacklist2Entry( int itemType ) {
-			string key = ItemIdentityHelpers.GetUniqueKey( itemType );
-			string[] parts = key.Split( new char[] { ' ' }, 2 );
-			if( parts.Length != 2 ) {
-				return;
-			}
-
-			this.FilterConfig.ItemBlacklist2.Add( new ItemDefinition( parts[0], parts[1] ) );
+			Tuple<string, string> segs = ItemIdentityHelpers.GetUniqueKeySegs( itemType );
+			this.FilterConfig.ItemBlacklist2.Add( new ItemDefinition( segs.Item1, segs.Item2 ) );
 		}
 
-		public void SetRecipeBlacklist2Entry( int npcType ) {
-			this.FilterConfig.NpcBlacklist2.Add( npcType );
+		public void SetRecipeBlacklist2Entry( int itemType ) {
+			Tuple<string, string> segs = ItemIdentityHelpers.GetUniqueKeySegs( itemType );
+			this.FilterConfig.RecipeBlacklist2.Add( new ItemDefinition( segs.Item1, segs.Item2 ) );
 		}
 
 		public void SetNpcBlacklist2Entry( int npcType ) {
-			this.FilterConfig.NpcLootBlacklist2.Add( npcType );
+			Tuple<string, string> segs = NPCIdentityHelpers.GetUniqueKeySegs( npcType );
+			this.FilterConfig.NpcLootBlacklist2.Add( new NPCDefinition( segs.Item1, segs.Item2 ) );
 		}
 
-		public void SetNpcLootBlacklist2Entry( int itemType ) {
-			string key = ItemIdentityHelpers.GetUniqueKey( itemType );
-			string[] parts = key.Split( new char[] { ' ' }, 2 );
-			if( parts.Length != 2 ) {
-				return;
-			}
-
-			this.FilterConfig.RecipeBlacklist2.Add( new ItemDefinition( parts[0], parts[1] ) );
+		public void SetNpcLootBlacklist2Entry( int npcType ) {
+			Tuple<string, string> segs = NPCIdentityHelpers.GetUniqueKeySegs( npcType );
+			this.FilterConfig.RecipeBlacklist2.Add( new NPCDefinition( segs.Item1, segs.Item2 ) );
 		}
 
 
