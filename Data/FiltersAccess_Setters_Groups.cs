@@ -3,37 +3,37 @@
 
 namespace Nihilism.Data {
 	partial class NihilismFilterAccess {
-		public void SetItemGroupBlacklistEntry( string groupName ) {
+		public void SetItemBlacklistGroupEntry( string groupName ) {
 			this.FilterConfig.ItemGroupBlacklist.Add( groupName );
 		}
 
-		public void SetRecipeGroupBlacklistEntry( string groupName ) {
+		public void SetRecipeBlacklistGroupEntry( string groupName ) {
 			this.FilterConfig.RecipeGroupBlacklist.Add( groupName );
 		}
 
-		public void SetNpcGroupBlacklistEntry( string groupName ) {
+		public void SetNpcBlacklistGroupEntry( string groupName ) {
 			this.FilterConfig.NpcGroupBlacklist.Add( groupName );
 		}
 
-		public void SetNpcLootGroupBlacklistEntry( string groupName ) {
+		public void SetNpcLootBlacklistGroupEntry( string groupName ) {
 			this.FilterConfig.NpcLootGroupBlacklist.Add( groupName );
 		}
 
 		////
 
-		public void SetItemGroupWhitelistEntry( string groupName ) {
+		public void SetItemWhitelistGroupEntry( string groupName ) {
 			this.FilterConfig.ItemGroupWhitelist.Add( groupName );
 		}
 		
-		public void SetRecipeGroupWhitelistEntry( string groupName ) {
+		public void SetRecipeWhitelistGroupEntry( string groupName ) {
 			this.FilterConfig.RecipeGroupWhitelist.Add( groupName );
 		}
 
-		public void SetNpcGroupWhitelistEntry( string groupName ) {
+		public void SetNpcWhitelistGroupEntry( string groupName ) {
 			this.FilterConfig.NpcGroupWhitelist.Add( groupName );
 		}
 
-		public void SetNpcLootGroupWhitelistEntry( string groupName ) {
+		public void SetNpcLootWhitelistGroupEntry( string groupName ) {
 			this.FilterConfig.NpcLootGroupWhitelist.Add( groupName );
 		}
 
