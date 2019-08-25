@@ -1,4 +1,4 @@
-﻿using HamstarHelpers.Components.Errors;
+﻿using HamstarHelpers.Classes.Errors;
 using HamstarHelpers.Helpers.Debug;
 using HamstarHelpers.Helpers.Items;
 using HamstarHelpers.Helpers.TModLoader.Mods;
@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Nihilism.Data;
 using System;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 
@@ -77,7 +78,7 @@ namespace Nihilism {
 					return "  Item filters not enabled.";
 				}
 				
-				string name = ItemIdentityHelpers.GetUniqueKey( Main.mouseItem );
+				string name = ItemID.GetUniqueKey( Main.mouseItem );
 				bool isEnabled, isBlackList, isGroup;
 				isEnabled = myworld.Logic.DataAccess.IsItemEnabled( Main.mouseItem, out isBlackList, out isGroup );
 

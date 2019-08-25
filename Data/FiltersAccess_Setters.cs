@@ -62,12 +62,12 @@ namespace Nihilism.Data {
 
 		public void SetNpcBlacklist2Entry( int npcType ) {
 			Tuple<string, string> segs = NPCIdentityHelpers.GetUniqueKeySegs( npcType );
-			this.FilterConfig.NpcLootBlacklist2.Add( new NPCDefinition( segs.Item1, segs.Item2 ) );
+			this.FilterConfig.NpcBlacklist2.Add( new NPCDefinition( segs.Item1, segs.Item2 ) );
 		}
 
 		public void SetNpcLootBlacklist2Entry( int npcType ) {
 			Tuple<string, string> segs = NPCIdentityHelpers.GetUniqueKeySegs( npcType );
-			this.FilterConfig.RecipeBlacklist2.Add( new NPCDefinition( segs.Item1, segs.Item2 ) );
+			this.FilterConfig.NpcLootBlacklist2.Add( new NPCDefinition( segs.Item1, segs.Item2 ) );
 		}
 
 

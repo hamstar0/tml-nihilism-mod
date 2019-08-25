@@ -1,5 +1,5 @@
-﻿using HamstarHelpers.Components.Errors;
-using HamstarHelpers.Components.Protocols.Packet.Interfaces;
+﻿using HamstarHelpers.Classes.Errors;
+using HamstarHelpers.Classes.Protocols.Packet.Interfaces;
 using HamstarHelpers.Helpers.TModLoader;
 using Nihilism.Data;
 using Terraria;
@@ -44,7 +44,7 @@ namespace Nihilism.NetProtocol {
 
 		private void SetMyDefaults() {
 			var myworld = NihilismMod.Instance.GetModWorld<NihilismWorld>();
-			if( myworld.Logic.DataAccess == null ) { throw new HamstarException( "No filters to send" ); }
+			if( myworld.Logic.DataAccess == null ) { throw new ModHelpersException( "No filters to send" ); }
 
 			myworld.Logic.DataAccess.Give( ref this.Filters );
 		}

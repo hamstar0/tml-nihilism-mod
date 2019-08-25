@@ -1,4 +1,4 @@
-﻿using HamstarHelpers.Components.DataStructures;
+﻿using HamstarHelpers.Classes.DataStructures;
 using HamstarHelpers.Helpers.Debug;
 using HamstarHelpers.Services.EntityGroups;
 using System.Collections.Generic;

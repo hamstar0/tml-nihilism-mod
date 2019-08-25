@@ -1,17 +1,14 @@
-﻿using HamstarHelpers.Components.DataStructures;
+﻿using HamstarHelpers.Classes.DataStructures;
 using HamstarHelpers.Helpers.Debug;
-using HamstarHelpers.Helpers.Items;
-using HamstarHelpers.Helpers.NPCs;
 using HamstarHelpers.Services.EntityGroups;
 using Terraria;
+using Terraria.ModLoader.Config;
 
 
 namespace Nihilism.Data {
 	partial class NihilismFilterAccess {
 		internal bool IsItemBlacklisted( Item item, out bool isGroup ) {
-			string name = ItemIdentityHelpers.GetUniqueKey( item );
-
-			if( this.FilterConfig.ItemBlacklistMapping.ContainsKey( name ) ) {
+			if( this.FilterConfig.ItemBlacklist.Contains( new ItemDefinition(item.type) ) ) {
 				isGroup = false;
 				return true;
 			}
@@ -34,9 +31,7 @@ namespace Nihilism.Data {
 		}
 
 		private bool IsRecipeBlacklisted( Item item, out bool isGroup ) {
-			string name = ItemIdentityHelpers.GetUniqueKey( item );
-
-			if( this.FilterConfig.RecipeBlacklistMapping.ContainsKey( name ) ) {
+			if( this.FilterConfig.RecipeBlacklist.Contains( new ItemDefinition(item.type) ) ) {
 				isGroup = false;
 				return true;
 			}
@@ -59,9 +54,7 @@ namespace Nihilism.Data {
 		}
 
 		private bool IsNpcBlacklisted( NPC npc, out bool isGroup ) {
-			string name = NPCIdentityHelpers.GetUniqueKey( npc );
-
-			if( this.FilterConfig.NpcBlacklistMapping.ContainsKey( name ) ) {
+			if( this.FilterConfig.NpcBlacklist.Contains( new NPCDefinition(npc.type) ) ) {
 				isGroup = false;
 				return true;
 			}
@@ -84,9 +77,7 @@ namespace Nihilism.Data {
 		}
 
 		private bool IsNpcLootBlacklisted( NPC npc, out bool isGroup ) {
-			string name = NPCIdentityHelpers.GetUniqueKey( npc );
-
-			if( this.FilterConfig.NpcLootBlacklistMapping.ContainsKey( name ) ) {
+			if( this.FilterConfig.NpcLootBlacklist.Contains( new NPCDefinition(npc.type) ) ) {
 				isGroup = false;
 				return true;
 			}
@@ -112,9 +103,7 @@ namespace Nihilism.Data {
 		////////////////
 
 		internal bool IsItemWhitelisted( Item item, out bool isGroup ) {
-			string name = ItemIdentityHelpers.GetUniqueKey( item );
-
-			if( this.FilterConfig.ItemWhitelistMapping.ContainsKey( name ) ) {
+			if( this.FilterConfig.ItemWhitelist.Contains( new ItemDefinition(item.type) ) ) {
 				isGroup = false;
 				return true;
 			}
@@ -137,9 +126,7 @@ namespace Nihilism.Data {
 		}
 
 		private bool IsRecipeWhitelisted( Item item, out bool isGroup ) {
-			string name = ItemIdentityHelpers.GetUniqueKey( item );
-
-			if( this.FilterConfig.RecipeWhitelistMapping.ContainsKey( name ) ) {
+			if( this.FilterConfig.RecipeWhitelist.Contains( new ItemDefinition(item.type) ) ) {
 				isGroup = false;
 				return true;
 			}
@@ -162,9 +149,7 @@ namespace Nihilism.Data {
 		}
 
 		private bool IsNpcWhitelisted( NPC npc, out bool isGroup ) {
-			string name = NPCIdentityHelpers.GetUniqueKey( npc );
-
-			if( this.FilterConfig.NpcWhitelistMapping.ContainsKey( name ) ) {
+			if( this.FilterConfig.NpcWhitelist.Contains( new NPCDefinition(npc.type) ) ) {
 				isGroup = false;
 				return true;
 			}
@@ -187,9 +172,7 @@ namespace Nihilism.Data {
 		}
 
 		private bool IsNpcLootWhitelisted( NPC npc, out bool isGroup ) {
-			string name = NPCIdentityHelpers.GetUniqueKey( npc );
-
-			if( this.FilterConfig.NpcLootWhitelistMapping.ContainsKey( name ) ) {
+			if( this.FilterConfig.NpcLootWhitelist.Contains( new NPCDefinition(npc.type) ) ) {
 				isGroup = false;
 				return true;
 			}
@@ -215,9 +198,7 @@ namespace Nihilism.Data {
 		////////////////
 
 		internal bool IsItemBlacklisted2( Item item, out bool isGroup ) {
-			string name = ItemIdentityHelpers.GetUniqueKey( item );
-
-			if( this.FilterConfig.ItemBlacklist2Mapping.ContainsKey( name ) ) {
+			if( this.FilterConfig.ItemBlacklist2.Contains( new ItemDefinition(item.type) ) ) {
 				isGroup = false;
 				return true;
 			}
@@ -240,9 +221,7 @@ namespace Nihilism.Data {
 		}
 
 		private bool IsRecipeBlacklisted2( Item item, out bool isGroup ) {
-			string name = ItemIdentityHelpers.GetUniqueKey( item );
-
-			if( this.FilterConfig.RecipeBlacklist2Mapping.ContainsKey( name ) ) {
+			if( this.FilterConfig.RecipeBlacklist2.Contains( new ItemDefinition(item.type) ) ) {
 				isGroup = false;
 				return true;
 			}
@@ -265,9 +244,7 @@ namespace Nihilism.Data {
 		}
 
 		private bool IsNpcBlacklisted2( NPC npc, out bool isGroup ) {
-			string name = NPCIdentityHelpers.GetUniqueKey( npc );
-
-			if( this.FilterConfig.NpcBlacklist2Mapping.ContainsKey( name ) ) {
+			if( this.FilterConfig.NpcBlacklist2.Contains( new NPCDefinition(npc.type) ) ) {
 				isGroup = false;
 				return true;
 			}
@@ -290,9 +267,7 @@ namespace Nihilism.Data {
 		}
 
 		private bool IsNpcLootBlacklisted2( NPC npc, out bool isGroup ) {
-			string name = NPCIdentityHelpers.GetUniqueKey( npc );
-
-			if( this.FilterConfig.NpcLootBlacklistMapping.ContainsKey( name ) ) {
+			if( this.FilterConfig.NpcLootBlacklist.Contains( new NPCDefinition(npc.type) ) ) {
 				isGroup = false;
 				return true;
 			}
