@@ -49,6 +49,32 @@ namespace Nihilism.Data {
 
 		////////////////
 
+		public void SetCurrentFiltersAsDefaults() {
+			this.FilterConfig.SetCurrentFiltersAsDefaults();
+		}
+
+		public void ResetFiltersFromDefaults() {
+			this.FilterConfig.ResetFiltersFromDefaults();
+		}
+
+
+		////////////////
+
+		public bool IsActive() {
+			return this.FilterConfig.IsActive;
+		}
+
+		public void Activate() {
+			this.FilterConfig.IsActive = true;
+		}
+
+		public void Deactivate() {
+			this.FilterConfig.IsActive = false;
+		}
+
+
+		////////////////
+
 		public IEnumerable<string> GetFormattedFilterData( string subspace="  " ) {
 			return new string[] { "Is nihilated: " + this.FilterConfig.IsActive,
 				"Items BL:\n  " + string.Join( ", ", this.FilterConfig.ItemBlacklist ),
