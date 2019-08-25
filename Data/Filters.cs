@@ -12,35 +12,35 @@ namespace Nihilism.Data {
 
 		public bool IsActive = false;
 
-		public ISet<ItemDefinition> ItemBlacklist = new HashSet<ItemDefinition> { };
-		public ISet<ItemDefinition> RecipeBlacklist = new HashSet<ItemDefinition> { };
-		public ISet<NPCDefinition> NpcBlacklist = new HashSet<NPCDefinition> { };
-		public ISet<NPCDefinition> NpcLootBlacklist = new HashSet<NPCDefinition> { };
+		public HashSet<ItemDefinition> ItemBlacklist = new HashSet<ItemDefinition> { };
+		public HashSet<ItemDefinition> RecipeBlacklist = new HashSet<ItemDefinition> { };
+		public HashSet<NPCDefinition> NpcBlacklist = new HashSet<NPCDefinition> { };
+		public HashSet<NPCDefinition> NpcLootBlacklist = new HashSet<NPCDefinition> { };
 
-		public ISet<ItemDefinition> RecipeWhitelist = new HashSet<ItemDefinition> { };
-		public ISet<ItemDefinition> ItemWhitelist = new HashSet<ItemDefinition> { };
-		public ISet<NPCDefinition> NpcWhitelist = new HashSet<NPCDefinition> { };
-		public ISet<NPCDefinition> NpcLootWhitelist = new HashSet<NPCDefinition> { };
+		public HashSet<ItemDefinition> RecipeWhitelist = new HashSet<ItemDefinition> { };
+		public HashSet<ItemDefinition> ItemWhitelist = new HashSet<ItemDefinition> { };
+		public HashSet<NPCDefinition> NpcWhitelist = new HashSet<NPCDefinition> { };
+		public HashSet<NPCDefinition> NpcLootWhitelist = new HashSet<NPCDefinition> { };
 
-		public ISet<ItemDefinition> ItemBlacklist2 = new HashSet<ItemDefinition> { };
-		public ISet<ItemDefinition> RecipeBlacklist2 = new HashSet<ItemDefinition> { };
-		public ISet<NPCDefinition> NpcBlacklist2 = new HashSet<NPCDefinition> { };
-		public ISet<NPCDefinition> NpcLootBlacklist2 = new HashSet<NPCDefinition> { };
+		public HashSet<ItemDefinition> ItemBlacklist2 = new HashSet<ItemDefinition> { };
+		public HashSet<ItemDefinition> RecipeBlacklist2 = new HashSet<ItemDefinition> { };
+		public HashSet<NPCDefinition> NpcBlacklist2 = new HashSet<NPCDefinition> { };
+		public HashSet<NPCDefinition> NpcLootBlacklist2 = new HashSet<NPCDefinition> { };
 
-		public ISet<string> ItemGroupBlacklist = new HashSet<string> { };
-		public ISet<string> RecipeGroupBlacklist = new HashSet<string> { };
-		public ISet<string> NpcGroupBlacklist = new HashSet<string> { };
-		public ISet<string> NpcLootGroupBlacklist = new HashSet<string> { };
+		public HashSet<string> ItemGroupBlacklist = new HashSet<string> { };
+		public HashSet<string> RecipeGroupBlacklist = new HashSet<string> { };
+		public HashSet<string> NpcGroupBlacklist = new HashSet<string> { };
+		public HashSet<string> NpcLootGroupBlacklist = new HashSet<string> { };
 
-		public ISet<string> ItemGroupWhitelist = new HashSet<string> { };
-		public ISet<string> RecipeGroupWhitelist = new HashSet<string> { };
-		public ISet<string> NpcGroupWhitelist = new HashSet<string> { };
-		public ISet<string> NpcLootGroupWhitelist = new HashSet<string> { };
+		public HashSet<string> ItemGroupWhitelist = new HashSet<string> { };
+		public HashSet<string> RecipeGroupWhitelist = new HashSet<string> { };
+		public HashSet<string> NpcGroupWhitelist = new HashSet<string> { };
+		public HashSet<string> NpcLootGroupWhitelist = new HashSet<string> { };
 
-		public ISet<string> ItemGroupBlacklist2 = new HashSet<string> { };
-		public ISet<string> RecipeGroupBlacklist2 = new HashSet<string> { };
-		public ISet<string> NpcGroupBlacklist2 = new HashSet<string> { };
-		public ISet<string> NpcLootGroupBlacklist2 = new HashSet<string> { };
+		public HashSet<string> ItemGroupBlacklist2 = new HashSet<string> { };
+		public HashSet<string> RecipeGroupBlacklist2 = new HashSet<string> { };
+		public HashSet<string> NpcGroupBlacklist2 = new HashSet<string> { };
+		public HashSet<string> NpcLootGroupBlacklist2 = new HashSet<string> { };
 
 
 

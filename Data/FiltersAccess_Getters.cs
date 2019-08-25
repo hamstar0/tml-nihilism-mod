@@ -13,7 +13,7 @@ namespace Nihilism.Data {
 				return true;
 			}
 
-			lock( NihilismFilterAccess.MyLock ) {
+			lock( this.MyLock ) {
 				IReadOnlySet<string> grpsPerItem;
 
 				if( EntityGroups.TryGetGroupsPerItem( item.type, out grpsPerItem ) ) {
@@ -36,7 +36,7 @@ namespace Nihilism.Data {
 				return true;
 			}
 
-			lock( NihilismFilterAccess.MyLock ) {
+			lock( this.MyLock ) {
 				IReadOnlySet<string> grpsPerItem;
 
 				if( EntityGroups.TryGetGroupsPerItem( item.type, out grpsPerItem ) ) {
@@ -59,7 +59,7 @@ namespace Nihilism.Data {
 				return true;
 			}
 
-			lock( NihilismFilterAccess.MyLock ) {
+			lock( this.MyLock ) {
 				IReadOnlySet<string> grpsPerNPC;
 
 				if( EntityGroups.TryGetGroupsPerNPC( npc.type, out grpsPerNPC ) ) {
@@ -82,7 +82,7 @@ namespace Nihilism.Data {
 				return true;
 			}
 
-			lock( NihilismFilterAccess.MyLock ) {
+			lock( this.MyLock ) {
 				IReadOnlySet<string> grpsPerNPC;
 
 				if( EntityGroups.TryGetGroupsPerNPC( npc.type, out grpsPerNPC ) ) {
@@ -108,7 +108,7 @@ namespace Nihilism.Data {
 				return true;
 			}
 
-			lock( NihilismFilterAccess.MyLock ) {
+			lock( this.MyLock ) {
 				IReadOnlySet<string> grpsPerItem;
 
 				if( EntityGroups.TryGetGroupsPerItem( item.type, out grpsPerItem ) ) {
@@ -131,7 +131,7 @@ namespace Nihilism.Data {
 				return true;
 			}
 
-			lock( NihilismFilterAccess.MyLock ) {
+			lock( this.MyLock ) {
 				IReadOnlySet<string> grpsPerItem;
 
 				if( EntityGroups.TryGetGroupsPerItem( item.type, out grpsPerItem ) ) {
@@ -154,7 +154,7 @@ namespace Nihilism.Data {
 				return true;
 			}
 
-			lock( NihilismFilterAccess.MyLock ) {
+			lock( this.MyLock ) {
 				IReadOnlySet<string> grpsPerNPC;
 
 				if( EntityGroups.TryGetGroupsPerNPC( npc.type, out grpsPerNPC ) ) {
@@ -177,7 +177,7 @@ namespace Nihilism.Data {
 				return true;
 			}
 
-			lock( NihilismFilterAccess.MyLock ) {
+			lock( this.MyLock ) {
 				IReadOnlySet<string> grpsPerNPC;
 
 				if( EntityGroups.TryGetGroupsPerNPC( npc.type, out grpsPerNPC ) ) {
@@ -203,7 +203,7 @@ namespace Nihilism.Data {
 				return true;
 			}
 
-			lock( NihilismFilterAccess.MyLock ) {
+			lock( this.MyLock ) {
 				IReadOnlySet<string> grpsPerItem;
 
 				if( EntityGroups.TryGetGroupsPerItem( item.type, out grpsPerItem ) ) {
@@ -226,7 +226,7 @@ namespace Nihilism.Data {
 				return true;
 			}
 
-			lock( NihilismFilterAccess.MyLock ) {
+			lock( this.MyLock ) {
 				IReadOnlySet<string> grpsPerItem;
 
 				if( EntityGroups.TryGetGroupsPerItem( item.type, out grpsPerItem ) ) {
@@ -249,7 +249,7 @@ namespace Nihilism.Data {
 				return true;
 			}
 
-			lock( NihilismFilterAccess.MyLock ) {
+			lock( this.MyLock ) {
 				IReadOnlySet<string> grpsPerNPC;
 
 				if( EntityGroups.TryGetGroupsPerNPC( npc.type, out grpsPerNPC ) ) {
@@ -272,7 +272,7 @@ namespace Nihilism.Data {
 				return true;
 			}
 
-			lock( NihilismFilterAccess.MyLock ) {
+			lock( this.MyLock ) {
 				IReadOnlySet<string> grpsPerNPC;
 
 				if( EntityGroups.TryGetGroupsPerNPC( npc.type, out grpsPerNPC ) ) {

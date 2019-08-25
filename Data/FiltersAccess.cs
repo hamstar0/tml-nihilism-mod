@@ -6,7 +6,7 @@ using Terraria;
 
 namespace Nihilism.Data {
 	partial class NihilismFilterAccess {
-		private static object MyLock = new object();
+		private readonly object MyLock = new object();
 
 
 
@@ -34,13 +34,6 @@ namespace Nihilism.Data {
 		////////////////
 
 		public NihilismFilterAccess() { }
-
-
-		////////////////
-
-		private string GetDataFileName() {
-			return WorldHelpers.GetUniqueIdForCurrentWorld(true) + " Filters";
-		}
 
 
 		////////////////

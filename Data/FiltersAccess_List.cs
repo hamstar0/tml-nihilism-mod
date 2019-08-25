@@ -10,7 +10,7 @@ namespace Nihilism.Data {
 		public IList<string> GetItemBlacklistGroupEntriesForItem( Item item ) {
 			IList<string> groups = new List<string>();
 
-			lock( NihilismFilterAccess.MyLock ) {
+			lock( this.MyLock ) {
 				IReadOnlySet<string> grpsPerItem;
 
 				if( EntityGroups.TryGetGroupsPerItem( item.type, out grpsPerItem ) ) {
@@ -28,7 +28,7 @@ namespace Nihilism.Data {
 		public IList<string> GetRecipeBlacklistGroupEntriesForItemRecipe( Item item ) {
 			IList<string> groups = new List<string>();
 
-			lock( NihilismFilterAccess.MyLock ) {
+			lock( this.MyLock ) {
 				IReadOnlySet<string> grpsPerItem;
 
 				if( EntityGroups.TryGetGroupsPerItem( item.type, out grpsPerItem ) ) {
@@ -46,7 +46,7 @@ namespace Nihilism.Data {
 		public IList<string> GetNpcBlacklistGroupEntriesForNpc( NPC npc ) {
 			IList<string> groups = new List<string>();
 
-			lock( NihilismFilterAccess.MyLock ) {
+			lock( this.MyLock ) {
 				IReadOnlySet<string> grpsPerNPC;
 
 				if( EntityGroups.TryGetGroupsPerNPC( npc.type, out grpsPerNPC ) ) {
@@ -64,7 +64,7 @@ namespace Nihilism.Data {
 		public IList<string> GetNpcLootBlacklistGroupEntriesForNpc( NPC npc ) {
 			IList<string> groups = new List<string>();
 
-			lock( NihilismFilterAccess.MyLock ) {
+			lock( this.MyLock ) {
 				IReadOnlySet<string> grpsPerNPC;
 
 				if( EntityGroups.TryGetGroupsPerNPC( npc.type, out grpsPerNPC ) ) {
@@ -85,7 +85,7 @@ namespace Nihilism.Data {
 		public IList<string> GetItemWhitelistGroupEntriesForItem( Item item ) {
 			IList<string> groups = new List<string>();
 
-			lock( NihilismFilterAccess.MyLock ) {
+			lock( this.MyLock ) {
 				IReadOnlySet<string> grpsPerItem;
 
 				if( EntityGroups.TryGetGroupsPerItem( item.type, out grpsPerItem ) ) {
@@ -103,7 +103,7 @@ namespace Nihilism.Data {
 		public IList<string> GetRecipeWhitelistGroupEntriesForItemRecipe( Item item ) {
 			IList<string> groups = new List<string>();
 
-			lock( NihilismFilterAccess.MyLock ) {
+			lock( this.MyLock ) {
 				IReadOnlySet<string> grpsPerItem;
 
 				if( EntityGroups.TryGetGroupsPerItem( item.type, out grpsPerItem ) ) {
@@ -121,7 +121,7 @@ namespace Nihilism.Data {
 		public IList<string> GetNpcWhitelistGroupEntriesForNpc( NPC npc ) {
 			IList<string> groups = new List<string>();
 
-			lock( NihilismFilterAccess.MyLock ) {
+			lock( this.MyLock ) {
 				IReadOnlySet<string> grpsPerNPC;
 
 				if( EntityGroups.TryGetGroupsPerNPC( npc.type, out grpsPerNPC ) ) {
@@ -139,7 +139,7 @@ namespace Nihilism.Data {
 		public IList<string> GetNpcLootWhitelistGroupEntriesForNpc( NPC npc ) {
 			IList<string> groups = new List<string>();
 
-			lock( NihilismFilterAccess.MyLock ) {
+			lock( this.MyLock ) {
 				IReadOnlySet<string> grpsPerNPC;
 
 				if( EntityGroups.TryGetGroupsPerNPC( npc.type, out grpsPerNPC ) ) {
@@ -160,7 +160,7 @@ namespace Nihilism.Data {
 		public IList<string> GetItemBlacklist2GroupEntriesForItem( Item item ) {
 			IList<string> groups = new List<string>();
 
-			lock( NihilismFilterAccess.MyLock ) {
+			lock( this.MyLock ) {
 				IReadOnlySet<string> grpsPerItem;
 
 				if( EntityGroups.TryGetGroupsPerItem( item.type, out grpsPerItem ) ) {
@@ -178,7 +178,7 @@ namespace Nihilism.Data {
 		public IList<string> GetRecipeBlacklist2GroupEntriesForItemRecipe( Item item ) {
 			IList<string> groups = new List<string>();
 
-			lock( NihilismFilterAccess.MyLock ) {
+			lock( this.MyLock ) {
 				IReadOnlySet<string> grpsPerItem;
 
 				if( EntityGroups.TryGetGroupsPerItem( item.type, out grpsPerItem ) ) {
@@ -196,7 +196,7 @@ namespace Nihilism.Data {
 		public IList<string> GetNpcBlacklist2GroupEntriesForNpc( NPC npc ) {
 			IList<string> groups = new List<string>();
 
-			lock( NihilismFilterAccess.MyLock ) {
+			lock( this.MyLock ) {
 				IReadOnlySet<string> grpsPerNPC;
 
 				if( EntityGroups.TryGetGroupsPerNPC( npc.type, out grpsPerNPC ) ) {
@@ -214,7 +214,7 @@ namespace Nihilism.Data {
 		public IList<string> GetNpcLootBlacklist2GroupEntriesForNpc( NPC npc ) {
 			IList<string> groups = new List<string>();
 
-			lock( NihilismFilterAccess.MyLock ) {
+			lock( this.MyLock ) {
 				IReadOnlySet<string> grpsPerNPC;
 
 				if( EntityGroups.TryGetGroupsPerNPC( npc.type, out grpsPerNPC ) ) {

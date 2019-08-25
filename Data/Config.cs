@@ -15,35 +15,35 @@ namespace Nihilism.Data {
 		public bool DebugModeInfo = false;
 		public bool DebugModePerItemInfo = false;
 
-		public ISet<ItemDefinition> DefaultItemBlacklist = new HashSet<ItemDefinition> { };
-		public ISet<ItemDefinition> DefaultRecipeBlacklist = new HashSet<ItemDefinition> { };
-		public ISet<NPCDefinition> DefaultNpcBlacklist = new HashSet<NPCDefinition> { };
-		public ISet<NPCDefinition> DefaultNpcLootBlacklist = new HashSet<NPCDefinition> { };
+		public HashSet<ItemDefinition> DefaultItemBlacklist = new HashSet<ItemDefinition> { };
+		public HashSet<ItemDefinition> DefaultRecipeBlacklist = new HashSet<ItemDefinition> { };
+		public HashSet<NPCDefinition> DefaultNpcBlacklist = new HashSet<NPCDefinition> { };
+		public HashSet<NPCDefinition> DefaultNpcLootBlacklist = new HashSet<NPCDefinition> { };
 
-		public ISet<ItemDefinition> DefaultItemWhitelist = new HashSet<ItemDefinition> { };
-		public ISet<ItemDefinition> DefaultRecipeWhitelist = new HashSet<ItemDefinition> { };
-		public ISet<NPCDefinition> DefaultNpcWhitelist = new HashSet<NPCDefinition> { };
-		public ISet<NPCDefinition> DefaultNpcLootWhitelist = new HashSet<NPCDefinition> { };
+		public HashSet<ItemDefinition> DefaultItemWhitelist = new HashSet<ItemDefinition> { };
+		public HashSet<ItemDefinition> DefaultRecipeWhitelist = new HashSet<ItemDefinition> { };
+		public HashSet<NPCDefinition> DefaultNpcWhitelist = new HashSet<NPCDefinition> { };
+		public HashSet<NPCDefinition> DefaultNpcLootWhitelist = new HashSet<NPCDefinition> { };
 
-		public ISet<ItemDefinition> DefaultItemBlacklist2 = new HashSet<ItemDefinition> { };
-		public ISet<ItemDefinition> DefaultRecipeBlacklist2 = new HashSet<ItemDefinition> { };
-		public ISet<NPCDefinition> DefaultNpcBlacklist2 = new HashSet<NPCDefinition> { };
-		public ISet<NPCDefinition> DefaultNpcLootBlacklist2 = new HashSet<NPCDefinition> { };
+		public HashSet<ItemDefinition> DefaultItemBlacklist2 = new HashSet<ItemDefinition> { };
+		public HashSet<ItemDefinition> DefaultRecipeBlacklist2 = new HashSet<ItemDefinition> { };
+		public HashSet<NPCDefinition> DefaultNpcBlacklist2 = new HashSet<NPCDefinition> { };
+		public HashSet<NPCDefinition> DefaultNpcLootBlacklist2 = new HashSet<NPCDefinition> { };
 
-		public ISet<string> DefaultItemGroupBlacklist = new HashSet<string> { };
-		public ISet<string> DefaultRecipeGroupBlacklist = new HashSet<string> { };
-		public ISet<string> DefaultNpcGroupBlacklist = new HashSet<string> { };
-		public ISet<string> DefaultNpcLootGroupBlacklist = new HashSet<string> { };
+		public HashSet<string> DefaultItemGroupBlacklist = new HashSet<string> { };
+		public HashSet<string> DefaultRecipeGroupBlacklist = new HashSet<string> { };
+		public HashSet<string> DefaultNpcGroupBlacklist = new HashSet<string> { };
+		public HashSet<string> DefaultNpcLootGroupBlacklist = new HashSet<string> { };
 
-		public ISet<string> DefaultItemGroupWhitelist = new HashSet<string> { };
-		public ISet<string> DefaultRecipeGroupWhitelist = new HashSet<string> { };
-		public ISet<string> DefaultNpcGroupWhitelist = new HashSet<string> { };
-		public ISet<string> DefaultNpcLootGroupWhitelist = new HashSet<string> { };
+		public HashSet<string> DefaultItemGroupWhitelist = new HashSet<string> { };
+		public HashSet<string> DefaultRecipeGroupWhitelist = new HashSet<string> { };
+		public HashSet<string> DefaultNpcGroupWhitelist = new HashSet<string> { };
+		public HashSet<string> DefaultNpcLootGroupWhitelist = new HashSet<string> { };
 
-		public ISet<string> DefaultItemGroupBlacklist2 = new HashSet<string> { };
-		public ISet<string> DefaultRecipeGroupBlacklist2 = new HashSet<string> { };
-		public ISet<string> DefaultNpcGroupBlacklist2 = new HashSet<string> { };
-		public ISet<string> DefaultNpcLootGroupBlacklist2 = new HashSet<string> { };
+		public HashSet<string> DefaultItemGroupBlacklist2 = new HashSet<string> { };
+		public HashSet<string> DefaultRecipeGroupBlacklist2 = new HashSet<string> { };
+		public HashSet<string> DefaultNpcGroupBlacklist2 = new HashSet<string> { };
+		public HashSet<string> DefaultNpcLootGroupBlacklist2 = new HashSet<string> { };
 
 		[DefaultValue(true)]
 		public bool EnableItemFilters = true;
