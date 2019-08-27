@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Runtime.Serialization;
 using Terraria.ModLoader.Config;
 
 
@@ -60,12 +59,7 @@ namespace Nihilism.Data {
 
 		////////////////
 
-		[OnDeserialized]
-		internal void OnDeserializedMethod( StreamingContext context ) {
-			if( this.DefaultItemBlacklist != null ) {
-				return;
-			}
-
+		public NihilismConfig() {
 			this.DefaultItemBlacklist = new HashSet<ItemDefinition>();
 			this.DefaultRecipeBlacklist = new HashSet<ItemDefinition>();
 			this.DefaultNpcBlacklist = new HashSet<NPCDefinition>();
@@ -95,6 +89,42 @@ namespace Nihilism.Data {
 			this.DefaultRecipeGroupBlacklist2 = new HashSet<string> { };
 			this.DefaultNpcGroupBlacklist2 = new HashSet<string> { };
 			this.DefaultNpcLootGroupBlacklist2 = new HashSet<string> { };
+		}
+
+		public override ModConfig Clone() {
+			var clone = (NihilismConfig)base.Clone();
+
+			clone.DefaultItemBlacklist = new HashSet<ItemDefinition>( this.DefaultItemBlacklist );
+			clone.DefaultRecipeBlacklist = new HashSet<ItemDefinition>( this.DefaultRecipeBlacklist );
+			clone.DefaultNpcBlacklist = new HashSet<NPCDefinition>( this.DefaultNpcBlacklist );
+			clone.DefaultNpcLootBlacklist = new HashSet<NPCDefinition>( this.DefaultNpcLootBlacklist );
+
+			clone.DefaultItemWhitelist = new HashSet<ItemDefinition>( this.DefaultItemWhitelist );
+			clone.DefaultRecipeWhitelist = new HashSet<ItemDefinition>( this.DefaultRecipeWhitelist );
+			clone.DefaultNpcWhitelist = new HashSet<NPCDefinition>( this.DefaultNpcWhitelist );
+			clone.DefaultNpcLootWhitelist = new HashSet<NPCDefinition>( this.DefaultNpcLootWhitelist );
+
+			clone.DefaultItemBlacklist2 = new HashSet<ItemDefinition>( this.DefaultItemBlacklist2 );
+			clone.DefaultRecipeBlacklist2 = new HashSet<ItemDefinition>( this.DefaultRecipeBlacklist2 );
+			clone.DefaultNpcBlacklist2 = new HashSet<NPCDefinition>( this.DefaultNpcBlacklist2 );
+			clone.DefaultNpcLootBlacklist2 = new HashSet<NPCDefinition>( this.DefaultNpcLootBlacklist2 );
+
+			clone.DefaultItemGroupBlacklist = new HashSet<string>( this.DefaultItemGroupBlacklist );
+			clone.DefaultRecipeGroupBlacklist = new HashSet<string>( this.DefaultRecipeGroupBlacklist );
+			clone.DefaultNpcGroupBlacklist = new HashSet<string>( this.DefaultNpcGroupBlacklist );
+			clone.DefaultNpcLootGroupBlacklist = new HashSet<string>( this.DefaultNpcLootGroupBlacklist );
+
+			clone.DefaultItemGroupWhitelist = new HashSet<string>( this.DefaultItemGroupWhitelist );
+			clone.DefaultRecipeGroupWhitelist = new HashSet<string>( this.DefaultRecipeGroupWhitelist );
+			clone.DefaultNpcGroupWhitelist = new HashSet<string>( this.DefaultNpcGroupWhitelist );
+			clone.DefaultNpcLootGroupWhitelist = new HashSet<string>( this.DefaultNpcLootGroupWhitelist );
+
+			clone.DefaultItemGroupBlacklist2 = new HashSet<string>( this.DefaultItemGroupBlacklist2 );
+			clone.DefaultRecipeGroupBlacklist2 = new HashSet<string>( this.DefaultRecipeGroupBlacklist2 );
+			clone.DefaultNpcGroupBlacklist2 = new HashSet<string>( this.DefaultNpcGroupBlacklist2 );
+			clone.DefaultNpcLootGroupBlacklist2 = new HashSet<string>( this.DefaultNpcLootGroupBlacklist2 );
+
+			return clone;
 		}
 	}
 }

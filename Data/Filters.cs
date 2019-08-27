@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Runtime.Serialization;
 using Terraria.ModLoader.Config;
 
 
@@ -46,13 +45,44 @@ namespace Nihilism.Data {
 
 		////////////////
 
-		[OnDeserialized]
-		internal void OnDeserializedMethod( StreamingContext context ) {
-			if( this.ItemBlacklist != null ) {
-				return;
-			}
-
+		public NihilismFilterConfig() {
 			this.ResetFiltersFromDefaults();
+		}
+
+		public override ModConfig Clone() {
+			var clone = (NihilismFilterConfig)base.Clone();
+
+			clone.ItemBlacklist = new HashSet<ItemDefinition>( this.ItemBlacklist );
+			clone.RecipeBlacklist = new HashSet<ItemDefinition>( this.RecipeBlacklist );
+			clone.NpcBlacklist = new HashSet<NPCDefinition>( this.NpcBlacklist );
+			clone.NpcLootBlacklist = new HashSet<NPCDefinition>( this.NpcLootBlacklist );
+
+			clone.RecipeWhitelist = new HashSet<ItemDefinition>( this.RecipeWhitelist );
+			clone.ItemWhitelist = new HashSet<ItemDefinition>( this.ItemWhitelist );
+			clone.NpcWhitelist = new HashSet<NPCDefinition>( this.NpcWhitelist );
+			clone.NpcLootWhitelist = new HashSet<NPCDefinition>( this.NpcLootWhitelist );
+
+			clone.ItemBlacklist2 = new HashSet<ItemDefinition>( this.ItemBlacklist2 );
+			clone.RecipeBlacklist2 = new HashSet<ItemDefinition>( this.RecipeBlacklist2 );
+			clone.NpcBlacklist2 = new HashSet<NPCDefinition>( this.NpcBlacklist2 );
+			clone.NpcLootBlacklist2 = new HashSet<NPCDefinition>( this.NpcLootBlacklist2 );
+
+			clone.ItemGroupBlacklist = new HashSet<string>( this.ItemGroupBlacklist );
+			clone.RecipeGroupBlacklist = new HashSet<string>( this.RecipeGroupBlacklist );
+			clone.NpcGroupBlacklist = new HashSet<string>( this.NpcGroupBlacklist );
+			clone.NpcLootGroupBlacklist = new HashSet<string>( this.NpcLootGroupBlacklist );
+
+			clone.RecipeGroupWhitelist = new HashSet<string>( this.RecipeGroupWhitelist );
+			clone.ItemGroupWhitelist = new HashSet<string>( this.ItemGroupWhitelist );
+			clone.NpcGroupWhitelist = new HashSet<string>( this.NpcGroupWhitelist );
+			clone.NpcLootGroupWhitelist = new HashSet<string>( this.NpcLootGroupWhitelist );
+
+			clone.ItemGroupBlacklist2 = new HashSet<string>( this.ItemGroupBlacklist2 );
+			clone.RecipeGroupBlacklist2 = new HashSet<string>( this.RecipeGroupBlacklist2 );
+			clone.NpcGroupBlacklist2 = new HashSet<string>( this.NpcGroupBlacklist2 );
+			clone.NpcLootGroupBlacklist2 = new HashSet<string>( this.NpcLootGroupBlacklist2 );
+
+			return clone;
 		}
 
 
@@ -64,10 +94,12 @@ namespace Nihilism.Data {
 			this.RecipeBlacklist = new HashSet<ItemDefinition>( copy.RecipeBlacklist );
 			this.NpcBlacklist = new HashSet<NPCDefinition>( copy.NpcBlacklist );
 			this.NpcLootBlacklist = new HashSet<NPCDefinition>( copy.NpcLootBlacklist );
+
 			this.RecipeWhitelist = new HashSet<ItemDefinition>( copy.RecipeWhitelist );
 			this.ItemWhitelist = new HashSet<ItemDefinition>( copy.ItemWhitelist );
 			this.NpcWhitelist = new HashSet<NPCDefinition>( copy.NpcWhitelist );
 			this.NpcLootWhitelist = new HashSet<NPCDefinition>( copy.NpcLootWhitelist );
+
 			this.ItemBlacklist2 = new HashSet<ItemDefinition>( copy.ItemBlacklist2 );
 			this.RecipeBlacklist2 = new HashSet<ItemDefinition>( copy.RecipeBlacklist2 );
 			this.NpcBlacklist2 = new HashSet<NPCDefinition>( copy.NpcBlacklist2 );
@@ -77,10 +109,12 @@ namespace Nihilism.Data {
 			this.RecipeGroupBlacklist = new HashSet<string>( copy.RecipeGroupBlacklist );
 			this.NpcGroupBlacklist = new HashSet<string>( copy.NpcGroupBlacklist );
 			this.NpcLootGroupBlacklist = new HashSet<string>( copy.NpcLootGroupBlacklist );
+
 			this.RecipeGroupWhitelist = new HashSet<string>( copy.RecipeGroupWhitelist );
 			this.ItemGroupWhitelist = new HashSet<string>( copy.ItemGroupWhitelist );
 			this.NpcGroupWhitelist = new HashSet<string>( copy.NpcGroupWhitelist );
 			this.NpcLootGroupWhitelist = new HashSet<string>( copy.NpcLootGroupWhitelist );
+
 			this.ItemGroupBlacklist2 = new HashSet<string>( copy.ItemGroupBlacklist2 );
 			this.RecipeGroupBlacklist2 = new HashSet<string>( copy.RecipeGroupBlacklist2 );
 			this.NpcGroupBlacklist2 = new HashSet<string>( copy.NpcGroupBlacklist2 );
