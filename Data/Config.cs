@@ -11,7 +11,7 @@ namespace Nihilism.Data {
 
 		////
 
-		[Header( "Debug flags" )]
+		[Header( "Note: Type /help in-game for additional commands.\n \n \nDebug flags" )]
 		[Label( "Output debug information to log or chat" )]
 		public bool DebugModeInfo = false;
 		[Label( "Output item debug information (e.g. applicable filters) to log or chat" )]
