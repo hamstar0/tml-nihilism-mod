@@ -11,7 +11,14 @@ namespace Nihilism.Data {
 
 		////
 
-		[Header( "Note: Type /help in-game for additional commands.\n \n \nDebug flags" )]
+		[Header( "Chat commands (type /help in-game and scroll chat for more info):\n"+
+			"  /nih-on, /nih-off: Enables or disables filters for the current world.\n"+
+			"  /nih-defaults-reset: Sets the below \"default\" filters as those for the current world.\n"+
+			"  /nih-defaults-set: Sets the current world's active filters to override the below defaults.\n"+
+			"  /nih-clear: Clears all filters for the current world. Does not affect defaults below.\n" +
+			"  /nih-show-filters: Outputs the current world's active filters to the client.log.\n " +
+			"\nSee homepage for info on using the mod's API for more options.\n \n"+
+		"Debug settings" )]
 		[Label( "Output debug information to log or chat" )]
 		public bool DebugModeInfo = false;
 		[Label( "Output item debug information (e.g. applicable filters) to log or chat" )]
