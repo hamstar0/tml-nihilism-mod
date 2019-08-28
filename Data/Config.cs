@@ -11,47 +11,86 @@ namespace Nihilism.Data {
 
 		////
 
+		[Header( "Debug flags" )]
+		[Label( "Output debug information to log or chat" )]
 		public bool DebugModeInfo = false;
+		[Label( "Output item debug information (e.g. applicable filters) to log or chat" )]
 		public bool DebugModePerItemInfo = false;
 
+		[Header( "Default blacklists" )]
+		[Label( "Default blacklist of items" )]
 		public HashSet<ItemDefinition> DefaultItemBlacklist = new HashSet<ItemDefinition> { };
+		[Label( "Default blacklist of item recipes" )]
 		public HashSet<ItemDefinition> DefaultRecipeBlacklist = new HashSet<ItemDefinition> { };
+		[Label( "Default blacklist of NPCs" )]
 		public HashSet<NPCDefinition> DefaultNpcBlacklist = new HashSet<NPCDefinition> { };
+		[Label( "Default blacklist that can drop loot NPCs" )]
 		public HashSet<NPCDefinition> DefaultNpcLootBlacklist = new HashSet<NPCDefinition> { };
 
+		[Header( "Default whitelists (subtracts from blacklist)" )]
+		[Label( "Default whitelist of items" )]
 		public HashSet<ItemDefinition> DefaultItemWhitelist = new HashSet<ItemDefinition> { };
+		[Label( "Default whitelist of item recipes" )]
 		public HashSet<ItemDefinition> DefaultRecipeWhitelist = new HashSet<ItemDefinition> { };
+		[Label( "Default whitelist of NPCs" )]
 		public HashSet<NPCDefinition> DefaultNpcWhitelist = new HashSet<NPCDefinition> { };
+		[Label( "Default whitelist of loot dropping of NPCs" )]
 		public HashSet<NPCDefinition> DefaultNpcLootWhitelist = new HashSet<NPCDefinition> { };
 
+		[Header( "Default secondary blacklists (subtracts from whitelist)" )]
+		[Label( "Default secondary blacklist of items" )]
 		public HashSet<ItemDefinition> DefaultItemBlacklist2 = new HashSet<ItemDefinition> { };
+		[Label( "Default blacklist of item recipes" )]
 		public HashSet<ItemDefinition> DefaultRecipeBlacklist2 = new HashSet<ItemDefinition> { };
+		[Label( "Default blacklist of NPCs" )]
 		public HashSet<NPCDefinition> DefaultNpcBlacklist2 = new HashSet<NPCDefinition> { };
+		[Label( "Default blacklist of loot dropping of NPCs" )]
 		public HashSet<NPCDefinition> DefaultNpcLootBlacklist2 = new HashSet<NPCDefinition> { };
 
+		[Header( "Default groups blacklists (see Entity Groups via. Mod Helpers)" )]
+		[Label( "Default blacklist of item groups" )]
 		public HashSet<string> DefaultItemGroupBlacklist = new HashSet<string> { };
+		[Label( "Default blacklist of item recipes as item groups" )]
 		public HashSet<string> DefaultRecipeGroupBlacklist = new HashSet<string> { };
+		[Label( "Default blacklist of NPC groups" )]
 		public HashSet<string> DefaultNpcGroupBlacklist = new HashSet<string> { };
+		[Label( "Default blacklist of loot dropping of NPCs" )]
 		public HashSet<string> DefaultNpcLootGroupBlacklist = new HashSet<string> { };
 
+		[Header( "Default groups whitelists (subtracts from blacklist)" )]
+		[Label( "Default whitelist of items" )]
 		public HashSet<string> DefaultItemGroupWhitelist = new HashSet<string> { };
+		[Label( "Default whitelist of item recipes" )]
 		public HashSet<string> DefaultRecipeGroupWhitelist = new HashSet<string> { };
+		[Label( "Default whitelist of NPCs" )]
 		public HashSet<string> DefaultNpcGroupWhitelist = new HashSet<string> { };
+		[Label( "Default whitelist of loot dropping of NPCs" )]
 		public HashSet<string> DefaultNpcLootGroupWhitelist = new HashSet<string> { };
 
+		[Header( "Default groups secondary blacklists (subtracts from whitelist)" )]
+		[Label( "Default secondary blacklist of items" )]
 		public HashSet<string> DefaultItemGroupBlacklist2 = new HashSet<string> { };
+		[Label( "Default blacklist of item recipes" )]
 		public HashSet<string> DefaultRecipeGroupBlacklist2 = new HashSet<string> { };
+		[Label( "Default blacklist of NPCs" )]
 		public HashSet<string> DefaultNpcGroupBlacklist2 = new HashSet<string> { };
+		[Label( "Default blacklist of loot dropping of NPCs" )]
 		public HashSet<string> DefaultNpcLootGroupBlacklist2 = new HashSet<string> { };
 
+		[Header( "Flags for categories of blacklists or whitelists (filters)" )]
+		[Label( "Enable item filters" )]
 		[DefaultValue(true)]
 		public bool EnableItemFilters = true;
+		[Label( "Enable item equips filters" )]
 		[DefaultValue( true )]
 		public bool EnableItemEquipsFilters = true;
+		[Label( "Enable item recipes filters" )]
 		[DefaultValue( true )]
 		public bool EnableRecipeFilters = true;
+		[Label( "Enable NPC filters" )]
 		[DefaultValue( true )]
 		public bool EnableNpcFilters = true;
+		[Label( "Enable filters of NPCs' loot dropping" )]
 		[DefaultValue( true )]
 		public bool EnableNpcLootFilters = true;
 
