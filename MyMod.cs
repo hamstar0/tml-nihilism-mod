@@ -20,7 +20,7 @@ namespace Nihilism {
 
 		////////////////
 
-		public NihilismConfig Config => this.GetConfig<NihilismConfig>();
+		public NihilismConfig Config => ModContent.GetInstance<NihilismConfig>();
 
 
 		public Texture2D DisabledItemTex { get; private set; }
@@ -69,7 +69,7 @@ namespace Nihilism {
 					return "  No mouse item selected.";
 				}
 
-				var myworld = this.GetModWorld<NihilismWorld>();
+				var myworld = ModContent.GetInstance<NihilismWorld>();
 				if( myworld.Logic == null ) {
 					return "  Logic not loaded.";
 				}

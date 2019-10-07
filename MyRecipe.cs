@@ -6,7 +6,7 @@ namespace Nihilism {
 	class NihilismRecipe : GlobalRecipe {
 		public override bool RecipeAvailable( Recipe recipe ) {
 			var mymod = (NihilismMod)this.mod;
-			var myworld = mymod.GetModWorld<NihilismWorld>();
+			var myworld = ModContent.GetInstance<NihilismWorld>();
 			if( myworld.Logic == null ) { return base.RecipeAvailable( recipe ); }
 
 			if( !myworld.Logic.AreRecipesFiltersEnabled() ) {

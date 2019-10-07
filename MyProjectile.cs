@@ -7,7 +7,7 @@ namespace Nihilism {
 	class NihilismProjectile : GlobalProjectile {
 		public override bool? CanUseGrapple( int projType, Player player ) {
 			var mymod = (NihilismMod)this.mod;
-			var myworld = mymod.GetModWorld<NihilismWorld>();
+			var myworld = ModContent.GetInstance<NihilismWorld>();
 			if( myworld.Logic == null ) { return null; }
 
 			if( !myworld.Logic.AreItemFiltersEnabled() ) {

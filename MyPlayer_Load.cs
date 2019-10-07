@@ -6,7 +6,7 @@ namespace Nihilism {
 	partial class NihilismPlayer : ModPlayer {
 		internal void OnEnterWorldOnSingle() {
 			var mymod = (NihilismMod)this.mod;
-			var myworld = this.mod.GetModWorld<NihilismWorld>();
+			var myworld = ModContent.GetInstance<NihilismWorld>();
 
 			myworld.Logic.PostFiltersLoad();
 

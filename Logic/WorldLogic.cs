@@ -4,6 +4,7 @@ using HamstarHelpers.Services.Messages.Inbox;
 using Nihilism.Data;
 using Nihilism.NetProtocol;
 using Terraria;
+using Terraria.ModLoader;
 
 
 namespace Nihilism.Logic {
@@ -50,7 +51,7 @@ namespace Nihilism.Logic {
 				if( Main.netMode == 2 ) { return; }
 
 				var mymod = NihilismMod.Instance;
-				var myworld = mymod.GetModWorld<NihilismWorld>();
+				var myworld = ModContent.GetInstance<NihilismWorld>();
 
 				if( !myworld.Logic.DataAccess.IsActive() ) {
 					string msg;

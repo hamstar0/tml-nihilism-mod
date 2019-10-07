@@ -35,9 +35,9 @@ namespace Nihilism {
 
 		public override void PostDrawInInventory( Item item, SpriteBatch sb, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale ) {
 			var mymod = (NihilismMod)this.mod;
-			var myworld = mymod.GetModWorld<NihilismWorld>();
+			var myworld = ModContent.GetInstance<NihilismWorld>();
 			if( myworld.Logic == null ) {
-				LogHelpers.Warn( "Logic not loaded." );
+				LogHelpers.WarnOnce( "Logic not loaded." );
 				return;
 			}
 			

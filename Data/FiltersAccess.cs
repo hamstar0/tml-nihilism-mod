@@ -1,6 +1,7 @@
 ﻿using HamstarHelpers.Helpers.Debug;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.ModLoader;
 
 
 namespace Nihilism.Data {
@@ -17,11 +18,11 @@ namespace Nihilism.Data {
 
 				if( mymod.InstancedFilters ) {
 					if( this.ConfigCache == null ) {
-						this.ConfigCache = (NihilismFilterConfig)mymod.GetConfig<NihilismFilterConfig>().Clone();
+						this.ConfigCache = (NihilismFilterConfig)ModContent.GetInstance<NihilismFilterConfig>().Clone();
 					}
 					return this.ConfigCache;
 				} else {
-					return mymod.GetConfig<NihilismFilterConfig>();
+					return ModContent.GetInstance<NihilismFilterConfig>();
 				}
 			}
 		}

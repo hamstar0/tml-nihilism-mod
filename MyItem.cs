@@ -13,9 +13,9 @@ namespace Nihilism {
 	partial class NihilismItem : GlobalItem {
 		public override bool CanUseItem( Item item, Player player ) {
 			var mymod = (NihilismMod)this.mod;
-			var myworld = mymod.GetModWorld<NihilismWorld>();
+			var myworld = ModContent.GetInstance<NihilismWorld>();
 			if( myworld.Logic == null ) {
-				LogHelpers.Warn( "Logic not loaded." );
+				LogHelpers.WarnOnce( "Logic not loaded." );
 				return base.CanUseItem( item, player );
 			}
 			
@@ -42,9 +42,9 @@ namespace Nihilism {
 
 		public override bool CanRightClick( Item item ) {
 			var mymod = (NihilismMod)this.mod;
-			var myworld = mymod.GetModWorld<NihilismWorld>();
+			var myworld = ModContent.GetInstance<NihilismWorld>();
 			if( myworld.Logic == null ) {
-				LogHelpers.Warn( "Logic not loaded." );
+				LogHelpers.WarnOnce( "Logic not loaded." );
 				return base.CanRightClick( item );
 			}
 
@@ -62,9 +62,9 @@ namespace Nihilism {
 
 		public override bool AltFunctionUse( Item item, Player player ) {
 			var mymod = (NihilismMod)this.mod;
-			var myworld = mymod.GetModWorld<NihilismWorld>();
+			var myworld = ModContent.GetInstance<NihilismWorld>();
 			if( myworld.Logic == null ) {
-				LogHelpers.Warn( "Logic not loaded." );
+				LogHelpers.WarnOnce( "Logic not loaded." );
 				return base.AltFunctionUse( item, player );
 			}
 
@@ -82,9 +82,9 @@ namespace Nihilism {
 
 		public override bool ConsumeItem( Item item, Player player ) {
 			var mymod = (NihilismMod)this.mod;
-			var myworld = mymod.GetModWorld<NihilismWorld>();
+			var myworld = ModContent.GetInstance<NihilismWorld>();
 			if( myworld.Logic == null ) {
-				LogHelpers.Warn( "Logic not loaded." );
+				LogHelpers.WarnOnce( "Logic not loaded." );
 				return base.ConsumeItem( item, player );
 			}
 
@@ -102,9 +102,9 @@ namespace Nihilism {
 
 		public override bool ConsumeAmmo( Item item, Player player ) {
 			var mymod = (NihilismMod)this.mod;
-			var myworld = mymod.GetModWorld<NihilismWorld>();
+			var myworld = ModContent.GetInstance<NihilismWorld>();
 			if( myworld.Logic == null ) {
-				LogHelpers.Warn( "Logic not loaded." );
+				LogHelpers.WarnOnce( "Logic not loaded." );
 				return base.ConsumeAmmo( item, player );
 			}
 
@@ -122,9 +122,9 @@ namespace Nihilism {
 
 		public override bool PreOpenVanillaBag( string context, Player player, int arg ) {
 			var mymod = (NihilismMod)this.mod;
-			var myworld = mymod.GetModWorld<NihilismWorld>();
+			var myworld = ModContent.GetInstance<NihilismWorld>();
 			if( myworld.Logic == null ) {
-				LogHelpers.Warn( "Logic not loaded." );
+				LogHelpers.WarnOnce( "Logic not loaded." );
 				return base.PreOpenVanillaBag( context, player, arg );
 			}
 

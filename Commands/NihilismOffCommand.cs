@@ -22,7 +22,7 @@ namespace Nihilism.Commands {
 		////////////////
 
 		public override void Action( CommandCaller caller, string input, string[] args ) {
-			var myworld = this.mod.GetModWorld<NihilismWorld>();
+			var myworld = ModContent.GetInstance<NihilismWorld>();
 
 			if( NihilismAPI.UnnihilateCurrentWorld() ) {
 				caller.Reply( "Current world is no longer nihilated.", Color.YellowGreen );

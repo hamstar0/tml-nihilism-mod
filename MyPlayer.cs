@@ -57,7 +57,7 @@ namespace Nihilism {
 			}
 			
 			var mymod = (NihilismMod)this.mod;
-			var myworld = mymod.GetModWorld<NihilismWorld>();
+			var myworld = ModContent.GetInstance<NihilismWorld>();
 			if( myworld.Logic == null ) { return; }
 
 			if( myworld.Logic.DataAccess.IsActive() ) {
@@ -74,7 +74,7 @@ namespace Nihilism {
 			var mymod = (NihilismMod)this.mod;
 			if( !mymod.Config.EnableItemEquipsFilters ) { return; }
 
-			var myworld = mymod.GetModWorld<NihilismWorld>();
+			var myworld = ModContent.GetInstance<NihilismWorld>();
 			if( myworld.Logic == null ) { return; }
 			if( !myworld.Logic.DataAccess.IsActive() ) { return; }
 
@@ -107,7 +107,7 @@ namespace Nihilism {
 
 		private void BlockWingSlotIfDisabled( string fieldName ) {
 			var mymod = (NihilismMod)this.mod;
-			var myworld = mymod.GetModWorld<NihilismWorld>();
+			var myworld = ModContent.GetInstance<NihilismWorld>();
 			if( myworld.Logic == null ) { return; }
 
 			ModPlayer mywingplayer = this.player.GetModPlayer( mymod.WingSlotMod, "WingSlotPlayer" );

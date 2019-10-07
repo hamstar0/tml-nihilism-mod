@@ -1,13 +1,13 @@
 ﻿using HamstarHelpers.Classes.Errors;
 using HamstarHelpers.Helpers.TModLoader;
-using Nihilism.Data;
 using System;
+using Terraria.ModLoader;
 
 
 namespace Nihilism {
 	public static partial class NihilismAPI {
 		public static bool NihilateCurrentWorld() {
-			var myworld = NihilismMod.Instance.GetModWorld<NihilismWorld>();
+			var myworld = ModContent.GetInstance<NihilismWorld>();
 			if( myworld.Logic.DataAccess.IsActive() ) {
 				return false;
 			}
@@ -19,7 +19,7 @@ namespace Nihilism {
 		}
 
 		public static bool UnnihilateCurrentWorld() {
-			var myworld = NihilismMod.Instance.GetModWorld<NihilismWorld>();
+			var myworld = ModContent.GetInstance<NihilismWorld>();
 			if( !myworld.Logic.DataAccess.IsActive() ) {
 				return false;
 			}
@@ -47,7 +47,7 @@ namespace Nihilism {
 			if( !LoadHelpers.IsWorldLoaded() ) { throw new ModHelpersException( "World not loaded" ); }
 
 			var mymod = NihilismMod.Instance;
-			var myworld = mymod.GetModWorld<NihilismWorld>();
+			var myworld = ModContent.GetInstance<NihilismWorld>();
 
 			myworld.Logic.DataAccess.SetCurrentFiltersAsDefaults();
 		}
@@ -56,7 +56,7 @@ namespace Nihilism {
 			if( !LoadHelpers.IsWorldLoaded() ) { throw new ModHelpersException( "World not loaded" ); }
 
 			var mymod = NihilismMod.Instance;
-			var myworld = mymod.GetModWorld<NihilismWorld>();
+			var myworld = ModContent.GetInstance<NihilismWorld>();
 
 			myworld.Logic.DataAccess.ResetFiltersFromDefaults();
 		}
@@ -67,7 +67,7 @@ namespace Nihilism {
 			if( !LoadHelpers.IsWorldLoaded() ) { throw new ModHelpersException( "World not loaded" ); }
 
 			var mymod = NihilismMod.Instance;
-			var myworld = mymod.GetModWorld<NihilismWorld>();
+			var myworld = ModContent.GetInstance<NihilismWorld>();
 
 			myworld.Logic.DataAccess.ClearItemBlacklist();
 			myworld.Logic.DataAccess.ClearNpcBlacklist();
