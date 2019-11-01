@@ -121,6 +121,21 @@ namespace Nihilism {
 			myworld.Logic.DataAccess.ClearNpcLootBlacklist2();
 			myworld.Logic.DataAccess.ClearRecipeBlacklist2();
 
+			myworld.Logic.DataAccess.ClearItemGroupBlacklist();
+			myworld.Logic.DataAccess.ClearNpcGroupBlacklist();
+			myworld.Logic.DataAccess.ClearNpcLootGroupBlacklist();
+			myworld.Logic.DataAccess.ClearRecipeGroupBlacklist();
+
+			myworld.Logic.DataAccess.ClearItemGroupWhitelist();
+			myworld.Logic.DataAccess.ClearNpcLootGroupWhitelist();
+			myworld.Logic.DataAccess.ClearNpcGroupWhitelist();
+			myworld.Logic.DataAccess.ClearRecipeGroupWhitelist();
+
+			myworld.Logic.DataAccess.ClearItemGroupBlacklist2();
+			myworld.Logic.DataAccess.ClearNpcGroupBlacklist2();
+			myworld.Logic.DataAccess.ClearNpcLootGroupBlacklist2();
+			myworld.Logic.DataAccess.ClearRecipeGroupBlacklist2();
+
 			if( !localOnly ) {
 				myworld.Logic.SyncDataChanges();
 			}
