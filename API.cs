@@ -6,26 +6,30 @@ using Terraria.ModLoader;
 
 namespace Nihilism {
 	public static partial class NihilismAPI {
-		public static bool NihilateCurrentWorld() {
+		public static bool NihilateCurrentWorld( bool localOnly ) {
 			var myworld = ModContent.GetInstance<NihilismWorld>();
 			if( myworld.Logic.DataAccess.IsActive() ) {
 				return false;
 			}
 
 			myworld.Logic.DataAccess.Activate();
-			myworld.Logic.SyncDataChanges();
+			if( !localOnly ) {
+				myworld.Logic.SyncDataChanges();
+			}
 
 			return true;
 		}
 
-		public static bool UnnihilateCurrentWorld() {
+		public static bool UnnihilateCurrentWorld( bool localOnly ) {
 			var myworld = ModContent.GetInstance<NihilismWorld>();
 			if( !myworld.Logic.DataAccess.IsActive() ) {
 				return false;
 			}
 
 			myworld.Logic.DataAccess.Deactivate();
-			myworld.Logic.SyncDataChanges();
+			if( !localOnly ) {
+				myworld.Logic.SyncDataChanges();
+			}
 
 			return true;
 		}
@@ -43,27 +47,35 @@ namespace Nihilism {
 
 		////////////////
 
-		public static void SetCurrentFiltersAsDefaults() {
+		public static void SetCurrentFiltersAsDefaults( bool localOnly ) {
 			if( !LoadHelpers.IsWorldLoaded() ) { throw new ModHelpersException( "World not loaded" ); }
 
 			var mymod = NihilismMod.Instance;
 			var myworld = ModContent.GetInstance<NihilismWorld>();
 
 			myworld.Logic.DataAccess.SetCurrentFiltersAsDefaults();
+
+			if( !localOnly ) {
+				myworld.Logic.SyncDataChanges();
+			}
 		}
 
-		public static void ResetFiltersFromDefaults() {
+		public static void ResetFiltersFromDefaults( bool localOnly ) {
 			if( !LoadHelpers.IsWorldLoaded() ) { throw new ModHelpersException( "World not loaded" ); }
 
 			var mymod = NihilismMod.Instance;
 			var myworld = ModContent.GetInstance<NihilismWorld>();
 
 			myworld.Logic.DataAccess.ResetFiltersFromDefaults();
+
+			if( !localOnly ) {
+				myworld.Logic.SyncDataChanges();
+			}
 		}
 
 		////
 
-		public static void ClearFiltersForCurrentWorld() {
+		public static void ClearFiltersForCurrentWorld( bool localOnly ) {
 			if( !LoadHelpers.IsWorldLoaded() ) { throw new ModHelpersException( "World not loaded" ); }
 
 			var mymod = NihilismMod.Instance;
@@ -83,6 +95,10 @@ namespace Nihilism {
 			myworld.Logic.DataAccess.ClearNpcBlacklist2();
 			myworld.Logic.DataAccess.ClearNpcLootBlacklist2();
 			myworld.Logic.DataAccess.ClearRecipeBlacklist2();
+
+			if( !localOnly ) {
+				myworld.Logic.SyncDataChanges();
+			}
 		}
 	}
 }

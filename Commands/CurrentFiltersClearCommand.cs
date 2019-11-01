@@ -23,7 +23,7 @@ namespace Nihilism.Commands {
 		////////////////
 
 		public override void Action( CommandCaller caller, string input, string[] args ) {
-			NihilismAPI.ClearFiltersForCurrentWorld();
+			NihilismAPI.ClearFiltersForCurrentWorld( false );
 
 			caller.Reply( "Cleared all blacklists and whitelists.", Color.YellowGreen );
 		}

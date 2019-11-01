@@ -25,7 +25,7 @@ namespace Nihilism.Commands {
 		public override void Action( CommandCaller caller, string input, string[] args ) {
 			var myworld = ModContent.GetInstance<NihilismWorld>();
 
-			if( NihilismAPI.NihilateCurrentWorld() ) {
+			if( NihilismAPI.NihilateCurrentWorld(false) ) {
 				caller.Reply( "Current world is nihilated. Type /nih-off to revert.", Color.YellowGreen );
 			}  else {
 				caller.Reply( "Current world is already nihilated.", Color.Yellow );

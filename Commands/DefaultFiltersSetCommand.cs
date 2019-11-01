@@ -22,7 +22,7 @@ namespace Nihilism.Commands {
 		////////////////
 
 		public override void Action( CommandCaller caller, string input, string[] args ) {
-			NihilismAPI.SetCurrentFiltersAsDefaults();
+			NihilismAPI.SetCurrentFiltersAsDefaults(false);
 
 			caller.Reply( "Current world's filters as the new defaults.", Color.YellowGreen );
 		}

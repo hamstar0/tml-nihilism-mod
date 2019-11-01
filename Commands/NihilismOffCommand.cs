@@ -24,7 +24,7 @@ namespace Nihilism.Commands {
 		public override void Action( CommandCaller caller, string input, string[] args ) {
 			var myworld = ModContent.GetInstance<NihilismWorld>();
 
-			if( NihilismAPI.UnnihilateCurrentWorld() ) {
+			if( NihilismAPI.UnnihilateCurrentWorld(false) ) {
 				caller.Reply( "Current world is no longer nihilated.", Color.YellowGreen );
 			} else {
 				caller.Reply( "Current world is already unnihilated.", Color.Yellow );
