@@ -34,19 +34,19 @@ namespace Nihilism {
 		////////////////
 
 		public override void PostDrawInInventory( Item item, SpriteBatch sb, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale ) {
+			if( item == null || item.IsAir ) { return; }
+
 			var mymod = (NihilismMod)this.mod;
 			var myworld = ModContent.GetInstance<NihilismWorld>();
 			if( myworld.Logic == null ) {
 				LogHelpers.WarnOnce( "Logic not loaded." );
 				return;
 			}
-			
+
 			if( !myworld.Logic.AreItemFiltersEnabled() ) {
 				return;
 			}
 			
-			if( item == null || item.IsAir ) { return; }
-
 			bool _;
 			if( !myworld.Logic.DataAccess.IsItemEnabled( item, out _, out _ ) ) {
 				float posX = position.X + (((float)frame.Width / 2f) * scale) - (((float)mymod.DisabledItemTex.Width / 2f) * scale);

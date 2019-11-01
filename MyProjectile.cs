@@ -1,4 +1,5 @@
-﻿using HamstarHelpers.Helpers.Players;
+﻿using HamstarHelpers.Helpers.Debug;
+using HamstarHelpers.Helpers.Players;
 using Terraria;
 using Terraria.ModLoader;
 

@@ -88,10 +88,26 @@ namespace Nihilism.Data {
 		
 		public void OutputFormattedFilterData() {
 			Main.NewText( "Is nihilated: " + this.FilterConfig.IsActive );
-			Main.NewText( "Items BL: " + this.FilterConfig.ItemBlacklist.Count + ", WL count: " + this.FilterConfig.ItemWhitelist.Count );
-			Main.NewText( "Recipes BL: " + this.FilterConfig.RecipeBlacklist.Count + ", WL count: " + this.FilterConfig.RecipeWhitelist.Count );
-			Main.NewText( "NPCs BL: " + this.FilterConfig.NpcBlacklist.Count + ", WL count: " + this.FilterConfig.NpcWhitelist.Count );
-			Main.NewText( "Loot BL: " + this.FilterConfig.NpcLootBlacklist.Count + ", WL count: " + this.FilterConfig.NpcLootWhitelist.Count );
+			Main.NewText( "Items BL: "
+				+ this.FilterConfig.ItemBlacklist.Count + "+"
+				+ this.FilterConfig.ItemGroupBlacklist.Count + ", WL count: "
+				+ this.FilterConfig.ItemWhitelist.Count + "+"
+				+ this.FilterConfig.ItemGroupWhitelist.Count );
+			Main.NewText( "Recipes BL: "
+				+ this.FilterConfig.RecipeBlacklist.Count + "+"
+				+ this.FilterConfig.RecipeGroupBlacklist.Count + ", WL count: "
+				+ this.FilterConfig.RecipeWhitelist.Count + "+"
+				+ this.FilterConfig.RecipeGroupWhitelist.Count );
+			Main.NewText( "NPCs BL: "
+				+ this.FilterConfig.NpcBlacklist.Count + "+"
+				+ this.FilterConfig.NpcGroupBlacklist.Count + ", WL count: "
+				+ this.FilterConfig.NpcWhitelist.Count + "+"
+				+ this.FilterConfig.NpcGroupWhitelist.Count );
+			Main.NewText( "Loot BL: "
+				+ this.FilterConfig.NpcLootGroupBlacklist.Count + "+"
+				+ this.FilterConfig.NpcLootBlacklist.Count + ", WL count: "
+				+ this.FilterConfig.NpcLootGroupWhitelist.Count + "+"
+				+ this.FilterConfig.NpcLootWhitelist.Count );
 
 			LogHelpers.Log( string.Join("\n", this.GetFormattedFilterData()) );
 		}
