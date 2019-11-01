@@ -1,12 +1,12 @@
 ﻿using HamstarHelpers.Classes.Errors;
 using HamstarHelpers.Helpers.Debug;
-using HamstarHelpers.Helpers.Items;
 using HamstarHelpers.Helpers.TModLoader.Mods;
 using HamstarHelpers.Services.Debug.DataDumper;
 using HamstarHelpers.Services.EntityGroups;
 using Microsoft.Xna.Framework.Graphics;
 using Nihilism.Data;
 using System;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -20,16 +20,18 @@ namespace Nihilism {
 
 		////////////////
 
+		internal Mod WingSlotMod = null;
+		internal IList<(float, Action<bool>)> SyncOrWorldLoadActions = new List<(float, Action<bool>)>();
+
+
+		////
+
 		public NihilismConfig Config => ModContent.GetInstance<NihilismConfig>();
 
 
 		public Texture2D DisabledItemTex { get; private set; }
 
 		public bool InstancedFilters { get; internal set; }
-
-		////
-
-		internal Mod WingSlotMod = null;
 
 
 
@@ -91,6 +93,15 @@ namespace Nihilism {
 
 		public override object Call( params object[] args ) {
 			return ModBoilerplateHelpers.HandleModCall( typeof( NihilismAPI ), args );
+		}
+
+
+		////////////////
+
+		public void RunSyncOrWorldLoadActions( bool isSync ) {
+			foreach( (float priority, Action<bool> action) in this.SyncOrWorldLoadActions ) {
+				action( isSync );
+			}
 		}
 	}
 }

@@ -6,6 +6,31 @@ using Terraria.ModLoader;
 
 namespace Nihilism {
 	public static partial class NihilismAPI {
+		public static void OnSyncOrWorldLoad( Action<bool> action, float priority ) {
+			var mymod = NihilismMod.Instance;
+			int count = mymod.SyncOrWorldLoadActions.Count;
+
+			if( priority >= 1f ) {
+				mymod.SyncOrWorldLoadActions.Add( (1f, action) );
+			} else if( priority <= 0f ) {
+				mymod.SyncOrWorldLoadActions.Insert( 0, (0f, action) );
+			} else {
+				for( int i = 0; i < count; i++ ) {
+					(float priority, Action<bool> action) entry = mymod.SyncOrWorldLoadActions[i];
+
+					if( priority >= entry.priority ) {
+						mymod.SyncOrWorldLoadActions.Insert( i+1, (priority, action) );
+						return;
+					}
+				}
+
+				mymod.SyncOrWorldLoadActions.Add( (priority, action) );
+			}
+		}
+
+
+		////////////////
+
 		public static bool NihilateCurrentWorld( bool localOnly ) {
 			var myworld = ModContent.GetInstance<NihilismWorld>();
 			if( myworld.Logic.DataAccess.IsActive() ) {

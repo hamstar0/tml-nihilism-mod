@@ -58,6 +58,8 @@ namespace Nihilism.NetProtocol {
 			var myworld = ModContent.GetInstance<NihilismWorld>();
 
 			myworld.Logic.DataAccess.Take( this.Filters );
+
+			mymod.RunSyncOrWorldLoadActions( true );
 		}
 
 		////////////////

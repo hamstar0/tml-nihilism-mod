@@ -12,6 +12,8 @@ namespace Nihilism {
 
 			this.FinishModSettingsSync();
 			this.FinishFiltersSync();
+
+			mymod.RunSyncOrWorldLoadActions( false );
 		}
 
 		internal void OnEnterWorldOnClient() {
@@ -19,8 +21,12 @@ namespace Nihilism {
 		}
 
 		internal void OnEnterWorldOnServer() {
+			var mymod = (NihilismMod)this.mod;
+
 			this.IsModSettingsSynced = true;
 			this.IsFiltersSynced = true;
+
+			mymod.RunSyncOrWorldLoadActions( false );
 		}
 
 
