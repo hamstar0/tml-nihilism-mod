@@ -3,7 +3,7 @@ using Terraria;
 
 
 namespace Nihilism.Data {
-	partial class NihilismFilterAccess {
+	partial class NihilismFiltersAccess {
 		public bool IsItemEnabled( Item item, out bool isBlackList, out bool isGroup ) {
 			isBlackList = this.IsItemBlacklisted( item, out isGroup );
 

@@ -6,7 +6,7 @@ using Terraria.ModLoader.Config;
 
 
 namespace Nihilism.Data {
-	partial class NihilismFilterAccess {
+	partial class NihilismFiltersAccess {
 		internal bool IsItemBlacklisted( Item item, out bool isGroup ) {
 			if( this.FilterConfig.ItemBlacklist.Contains( new ItemDefinition(item.type) ) ) {
 				isGroup = false;

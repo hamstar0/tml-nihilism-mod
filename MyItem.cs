@@ -1,4 +1,5 @@
 ﻿using HamstarHelpers.Helpers.Debug;
+using HamstarHelpers.Helpers.DotNET;
 using HamstarHelpers.Helpers.Items;
 using HamstarHelpers.Helpers.Items.Attributes;
 using HamstarHelpers.Helpers.Players;
@@ -139,7 +140,7 @@ namespace Nihilism {
 					if( arg != 0 ) { return item.type == arg; }
 					return true;
 				} )
-				.Select( item => item.type )
+				.SafeSelect( item => item.type )
 				.ToList();
 
 			if( containers.Count == 0 ) {

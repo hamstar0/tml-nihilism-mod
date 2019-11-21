@@ -23,24 +23,24 @@ namespace Nihilism.Logic {
 
 
 		////////////////
-		public NihilismFilterAccess DataAccess { get; private set; }
+		public NihilismFiltersAccess DataAccess { get; private set; }
 
 
 		////////////////
 
 		public WorldLogic() {
-			this.DataAccess = new NihilismFilterAccess();
+			this.DataAccess = new NihilismFiltersAccess();
 		}
 
 
 		////////////////
 		
 		public void LoadWorldData() {
-			//this.DataAccess.Load();
+			this.DataAccess.Load();
 		}
 
 		public void SaveWorldData() {
-			//this.DataAccess.Save();
+			this.DataAccess.Save();
 		}
 		
 

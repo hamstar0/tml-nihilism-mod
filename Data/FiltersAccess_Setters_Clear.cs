@@ -1,5 +1,5 @@
 ﻿namespace Nihilism.Data {
-	partial class NihilismFilterAccess {
+	partial class NihilismFiltersAccess {
 		public void ClearItemBlacklist() {
 			this.FilterConfig.ItemBlacklist.Clear();
 		}

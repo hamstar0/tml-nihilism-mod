@@ -1,48 +1,66 @@
 ﻿using HamstarHelpers.Helpers.Debug;
+using HamstarHelpers.Helpers.Misc;
+using HamstarHelpers.Helpers.World;
 using System.Collections.Generic;
 using Terraria;
-using Terraria.ModLoader;
 
 
 namespace Nihilism.Data {
-	partial class NihilismFilterAccess {
+	partial class NihilismFiltersAccess {
 		private readonly object MyLock = new object();
 
 
 
 		////////////////
 
-		private NihilismFilterConfig FilterConfig {
+		private NihilismFilters FilterConfig {
 			get {
 				var mymod = NihilismMod.Instance;
 
 				if( mymod.InstancedFilters ) {
-					if( this.ConfigCache == null ) {
-						this.ConfigCache = (NihilismFilterConfig)ModContent.GetInstance<NihilismFilterConfig>().Clone();
+					if( this.FiltersSeparateCopy == null ) {
+						this.FiltersSeparateCopy = (NihilismFilters)this.Filters.Clone();
 					}
-					return this.ConfigCache;
+					return this.FiltersSeparateCopy;
 				} else {
-					return ModContent.GetInstance<NihilismFilterConfig>();
+					return this.Filters;
 				}
 			}
 		}
 
-		private NihilismFilterConfig ConfigCache = null;
+		private NihilismFilters Filters = new NihilismFilters();
+		private NihilismFilters FiltersSeparateCopy = null;
 
 
 
 		////////////////
 
-		public NihilismFilterAccess() { }
+		public NihilismFiltersAccess() { }
 
 
 		////////////////
 
-		internal void Give( ref NihilismFilterConfig data ) {
+		internal void Load() {
+			string worldUid = WorldHelpers.GetUniqueIdForCurrentWorld( true );
+
+			var filters = ModCustomDataFileHelpers.LoadJson<NihilismFilters>( NihilismMod.Instance, worldUid );
+			this.Filters = filters != null ? filters : this.Filters;
+		}
+
+		internal void Save() {
+			string worldUid = WorldHelpers.GetUniqueIdForCurrentWorld( true );
+
+			ModCustomDataFileHelpers.SaveAsJson( NihilismMod.Instance, worldUid, true, this.Filters );
+		}
+
+
+		////////////////
+
+		internal void Give( ref NihilismFilters data ) {
 			data = this.FilterConfig;
 		}
 
-		internal void Take( NihilismFilterConfig data ) {
+		internal void Take( NihilismFilters data ) {
 			this.FilterConfig.CopyFrom( data );
 		}
 
@@ -78,11 +96,17 @@ namespace Nihilism.Data {
 		public IEnumerable<string> GetFormattedFilterData( string subspace="  " ) {
 			return new string[] { "Is nihilated: " + this.FilterConfig.IsActive,
 				"Items BL:\n  " + string.Join( ", ", this.FilterConfig.ItemBlacklist ),
+				"Item Groups BL:\n  " + string.Join( ", ", this.FilterConfig.ItemGroupBlacklist ),
 				"Items WL:\n  " + string.Join( ", ", this.FilterConfig.ItemWhitelist ),
+				"Items Groups WL:\n  " + string.Join( ", ", this.FilterConfig.ItemGroupWhitelist ),
 				"Recipes BL:\n  " + string.Join( ", ", this.FilterConfig.RecipeBlacklist ),
+				"Recipes Groups BL:\n  " + string.Join( ", ", this.FilterConfig.RecipeGroupBlacklist ),
 				"Recipes WL:\n  " + string.Join( ", ", this.FilterConfig.RecipeWhitelist ),
+				"Recipes Groups WL:\n  " + string.Join( ", ", this.FilterConfig.RecipeGroupWhitelist ),
 				"NPCs BL:\n  " + string.Join( ", ", this.FilterConfig.NpcBlacklist ),
-				"Loot WL:\n  " + string.Join( ", ", this.FilterConfig.NpcLootWhitelist )
+				"NPCs Groups BL:\n  " + string.Join( ", ", this.FilterConfig.NpcGroupBlacklist ),
+				"Loot WL:\n  " + string.Join( ", ", this.FilterConfig.NpcLootWhitelist ),
+				"Loot Groups WL:\n  " + string.Join( ", ", this.FilterConfig.NpcLootGroupWhitelist )
 			};
 		}
 		

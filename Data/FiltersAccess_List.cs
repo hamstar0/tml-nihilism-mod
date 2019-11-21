@@ -6,7 +6,7 @@ using Terraria;
 
 
 namespace Nihilism.Data {
-	partial class NihilismFilterAccess {
+	partial class NihilismFiltersAccess {
 		public IList<string> GetItemBlacklistGroupEntriesForItem( Item item ) {
 			IList<string> groups = new List<string>();
 

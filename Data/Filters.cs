@@ -3,12 +3,7 @@ using Terraria.ModLoader.Config;
 
 
 namespace Nihilism.Data {
-	partial class NihilismFilterConfig : ModConfig {
-		public override ConfigScope Mode => ConfigScope.ServerSide;
-
-
-		////
-
+	partial class NihilismFilters {
 		public bool IsActive = false;
 
 		public HashSet<ItemDefinition> ItemBlacklist = new HashSet<ItemDefinition> { };
@@ -45,12 +40,12 @@ namespace Nihilism.Data {
 
 		////////////////
 
-		public NihilismFilterConfig() {
+		public NihilismFilters() {
 			this.ResetFiltersFromDefaults();
 		}
 
-		public override ModConfig Clone() {
-			var clone = (NihilismFilterConfig)base.Clone();
+		public NihilismFilters Clone() {
+			var clone = (NihilismFilters)base.MemberwiseClone();
 
 			clone.ItemBlacklist = new HashSet<ItemDefinition>( this.ItemBlacklist );
 			clone.RecipeBlacklist = new HashSet<ItemDefinition>( this.RecipeBlacklist );
@@ -88,7 +83,7 @@ namespace Nihilism.Data {
 
 		////////////////
 
-		internal void CopyFrom( NihilismFilterConfig copy ) {
+		internal void CopyFrom( NihilismFilters copy ) {
 			this.IsActive = copy.IsActive;
 			this.ItemBlacklist = new HashSet<ItemDefinition>( copy.ItemBlacklist );
 			this.RecipeBlacklist = new HashSet<ItemDefinition>( copy.RecipeBlacklist );

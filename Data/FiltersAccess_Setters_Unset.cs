@@ -2,7 +2,7 @@
 
 
 namespace Nihilism.Data {
-	partial class NihilismFilterAccess {
+	partial class NihilismFiltersAccess {
 		public void UnsetItemBlacklistEntry( ItemDefinition itemDef ) {
 			this.FilterConfig.ItemBlacklist.Remove( itemDef );
 		}

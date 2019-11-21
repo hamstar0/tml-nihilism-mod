@@ -75,7 +75,6 @@ namespace Nihilism {
 		public static void SetCurrentFiltersAsDefaults( bool localOnly ) {
 			if( !LoadHelpers.IsWorldLoaded() ) { throw new ModHelpersException( "World not loaded" ); }
 
-			var mymod = NihilismMod.Instance;
 			var myworld = ModContent.GetInstance<NihilismWorld>();
 
 			myworld.Logic.DataAccess.SetCurrentFiltersAsDefaults();
@@ -88,7 +87,6 @@ namespace Nihilism {
 		public static void ResetFiltersFromDefaults( bool localOnly ) {
 			if( !LoadHelpers.IsWorldLoaded() ) { throw new ModHelpersException( "World not loaded" ); }
 
-			var mymod = NihilismMod.Instance;
 			var myworld = ModContent.GetInstance<NihilismWorld>();
 
 			myworld.Logic.DataAccess.ResetFiltersFromDefaults();
@@ -103,7 +101,6 @@ namespace Nihilism {
 		public static void ClearFiltersForCurrentWorld( bool localOnly ) {
 			if( !LoadHelpers.IsWorldLoaded() ) { throw new ModHelpersException( "World not loaded" ); }
 
-			var mymod = NihilismMod.Instance;
 			var myworld = ModContent.GetInstance<NihilismWorld>();
 
 			myworld.Logic.DataAccess.ClearItemBlacklist();

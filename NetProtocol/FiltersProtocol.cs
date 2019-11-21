@@ -24,7 +24,7 @@ namespace Nihilism.NetProtocol {
 
 		////////////////
 
-		public NihilismFilterConfig Filters;
+		public NihilismFilters Filters;
 
 
 

@@ -3,7 +3,7 @@ using Terraria.ModLoader.Config;
 
 
 namespace Nihilism.Data {
-	partial class NihilismFilterAccess {
+	partial class NihilismFiltersAccess {
 		public void SetItemBlacklistEntry( ItemDefinition itemDef ) {
 			this.FilterConfig.ItemBlacklist.Add( itemDef );
 		}
