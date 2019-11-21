@@ -6,6 +6,8 @@ namespace Nihilism.Data {
 	partial class NihilismFilters {
 		public bool IsActive = false;
 
+		////
+
 		public HashSet<ItemDefinition> ItemBlacklist = new HashSet<ItemDefinition> { };
 		public HashSet<ItemDefinition> RecipeBlacklist = new HashSet<ItemDefinition> { };
 		public HashSet<NPCDefinition> NpcBlacklist = new HashSet<NPCDefinition> { };
