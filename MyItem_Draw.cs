@@ -1,6 +1,7 @@
 ﻿using HamstarHelpers.Helpers.Debug;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Nihilism.Data;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ModLoader;
@@ -11,7 +12,7 @@ namespace Nihilism {
 		public override void ModifyTooltips( Item item, List<TooltipLine> tooltips ) {
 			var mymod = (NihilismMod)this.mod;
 
-			if( mymod.Config.DebugModePerItemInfo ) {
+			if( NihilismConfig.Instance.DebugModePerItemInfo ) {
 				IList<string> blGrps = NihilismAPI.GetItemBlacklistGroupsForItem( item );
 				IList<string> bl2Grps = NihilismAPI.GetItemBlacklist2GroupsForItem( item );
 				IList<string> wlGrps = NihilismAPI.GetItemWhitelistGroupsForItem( item );

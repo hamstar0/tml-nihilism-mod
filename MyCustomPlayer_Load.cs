@@ -1,11 +1,12 @@
-﻿using Nihilism.NetProtocol;
+﻿using HamstarHelpers.Classes.PlayerData;
+using Nihilism.NetProtocol;
 using Terraria.ModLoader;
 
 
 namespace Nihilism {
-	partial class NihilismPlayer : ModPlayer {
-		internal void OnEnterWorldOnSingle() {
-			var mymod = (NihilismMod)this.mod;
+	partial class NihilismCustomPlayer : CustomPlayerData {
+		private void OnEnterWorldOnSingle() {
+			var mymod = NihilismMod.Instance;
 			var myworld = ModContent.GetInstance<NihilismWorld>();
 
 			myworld.Logic.PostFiltersLoad();
@@ -16,12 +17,12 @@ namespace Nihilism {
 			mymod.RunSyncOrWorldLoadActions( false );
 		}
 
-		internal void OnEnterWorldOnClient() {
+		private void OnEnterWorldOnClient() {
 			FiltersProtocol.SyncToMe();
 		}
 
-		internal void OnEnterWorldOnServer() {
-			var mymod = (NihilismMod)this.mod;
+		private void OnEnterWorldOnServer() {
+			var mymod = NihilismMod.Instance;
 
 			this.IsModSettingsSynced = true;
 			this.IsFiltersSynced = true;
@@ -32,7 +33,7 @@ namespace Nihilism {
 
 		////////////////
 
-		internal void FinishModSettingsSync() {
+		private void FinishModSettingsSync() {
 			this.IsModSettingsSynced = true;
 		}
 

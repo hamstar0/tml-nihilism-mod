@@ -1,15 +1,29 @@
-﻿using System;
+﻿using HamstarHelpers.Services.Configs;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using Terraria.ModLoader.Config;
 
 
 namespace Nihilism.Data {
-	public class NihilismConfig : ModConfig {
+	public class NihilismConfig : StackableModConfig {
+		public static NihilismConfig Instance {
+			get {
+				if( !NihilismMod.Instance.InstancedFilters ) {
+					return ModConfigStack.GetMergedConfigs<NihilismConfig>();
+				} else {
+					return ModConfigStack.GetMergedStackedConfigs<NihilismConfig>();
+				}
+			}
+		}
+
+		////
+
 		public override ConfigScope Mode => ConfigScope.ServerSide;
 
 
-		////
+
+		////////////////
 
 		[Header( "Chat commands (type /help in-game and scroll chat for more info):\n"+
 			"  /nih-on, /nih-off: Enables or disables filters for the current world.\n"+

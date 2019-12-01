@@ -21,13 +21,11 @@ namespace Nihilism {
 		////////////////
 
 		internal Mod WingSlotMod = null;
+
 		internal IList<(float, Action<bool>)> SyncOrWorldLoadActions = new List<(float, Action<bool>)>();
 
 
 		////
-
-		public NihilismConfig Config => ModContent.GetInstance<NihilismConfig>();
-
 
 		public Texture2D DisabledItemTex { get; private set; }
 
@@ -52,7 +50,7 @@ namespace Nihilism {
 
 			this.WingSlotMod = ModLoader.GetMod( "WingSlot" );
 			if( this.WingSlotMod == null ) {
-				if( this.Config.DebugModeInfo ) {
+				if( NihilismConfig.Instance.DebugModeInfo ) {
 					LogHelpers.Alert( "Wing Mod not detected; ignoring wing slots..." );
 				}
 			} else {

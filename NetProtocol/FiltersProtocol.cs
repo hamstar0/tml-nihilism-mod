@@ -1,6 +1,5 @@
 ﻿using HamstarHelpers.Classes.Errors;
 using HamstarHelpers.Classes.Protocols.Packet.Interfaces;
-using HamstarHelpers.Helpers.TModLoader;
 using Nihilism.Data;
 using Terraria;
 using Terraria.ModLoader;
@@ -71,13 +70,12 @@ namespace Nihilism.NetProtocol {
 		protected override void ReceiveOnClient() {
 			this.ReceiveOnAny();
 
-			var mymod = NihilismMod.Instance;
 			var myworld = ModContent.GetInstance<NihilismWorld>();
-			var myplayer = (NihilismPlayer)TmlHelpers.SafelyGetModPlayer( Main.LocalPlayer, mymod, "NihilismPlayer" );
+			var customPlrData = NihilismCustomPlayer.GetPlayerData<NihilismCustomPlayer>( Main.myPlayer );
 
 			myworld.Logic.PostFiltersLoad();
 
-			myplayer.FinishFiltersSync();
+			customPlrData.FinishFiltersSync();
 		}
 	}
 }
