@@ -133,35 +133,36 @@ namespace Nihilism {
 				return base.PreOpenVanillaBag( context, player, arg );
 			}
 
-			IList<int> containers = player.inventory
-				.Where( ( item ) => {
+			IList<Item> containerInvIndexes = player.inventory
+				.SafeWhere( ( item ) => {
 					if( item == null || item.IsAir ) { return false; }
 					if( ItemAttributeHelpers.GetVanillaContainerContext( item ) != context ) { return false; }
 					if( arg != 0 ) { return item.type == arg; }
 					return true;
 				} )
-				.SafeSelect( item => item.type )
 				.ToList();
 
-			if( containers.Count == 0 ) {
-				LogHelpers.Alert( "Unknown bad of context " + context + ", " + arg );
+			if( containerInvIndexes.Count == 0 ) {
+				LogHelpers.Alert( "Unknown bag of context " + context + ", " + arg );
 				return base.PreOpenVanillaBag( context, player, arg );	// Shouldn't happen?
 			}
 
-			Item container = player.inventory[ containers[0] ];
-			bool isAir = container.IsAir;
+			Item containerItem = containerInvIndexes.FirstOrDefault();
+			bool isAir = containerItem?.IsAir ?? true;
 
 			if( isAir ) {
-				int containerType = arg != 0 ? arg : ItemGroupIdentityHelpers.GetVanillaContainerItemTypes( context )[0];
-				container = new Item();
-				container.SetDefaults( containerType, true );
+				int containerType = arg != 0
+					? arg
+					: ItemGroupIdentityHelpers.GetVanillaContainerItemTypes( context )[0];
+				containerItem = new Item();
+				containerItem.SetDefaults( containerType, true );
 			}
 
 			bool _;
-			bool canOpen = myworld.Logic.DataAccess.IsItemEnabled( container, out _, out _ );
+			bool canOpen = myworld.Logic.DataAccess.IsItemEnabled( containerItem, out _, out _ );
 
 			if( !canOpen ) {
-				if( containers.Count > 1 || isAir ) {
+				if( containerInvIndexes.Count > 1 || isAir ) {
 					Main.NewText( "Due to a tModLoader bug, opening blacklisted bags and boxes will sometimes consume the item. Sorry. :(", Color.Red );
 				}
 				return false;
