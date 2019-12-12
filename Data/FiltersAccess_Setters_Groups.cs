@@ -39,19 +39,19 @@ namespace Nihilism.Data {
 
 		////
 
-		public void SetItemGroupBlacklist2Entry( string groupName ) {
+		public void SetItemBlacklist2GroupEntry( string groupName ) {
 			this.FilterConfig.ItemGroupBlacklist2.Add( groupName );
 		}
 
-		public void SetRecipeGroupBlacklist2Entry( string groupName ) {
+		public void SetRecipeBlacklist2GroupEntry( string groupName ) {
 			this.FilterConfig.RecipeGroupBlacklist2.Add( groupName );
 		}
 
-		public void SetNpcGroupBlacklist2Entry( string groupName ) {
+		public void SetNpcBlacklist2GroupEntry( string groupName ) {
 			this.FilterConfig.NpcGroupBlacklist2.Add( groupName );
 		}
 
-		public void SetNpcLootGroupBlacklist2Entry( string groupName ) {
+		public void SetNpcLootBlacklist2GroupEntry( string groupName ) {
 			this.FilterConfig.NpcLootGroupBlacklist2.Add( groupName );
 		}
 	}
