@@ -13,22 +13,22 @@ namespace Nihilism.Data {
 
 		////////////////
 
-		private NihilismFilters FilterConfig {
+		private NihilismFilters Filters {
 			get {
 				var mymod = NihilismMod.Instance;
 
 				if( mymod.InstancedFilters ) {
 					if( this.FiltersSeparateCopy == null ) {
-						this.FiltersSeparateCopy = (NihilismFilters)this.Filters.Clone();
+						this.FiltersSeparateCopy = (NihilismFilters)this.FiltersInternalCopy.Clone();
 					}
 					return this.FiltersSeparateCopy;
 				} else {
-					return this.Filters;
+					return this.FiltersInternalCopy;
 				}
 			}
 		}
 
-		private NihilismFilters Filters = new NihilismFilters();
+		private NihilismFilters FiltersInternalCopy = new NihilismFilters();
 		private NihilismFilters FiltersSeparateCopy = null;
 
 
@@ -44,94 +44,94 @@ namespace Nihilism.Data {
 			string worldUid = WorldHelpers.GetUniqueIdForCurrentWorld( true );
 
 			var filters = ModCustomDataFileHelpers.LoadJson<NihilismFilters>( NihilismMod.Instance, worldUid );
-			this.Filters = filters != null ? filters : this.Filters;
+			this.FiltersInternalCopy = filters != null ? filters : this.FiltersInternalCopy;
 		}
 
 		internal void Save() {
 			string worldUid = WorldHelpers.GetUniqueIdForCurrentWorld( true );
 
-			ModCustomDataFileHelpers.SaveAsJson( NihilismMod.Instance, worldUid, true, this.Filters );
+			ModCustomDataFileHelpers.SaveAsJson( NihilismMod.Instance, worldUid, true, this.FiltersInternalCopy );
 		}
 
 
 		////////////////
 
 		internal void Give( ref NihilismFilters data ) {
-			data = this.FilterConfig;
+			data = this.Filters;
 		}
 
 		internal void Take( NihilismFilters data ) {
-			this.FilterConfig.CopyFrom( data );
+			this.Filters.CopyFrom( data );
 		}
 
 
 		////////////////
 
 		public void SetCurrentFiltersAsDefaults() {
-			this.FilterConfig.SetCurrentFiltersAsDefaults();
+			this.Filters.SetCurrentFiltersAsDefaults();
 		}
 
 		public void ResetFiltersFromDefaults() {
-			this.FilterConfig.ResetFiltersFromDefaults();
+			this.Filters.ResetFiltersFromDefaults();
 		}
 
 
 		////////////////
 
 		public bool IsActive() {
-			return this.FilterConfig.IsActive;
+			return this.Filters.IsActive;
 		}
 
 		public void Activate() {
-			this.FilterConfig.IsActive = true;
+			this.Filters.IsActive = true;
 		}
 
 		public void Deactivate() {
-			this.FilterConfig.IsActive = false;
+			this.Filters.IsActive = false;
 		}
 
 
 		////////////////
 
 		public IEnumerable<string> GetFormattedFilterData( string subspace="  " ) {
-			return new string[] { "Is nihilated: " + this.FilterConfig.IsActive,
-				"Items BL:\n  " + string.Join( ", ", this.FilterConfig.ItemBlacklist ),
-				"Item Groups BL:\n  " + string.Join( ", ", this.FilterConfig.ItemGroupBlacklist ),
-				"Items WL:\n  " + string.Join( ", ", this.FilterConfig.ItemWhitelist ),
-				"Items Groups WL:\n  " + string.Join( ", ", this.FilterConfig.ItemGroupWhitelist ),
-				"Recipes BL:\n  " + string.Join( ", ", this.FilterConfig.RecipeBlacklist ),
-				"Recipes Groups BL:\n  " + string.Join( ", ", this.FilterConfig.RecipeGroupBlacklist ),
-				"Recipes WL:\n  " + string.Join( ", ", this.FilterConfig.RecipeWhitelist ),
-				"Recipes Groups WL:\n  " + string.Join( ", ", this.FilterConfig.RecipeGroupWhitelist ),
-				"NPCs BL:\n  " + string.Join( ", ", this.FilterConfig.NpcBlacklist ),
-				"NPCs Groups BL:\n  " + string.Join( ", ", this.FilterConfig.NpcGroupBlacklist ),
-				"Loot WL:\n  " + string.Join( ", ", this.FilterConfig.NpcLootWhitelist ),
-				"Loot Groups WL:\n  " + string.Join( ", ", this.FilterConfig.NpcLootGroupWhitelist )
+			return new string[] { "Is nihilated: " + this.Filters.IsActive,
+				"Items BL:\n  " + string.Join( ", ", this.Filters.ItemBlacklist ),
+				"Item Groups BL:\n  " + string.Join( ", ", this.Filters.ItemGroupBlacklist ),
+				"Items WL:\n  " + string.Join( ", ", this.Filters.ItemWhitelist ),
+				"Items Groups WL:\n  " + string.Join( ", ", this.Filters.ItemGroupWhitelist ),
+				"Recipes BL:\n  " + string.Join( ", ", this.Filters.RecipeBlacklist ),
+				"Recipes Groups BL:\n  " + string.Join( ", ", this.Filters.RecipeGroupBlacklist ),
+				"Recipes WL:\n  " + string.Join( ", ", this.Filters.RecipeWhitelist ),
+				"Recipes Groups WL:\n  " + string.Join( ", ", this.Filters.RecipeGroupWhitelist ),
+				"NPCs BL:\n  " + string.Join( ", ", this.Filters.NpcBlacklist ),
+				"NPCs Groups BL:\n  " + string.Join( ", ", this.Filters.NpcGroupBlacklist ),
+				"Loot WL:\n  " + string.Join( ", ", this.Filters.NpcLootWhitelist ),
+				"Loot Groups WL:\n  " + string.Join( ", ", this.Filters.NpcLootGroupWhitelist )
 			};
 		}
 		
 		public void OutputFormattedFilterData() {
-			Main.NewText( "Is nihilated: " + this.FilterConfig.IsActive );
+			Main.NewText( "Is nihilated: " + this.Filters.IsActive );
 			Main.NewText( "Items BL: "
-				+ this.FilterConfig.ItemBlacklist.Count + "+"
-				+ this.FilterConfig.ItemGroupBlacklist.Count + ", WL count: "
-				+ this.FilterConfig.ItemWhitelist.Count + "+"
-				+ this.FilterConfig.ItemGroupWhitelist.Count );
+				+ this.Filters.ItemBlacklist.Count + "+"
+				+ this.Filters.ItemGroupBlacklist.Count + ", WL count: "
+				+ this.Filters.ItemWhitelist.Count + "+"
+				+ this.Filters.ItemGroupWhitelist.Count );
 			Main.NewText( "Recipes BL: "
-				+ this.FilterConfig.RecipeBlacklist.Count + "+"
-				+ this.FilterConfig.RecipeGroupBlacklist.Count + ", WL count: "
-				+ this.FilterConfig.RecipeWhitelist.Count + "+"
-				+ this.FilterConfig.RecipeGroupWhitelist.Count );
+				+ this.Filters.RecipeBlacklist.Count + "+"
+				+ this.Filters.RecipeGroupBlacklist.Count + ", WL count: "
+				+ this.Filters.RecipeWhitelist.Count + "+"
+				+ this.Filters.RecipeGroupWhitelist.Count );
 			Main.NewText( "NPCs BL: "
-				+ this.FilterConfig.NpcBlacklist.Count + "+"
-				+ this.FilterConfig.NpcGroupBlacklist.Count + ", WL count: "
-				+ this.FilterConfig.NpcWhitelist.Count + "+"
-				+ this.FilterConfig.NpcGroupWhitelist.Count );
+				+ this.Filters.NpcBlacklist.Count + "+"
+				+ this.Filters.NpcGroupBlacklist.Count + ", WL count: "
+				+ this.Filters.NpcWhitelist.Count + "+"
+				+ this.Filters.NpcGroupWhitelist.Count );
 			Main.NewText( "Loot BL: "
-				+ this.FilterConfig.NpcLootGroupBlacklist.Count + "+"
-				+ this.FilterConfig.NpcLootBlacklist.Count + ", WL count: "
-				+ this.FilterConfig.NpcLootGroupWhitelist.Count + "+"
-				+ this.FilterConfig.NpcLootWhitelist.Count );
+				+ this.Filters.NpcLootGroupBlacklist.Count + "+"
+				+ this.Filters.NpcLootBlacklist.Count + ", WL count: "
+				+ this.Filters.NpcLootGroupWhitelist.Count + "+"
+				+ this.Filters.NpcLootWhitelist.Count );
 
 			LogHelpers.Log( string.Join("\n", this.GetFormattedFilterData()) );
 		}

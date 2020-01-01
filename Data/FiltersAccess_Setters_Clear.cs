@@ -1,55 +1,55 @@
 ﻿namespace Nihilism.Data {
 	partial class NihilismFiltersAccess {
 		public void ClearItemBlacklist() {
-			this.FilterConfig.ItemBlacklist.Clear();
+			this.Filters.ItemBlacklist.Clear();
 		}
 
 		public void ClearRecipeBlacklist() {
-			this.FilterConfig.RecipeBlacklist.Clear();
+			this.Filters.RecipeBlacklist.Clear();
 		}
 
 		public void ClearNpcLootBlacklist() {
-			this.FilterConfig.NpcLootBlacklist.Clear();
+			this.Filters.NpcLootBlacklist.Clear();
 		}
 
 		public void ClearNpcBlacklist() {
-			this.FilterConfig.NpcBlacklist.Clear();
+			this.Filters.NpcBlacklist.Clear();
 		}
 
 		/////
 
 		public void ClearItemWhitelist() {
-			this.FilterConfig.ItemWhitelist.Clear();
+			this.Filters.ItemWhitelist.Clear();
 		}
 
 		public void ClearRecipeWhitelist() {
-			this.FilterConfig.RecipeWhitelist.Clear();
+			this.Filters.RecipeWhitelist.Clear();
 		}
 
 		public void ClearNpcLootWhitelist() {
-			this.FilterConfig.NpcLootWhitelist.Clear();
+			this.Filters.NpcLootWhitelist.Clear();
 		}
 
 		public void ClearNpcWhitelist() {
-			this.FilterConfig.NpcWhitelist.Clear();
+			this.Filters.NpcWhitelist.Clear();
 		}
 
 		/////
 
 		public void ClearItemBlacklist2() {
-			this.FilterConfig.ItemBlacklist2.Clear();
+			this.Filters.ItemBlacklist2.Clear();
 		}
 
 		public void ClearRecipeBlacklist2() {
-			this.FilterConfig.RecipeBlacklist2.Clear();
+			this.Filters.RecipeBlacklist2.Clear();
 		}
 
 		public void ClearNpcLootBlacklist2() {
-			this.FilterConfig.NpcLootBlacklist2.Clear();
+			this.Filters.NpcLootBlacklist2.Clear();
 		}
 
 		public void ClearNpcBlacklist2() {
-			this.FilterConfig.NpcBlacklist2.Clear();
+			this.Filters.NpcBlacklist2.Clear();
 		}
 	}
 }
