@@ -43,9 +43,7 @@ namespace Nihilism.Data {
 
 		////////////////
 
-		public NihilismFilters() {
-			this.ResetFiltersFromDefaults();
-		}
+		public NihilismFilters() { }
 
 		public NihilismFilters Clone() {
 			var clone = (NihilismFilters)base.MemberwiseClone();

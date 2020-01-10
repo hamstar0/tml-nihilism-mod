@@ -17,6 +17,12 @@ namespace Nihilism {
 		public static NihilismMod Instance { get; private set; }
 
 
+		////////////////
+
+		public static string GithubUserName => "hamstar0";
+		public static string GithubProjectName => "tml-nihilism-mod";
+
+
 
 		////////////////
 

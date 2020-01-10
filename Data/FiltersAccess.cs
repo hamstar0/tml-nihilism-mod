@@ -15,27 +15,28 @@ namespace Nihilism.Data {
 
 		private NihilismFilters Filters {
 			get {
-				var mymod = NihilismMod.Instance;
-
-				if( mymod.InstancedFilters ) {
-					if( this.FiltersSeparateCopy == null ) {
-						this.FiltersSeparateCopy = (NihilismFilters)this.FiltersInternalCopy.Clone();
+				if( NihilismMod.Instance.InstancedFilters ) {
+					if( this.FiltersNoSaveCopy == null ) {
+						this.FiltersNoSaveCopy = (NihilismFilters)this.FiltersSaveCopy.Clone();
 					}
-					return this.FiltersSeparateCopy;
-				} else {
-					return this.FiltersInternalCopy;
+					return this.FiltersNoSaveCopy;
 				}
+
+				return this.FiltersSaveCopy;
 			}
 		}
 
-		private NihilismFilters FiltersInternalCopy = new NihilismFilters();
-		private NihilismFilters FiltersSeparateCopy = null;
+		private NihilismFilters FiltersSaveCopy = null;
+		private NihilismFilters FiltersNoSaveCopy = null;
 
 
 
 		////////////////
 
-		public NihilismFiltersAccess() { }
+		public NihilismFiltersAccess() {
+			this.FiltersSaveCopy = new NihilismFilters();
+			this.FiltersSaveCopy.ResetFiltersFromDefaults();
+		}
 
 
 		////////////////
@@ -44,13 +45,15 @@ namespace Nihilism.Data {
 			string worldUid = WorldHelpers.GetUniqueIdForCurrentWorld( true );
 
 			var filters = ModCustomDataFileHelpers.LoadJson<NihilismFilters>( NihilismMod.Instance, worldUid );
-			this.FiltersInternalCopy = filters != null ? filters : this.FiltersInternalCopy;
+			this.FiltersSaveCopy = filters != null
+				? filters
+				: this.FiltersSaveCopy;
 		}
 
 		internal void Save() {
 			string worldUid = WorldHelpers.GetUniqueIdForCurrentWorld( true );
 
-			ModCustomDataFileHelpers.SaveAsJson( NihilismMod.Instance, worldUid, true, this.FiltersInternalCopy );
+			ModCustomDataFileHelpers.SaveAsJson( NihilismMod.Instance, worldUid, true, this.FiltersSaveCopy );
 		}
 
 
