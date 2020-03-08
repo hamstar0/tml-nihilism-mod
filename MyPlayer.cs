@@ -56,10 +56,10 @@ namespace Nihilism {
 			
 			var myworld = ModContent.GetInstance<NihilismWorld>();
 
-			if( myworld.Logic?.DataAccess?.IsActive() ?? false ) {
+			if( myworld?.Logic?.DataAccess?.IsActive() ?? false ) {
 				var customPlrData = NihilismCustomPlayer.GetPlayerData<NihilismCustomPlayer>( this.player.whoAmI );
 
-				if( customPlrData.IsSynced() ) {
+				if( customPlrData?.IsSynced() ?? false ) {
 					this.BlockEquipsIfDisabled();
 				}
 			}
