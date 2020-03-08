@@ -54,11 +54,9 @@ namespace Nihilism {
 				if( this.player.whoAmI != Main.myPlayer ) { return; }
 			}
 			
-			var mymod = (NihilismMod)this.mod;
 			var myworld = ModContent.GetInstance<NihilismWorld>();
-			if( myworld.Logic == null ) { return; }
 
-			if( myworld.Logic.DataAccess.IsActive() ) {
+			if( myworld.Logic?.DataAccess?.IsActive() ?? false ) {
 				var customPlrData = NihilismCustomPlayer.GetPlayerData<NihilismCustomPlayer>( this.player.whoAmI );
 
 				if( customPlrData.IsSynced() ) {

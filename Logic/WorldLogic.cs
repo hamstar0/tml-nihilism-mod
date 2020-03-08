@@ -56,7 +56,7 @@ namespace Nihilism.Logic {
 				if( !myworld.Logic.DataAccess.IsActive() ) {
 					string msg;
 					if( Main.netMode == 0 ) {
-						msg = "Enter the /nih-on command to active Nihilism restrictions for the current world. Enter /help for a list of other commands.";
+						msg = "Enter the /nih-on command to activate Nihilism restrictions for the current world. Enter /help for a list of other commands.";
 					} else {
 						msg = "Enter nih-on in the server's command console to activate Nihilism restrictions for the current world. Enter help for a list of other commands.";
 					}
