@@ -1,5 +1,4 @@
-﻿using HamstarHelpers.Services.Configs;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Terraria.ModLoader.Config;
 
 
@@ -120,73 +119,202 @@ namespace Nihilism.Data {
 		////////////////
 
 		public void ResetFiltersFromDefaults() {
+			var config = NihilismConfig.Instance;
 			var mymod = NihilismMod.Instance;
 
-			this.ItemBlacklist = new HashSet<ItemDefinition>( NihilismConfig.Instance.DefaultItemBlacklist );  // Was there a reason these weren't cloned?
-			this.RecipeBlacklist = new HashSet<ItemDefinition>( NihilismConfig.Instance.DefaultRecipeBlacklist );//
-			this.NpcBlacklist = new HashSet<NPCDefinition>( NihilismConfig.Instance.DefaultNpcBlacklist );//
-			this.NpcLootBlacklist = new HashSet<NPCDefinition>( NihilismConfig.Instance.DefaultNpcLootBlacklist );//
+			this.ItemBlacklist = new HashSet<ItemDefinition>(  // Was there a reason these weren't cloned?
+				config.Get<HashSet<ItemDefinition>>( nameof(NihilismConfig.DefaultItemBlacklist) )
+			);
+			this.RecipeBlacklist = new HashSet<ItemDefinition>(//
+				config.Get<HashSet<ItemDefinition>>( nameof(NihilismConfig.DefaultRecipeBlacklist) )
+			);
+			this.NpcBlacklist = new HashSet<NPCDefinition>(//
+				config.Get<HashSet<NPCDefinition>>( nameof(NihilismConfig.DefaultNpcBlacklist) )
+			);
+			this.NpcLootBlacklist = new HashSet<NPCDefinition>(//
+				config.Get<HashSet<NPCDefinition>>( nameof(NihilismConfig.DefaultNpcLootBlacklist) )
+			);
 
-			this.RecipeWhitelist = new HashSet<ItemDefinition>( NihilismConfig.Instance.DefaultRecipeWhitelist );
-			this.ItemWhitelist = new HashSet<ItemDefinition>( NihilismConfig.Instance.DefaultItemWhitelist );
-			this.NpcWhitelist = new HashSet<NPCDefinition>( NihilismConfig.Instance.DefaultNpcWhitelist );
-			this.NpcLootWhitelist = new HashSet<NPCDefinition>( NihilismConfig.Instance.DefaultNpcLootWhitelist );
+			this.ItemWhitelist = new HashSet<ItemDefinition>(
+				config.Get<HashSet<ItemDefinition>>( nameof(NihilismConfig.DefaultItemWhitelist) )
+			);
+			this.RecipeWhitelist = new HashSet<ItemDefinition>(
+				config.Get<HashSet<ItemDefinition>>( nameof(NihilismConfig.DefaultRecipeWhitelist) )
+			);
+			this.NpcWhitelist = new HashSet<NPCDefinition>(
+				config.Get<HashSet<NPCDefinition>>( nameof(NihilismConfig.DefaultNpcWhitelist) )
+			);
+			this.NpcLootWhitelist = new HashSet<NPCDefinition>(
+				config.Get<HashSet<NPCDefinition>>( nameof(NihilismConfig.DefaultNpcLootWhitelist) )
+			);
 
-			this.ItemBlacklist2 = new HashSet<ItemDefinition>( NihilismConfig.Instance.DefaultItemBlacklist2 );
-			this.RecipeBlacklist2 = new HashSet<ItemDefinition>( NihilismConfig.Instance.DefaultRecipeBlacklist2 );
-			this.NpcBlacklist2 = new HashSet<NPCDefinition>( NihilismConfig.Instance.DefaultNpcBlacklist2 );
-			this.NpcLootBlacklist2 = new HashSet<NPCDefinition>( NihilismConfig.Instance.DefaultNpcLootBlacklist2 );
+			this.ItemBlacklist2 = new HashSet<ItemDefinition>(
+				config.Get<HashSet<ItemDefinition>>( nameof(NihilismConfig.DefaultItemBlacklist2) )
+			);
+			this.RecipeBlacklist2 = new HashSet<ItemDefinition>(
+				config.Get<HashSet<ItemDefinition>>( nameof(NihilismConfig.DefaultRecipeBlacklist2) )
+			);
+			this.NpcBlacklist2 = new HashSet<NPCDefinition>(
+				config.Get<HashSet<NPCDefinition>>( nameof(NihilismConfig.DefaultNpcBlacklist2) )
+			);
+			this.NpcLootBlacklist2 = new HashSet<NPCDefinition>(
+				config.Get<HashSet<NPCDefinition>>( nameof(NihilismConfig.DefaultNpcLootBlacklist2) )
+			);
 
 
-			this.ItemGroupBlacklist = new HashSet<string>( NihilismConfig.Instance.DefaultItemGroupBlacklist );
-			this.RecipeGroupBlacklist = new HashSet<string>( NihilismConfig.Instance.DefaultRecipeGroupBlacklist );
-			this.NpcGroupBlacklist = new HashSet<string>( NihilismConfig.Instance.DefaultNpcGroupBlacklist );
-			this.NpcLootGroupBlacklist = new HashSet<string>( NihilismConfig.Instance.DefaultNpcLootGroupBlacklist );
+			this.ItemGroupBlacklist = new HashSet<string>(
+				config.Get<HashSet<string>>( nameof(NihilismConfig.DefaultItemGroupBlacklist) )
+			);
+			this.RecipeGroupBlacklist = new HashSet<string>(
+				config.Get<HashSet<string>>( nameof(NihilismConfig.DefaultRecipeGroupBlacklist) )
+			);
+			this.NpcGroupBlacklist = new HashSet<string>(
+				config.Get<HashSet<string>>( nameof(NihilismConfig.DefaultNpcGroupBlacklist) )
+			);
+			this.NpcLootGroupBlacklist = new HashSet<string>(
+				config.Get<HashSet<string>>( nameof(NihilismConfig.DefaultNpcLootGroupBlacklist) )
+			);
 
-			this.RecipeGroupWhitelist = new HashSet<string>( NihilismConfig.Instance.DefaultRecipeGroupWhitelist );
-			this.ItemGroupWhitelist = new HashSet<string>( NihilismConfig.Instance.DefaultItemGroupWhitelist );
-			this.NpcGroupWhitelist = new HashSet<string>( NihilismConfig.Instance.DefaultNpcGroupWhitelist );
-			this.NpcLootGroupWhitelist = new HashSet<string>( NihilismConfig.Instance.DefaultNpcLootGroupWhitelist );
+			this.RecipeGroupWhitelist = new HashSet<string>(
+				config.Get<HashSet<string>>( nameof(NihilismConfig.DefaultRecipeGroupWhitelist) )
+			);
+			this.ItemGroupWhitelist = new HashSet<string>(
+				config.Get<HashSet<string>>( nameof(NihilismConfig.DefaultItemGroupWhitelist) )
+			);
+			this.NpcGroupWhitelist = new HashSet<string>(
+				config.Get<HashSet<string>>( nameof(NihilismConfig.DefaultNpcGroupWhitelist) )
+			);
+			this.NpcLootGroupWhitelist = new HashSet<string>(
+				config.Get<HashSet<string>>( nameof(NihilismConfig.DefaultNpcLootGroupWhitelist) )
+			);
 
-			this.ItemGroupBlacklist2 = new HashSet<string>( NihilismConfig.Instance.DefaultItemGroupBlacklist2 );
-			this.RecipeGroupBlacklist2 = new HashSet<string>( NihilismConfig.Instance.DefaultRecipeGroupBlacklist2 );
-			this.NpcGroupBlacklist2 = new HashSet<string>( NihilismConfig.Instance.DefaultNpcGroupBlacklist2 );
-			this.NpcLootGroupBlacklist2 = new HashSet<string>( NihilismConfig.Instance.DefaultNpcLootGroupBlacklist2 );
+			this.ItemGroupBlacklist2 = new HashSet<string>(
+				config.Get<HashSet<string>>( nameof(NihilismConfig.DefaultItemGroupBlacklist2 ) )
+			);
+			this.RecipeGroupBlacklist2 = new HashSet<string>(
+				config.Get<HashSet<string>>( nameof(NihilismConfig.DefaultRecipeGroupBlacklist2 ) )
+			);
+			this.NpcGroupBlacklist2 = new HashSet<string>(
+				config.Get<HashSet<string>>( nameof(NihilismConfig.DefaultNpcGroupBlacklist2) )
+			);
+			this.NpcLootGroupBlacklist2 = new HashSet<string>(
+				config.Get<HashSet<string>>( nameof(NihilismConfig.DefaultNpcLootGroupBlacklist2) )
+			);
 		}
 
 		public void SetCurrentFiltersAsDefaults() {
-			NihilismConfig.Instance.DefaultItemBlacklist = new HashSet<ItemDefinition>( this.ItemBlacklist );  // Was there a reason these weren't cloned?
-			NihilismConfig.Instance.DefaultRecipeBlacklist = new HashSet<ItemDefinition>( this.RecipeBlacklist );//
-			NihilismConfig.Instance.DefaultNpcBlacklist = new HashSet<NPCDefinition>( this.NpcBlacklist );//
-			NihilismConfig.Instance.DefaultNpcLootBlacklist = new HashSet<NPCDefinition>( this.NpcLootBlacklist );//
+			var config = NihilismConfig.Instance;
 
-			NihilismConfig.Instance.DefaultRecipeWhitelist = new HashSet<ItemDefinition>( this.RecipeWhitelist );
-			NihilismConfig.Instance.DefaultItemWhitelist = new HashSet<ItemDefinition>( this.ItemWhitelist );
-			NihilismConfig.Instance.DefaultNpcWhitelist = new HashSet<NPCDefinition>( this.NpcWhitelist );
-			NihilismConfig.Instance.DefaultNpcLootWhitelist = new HashSet<NPCDefinition>( this.NpcLootWhitelist );
+			config.SetOverride(
+				nameof( NihilismConfig.DefaultItemBlacklist ),
+				new HashSet<ItemDefinition>( this.ItemBlacklist )
+			);  // Was there a reason these weren't cloned?
+			config.SetOverride(
+				nameof( NihilismConfig.DefaultRecipeBlacklist ),
+				new HashSet<ItemDefinition>( this.RecipeBlacklist )
+			);//
+			config.SetOverride(
+				nameof( NihilismConfig.DefaultNpcBlacklist ),
+				new HashSet<NPCDefinition>( this.NpcBlacklist )
+			);//
+			config.SetOverride(
+				nameof( NihilismConfig.DefaultNpcLootBlacklist ),
+				new HashSet<NPCDefinition>( this.NpcLootBlacklist )
+			);//
 
-			NihilismConfig.Instance.DefaultItemBlacklist2 = new HashSet<ItemDefinition>( this.ItemBlacklist2 );
-			NihilismConfig.Instance.DefaultRecipeBlacklist2 = new HashSet<ItemDefinition>( this.RecipeBlacklist2 );
-			NihilismConfig.Instance.DefaultNpcBlacklist2 = new HashSet<NPCDefinition>( this.NpcBlacklist2 );
-			NihilismConfig.Instance.DefaultNpcLootBlacklist2 = new HashSet<NPCDefinition>( this.NpcLootBlacklist2 );
+			config.SetOverride(
+				nameof( NihilismConfig.DefaultRecipeWhitelist ),
+				new HashSet<ItemDefinition>( this.RecipeWhitelist )
+			);
+			config.SetOverride(
+				nameof( NihilismConfig.DefaultItemWhitelist ),
+				new HashSet<ItemDefinition>( this.ItemWhitelist )
+			);
+			config.SetOverride(
+				nameof( NihilismConfig.DefaultNpcWhitelist ),
+				new HashSet<NPCDefinition>( this.NpcWhitelist )
+			);
+			config.SetOverride(
+				nameof( NihilismConfig.DefaultNpcLootWhitelist ),
+				new HashSet<NPCDefinition>( this.NpcLootWhitelist )
+			);
+
+			config.SetOverride(
+				nameof( NihilismConfig.DefaultItemBlacklist2 ),
+				new HashSet<ItemDefinition>( this.ItemBlacklist2 )
+			);
+			config.SetOverride(
+				nameof( NihilismConfig.DefaultRecipeBlacklist2 ),
+				new HashSet<ItemDefinition>( this.RecipeBlacklist2 )
+			);
+			config.SetOverride(
+				nameof( NihilismConfig.DefaultNpcBlacklist2 ),
+				new HashSet<NPCDefinition>( this.NpcBlacklist2 )
+			);
+			config.SetOverride(
+				nameof( NihilismConfig.DefaultNpcLootBlacklist2 ),
+				new HashSet<NPCDefinition>( this.NpcLootBlacklist2 )
+			);
 
 
-			NihilismConfig.Instance.DefaultItemGroupBlacklist = new HashSet<string>( this.ItemGroupBlacklist );
-			NihilismConfig.Instance.DefaultRecipeGroupBlacklist = new HashSet<string>( this.RecipeGroupBlacklist );
-			NihilismConfig.Instance.DefaultNpcGroupBlacklist = new HashSet<string>( this.NpcGroupBlacklist );
-			NihilismConfig.Instance.DefaultNpcLootGroupBlacklist = new HashSet<string>( this.NpcLootGroupBlacklist );
+			config.SetOverride(
+				nameof( NihilismConfig.DefaultItemGroupBlacklist ),
+				new HashSet<string>( this.ItemGroupBlacklist )
+			);
+			config.SetOverride(
+				nameof( NihilismConfig.DefaultRecipeGroupBlacklist ),
+				new HashSet<string>( this.RecipeGroupBlacklist )
+			);
+			config.SetOverride(
+				nameof( NihilismConfig.DefaultNpcGroupBlacklist ),
+				new HashSet<string>( this.NpcGroupBlacklist )
+			);
+			config.SetOverride(
+				nameof( NihilismConfig.DefaultNpcLootGroupBlacklist ),
+				new HashSet<string>( this.NpcLootGroupBlacklist )
+			);
 
-			NihilismConfig.Instance.DefaultRecipeGroupWhitelist = new HashSet<string>( this.RecipeGroupWhitelist );
-			NihilismConfig.Instance.DefaultItemGroupWhitelist = new HashSet<string>( this.ItemGroupWhitelist );
-			NihilismConfig.Instance.DefaultNpcGroupWhitelist = new HashSet<string>( this.NpcGroupWhitelist );
-			NihilismConfig.Instance.DefaultNpcLootGroupWhitelist = new HashSet<string>( this.NpcLootGroupWhitelist );
+			config.SetOverride(
+				nameof( NihilismConfig.DefaultRecipeGroupWhitelist ),
+				new HashSet<string>( this.RecipeGroupWhitelist )
+			);
+			config.SetOverride(
+				nameof( NihilismConfig.DefaultItemGroupWhitelist ),
+				new HashSet<string>( this.ItemGroupWhitelist )
+			);
+			config.SetOverride(
+				nameof( NihilismConfig.DefaultNpcGroupWhitelist ),
+				new HashSet<string>( this.NpcGroupWhitelist )
+			);
+			config.SetOverride(
+				nameof( NihilismConfig.DefaultNpcLootGroupWhitelist ),
+				new HashSet<string>( this.NpcLootGroupWhitelist )
+			);
 
-			NihilismConfig.Instance.DefaultItemGroupBlacklist2 = new HashSet<string>( this.ItemGroupBlacklist2 );
-			NihilismConfig.Instance.DefaultRecipeGroupBlacklist2 = new HashSet<string>( this.RecipeGroupBlacklist2 );
-			NihilismConfig.Instance.DefaultNpcGroupBlacklist2 = new HashSet<string>( this.NpcGroupBlacklist2 );
-			NihilismConfig.Instance.DefaultNpcLootGroupBlacklist2 = new HashSet<string>( this.NpcLootGroupBlacklist2 );
-
-			ModConfigStack.Uncache<NihilismConfig>();
+			config.SetOverride(
+				nameof( NihilismConfig.DefaultItemGroupBlacklist2 ),
+				new HashSet<string>( this.ItemGroupBlacklist2 )
+			);
+			config.SetOverride(
+				nameof( NihilismConfig.DefaultRecipeGroupBlacklist2 ),
+				new HashSet<string>( this.RecipeGroupBlacklist2 )
+			);
+			config.SetOverride(
+				nameof( NihilismConfig.DefaultRecipeGroupBlacklist2 ),
+				new HashSet<string>( this.RecipeGroupBlacklist2 )
+			);
+			config.SetOverride(
+				nameof( NihilismConfig.DefaultNpcGroupBlacklist2 ),
+				new HashSet<string>( this.NpcGroupBlacklist2 )
+			);
+			config.SetOverride(
+				nameof( NihilismConfig.DefaultNpcGroupBlacklist2 ),
+				new HashSet<string>( this.NpcGroupBlacklist2 )
+			);
+			config.SetOverride(
+				nameof( NihilismConfig.DefaultNpcLootGroupBlacklist2 ),
+				new HashSet<string>( this.NpcLootGroupBlacklist2 )
+			);
 		}
 	}
 }

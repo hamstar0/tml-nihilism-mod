@@ -1,21 +1,13 @@
-﻿using HamstarHelpers.Services.Configs;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using Terraria.ModLoader;
 using Terraria.ModLoader.Config;
 
 
 namespace Nihilism.Data {
-	public class NihilismConfig : StackableModConfig {
-		public static NihilismConfig Instance {
-			get {
-				if( !NihilismMod.Instance.InstancedFilters ) {
-					return ModConfigStack.GetMergedConfigs<NihilismConfig>();
-				} else {
-					return ModConfigStack.GetMergedStackedConfigs<NihilismConfig>();
-				}
-			}
-		}
+	public partial class NihilismConfig : ModConfig {
+		public static NihilismConfig Instance => ModContent.GetInstance<NihilismConfig>();
 
 
 
