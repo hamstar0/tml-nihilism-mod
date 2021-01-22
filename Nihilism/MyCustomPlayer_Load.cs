@@ -1,6 +1,6 @@
-﻿using HamstarHelpers.Classes.PlayerData;
+﻿using Terraria.ModLoader;
+using HamstarHelpers.Classes.PlayerData;
 using Nihilism.NetProtocol;
-using Terraria.ModLoader;
 
 
 namespace Nihilism {

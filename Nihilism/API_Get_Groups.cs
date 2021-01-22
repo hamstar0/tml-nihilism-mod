@@ -1,9 +1,9 @@
-﻿using HamstarHelpers.Classes.Errors;
-using HamstarHelpers.Helpers.TModLoader;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ModLoader;
+using HamstarHelpers.Classes.Errors;
+using HamstarHelpers.Helpers.TModLoader;
 
 
 namespace Nihilism {

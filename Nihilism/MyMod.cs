@@ -1,15 +1,15 @@
-﻿using HamstarHelpers.Classes.Errors;
+﻿using System;
+using System.Collections.Generic;
+using Microsoft.Xna.Framework.Graphics;
+using Terraria;
+using Terraria.ID;
+using Terraria.ModLoader;
+using HamstarHelpers.Classes.Errors;
 using HamstarHelpers.Helpers.Debug;
 using HamstarHelpers.Helpers.TModLoader.Mods;
 using HamstarHelpers.Services.Debug.DataDumper;
 using HamstarHelpers.Services.EntityGroups;
-using Microsoft.Xna.Framework.Graphics;
 using Nihilism.Data;
-using System;
-using System.Collections.Generic;
-using Terraria;
-using Terraria.ID;
-using Terraria.ModLoader;
 
 
 namespace Nihilism {
