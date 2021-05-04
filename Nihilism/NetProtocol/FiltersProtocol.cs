@@ -1,9 +1,9 @@
-﻿using HamstarHelpers.Classes.Errors;
+﻿using Terraria;
+using Terraria.ModLoader;
+using HamstarHelpers.Classes.Errors;
 using HamstarHelpers.Classes.Protocols.Packet.Interfaces;
 using HamstarHelpers.Helpers.Debug;
 using Nihilism.Data;
-using Terraria;
-using Terraria.ModLoader;
 
 
 namespace Nihilism.NetProtocol {
@@ -65,7 +65,7 @@ namespace Nihilism.NetProtocol {
 
 		////////////////
 
-		protected override void ReceiveOnServer( int from_who ) {
+		protected override void ReceiveOnServer( int fromWho ) {
 			this.ReceiveOnAny();
 		}
 

@@ -1,6 +1,6 @@
 author = hamstar
-version = 3.2.0
+version = 3.2.0.1
 displayName = Nihilism
-modReferences = HamstarHelpers@5.9.3
+modReferences = HamstarHelpers@5.13.0
 buildIgnore = *.csproj, *.user, *.bat, obj\*, bin\*, .vs\*, .git\*
 homepage = https://forums.terraria.org/index.php?threads/nihilism-empties-the-game.60333/
