@@ -1,7 +1,7 @@
-﻿using HamstarHelpers.Helpers.Debug;
-using HamstarHelpers.Helpers.Players;
-using Terraria;
+﻿using Terraria;
 using Terraria.ModLoader;
+using ModLibsCore.Libraries.Debug;
+using ModLibsGeneral.Libraries.Players;
 
 
 namespace Nihilism {
@@ -15,7 +15,7 @@ namespace Nihilism {
 				return null;
 			}
 
-			Item grappleItem = PlayerItemHelpers.GetGrappleItem( player );
+			Item grappleItem = PlayerItemLibraries.GetGrappleItem( player );
 
 			bool _;
 			if( grappleItem != null && myworld.Logic.DataAccess.IsItemEnabled( grappleItem, out _, out _ ) ) {

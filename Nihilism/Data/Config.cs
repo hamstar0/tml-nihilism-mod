@@ -62,7 +62,7 @@ namespace Nihilism.Data {
 		[Label( "Default blacklist of loot dropping of NPCs" )]
 		public HashSet<NPCDefinition> DefaultNpcLootBlacklist2 { get; set; }
 
-		[Header( "Default groups blacklists (see Entity Groups via. Mod Helpers)" )]
+		[Header( "Default groups blacklists (see Entity Groups via. Mod Libs)" )]
 		[Label( "Default blacklist of item groups" )]
 		public HashSet<string> DefaultItemGroupBlacklist { get; set; }
 		[Label( "Default blacklist of item recipes as item groups" )]

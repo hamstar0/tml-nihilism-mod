@@ -1,9 +1,9 @@
-﻿using HamstarHelpers.Helpers.Debug;
-using Nihilism.Data;
-using Nihilism.Logic;
-using Terraria;
+﻿using Terraria;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
+using ModLibsCore.Libraries.Debug;
+using Nihilism.Data;
+using Nihilism.Logic;
 
 
 namespace Nihilism {
@@ -19,7 +19,7 @@ namespace Nihilism {
 			this.Logic = new WorldLogic();
 
 			if( NihilismConfig.Instance.DebugModeInfo ) {
-				LogHelpers.Alert( "World initialized." );
+				LogLibraries.Alert( "World initialized." );
 			}
 		}
 

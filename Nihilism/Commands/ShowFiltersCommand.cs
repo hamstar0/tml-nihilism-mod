@@ -1,6 +1,6 @@
-﻿using HamstarHelpers.Helpers.Debug;
-using Terraria;
+﻿using Terraria;
 using Terraria.ModLoader;
+using ModLibsCore.Libraries.Debug;
 
 
 namespace Nihilism.Commands {

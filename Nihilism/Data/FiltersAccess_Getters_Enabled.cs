@@ -1,5 +1,5 @@
-﻿using HamstarHelpers.Helpers.Debug;
-using Terraria;
+﻿using Terraria;
+using ModLibsCore.Libraries.Debug;
 
 
 namespace Nihilism.Data {

@@ -1,9 +1,9 @@
-﻿using HamstarHelpers.Helpers.Debug;
-using HamstarHelpers.Helpers.DotNET.Reflection;
-using HamstarHelpers.Helpers.Players;
-using Nihilism.Data;
-using Terraria;
+﻿using Terraria;
 using Terraria.ModLoader;
+using ModLibsCore.Libraries.Debug;
+using ModLibsCore.Libraries.DotNET.Reflection;
+using ModLibsGeneral.Libraries.Players;
+using Nihilism.Data;
 
 
 namespace Nihilism {
@@ -22,7 +22,7 @@ namespace Nihilism {
 				if( item == null || item.IsAir ) { continue; }
 
 				if( !myworld.Logic.DataAccess.IsItemEnabled(item, out _, out _) ) {
-					PlayerItemHelpers.DropEquippedArmorItem( player, i );
+					PlayerItemLibraries.DropEquippedArmorItem( player, i );
 				}
 			}
 
@@ -31,7 +31,7 @@ namespace Nihilism {
 				if( item == null || item.IsAir ) { continue; }
 
 				if( !myworld.Logic.DataAccess.IsItemEnabled( item, out _, out _ ) ) {
-					PlayerItemHelpers.DropEquippedMiscItem( player, i );
+					PlayerItemLibraries.DropEquippedMiscItem( player, i );
 				}
 			}
 
@@ -51,12 +51,12 @@ namespace Nihilism {
 			ModPlayer mywingplayer = this.player.GetModPlayer( mymod.WingSlotMod, "WingSlotPlayer" );
 			object wingEquipSlot;
 			
-			if( !ReflectionHelpers.Get( mywingplayer, fieldName, out wingEquipSlot ) || wingEquipSlot == null ) {
+			if( !ReflectionLibraries.Get( mywingplayer, fieldName, out wingEquipSlot ) || wingEquipSlot == null ) {
 				return;
 			}
 
 			Item wingItem;
-			if( !ReflectionHelpers.Get( wingEquipSlot, "Item", out wingItem ) || wingItem == null || wingItem.IsAir ) {
+			if( !ReflectionLibraries.Get( wingEquipSlot, "Item", out wingItem ) || wingItem == null || wingItem.IsAir ) {
 				return;
 			}
 
@@ -71,8 +71,8 @@ namespace Nihilism {
 					NetMessage.SendData( 21, -1, -1, null, idx, 1f, 0f, 0f, 0, 0, 0 );
 				}
 				
-				ReflectionHelpers.Set( wingEquipSlot, "Item", new Item() );
-				ReflectionHelpers.Set( mywingplayer, fieldName, wingEquipSlot );
+				ReflectionLibraries.Set( wingEquipSlot, "Item", new Item() );
+				ReflectionLibraries.Set( mywingplayer, fieldName, wingEquipSlot );
 			}
 		}
 	}

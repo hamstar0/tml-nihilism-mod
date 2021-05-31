@@ -1,6 +1,6 @@
-﻿using HamstarHelpers.Classes.PlayerData;
-using HamstarHelpers.Helpers.Debug;
-using Terraria;
+﻿using Terraria;
+using ModLibsCore.Classes.PlayerData;
+using ModLibsCore.Libraries.Debug;
 
 
 namespace Nihilism {
@@ -12,7 +12,7 @@ namespace Nihilism {
 
 		////////////////
 
-		protected override void OnEnter( object data ) {
+		protected override void OnEnter( bool isCurrentPlayer, object data ) {
 			if( Main.netMode != 2 ) {
 				if( this.PlayerWho != Main.myPlayer ) { return; }
 			}

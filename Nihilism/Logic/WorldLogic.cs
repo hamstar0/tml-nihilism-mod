@@ -1,29 +1,16 @@
-﻿using HamstarHelpers.Helpers.Debug;
-using HamstarHelpers.Services.Hooks.LoadHooks;
-using HamstarHelpers.Services.Messages.Inbox;
+﻿using Terraria;
+using Terraria.ModLoader;
+using ModLibsCore.Libraries.Debug;
+using ModLibsCore.Services.Hooks.LoadHooks;
+using ModLibsInterMod.Libraries.Mods.APIMirrors.ModHelpersAPIMirrors;
 using Nihilism.Data;
 using Nihilism.NetProtocol;
-using Terraria;
-using Terraria.ModLoader;
 
 
 namespace Nihilism.Logic {
 	partial class WorldLogic {
-		internal readonly static object MyValidatorKey;
-		public readonly static CustomLoadHookValidator<object> LoadAllValidator;
-
-
-
-		////////////////
-
-		static WorldLogic() {
-			WorldLogic.MyValidatorKey = new object();
-			WorldLogic.LoadAllValidator = new CustomLoadHookValidator<object>( WorldLogic.MyValidatorKey );
-		}
-
-
-		////////////////
 		public NihilismFiltersAccess DataAccess { get; private set; }
+
 
 
 		////////////////
@@ -61,13 +48,8 @@ namespace Nihilism.Logic {
 						msg = "Enter nih-on in the server's command console to activate Nihilism restrictions for the current world. Enter help for a list of other commands.";
 					}
 
-					InboxMessages.SetMessage( "nihilism_init", msg, false );
+					InboxAPIMirrorsLibraries.SetMessage( "nihilism_init", msg, false );
 				}
-
-				CustomLoadHooks.TriggerHook( WorldLogic.LoadAllValidator, WorldLogic.MyValidatorKey );
-				LoadHooks.AddWorldUnloadOnceHook( () => {
-					CustomLoadHooks.ClearHook( WorldLogic.LoadAllValidator, WorldLogic.MyValidatorKey );
-				} );
 			} );
 		}
 

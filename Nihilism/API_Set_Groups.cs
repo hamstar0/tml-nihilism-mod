@@ -1,13 +1,13 @@
-﻿using HamstarHelpers.Classes.Errors;
-using HamstarHelpers.Helpers.TModLoader;
-using System;
+﻿using System;
 using Terraria.ModLoader;
+using ModLibsCore.Classes.Errors;
+using ModLibsCore.Libraries.TModLoader;
 
 
 namespace Nihilism {
 	public static partial class NihilismAPI {
 		public static void SetItemBlacklistGroupEntry( string groupName, bool localOnly ) {
-			if( !LoadHelpers.IsWorldLoaded() ) { throw new ModHelpersException( "World not loaded"); }
+			if( !LoadLibraries.IsWorldLoaded() ) { throw new ModLibsException( "World not loaded"); }
 			
 			var myworld = ModContent.GetInstance<NihilismWorld>();
 			myworld.Logic.DataAccess.SetItemBlacklistGroupEntry( groupName );
@@ -16,7 +16,7 @@ namespace Nihilism {
 		}
 
 		public static void SetRecipeBlacklistGroupEntry( string groupName, bool localOnly ) {
-			if( !LoadHelpers.IsWorldLoaded() ) { throw new ModHelpersException( "World not loaded" ); }
+			if( !LoadLibraries.IsWorldLoaded() ) { throw new ModLibsException( "World not loaded" ); }
 
 			var myworld = ModContent.GetInstance<NihilismWorld>();
 			myworld.Logic.DataAccess.SetRecipeBlacklistGroupEntry( groupName );
@@ -25,7 +25,7 @@ namespace Nihilism {
 		}
 
 		public static void SetNpcBlacklistGroupEntry( string groupName, bool localOnly ) {
-			if( !LoadHelpers.IsWorldLoaded() ) { throw new ModHelpersException( "World not loaded" ); }
+			if( !LoadLibraries.IsWorldLoaded() ) { throw new ModLibsException( "World not loaded" ); }
 
 			var myworld = ModContent.GetInstance<NihilismWorld>();
 			myworld.Logic.DataAccess.SetNpcBlacklistGroupEntry( groupName );
@@ -34,7 +34,7 @@ namespace Nihilism {
 		}
 
 		public static void SetNpcLootBlacklistGroupEntry( string groupName, bool localOnly ) {
-			if( !LoadHelpers.IsWorldLoaded() ) { throw new ModHelpersException( "World not loaded" ); }
+			if( !LoadLibraries.IsWorldLoaded() ) { throw new ModLibsException( "World not loaded" ); }
 
 			var myworld = ModContent.GetInstance<NihilismWorld>();
 			myworld.Logic.DataAccess.SetNpcLootBlacklistGroupEntry( groupName );
@@ -44,7 +44,7 @@ namespace Nihilism {
 
 
 		public static void SetItemWhitelistGroupEntry( string groupName, bool localOnly ) {
-			if( !LoadHelpers.IsWorldLoaded() ) { throw new ModHelpersException( "World not loaded" ); }
+			if( !LoadLibraries.IsWorldLoaded() ) { throw new ModLibsException( "World not loaded" ); }
 			
 			var myworld = ModContent.GetInstance<NihilismWorld>();
 			myworld.Logic.DataAccess.SetItemWhitelistGroupEntry( groupName );
@@ -53,7 +53,7 @@ namespace Nihilism {
 		}
 		
 		public static void SetRecipeWhitelistGroupEntry( string groupName, bool localOnly ) {
-			if( !LoadHelpers.IsWorldLoaded() ) { throw new ModHelpersException( "World not loaded" ); }
+			if( !LoadLibraries.IsWorldLoaded() ) { throw new ModLibsException( "World not loaded" ); }
 
 			var myworld = ModContent.GetInstance<NihilismWorld>();
 			myworld.Logic.DataAccess.SetRecipeWhitelistGroupEntry( groupName );
@@ -62,7 +62,7 @@ namespace Nihilism {
 		}
 
 		public static void SetNpcWhitelistGroupEntry( string groupName, bool localOnly ) {
-			if( !LoadHelpers.IsWorldLoaded() ) { throw new ModHelpersException( "World not loaded" ); }
+			if( !LoadLibraries.IsWorldLoaded() ) { throw new ModLibsException( "World not loaded" ); }
 
 			var myworld = ModContent.GetInstance<NihilismWorld>();
 			myworld.Logic.DataAccess.SetNpcWhitelistGroupEntry( groupName );
@@ -71,7 +71,7 @@ namespace Nihilism {
 		}
 
 		public static void SetNpcLootWhitelistGroupEntry( string groupName, bool localOnly ) {
-			if( !LoadHelpers.IsWorldLoaded() ) { throw new ModHelpersException( "World not loaded" ); }
+			if( !LoadLibraries.IsWorldLoaded() ) { throw new ModLibsException( "World not loaded" ); }
 
 			var myworld = ModContent.GetInstance<NihilismWorld>();
 			myworld.Logic.DataAccess.SetNpcLootWhitelistGroupEntry( groupName );
@@ -81,7 +81,7 @@ namespace Nihilism {
 
 
 		public static void SetItemBlacklist2GroupEntry( string groupName, bool localOnly ) {
-			if( !LoadHelpers.IsWorldLoaded() ) { throw new ModHelpersException( "World not loaded" ); }
+			if( !LoadLibraries.IsWorldLoaded() ) { throw new ModLibsException( "World not loaded" ); }
 
 			var myworld = ModContent.GetInstance<NihilismWorld>();
 			myworld.Logic.DataAccess.SetItemBlacklist2GroupEntry( groupName );
@@ -90,7 +90,7 @@ namespace Nihilism {
 		}
 
 		public static void SetRecipeBlacklist2GroupEntry( string groupName, bool localOnly ) {
-			if( !LoadHelpers.IsWorldLoaded() ) { throw new ModHelpersException( "World not loaded" ); }
+			if( !LoadLibraries.IsWorldLoaded() ) { throw new ModLibsException( "World not loaded" ); }
 
 			var myworld = ModContent.GetInstance<NihilismWorld>();
 			myworld.Logic.DataAccess.SetRecipeBlacklist2GroupEntry( groupName );
@@ -99,7 +99,7 @@ namespace Nihilism {
 		}
 
 		public static void SetNpcBlacklist2GroupEntry( string groupName, bool localOnly ) {
-			if( !LoadHelpers.IsWorldLoaded() ) { throw new ModHelpersException( "World not loaded" ); }
+			if( !LoadLibraries.IsWorldLoaded() ) { throw new ModLibsException( "World not loaded" ); }
 
 			var myworld = ModContent.GetInstance<NihilismWorld>();
 			myworld.Logic.DataAccess.SetNpcBlacklist2GroupEntry( groupName );
@@ -108,7 +108,7 @@ namespace Nihilism {
 		}
 
 		public static void SetNpcLootBlacklist2GroupEntry( string groupName, bool localOnly ) {
-			if( !LoadHelpers.IsWorldLoaded() ) { throw new ModHelpersException( "World not loaded" ); }
+			if( !LoadLibraries.IsWorldLoaded() ) { throw new ModLibsException( "World not loaded" ); }
 
 			var myworld = ModContent.GetInstance<NihilismWorld>();
 			myworld.Logic.DataAccess.SetNpcLootBlacklist2GroupEntry( groupName );
@@ -120,7 +120,7 @@ namespace Nihilism {
 		////////////////
 
 		public static void UnsetItemBlacklistGroupEntry( string groupName, bool localOnly ) {
-			if( !LoadHelpers.IsWorldLoaded() ) { throw new ModHelpersException( "World not loaded" ); }
+			if( !LoadLibraries.IsWorldLoaded() ) { throw new ModLibsException( "World not loaded" ); }
 
 			var myworld = ModContent.GetInstance<NihilismWorld>();
 			myworld.Logic.DataAccess.UnsetItemBlacklistGroupEntry( groupName );
@@ -129,7 +129,7 @@ namespace Nihilism {
 		}
 
 		public static void UnsetRecipeBlacklistGroupEntry( string groupName, bool localOnly ) {
-			if( !LoadHelpers.IsWorldLoaded() ) { throw new ModHelpersException( "World not loaded" ); }
+			if( !LoadLibraries.IsWorldLoaded() ) { throw new ModLibsException( "World not loaded" ); }
 
 			var myworld = ModContent.GetInstance<NihilismWorld>();
 			myworld.Logic.DataAccess.UnsetRecipeBlacklistGroupEntry( groupName );
@@ -138,7 +138,7 @@ namespace Nihilism {
 		}
 
 		public static void UnsetNpcBlacklistGroupEntry( string groupName, bool localOnly ) {
-			if( !LoadHelpers.IsWorldLoaded() ) { throw new ModHelpersException( "World not loaded" ); }
+			if( !LoadLibraries.IsWorldLoaded() ) { throw new ModLibsException( "World not loaded" ); }
 
 			var myworld = ModContent.GetInstance<NihilismWorld>();
 			myworld.Logic.DataAccess.UnsetNpcBlacklistGroupEntry( groupName );
@@ -147,7 +147,7 @@ namespace Nihilism {
 		}
 
 		public static void UnsetNpcLootBlacklistGroupEntry( string groupName, bool localOnly ) {
-			if( !LoadHelpers.IsWorldLoaded() ) { throw new ModHelpersException( "World not loaded" ); }
+			if( !LoadLibraries.IsWorldLoaded() ) { throw new ModLibsException( "World not loaded" ); }
 
 			var myworld = ModContent.GetInstance<NihilismWorld>();
 			myworld.Logic.DataAccess.UnsetNpcLootBlacklistGroupEntry( groupName );
@@ -158,7 +158,7 @@ namespace Nihilism {
 		////
 
 		public static void UnsetItemWhitelistGroupEntry( string groupName, bool localOnly ) {
-			if( !LoadHelpers.IsWorldLoaded() ) { throw new ModHelpersException( "World not loaded" ); }
+			if( !LoadLibraries.IsWorldLoaded() ) { throw new ModLibsException( "World not loaded" ); }
 
 			var myworld = ModContent.GetInstance<NihilismWorld>();
 			myworld.Logic.DataAccess.UnsetItemWhitelistGroupEntry( groupName );
@@ -167,7 +167,7 @@ namespace Nihilism {
 		}
 
 		public static void UnsetRecipeWhitelistGroupEntry( string groupName, bool localOnly ) {
-			if( !LoadHelpers.IsWorldLoaded() ) { throw new ModHelpersException( "World not loaded" ); }
+			if( !LoadLibraries.IsWorldLoaded() ) { throw new ModLibsException( "World not loaded" ); }
 
 			var myworld = ModContent.GetInstance<NihilismWorld>();
 			myworld.Logic.DataAccess.UnsetRecipeWhitelistGroupEntry( groupName );
@@ -176,7 +176,7 @@ namespace Nihilism {
 		}
 
 		public static void UnsetNpcWhitelistGroupEntry( string groupName, bool localOnly ) {
-			if( !LoadHelpers.IsWorldLoaded() ) { throw new ModHelpersException( "World not loaded" ); }
+			if( !LoadLibraries.IsWorldLoaded() ) { throw new ModLibsException( "World not loaded" ); }
 
 			var myworld = ModContent.GetInstance<NihilismWorld>();
 			myworld.Logic.DataAccess.UnsetNpcWhitelistGroupEntry( groupName );
@@ -185,7 +185,7 @@ namespace Nihilism {
 		}
 
 		public static void UnsetNpcLootWhitelistGroupEntry( string groupName, bool localOnly ) {
-			if( !LoadHelpers.IsWorldLoaded() ) { throw new ModHelpersException( "World not loaded" ); }
+			if( !LoadLibraries.IsWorldLoaded() ) { throw new ModLibsException( "World not loaded" ); }
 
 			var myworld = ModContent.GetInstance<NihilismWorld>();
 			myworld.Logic.DataAccess.UnsetNpcLootWhitelistGroupEntry( groupName );

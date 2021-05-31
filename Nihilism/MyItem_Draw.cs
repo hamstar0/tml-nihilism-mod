@@ -1,10 +1,10 @@
-﻿using HamstarHelpers.Helpers.Debug;
+﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Nihilism.Data;
-using System.Collections.Generic;
 using Terraria;
 using Terraria.ModLoader;
+using ModLibsCore.Libraries.Debug;
+using Nihilism.Data;
 
 
 namespace Nihilism {
@@ -40,7 +40,7 @@ namespace Nihilism {
 			var mymod = (NihilismMod)this.mod;
 			var myworld = ModContent.GetInstance<NihilismWorld>();
 			if( myworld.Logic == null ) {
-				LogHelpers.WarnOnce( "Logic not loaded." );
+				LogLibraries.WarnOnce( "Logic not loaded." );
 				return;
 			}
 

@@ -1,13 +1,13 @@
-﻿using HamstarHelpers.Helpers.Debug;
-using HamstarHelpers.Helpers.DotNET;
-using HamstarHelpers.Helpers.Items;
-using HamstarHelpers.Helpers.Items.Attributes;
-using HamstarHelpers.Helpers.Players;
-using Microsoft.Xna.Framework;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ModLoader;
+using ModLibsCore.Libraries.Debug;
+using ModLibsCore.Libraries.DotNET;
+using ModLibsGeneral.Libraries.Items;
+using ModLibsGeneral.Libraries.Items.Attributes;
+using ModLibsGeneral.Libraries.Players;
 
 
 namespace Nihilism {
@@ -16,7 +16,7 @@ namespace Nihilism {
 			var mymod = (NihilismMod)this.mod;
 			var myworld = ModContent.GetInstance<NihilismWorld>();
 			if( myworld.Logic == null ) {
-				LogHelpers.WarnOnce( "Logic not loaded." );
+				LogLibraries.WarnOnce( "Logic not loaded." );
 				return base.CanUseItem( item, player );
 			}
 			
@@ -28,7 +28,7 @@ namespace Nihilism {
 			if( !myworld.Logic.DataAccess.IsItemEnabled( item, out _, out _ ) ) {
 				return false;
 			} else if( item.useAmmo != 0 ) {
-				Item ammoItem = PlayerItemFinderHelpers.GetCurrentAmmo( player, item );
+				Item ammoItem = PlayerItemFinderLibraries.GetCurrentAmmo( player, item );
 
 				if( ammoItem != null ) {
 					if( !myworld.Logic.DataAccess.IsItemEnabled( ammoItem, out _, out _ ) ) {
@@ -45,7 +45,7 @@ namespace Nihilism {
 			var mymod = (NihilismMod)this.mod;
 			var myworld = ModContent.GetInstance<NihilismWorld>();
 			if( myworld.Logic == null ) {
-				LogHelpers.WarnOnce( "Logic not loaded." );
+				LogLibraries.WarnOnce( "Logic not loaded." );
 				return base.CanRightClick( item );
 			}
 
@@ -65,7 +65,7 @@ namespace Nihilism {
 			var mymod = (NihilismMod)this.mod;
 			var myworld = ModContent.GetInstance<NihilismWorld>();
 			if( myworld.Logic == null ) {
-				LogHelpers.WarnOnce( "Logic not loaded." );
+				LogLibraries.WarnOnce( "Logic not loaded." );
 				return base.AltFunctionUse( item, player );
 			}
 
@@ -85,7 +85,7 @@ namespace Nihilism {
 			var mymod = (NihilismMod)this.mod;
 			var myworld = ModContent.GetInstance<NihilismWorld>();
 			if( myworld.Logic == null ) {
-				LogHelpers.WarnOnce( "Logic not loaded." );
+				LogLibraries.WarnOnce( "Logic not loaded." );
 				return base.ConsumeItem( item, player );
 			}
 
@@ -105,7 +105,7 @@ namespace Nihilism {
 			var mymod = (NihilismMod)this.mod;
 			var myworld = ModContent.GetInstance<NihilismWorld>();
 			if( myworld.Logic == null ) {
-				LogHelpers.WarnOnce( "Logic not loaded." );
+				LogLibraries.WarnOnce( "Logic not loaded." );
 				return base.ConsumeAmmo( item, player );
 			}
 
@@ -125,7 +125,7 @@ namespace Nihilism {
 			var mymod = (NihilismMod)this.mod;
 			var myworld = ModContent.GetInstance<NihilismWorld>();
 			if( myworld.Logic == null ) {
-				LogHelpers.WarnOnce( "Logic not loaded." );
+				LogLibraries.WarnOnce( "Logic not loaded." );
 				return base.PreOpenVanillaBag( context, player, arg );
 			}
 
@@ -136,14 +136,14 @@ namespace Nihilism {
 			IList<Item> containerInvIndexes = player.inventory
 				.SafeWhere( ( item ) => {
 					if( item == null || item.IsAir ) { return false; }
-					if( ItemAttributeHelpers.GetVanillaContainerContext( item ) != context ) { return false; }
+					if( ItemAttributeLibraries.GetVanillaContainerContext( item ) != context ) { return false; }
 					if( arg != 0 ) { return item.type == arg; }
 					return true;
 				} )
 				.ToList();
 
 			if( containerInvIndexes.Count == 0 ) {
-				LogHelpers.Alert( "Unknown bag of context " + context + ", " + arg );
+				LogLibraries.Alert( "Unknown bag of context " + context + ", " + arg );
 				return base.PreOpenVanillaBag( context, player, arg );	// Shouldn't happen?
 			}
 
@@ -153,7 +153,7 @@ namespace Nihilism {
 			if( isAir ) {
 				int containerType = arg != 0
 					? arg
-					: ItemGroupIdentityHelpers.GetVanillaContainerItemTypes( context )[0];
+					: ItemCommonGroupsLibraries.GetVanillaContainerItemTypes( context )[0];
 				containerItem = new Item();
 				containerItem.SetDefaults( containerType, true );
 			}

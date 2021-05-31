@@ -1,7 +1,7 @@
-﻿using HamstarHelpers.Classes.Errors;
-using HamstarHelpers.Helpers.TModLoader;
-using System;
+﻿using System;
 using Terraria.ModLoader;
+using ModLibsCore.Classes.Errors;
+using ModLibsCore.Libraries.TModLoader;
 
 
 namespace Nihilism {
@@ -73,7 +73,7 @@ namespace Nihilism {
 		////////////////
 
 		public static void SetCurrentFiltersAsDefaults( bool localOnly ) {
-			if( !LoadHelpers.IsWorldLoaded() ) { throw new ModHelpersException( "World not loaded" ); }
+			if( !LoadLibraries.IsWorldLoaded() ) { throw new ModLibsException( "World not loaded" ); }
 
 			var myworld = ModContent.GetInstance<NihilismWorld>();
 
@@ -85,7 +85,7 @@ namespace Nihilism {
 		}
 
 		public static void ResetFiltersFromDefaults( bool localOnly ) {
-			if( !LoadHelpers.IsWorldLoaded() ) { throw new ModHelpersException( "World not loaded" ); }
+			if( !LoadLibraries.IsWorldLoaded() ) { throw new ModLibsException( "World not loaded" ); }
 
 			var myworld = ModContent.GetInstance<NihilismWorld>();
 
@@ -99,7 +99,7 @@ namespace Nihilism {
 		////
 
 		public static void ClearFiltersForCurrentWorld( bool localOnly ) {
-			if( !LoadHelpers.IsWorldLoaded() ) { throw new ModHelpersException( "World not loaded" ); }
+			if( !LoadLibraries.IsWorldLoaded() ) { throw new ModLibsException( "World not loaded" ); }
 
 			var myworld = ModContent.GetInstance<NihilismWorld>();
 

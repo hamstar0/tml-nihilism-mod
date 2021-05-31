@@ -4,11 +4,10 @@ using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using HamstarHelpers.Classes.Errors;
-using HamstarHelpers.Helpers.Debug;
-using HamstarHelpers.Helpers.TModLoader.Mods;
-using HamstarHelpers.Services.Debug.DataDumper;
-using HamstarHelpers.Services.EntityGroups;
+using ModLibsCore.Classes.Errors;
+using ModLibsCore.Libraries.Debug;
+using ModLibsCore.Libraries.TModLoader.Mods;
+using ModLibsCore.Services.Debug.DataDumper;
 using Nihilism.Data;
 
 
@@ -52,15 +51,13 @@ namespace Nihilism {
 				this.DisabledItemTex = ModContent.GetTexture( "Terraria/MapDeath" );
 			}
 
-			EntityGroups.Enable();
-
 			this.WingSlotMod = ModLoader.GetMod( "WingSlot" );
 			if( this.WingSlotMod == null ) {
 				if( NihilismConfig.Instance.DebugModeInfo ) {
-					LogHelpers.Alert( "Wing Mod not detected; ignoring wing slots..." );
+					LogLibraries.Alert( "Wing Mod not detected; ignoring wing slots..." );
 				}
 			} else {
-				LogHelpers.Alert( "Wing Mod detected. Compatibility will be attempted." );
+				LogLibraries.Alert( "Wing Mod detected. Compatibility will be attempted." );
 			}
 		}
 
@@ -96,7 +93,7 @@ namespace Nihilism {
 		////////////////
 
 		public override object Call( params object[] args ) {
-			return ModBoilerplateHelpers.HandleModCall( typeof( NihilismAPI ), args );
+			return ModBoilerplateLibraries.HandleModCall( typeof( NihilismAPI ), args );
 		}
 
 

@@ -1,8 +1,8 @@
-﻿using HamstarHelpers.Helpers.Debug;
-using HamstarHelpers.Helpers.Misc;
-using HamstarHelpers.Helpers.World;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Terraria;
+using ModLibsCore.Libraries.Debug;
+using ModLibsCore.Libraries.Misc;
+using ModLibsCore.Libraries.World;
 
 
 namespace Nihilism.Data {
@@ -42,18 +42,18 @@ namespace Nihilism.Data {
 		////////////////
 
 		internal void Load() {
-			string worldUid = WorldHelpers.GetUniqueIdForCurrentWorld( true );
+			string worldUid = WorldIdentityLibraries.GetUniqueIdForCurrentWorld( true );
 
-			var filters = ModCustomDataFileHelpers.LoadJson<NihilismFilters>( NihilismMod.Instance, worldUid );
+			var filters = ModCustomDataFileLibraries.LoadJson<NihilismFilters>( NihilismMod.Instance, worldUid );
 			this.FiltersSaveCopy = filters != null
 				? filters
 				: this.FiltersSaveCopy;
 		}
 
 		internal void Save() {
-			string worldUid = WorldHelpers.GetUniqueIdForCurrentWorld( true );
+			string worldUid = WorldIdentityLibraries.GetUniqueIdForCurrentWorld( true );
 
-			ModCustomDataFileHelpers.SaveAsJson( NihilismMod.Instance, worldUid, true, this.FiltersSaveCopy );
+			ModCustomDataFileLibraries.SaveAsJson( NihilismMod.Instance, worldUid, true, this.FiltersSaveCopy );
 		}
 
 
@@ -136,7 +136,7 @@ namespace Nihilism.Data {
 				+ this.Filters.NpcLootGroupWhitelist.Count + "+"
 				+ this.Filters.NpcLootWhitelist.Count );
 
-			LogHelpers.Log( string.Join("\n", this.GetFormattedFilterData()) );
+			LogLibraries.Log( string.Join("\n", this.GetFormattedFilterData()) );
 		}
 	}
 }

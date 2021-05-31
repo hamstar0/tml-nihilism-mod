@@ -1,8 +1,8 @@
-﻿using HamstarHelpers.Classes.DataStructures;
-using HamstarHelpers.Helpers.Debug;
-using HamstarHelpers.Services.EntityGroups;
-using Terraria;
+﻿using Terraria;
 using Terraria.ModLoader.Config;
+using ModLibsCore.Classes.DataStructures;
+using ModLibsCore.Libraries.Debug;
+using ModLibsEntityGroups.Services.EntityGroups;
 
 
 namespace Nihilism.Data {

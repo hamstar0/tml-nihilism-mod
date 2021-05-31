@@ -1,5 +1,5 @@
 ﻿using Terraria.ModLoader;
-using HamstarHelpers.Classes.PlayerData;
+using ModLibsCore.Classes.PlayerData;
 using Nihilism.NetProtocol;
 
 
@@ -18,7 +18,7 @@ namespace Nihilism {
 		}
 
 		private void OnEnterWorldOnClient() {
-			FiltersProtocol.SyncToMe();
+			FiltersRequestProtocol.QuickRequestFromMeToServer();
 		}
 
 		private void OnEnterWorldOnServer() {
