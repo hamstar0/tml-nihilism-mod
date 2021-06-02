@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Terraria.ModLoader.Config;
 
 
 namespace Nihilism.Data {
+	[Serializable]
 	partial class NihilismFilters {
 		public bool IsActive = false;
 
