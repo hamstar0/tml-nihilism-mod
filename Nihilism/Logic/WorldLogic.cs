@@ -1,10 +1,12 @@
-﻿using Terraria;
+﻿using System;
+using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 using ModLibsCore.Libraries.Debug;
 using ModLibsCore.Services.Hooks.LoadHooks;
 using Nihilism.Data;
 using Nihilism.NetProtocol;
-using Terraria.ID;
+
 
 namespace Nihilism.Logic {
 	partial class WorldLogic {
@@ -34,32 +36,36 @@ namespace Nihilism.Logic {
 
 		internal void PostFiltersLoad() {
 			LoadHooks.AddWorldLoadOnceHook( () => {
-				if( Main.netMode == 2 ) { return; }
+				if( Main.netMode == NetmodeID.Server ) {
+					return;
+				}
 
-				var mymod = NihilismMod.Instance;
 				var myworld = ModContent.GetInstance<NihilismWorld>();
+				if( myworld.Logic.DataAccess.IsActive() ) {
+					return;
+				}
 
-				if( !myworld.Logic.DataAccess.IsActive() ) {
-					string msg;
-					if( Main.netMode == NetmodeID.SinglePlayer ) {
-						msg = "Enter the /nih-on command to activate Nihilism restrictions for the current world. Enter /help for a list of other commands.";
-					} else {
-						msg = "Enter nih-on in the server's command console to activate Nihilism restrictions for the current world. Enter help for a list of other commands.";
-					}
+				string msg;
+				if( Main.netMode == NetmodeID.SinglePlayer ) {
+					msg = "Enter the /nih-on command to activate Nihilism restrictions for the current world. Enter /help for a list of other commands.";
+				} else {
+					msg = "Enter nih-on in the server's command console to activate Nihilism restrictions for the current world. Enter help for a list of other commands.";
+				}
 
-					Mod msgMod = ModLoader.GetMod( "Messages" );
-					if( msgMod != null ) {
-						msgMod.Call(
-							"AddMessage",
-							"How to use Nihilism mod",	//title
-							msg,						//description
-							NihilismMod.Instance,		//modOfOrigin
-							"nihilism_init",            //id
-							0,							//weight
-							msgMod.Call("GetMessage", "Messages - Mod Info" ), //parentMessage
-							true                        //alertPlayer
-						);
-					}
+				Mod msgMod = ModLoader.GetMod( "Messages" );
+				if( msgMod != null ) {
+					Action mycall = () => msgMod.Call(
+						"AddMessage",
+						"How to use Nihilism mod",  //title
+						msg,                        //description
+						NihilismMod.Instance,       //modOfOrigin
+						"nihilism_init",            //id
+						0,                          //weight
+						msgMod.Call( "GetMessage", "Messages - Mod Info" ), //parentMessage
+						true                        //alertPlayer
+					);
+
+					msgMod.Call( "AddMessagesCategoriesInitializeEvent", mycall );
 				}
 			} );
 		}
