@@ -4,7 +4,7 @@ using ModLibsCore.Libraries.Debug;
 using ModLibsCore.Services.Hooks.LoadHooks;
 using Nihilism.Data;
 using Nihilism.NetProtocol;
-
+using Terraria.ID;
 
 namespace Nihilism.Logic {
 	partial class WorldLogic {
@@ -41,7 +41,7 @@ namespace Nihilism.Logic {
 
 				if( !myworld.Logic.DataAccess.IsActive() ) {
 					string msg;
-					if( Main.netMode == 0 ) {
+					if( Main.netMode == NetmodeID.SinglePlayer ) {
 						msg = "Enter the /nih-on command to activate Nihilism restrictions for the current world. Enter /help for a list of other commands.";
 					} else {
 						msg = "Enter nih-on in the server's command console to activate Nihilism restrictions for the current world. Enter help for a list of other commands.";
@@ -54,8 +54,10 @@ namespace Nihilism.Logic {
 							"How to use Nihilism mod",	//title
 							msg,						//description
 							NihilismMod.Instance,		//modOfOrigin
-							"nihilism_init",			//id
-							msgMod.Call("GetMessage", "Messages - Mod Info" ) //parentMessage
+							"nihilism_init",            //id
+							0,							//weight
+							msgMod.Call("GetMessage", "Messages - Mod Info" ), //parentMessage
+							true                        //alertPlayer
 						);
 					}
 				}
