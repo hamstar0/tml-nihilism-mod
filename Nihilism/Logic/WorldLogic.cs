@@ -10,6 +10,20 @@ using Nihilism.NetProtocol;
 
 namespace Nihilism.Logic {
 	partial class WorldLogic {
+		private static void MessageAboutModUsage( string description ) {
+			Messages.MessagesAPI.AddMessage(
+				title: "How to use Nihilism mod",
+				description: description,
+				modOfOrigin: NihilismMod.Instance,
+				id: "NihilismUsage",
+				parentMessage: Messages.MessagesAPI.ModInfoCategoryMsg
+			);
+		}
+
+
+
+		////////////////
+
 		public NihilismFiltersAccess DataAccess { get; private set; }
 
 
@@ -52,20 +66,8 @@ namespace Nihilism.Logic {
 					msg = "Enter nih-on in the server's command console to activate Nihilism restrictions for the current world. Enter help for a list of other commands.";
 				}
 
-				Mod msgMod = ModLoader.GetMod( "Messages" );
-				if( msgMod != null ) {
-					Action mycall = () => msgMod.Call(
-						"AddMessage",
-						"How to use Nihilism mod",  //title
-						msg,                        //description
-						NihilismMod.Instance,       //modOfOrigin
-						"nihilism_init",            //id
-						0,                          //weight
-						msgMod.Call( "GetMessage", "Messages - Mod Info" ), //parentMessage
-						true                        //alertPlayer
-					);
-
-					msgMod.Call( "AddMessagesCategoriesInitializeEvent", mycall );
+				if( ModLoader.GetMod("Messages") != null ) {
+					WorldLogic.MessageAboutModUsage( msg );
 				}
 			} );
 		}
