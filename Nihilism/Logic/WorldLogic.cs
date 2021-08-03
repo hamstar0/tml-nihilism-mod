@@ -2,7 +2,6 @@
 using Terraria.ModLoader;
 using ModLibsCore.Libraries.Debug;
 using ModLibsCore.Services.Hooks.LoadHooks;
-using ModLibsInterMod.Libraries.Mods.APIMirrors.ModHelpersAPIMirrors;
 using Nihilism.Data;
 using Nihilism.NetProtocol;
 
@@ -48,7 +47,17 @@ namespace Nihilism.Logic {
 						msg = "Enter nih-on in the server's command console to activate Nihilism restrictions for the current world. Enter help for a list of other commands.";
 					}
 
-					InboxAPIMirrorsLibraries.SetMessage( "nihilism_init", msg, false );
+					Mod msgMod = ModLoader.GetMod( "Messages" );
+					if( msgMod != null ) {
+						msgMod.Call(
+							"AddMessage",
+							"How to use Nihilism mod",	//title
+							msg,						//description
+							NihilismMod.Instance,		//modOfOrigin
+							"nihilism_init",			//id
+							msgMod.Call("GetMessage", "Messages - Mod Info" ) //parentMessage
+						);
+					}
 				}
 			} );
 		}
