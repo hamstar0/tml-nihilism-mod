@@ -11,13 +11,15 @@ using Nihilism.NetProtocol;
 namespace Nihilism.Logic {
 	partial class WorldLogic {
 		private static void MessageAboutModUsage( string description ) {
-			Messages.MessagesAPI.AddMessage(
-				title: "How to use Nihilism mod",
-				description: description,
-				modOfOrigin: NihilismMod.Instance,
-				id: "NihilismUsage",
-				parentMessage: Messages.MessagesAPI.ModInfoCategoryMsg
-			);
+			Messages.MessagesAPI.AddMessagesCategoriesInitializeEvent( () => {
+				Messages.MessagesAPI.AddMessage(
+					title: "How to use Nihilism mod",
+					description: description,
+					modOfOrigin: NihilismMod.Instance,
+					id: "NihilismUsage",
+					parentMessage: Messages.MessagesAPI.ModInfoCategoryMsg
+				);
+			} );
 		}
 
 
