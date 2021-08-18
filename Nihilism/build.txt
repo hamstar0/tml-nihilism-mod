@@ -2,6 +2,6 @@ author = hamstar
 version = 4.0.0
 displayName = Nihilism
 modReferences = ModLibsCore@1.2.0, ModLibsGeneral@1.2.0, ModLibsEntityGroups@1.0.0
-weakReferences = Messages@1.0.0
+weakReferences = Messages@1.1.0
 buildIgnore = *.csproj, *.user, *.bat, obj\*, bin\*, .vs\*, .git\*
 homepage = https://forums.terraria.org/index.php?threads/nihilism-empties-the-game.60333/

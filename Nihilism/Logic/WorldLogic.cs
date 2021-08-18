@@ -16,6 +16,8 @@ namespace Nihilism.Logic {
 					title: "How to use Nihilism mod",
 					description: description,
 					modOfOrigin: NihilismMod.Instance,
+					isImportant: false,
+					alertPlayer: false,
 					id: "NihilismUsage",
 					parentMessage: Messages.MessagesAPI.ModInfoCategoryMsg
 				);
